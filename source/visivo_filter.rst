@@ -23,6 +23,24 @@ To run the operation:
 .. note:: The InputFile must be a valid VBT. :file:`InputFile.bin` and :file:`InputFile.bin.head` must exist.
 
 
+Global options
+--------------
+The following option can be given on any filter operation.
+
+--memsizelimit <percentage>
+    This option reduces the memory request of the percentage value given with this option.
+    
+    Depending on the specific filter request and on the system where VisIVOFilter runs, the allocated memory could exceed the available size and the application could be aborted or can use a significant portion of the system swap area, with a dramatic lost of performance.
+    
+    This parameter can be given to reduce the allocated space avoiding this effect.
+
+    A Warning message will be given when this option is used. The allowed value is a float greater than 0. and lower than 95.0.
+--history
+    Create an XML file which contains the history of operations performed.
+--historyfile
+    Change output history file name. Default: :file:`hist.xml`.
+
+
 Parameter file
 --------------
 Alternatively, to run the operation with options specified in the parameter file:
@@ -30,6 +48,19 @@ Alternatively, to run the operation with options specified in the parameter file
 .. code-block:: console
 
     $ VisIVOFilter <parameterFile>
+
+Lines starting with # are comments.
+
+An example of this file is the following (for the randomizer filter):
+
+.. code-block::
+
+    op=randomizer
+    #memsizelimit=30        This is a commented line
+    perc=50.0
+    iseed=1
+    out=VBT_rand.bin
+    file=VBT.bin
 
 
 Operations
@@ -48,7 +79,7 @@ Usage:
 
 .. code-block:: console
 
-    $ VisIVOFilters --op randomizer --perc percentage [--field parameters] [--iseed iseed] [--out filename_out.bin] [--history] [--historyfile filename.xml] [--file] inputFile.bin
+    $ VisIVOFilters --op randomizer --perc percentage [--field parameters] [--iseed iseed] [--out filename_out.bin] [--file] inputFile.bin
 
 
 Options:
@@ -63,10 +94,7 @@ Options:
     Output table filename. Default name is given.
 --file
     Input table filename.
---history
-    (Optional) Create an XML file which contains the history of operations performed.
---historyfile
-    (Optional) Change output history file name. Default: :file:`hist.xml`.
+
 
 
 Select Columns
