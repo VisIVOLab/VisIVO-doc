@@ -373,3 +373,164 @@ Options:
     Input table filename.
 
 Values are extracted in a regular sequence, skipping step element every time. The skip value is an integer number > 1 and represents the number of skipped values. The output table must fit the available RAM.
+
+
+Extraction
+^^^^^^^^^^
+This operation creates a new table from a sub-box or a sphere.
+
+.. note:: Operation not allowed on volumes.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op extraction --geometry geometry.txt [--out filename_out.bin] [--file] inputFile.bin
+
+Options:
+
+--geometry
+    The :file:`geometry.txt` file must have four rows and two columns. The first three rows must have a valid column name and a value for each column that indicates the extraction coordinates. The fourth field means the extraction mode and the sub-volume size:
+
+    * RADIUS, a sphere centered in the given values will be extracted;
+    * CORNER, a rectangular region having the lower corner at the given values will be extracted;
+    * BOX, a rectangular region centered in the given values will be extracted.
+--out
+    Output table filename. Default name is given.
+--file
+    Input table filename.
+
+Geometry file examples:
+
+.. code-block::
+
+    X 25.0
+    Y 25.0
+    Z 25.0
+    RADIUS 5.0
+
+.. code-block::
+
+    X 0.0
+    Y 0.0
+    Z 0.0
+    CORNER 10.0
+
+.. code-block::
+
+    X 25.0
+    Y 25.0
+    Z 25.0
+    BOX 5.0
+
+
+Visual
+^^^^^^
+This operation creates an eventually randomized new table from one or more input tables. All the input tables must have the same number of rows.
+
+.. note:: The operation cannot be applied to volume tables.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op visual [--size number_of_elements] [--out filename_out.bin] [--filelist] tab_selection_file.txt
+
+Options:
+
+--size
+    Number of max rows in output table. Default is the minimum between 8000000 and the number of rows of input tables.
+    
+    .. note:: Input table must have the same number of rows.
+--out
+    Output table filename. Default name is given.
+--filelist
+    Input text file with a list of tables and columns.
+
+The :file:`tab_selection_file.txt` is a text file that contain a list of tables and valid columns. Wildcard "*" means all columns of the given table. For example:
+
+.. code-block::
+
+    tab1.bin Col_1
+    tab5.bin Col_x
+    tab4.bin *
+    tab1.bin Col_2
+
+This file produces a new table having columns Col_1 and Col_2 from tab1.bin, Col_x from tab5.bin and all the columns of tab4.bin. If the row number of the input tables exceeds 8000000 elements, the output file will be limited to 8000000 randomized sampled rows.
+
+The column names in the output table will have the suffix ``_visual_#`` where # represent the number order listed in the txt file. The output table will contain the columns of the listed tables in alphabetic order. In the above example, the header of the VBT (if tab4.bin contains two columns A and B and there are 8000000 rows) will be:
+
+.. code-block::
+
+    float
+    5
+    8000000
+    little
+    Col_1_visual_1
+    Col_2_visual_5
+    A_visual_3
+    B_visual_4
+    Col_x_visual_2
+
+
+Show Table
+^^^^^^^^^^
+Produce an ASCII table with selected field of the first number of rows as specified in the --numrows parameter.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op showtable [--field column_name] [--numrows num_of_rows] [--rangerows fromRow toRow] [--width format_width] [--precision format_precision] [--out filename_out.txt] [--file] inputFile.bin
+
+Options:
+
+--field
+    Valid columns names. Default value of all columns will be reported.
+--numrows
+    Number of rows in the ASCII output file. Default value is equal to the number of rows of the input table.
+--rangerows
+    Rows range of the inputFile that will be reported in the ASCII output file. Default range is equal to all the rows of the input table. It is ignored if numrows is specified.
+--width
+    Field width in the ASCII output file. Default value is given.
+--precision
+    Field precision in the ASCII output file. Default value is given.
+--out
+    Output ASCII filename. Default name is given.
+--file
+    Input table filename.
+
+
+Statistic
+^^^^^^^^^
+This operation produces average, min and max value of field and creates an histogram of fields in the input table.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op statistic [--list columns_name] [--histogram [bin]] [--range min max] [--out result.txt] [--file] inputFile.bin
+
+Options:
+
+--list
+    A valid list of columns name. Default value all columns.
+--histogram
+    Produces an histogram ASCII file with the given number of bins. If the bins number is not specified, the default value is fixed to 10% of the total rows of the input table.
+--range
+    Produces the results only inside the specified interval.
+--out
+    Output ASCII filename with histogram.
+--file
+    Input table filename.
+
+.. note:: An error is given if there are no data in the specified range.
+
+For example the following command:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op statistic --list X Y --histogram 1000 --range 10.0 100.0 --out result.txt --file inputFile.bin
+
+produces min,max and average values printed in the standard output. The command also produces a :file:`result.txt` file that gives the histogram values of X and Y in the range :math:`[10.0, 100.0]` with 1000 bins.
+
