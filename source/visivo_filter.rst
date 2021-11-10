@@ -639,6 +639,66 @@ Grid to Point
 
 Extract List
 ^^^^^^^^^^^^
+This operation creates a new table from an input table with the elements (rows) listed in a given multi-list file. A multi-list is given in ascii or binary format (unsigned long long int).
+
+.. note:: Operation not allowed on volumes.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op extractlist --multilist filename_list [--binaryint] [--asciilist] [--numberlists NL] [--listelements N0] [--onelist] [--out filename_out.bin] [--file] inputFile.bin
+
+Options:
+
+--multilist
+    The multi-list file name.
+--binaryint
+    If this parameter is specified the multi-list file is in binary int. Defalt format: binary unsigned long long int.
+--asciilist
+    If this parameter is specified the multi-list file is an ascii text.
+--numberlists
+    The multi-list file format is just a sequence of NL lists specified in this option. Each list starts with the number of elements in the list.
+--listelements
+    The multi-list file format is just a sequence of NL lists. Each list has the same number of N0 elements. This option requires that the --numberlists option is specified, otherwise it is ignored.
+--onelist
+    If this option is given, the multi-list file is considered as only one list. Each element is the ID of the particle to be extracted. The --numberlists and --listelements options will be ignored.
+--out
+    Name of the new table. Default name is given.
+--file
+    Input table filename.
+
+The multi-list has the following structure:
+
+.. code-block:: none
+
+    Number NL of lists
+    NL sequences:
+        1) Number N0 of elements in the list,
+        2) N0 elements
+
+Option can be given to provide the NL number. In this case the multi-list file must not contain this information.
+Option can be given to provide the N0 number. In this case the multi-list file must not contain this informations but it is a multi-list, each list must contain N0 elements.
+
+If the onelist option is given the multi-list file is only a sequence of rows to be extracted.
+
+Multi-list ascii file example:
+
+.. code-block::
+
+    2       # N of lists
+    4       # N of elments of the 1st list
+    1       # Start sequence of the 1st list
+    7
+    27
+    100     # End of the 1st list
+    6       # N of elments of the 2nd list
+    4
+    8
+    15
+    16
+    23
+    42
 
 
 Add ID
@@ -683,6 +743,32 @@ Options:
 
 Split Table
 ^^^^^^^^^^^
+This operation splits  an existing table into two or more tables, using a field that will be used to divide the table.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op splittable [--field column] [--volumesplit direction] [--numoftables numberOfTable] [--maxsizetable MaxMbyteSize] [--hugesplit] [--out filename_out.bin] [--file] inputFile.bin
+
+Options:
+
+--field
+    A valid column name along which the table will be split. Must be given to split a table.
+--volumesplit
+    Direction (1, 2 or 3) along which the volume will be split. Must be given to split a volume.
+--numoftables
+    The number of tables in which the input table will be split. It must be greater than 1.
+--maxsizetable
+    Indicates the maximum size of the split table.
+    
+    VisIVO Filter will compute how many tables will be created. This option is ignored if --numoftable option is given.
+--hugesplit
+    Must be given to force the generation of more than 100 tables from the input table, avoiding errors.
+--out
+    Output prefix root table filename. A suffix ``_split_#.bin`` is added to each generated table, to this prefix. Default name is given.
+--file
+    Input table filename.
 
 
 Write VOTable
@@ -693,7 +779,7 @@ Usage:
 
 .. code-block:: console
 
-    $ VisIVOFilters--op wrvotable [--field column_name] [--force] [--out filename_out.xml] --file] inputFile.bin
+    $ VisIVOFilter --op wrvotable [--field column_name] [--force] [--out filename_out.xml] [--file] inputFile.bin
 
 Options:
 
