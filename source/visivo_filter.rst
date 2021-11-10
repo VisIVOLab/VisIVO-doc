@@ -597,6 +597,148 @@ Example:
 This command appends a new field named Module to the :file:`inputFile.bin` file that represents the module of the fields x, y and z: :math:`\sqrt{x^2+y^2+z^2}`.
 
 
+Sigma Contours
+^^^^^^^^^^^^^^
+This operation creates a new table where one or more fields of a data table have values within (or outside) N sigma contours. For the selected fields, the filter prints in the stdout the average and the sigma values of the distributions.
+
+.. note:: The filter can be applied on fields that have a Gaussian distribution. 
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op sigmacontours [--nsigma nOfSigma] [--field columns_list] [--exclude] [--allcolumns] [--out filename_out.bin] [--file] filename.bin
+
+Options:
+
+--nsigma
+    Number of sigma used in the variable selection. Default value: 1 sigma countour.
+--field
+    List of columns that must have values within N sigma contours. Default value: all the columns in the table.
+--exclude
+    Values outside N sigma contours will be reported.
+--allcolumns
+    All columns of the input tables will be saved in the output table. But only the corresponding rows for the --field selected columns are reported.
+--out
+    Name of the new table. Default name is given.
+--file
+    Input table filename.
+
+Example:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op sigmacontours --nsigma 2 --field F1 F2 F5 --allcolumns --out ncontours.bin --file example.bin
+
+The command produces a new table where columns F1, F2 and F5 have (all of them) values included in 2 sigma contours. The option --allcolumns creates a new table with all the columns of the input table, otherwise only F1, F2 and F5 will be reported in the output table. The command also prints in the stdout the average values and the sigma values for F1, F2 and F5 columns.
+
+
+Grid to Point
+^^^^^^^^^^^^^
+
+
+Extract List
+^^^^^^^^^^^^
+
+
+Add ID
+^^^^^^
+This operation adds a new column with a sequence of Ids in the input data table.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op addId [--outcol col_name] [--start start_number] [--file] inputFile.bin
+
+Options:
+
+--outcol
+    Column name of the new id column. Default name is Id.
+--start
+    Starting Id. Default value is 0. Only an int value can be given.
+--file
+    Input table filename.
+
+
+Change Column name
+^^^^^^^^^^^^^^^^^^
+This operation changes the column names in an existing table.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op changecolname --field column_names --newnames new_names [--file] inputFile.bin
+
+Options:
+
+--field
+    Valid columns names.
+--newnames
+    Valid new columns names.
+--file
+    Input table filename.
+
+
+Split Table
+^^^^^^^^^^^
+
+
+Write VOTable
+^^^^^^^^^^^^^
+This operation produces a VOTable 1.2 with selected field.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilters--op wrvotable [--field column_name] [--force] [--out filename_out.xml] --file] inputFile.bin
+
+Options:
+
+--field
+    Valid columns names. Default values of ALL columns will be reported.
+--force
+    Must be given to force the VOTable creation when the input table has more than 1000000 rows.
+--out
+    Output ascii filename. Default name is given.
+--file
+    Input table filename.
+
+
+Include
+^^^^^^^
+This operation produces a new table or adds a new field to the input table. Points inside the sphere (given with center and radius) will have the value invalue, otherwise outvalue.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op include --center x_coord y_coord z_coord --radius radius [--field x_col y_col z_col] [--append] [--out filename_out.bin] [--outcol col_name] [--outvalue outvalue] [--invalue invalue] [--file] inputFile.bin
+
+Options:
+
+--center
+    Coordinates of the sphere center.
+--radius
+    Radius of the sphere.
+--field
+    Three valid columns names. Default values are the first three columns.
+--append
+    No new table will be created. The original table will have the new field.
+--out
+    Name of the new table. Default name is given. Ignored if --append is specified.
+--outcol
+    Column name of the new field.
+--outvalue
+    Value given to points outside the sphere. Default value is 0.
+--invalue
+    Value given to points inside the sphere. Default value is 1.
+--file
+    Input table filename.
+
+
 Multi Resolution
 ^^^^^^^^^^^^^^^^
 This operation creates a new VBT as a random subsample from the input table, with different resolutions.
