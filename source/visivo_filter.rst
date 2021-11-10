@@ -535,6 +535,68 @@ For example the following command:
 produces min,max and average values printed in the standard output. The command also produces a :file:`result.txt` file that gives the histogram values of X and Y in the range :math:`[10.0, 100.0]` with 1000 bins.
 
 
+Interpolate
+^^^^^^^^^^^
+This operation creates new tables from two existing data tables (mainly used to produce intermediate frames of a dynamical evolution).
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op interpolate [--field columns_name] [--numbin numberbin] [--periodic] [--interval from to] [--out filename_out] --infiles file_start.bin file_end.bin
+
+.. note:: The two table must have the same structure. The infiles tables must have the listed columns in the --field option in the same corresponding order. The input tables must have the same number of rows and the interpolated elements are considered in the same order. No index is currently supported.
+
+Options:
+
+--field
+    A valid list of columns names that must exist on both input tables. Default: all columns in infile files are considered.
+--numbin
+    Is the number of bins between the starting and ending input files or the interval given in the --interval option. The default value is 10. The number of created tables is equal to numberbin-1.
+--periodic
+    Applies a periodical boundary condition.
+--interval
+    VisIVO assumes a distance of 1.0 between the starting frame and ending frame. This option produces the intermediate frames (tables) in a subinterval between the two input frames.
+    
+    The value 0.5 is the medium point of the interval. If the from value is lower than 0.0 it is considered 0.0. If the to value is greater than 1.0 it is considered 1.0. If the from value is equal to to value the operation is not performed. Default value from=0.0 to=1.0
+--out
+    It is the root name of the new tables. The default name is given. The new name is given by the :file:`filename_out#.bin` where # is the number of created tables.
+--infiles
+    It contains the names of the input tables of the interpolation process.
+
+
+Module
+^^^^^^
+This operation creates a new table (or a new field) computing the module of three fields of the input data table.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op module --field parameters [--append] [--outcol colname] [--out filename_out.bin] [--file] inputFile.bin
+
+Options:
+
+--field
+    Three valid columns name lists used to compute the module.
+--append
+    No new table will be created. The original table will have the new field. Default options: a new table with only the new field is produced.
+--outcol
+    Column name of the new field.
+--out
+    Name of the new table. Default name is given. Ignored if --append is specified.
+--file
+    Input table filename
+
+Example:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op module --field x y z --outcol Module --append --file inputFile.bin
+
+This command appends a new field named Module to the :file:`inputFile.bin` file that represents the module of the fields x, y and z: :math:`\sqrt{x^2+y^2+z^2}`.
+
+
 Multi Resolution
 ^^^^^^^^^^^^^^^^
 This operation creates a new VBT as a random subsample from the input table, with different resolutions.
