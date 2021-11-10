@@ -534,3 +534,102 @@ For example the following command:
 
 produces min,max and average values printed in the standard output. The command also produces a :file:`result.txt` file that gives the histogram values of X and Y in the range :math:`[10.0, 100.0]` with 1000 bins.
 
+
+Multi Resolution
+^^^^^^^^^^^^^^^^
+This operation creates a new VBT as a random subsample from the input table, with different resolutions.
+
+Starting from a fixed position, that represents the center of inner sphere, concentric spheres are considered. Different level of randomization can be given, creating more detail table in the inner sphere and lower detail in the outer regions, or vice versa. The region that is external to the last sphere represents the background.
+
+.. note:: Operation not yet allowed on volumes.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op mres --points x_col y_col z_col [--pos values] [--geometry layer_file.txt] [--background value] [--out filename_out.bin] [--file] inputFile.bin
+
+Options:
+
+--points
+    Columns to be assumed for points coordinates.
+--pos
+    Camera point coordinates. Default value is the center of the domain.
+--geometry
+    A file that contains a radius and a randomization value: 1.0 all values included; 0.1 means 1 per cent of values included in the layer. Each row of this file determine a layer. A default geometry is created with three spheres and different levels of randomization, depending on the input dataset.
+--background
+    A randomizator value for points outside the geometry. Default value is maximum 100000 values from input VBT.
+--out
+    Name of the new table. Default name is given.
+--file
+    Input table filename.
+
+For example, the following command and file:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op mres --points X Y Z --pos 10.0 10.0 10.0 --geometry layer.txt --background 0.0001 --out pos_layer.bin --file pos.bin
+
+.. code-block::
+
+    5.0 1.0
+    10.0 0.1
+    30.0 0.01
+
+produce a new table. 
+
+The geometry file  in this example, has the following values:
+
+* 5.0 is the radius of the inner sphere. The 1.0 is the percentage of randomization inside the inner sphere: all points that are inside the inner sphere will be reported in the output VBT.
+* 10.0 is the radius of the second sphere. The value 0.1 is the percentage of randomization inside this sphere: only 10% of points that are inside this sphere will be reported in the output VBT.
+* 30.0 is the radius of the last sphere. The value 0.01 is the percentage of randomization inside this sphere: only 1% of points that are inside this sphere will be reported in the output VBT. 
+
+.. figure:: images/mres.png
+    :align: center
+    :alt: mres
+
+
+Poca
+^^^^
+This operation produces two tables. The first one contains scattering points and angles. The second is a volume: each mesh point contains the square sum of the scattering angle.
+
+The input file must be the output from the muportal importer with 10 column: Event number, X_A Y_B X_C Y_D X_E Y_F X_G Y_H (8 values coordinates in cm at the planes of the system), Energy pulse in GeV/C.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op poca [--resolution x_res y_res z_res] [--dimvox voxel_size] [--trackplanedist distance] [--innerdist distance] [--outpoints points.bin] [--outvol vol.bin] [--file] inputFile.bin
+
+Options:
+
+--resolution
+    3D mesh size in cm. Default value 600 300 300.
+--dimvox
+    Cubic voxel dimension in cm. Default value 10.
+--trackplanedist
+    Distance in cm between planes 1 - 2 and planes 3 - 4. Default value 100.
+--innerdist
+    Distance in cm between planes 3 - 4. Default value 300.
+--outpoints
+    Name of the new table containing poca points.
+--outvol
+    Name of the new table containing the volume having the theta square value sum in each voxel.
+--file
+    Input table filename.
+
+For example, the following command:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op poca --resolution 600 300 300 --dimvox 10 --outpoins points --outvol vol.bin --file inputFile.bin
+
+Produces a points file VBT with scatter points inside the volume of reference a 60x30x30 and a multi-volume.
+
+The input file is a VBT with 10 columns that represent: Event number, X_A Y_B X_C Y_D X_E Y_F X_G Y_H (8 values coordinates in cm at the planes of the system), Pulse energy in GeV/C.
+
+The filter gives the track Id and the Energy of each points X Y Z. This is the output of the Importer “muportal”.
+It produces two tables (:file:`points.bin` and :file:`vol.bin`) containing:
+
+* The points of the POCA algorithm and angles with the following fields: event number, X, Y and Z, theta, theta square, energy.
+* A multi-volume (7 volumes) with cell resolution/dimvox on each directiom. Each voxel contatins quantities of all scattering points inside the voxel: sum of the theta (scattering angle), sum of theta square, theta square average, sigma, error and number of scatter points.
