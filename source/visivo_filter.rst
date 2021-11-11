@@ -675,6 +675,115 @@ Example:
 The command produces a new table where columns F1, F2 and F5 have (all of them) values included in 2 sigma contours. The option --allcolumns creates a new table with all the columns of the input table, otherwise only F1, F2 and F5 will be reported in the output table. The command also prints in the stdout the average values and the sigma values for F1, F2 and F5 columns.
 
 
+Cut
+^^^
+This operation fixes column values included in an interval to a threshold.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op cut [--field columns_list] --limits limitsfile.txt [--threshold value] [--operator AND/OR] [--out filename_out.bin] [--file] inputFile.bin
+
+The :file:`limitsfile.txt` file must have the following structure. A valid column name and an interval indicating the extraction limits:
+
+.. code-block::
+
+    X 20.0 30.0
+    Y 10.0 20.0
+    Z 0.0 10.0
+
+.. note:: The unlimited word can be used to indicate the infinite value.
+
+Options:
+
+--field
+    It is a valid columns name list to be reported in the new table. Default: all columns will be reported.
+--limits
+    A file that has three columns: a valid column name and an interval indicating the extraction limits.
+--threshold
+    Value to be used to cut data. Default value is 0.
+--operator
+    Limits on all fields listed in the --limits option file are combined by default with logic AND operator. If this option is given with the OR value the field limits are combined with logic OR operator.
+--out
+    Output table filename. Default name is given.
+--file
+    Input table filename.
+
+The example file and the following command:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op cut --field A B C --limits limitsfile.txt --operator AND --out filename_out.bin --threshold 1.0 --file inputFile.bin
+
+produce a new table that contains all the data points and columns of the input table. In any row where :math:`X \in [20.0, 30.0]` AND :math:`Y \in [10.0, 20.0]` AND :math:`Z \in [0.0, 10.0]` the fields A B and C will be changed with the threshold value 1.0. Other fields will not be changed. 
+
+
+Show Volume
+^^^^^^^^^^^
+This operation writes on an output ascii file, the volume cells and their values that satisfy given limits.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op showvol [--field column_name] --limits limits.txt [--operator AND/OR] [--numcells value] [--out filename_out.txt] [--file] inputFile.bin
+
+The :file:`limits.txt` file must have the following structure: a valid column name and an interval that indicate the limits.
+
+.. code-block::
+
+    density 20.0 30.0
+    mass 10.0 20.0
+
+.. note:: The keyword unlimited can be used to indicate the infinite value.
+
+Options:
+
+--field
+    Valid columns names. Default value of ALL columns will be reported.
+--limits
+    A file that has three columns: a valid column name and an interval that indicate the limits.
+--operator
+    Limits on all field listed in the --limits option file are combined by default with logic AND operator. If this option is given with OR value the field limits are combined with logic OR operator.
+--numcells
+    Set the maximum number of cells that will be reported in the output.
+--out
+    Output ascii filename. Default name is given.
+--file
+    Input table filename.
+
+The example file and the following command:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op showvol --field density mass --limits limitsfile.txt --operator AND --out filename_out.txt --file inputFile.bin
+
+produce an ascii file that lists all cells where limits are satisfied.
+
+The output ascii file will report on each row the cell (X, Y and Z) and the field value.
+
+
+Swap
+^^^^
+This operation produces the Endianism swap: little Endian to big Endian data format and viceversa of a VisIVO Binary Table. It can produce a new swapped table or data can be overwritten.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op swap [--override] [--out filename_out.bin] [--file] inputFile.bin
+
+Options:
+
+--override
+    The same input table is swapped. Data are overwritten.
+--out
+    Name of the new table. Default name is given. Ignored if --override is specified.
+--file
+    Input table filename.
+
+
 Cartesian2Polar
 ^^^^^^^^^^^^^^^
 This operation creates three new fields in a data table as the result of the spherical polar transformation of three existing fields.
