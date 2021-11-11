@@ -1,6 +1,21 @@
 VisIVO Server
 =============
-TBW.
+VisIVO Server is a suite of software tools for creating customized views of 3D renderings from astrophysical data tables. Their defining characteristic is that no fixed limits are prescribed regarding the dimensionality of data tables input for processing, thus supporting very large scale datasets.
+
+VisIVO Server consists of three core components: :doc:`/visivo_importer`, :doc:`/visivo_filter` and :doc:`visivo_viewer` respectively. Their functionality and usage is described in the following sections.
+
+To create customized views of 3D renderings from astrophysical data tables, a two-stage process is employed. First, VisIVO Importer is utilized to convert user datasets into `VisIVO Binary Table`_ (VBT). Then, VisIVO Viewer is invoked to display customized views of 3D renderings.
+
+As an example, consider displaying views from only three columns of an astrophysical data table supplied in ascii form, say col_1, col_2 and col_3, by using the commands
+
+.. code-block:: console
+
+    $ VisIVOImporter --fformat ascii UserDataSet.txt
+    $ VisIVOViewer -x col_1 -y col_2 -z col_3 --scale --glyphs pixel VBT.bin
+
+VisIVOServer is distributed with GNU General Public License v2.0 License for NON COMMERCIAL use.
+
+VisIVOServer source code is on `GitHub <https://github.com/VisIVOTeam/VisIVOServer>`_.
 
 
 VisIVO Binary Table
