@@ -535,6 +535,48 @@ For example the following command:
 produces min,max and average values printed in the standard output. The command also produces a :file:`result.txt` file that gives the histogram values of X and Y in the range :math:`[10.0, 100.0]` with 1000 bins.
 
 
+Point Distribute
+^^^^^^^^^^^^^^^^
+This operation creates a table which represents a volume from selected fields of the input table that are distributed using NGP, CIC (default) or TSC algorithm. The filter produces (by default) a density field: the field is distributed and divided for the cell volume.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op pointdistribute  --resolution x_res y_res z_res --points x_col y_col z_col [--field column_names] [--constant value] [--nodensity] [--avg] [--out filename_out.bin] [--tsc] [--ngp] [--gridOrigin xg0 xg1 xg2] [--gridSpacing sg0 sg1 sg2] [--box length] [--periodic] [--file] inputFile.bin
+
+Options:
+
+--resolution
+    3D mesh size.
+--points
+    Columns to be assumed for points coordinates.
+--field
+    Valid columns name list to be distributed in the grid.
+--constant
+    Assign a constant value to all points, to be distributed in the grid. Ignored if field option is given. Default value is 1.0 for all points.
+--nodensity
+    Overrides the default behavior. The field distribution is not divided for the cell volume.
+--avg
+    Distributes the first field on the volume grid and computes the arithmetic average value on each cell of the first field. The output volume table will have three fields. For each cell there will be: the number of total elements in the cell (NumberOfElements), the sum of total field value (fieldSum), and the arithmetic average value (fieldAvg). Only the ngp algorithm will be applied.
+--out
+    Name of the new table. Default name is given.
+--tsc
+    The TSC algorithm is adopted.
+--ngp
+    The NGP algorithm is adopted.
+--gridOrigin
+    It specifies the coordinates of the lower left corner of the grid. Default values are assumed from the box of :file:`inputFile.bin`.
+--gridSpacing
+    It specifies the length of each cell dimension in the arbitrary unit. This parameter is ignored if the box option is given. Default values are assumed from the box of the :file:`inputFile.bin`.
+--box
+    It specifies the length of a box. Default values is assumed from the box of :file:`inputFile.bin` if the gridSpacing option is not given.
+--periodic
+    It specifies the box is periodic. Particles outside the box limits are considered inside on the other side.
+--file
+    Input table filename.
+
+
 Interpolate
 ^^^^^^^^^^^
 This operation creates new tables from two existing data tables (mainly used to produce intermediate frames of a dynamical evolution).
@@ -633,8 +675,78 @@ Example:
 The command produces a new table where columns F1, F2 and F5 have (all of them) values included in 2 sigma contours. The option --allcolumns creates a new table with all the columns of the input table, otherwise only F1, F2 and F5 will be reported in the output table. The command also prints in the stdout the average values and the sigma values for F1, F2 and F5 columns.
 
 
-Grid to Point
-^^^^^^^^^^^^^
+Cartesian2Polar
+^^^^^^^^^^^^^^^
+This operation creates three new fields in a data table as the result of the spherical polar transformation of three existing fields.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op cartesian2polar --field X Y Z [--append] [--outcol rho theta phi] [--out filename_out.bin] [--file] inputFile.bin
+
+Options:
+
+--field
+    Three valid columns name used as cartesian coordinates.
+--append
+    No new table will be created. The original table will have new fields. Default options: a new table with only the new field is produced.
+--outcol
+    Column name of the new fields. Default names are: rho, theta and phi.
+--out
+    Name of the new table. Default name is given. Ignored if --append is specified.
+--file
+    Input table filename.
+
+
+Grid2Point
+^^^^^^^^^^
+This operation distributes a volume property to a point data set on the same computational domain using a field distribution (CIC/NGP/TSC algorithm) on a regular mesh. CIC is the default adopted algorithm. The Cell geometry is considered only to compute the cell volume value in this operation.
+
+This filter produces a new table or adds a new field to the input table.
+
+The operation performs the following:
+
+1. It loads a volume (input volume data table) and a table with a point distribution in the same volume;
+2. It computes, using a CIC or NGP or TSC algorithm, a value (assumed density) for each data point, considering the cells value where the point is spread. The grid points density values are multiplied for the cell volume and assigned to the point. If the density option is given the cell volume is assumed =1;
+3. It saves the property in a new table or adds the field to the original input table.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op grid2point --points x_col y_col z_col [--field column_name] [--density] [--append] [--out filename_out.bin] [--outcol col_name] [--tsc] [--ngp] --volume inputVolmeData.bin [--gridOrigin xg0 xg1 xg2] [--gridSpacing sg0 sg1 sg2] [--box length] [--periodic] [--file] inputFile.bin
+
+Options:
+
+--points
+    Columns to be assumed for points coordinates.
+--field
+    Valid Volume Column Name. Default value is the first column name.
+--density
+    Cell volume is not considered (cell volume=1).
+--append
+    No new table will be created. The original table will have the new field.
+--out
+    Name of the new table. Default name is given. Ignored if --append is specified.
+--outcol
+    Column name of the new field.
+--tsc
+    The TSC algorithm is adopted.
+--ngp
+    The NGP algorithm is adopted.
+--volume
+    Input data volume filename (a VisIVO Binary Table).
+--gridOrigin
+    It specifies the coordinate of the lower left corner of the grid. Default values are assumed from the box of :file:`inputFile.bin`.
+--gridSpacing
+    It specifies the length of each cell dimension in arbitrary unit. This parameter is ignored if the box option is given. Default values are assumed from the box of :file:`inputFile.bin`.
+--box
+    It specifies the length of a box. Default value is assumed from the box of :file:`inputFile.bin` if the gridSpacing option is not given.
+--periodic
+    Applies a periodical boundary condition.
+--file
+    Input table filename with point distribution.
 
 
 Extract List
@@ -923,3 +1035,49 @@ It produces two tables (:file:`points.bin` and :file:`vol.bin`) containing:
 
 * The points of the POCA algorithm and angles with the following fields: event number, X, Y and Z, theta, theta square, energy.
 * A multi-volume (7 volumes) with cell resolution/dimvox on each directiom. Each voxel contatins quantities of all scattering points inside the voxel: sum of the theta (scattering angle), sum of theta square, theta square average, sigma, error and number of scatter points.
+
+
+Point Property
+^^^^^^^^^^^^^^
+This operation assigns a property to each data point on the table.
+
+The operation performs the following:
+
+1. It creates a temporary volume using a field distribution (CIC algorithm) on a regular mesh. The temporary file will have the filename given in --out option + ``_tempPDOp.bin`` or :file:`_tempPDOp.bin`, and it is automatically cleaned by the operation itself;
+2. It computes, with the same CIC algorithm, the property for each data point, considering the cells where the point is spread on the volume;
+3. It saves the property in a new table or adds the field to the original input table. This operation cannot be applied to volumes.
+
+Usage:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op pointproperty --resolution x_res y_res z_res --points x_col y_col z_col [--field column_name] [--constant value] [--append] [--out filename_out.bin] [--outcol col_name] [--periodic] [--file] inputFile.bin
+
+Options:
+
+--resolution
+    3D mesh size.
+--points
+    Columns to be assumed for points coordinates.
+--field
+    valid column name list to be distributed in the grid.
+--constant
+    Assign a constant value to all points, to be distributed in the grid. Ignored if field option is given. Default value is a 1.0 for all points.
+--append
+    the input table will contain the new field.
+--out
+    Name of the new table. Default name is given. Ignored if –append is given.
+--outcol
+    New field column name.
+--periodic
+    Applies a periodical boundary condition.
+--file
+    Input table filename.
+
+For example, the following command:
+
+.. code-block:: console
+
+    $ VisIVOFilter --op pointproperty --resolution 16 16 16 --points X Y Z --field Mass --append --outcol distribute --file inputFile.bin
+
+distributes the Mass field of points X Y Z and it produces a temporary volume. Then it calculates a new field representing the weight value of the nearest mesh-cells where the point is distributed using the same CIC algorithm.
