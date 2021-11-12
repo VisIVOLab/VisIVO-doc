@@ -6,7 +6,8 @@ Welcome to VisIVO's documentation!
    :maxdepth: 2
    :caption: VisIVO
 
-   visivo
+   visivo/visivo
+   visivo/team
 
 
 .. toctree::
