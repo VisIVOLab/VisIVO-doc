@@ -1,3 +1,0 @@
-VisIVO Utils
-============
-TBW.

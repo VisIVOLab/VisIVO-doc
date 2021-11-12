@@ -1,3 +1,0 @@
-VisIVO Viewer
-=============
-TBW.
