@@ -7,7 +7,10 @@ Welcome to VisIVO's documentation!
    :caption: VisIVO
 
    visivo/visivo
+   visivo/projects
+   visivo/publications.rst
    visivo/team
+   visivo/former_tools
 
 
 .. toctree::

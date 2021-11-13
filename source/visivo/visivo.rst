@@ -5,7 +5,7 @@ Introduction
 
 VisIVO provides an integrated suite of tools and services that can also be used in other scientific fields. The VisIVO suite offers a variety of flavours as follows:
 
-* **VisIVO Server** a platform for high performance visualization,
+* **VisIVO Server** a platform for high performance visualization.
 
 * **VisIVO Library** for running complex workflows on DCI, clouds and HPC infrastructures to efficiently produce complex views of the dataset and full movies directly with the user-code internal data representation (i.e. without the need to create intermediate files).
 
@@ -13,6 +13,6 @@ VisIVO provides an integrated suite of tools and services that can also be used 
 
 * **VisIVO ViaLactea Web (VLW)**
 
-VisIVO technologies have been demonstrated as success stories in numerous relevant multidisciplinary environments, e.g. EU FP7 projects such as EDGI, EGI-Inspire, SCI-BUS, ViaLactea and national projects e.g. MuonPortal (http://www.dfa.unict.it/it/content/muon-portal). As an open access software, significant interest in its usage has been shown from all over the world (evident by the number of hits on the websites) and several scientists from different domains (e.g. Nuclear Physics) have produced visualisations of their data (simulations or observational datasets) using the VisIVO gateway. 
+VisIVO technologies have been demonstrated as success stories in numerous relevant multidisciplinary environments, and :ref:`projects`. As an open access software, significant interest in its usage has been shown from all over the world (evident by the number of hits on the websites) and several scientists from different domains (e.g. Nuclear Physics) have produced visualisations of their data (simulations or observational datasets).
 
 The suite is maintained by INAF-Astrophysical Observatory of Catania and is continuously enriched with several international collaborations. 
