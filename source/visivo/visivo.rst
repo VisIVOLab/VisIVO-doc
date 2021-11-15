@@ -11,7 +11,8 @@ VisIVO provides an integrated suite of tools and services that can also be used 
 
 * **VisIVO ViaLactea Visual Analytics (VLVA)**, developed within the ViaLactea project, which allows to exploit a combination of all new-generation surveys of the Galactic Plane to analyze star forming regions of the Milky Way.
 
-* **VisIVO ViaLactea Web (VLW)**
+* **VisIVO ViaLactea Web (VLW)**, a work-in-progress simplified web version of the VLVA, developed in collaboration with University of Portsmouth (UK) providing an efficient visualisation (GPU and CPU rendering) on remote server.
+
 
 VisIVO technologies have been demonstrated as success stories in numerous relevant multidisciplinary environments, and :ref:`projects`. As an open access software, significant interest in its usage has been shown from all over the world (evident by the number of hits on the websites) and several scientists from different domains (e.g. Nuclear Physics) have produced visualisations of their data (simulations or observational datasets).
 
