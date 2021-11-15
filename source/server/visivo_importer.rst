@@ -106,4 +106,27 @@ The following file formats are supported:
 
 ASCII
 ^^^^^
-TBW.
+ASCII files are expected to be in tabular form. An ASCII file may contain values for N variables organized in columns. The columns are typically separated by whitespace characters, e.g. spaces or tabs.
+
+The first row of an ASCII file lists the N variables names explicitly. As an example, the command below produces :file:`NewTable.bin`, :file:`NewTable.bin.head` from :file:`ASCIIUserFileName.txt`.
+
+.. code-block:: console
+
+    $ VisIVOImporter --fformat ascii --out /home/user/data/NewTable ASCIIUserFileName.txt
+
+
+CSV
+^^^
+CSV is a delimited data format that has fields/columns separated by the comma character and records/rows separated by newlines.
+
+Fields that contain a special character (such as comma, newline, or double quote) must be enclosed in double quotes. However, if a line contains a single entry that happens to be the empty string, it may be enclosed in double quotes. If a field's value is a double quote character, this is dealt with by placing another double quote character next to it.
+
+The CSV file format does not require a specific character encoding, byte order, or line terminator format. 
+
+As an example, the command below produces the files :file:`NewTable.bin` and :file:`NewTable.bin.head` from the user-supplied CSV file :file:`CSVUserFileName.txt`.
+
+.. code-block:: console
+
+    $ VisIVOImporter --fformat csv --out /home/user/data/NewTable CSVUserFileName.txt
+
+.. note:: The Importer automatically skips all the lines starting with # character. If the first line contains column names starting with #, this character will be removed, and the columns names will be given without it.
