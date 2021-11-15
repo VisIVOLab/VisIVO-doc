@@ -1,4 +1,4 @@
-The ViaLactea Visual Analytics (VLVA)
+Introduction
 =====================================
 
 The ViaLactea Visual Analytics (VLVA) tool combines different types of visualization to perform the analysis exploring the correlation between different data, for example 2D intensity images with 3D molecular spectral cubes.
