@@ -289,11 +289,168 @@ The following kinds of visualizations are available:
 
 Data Points
 ^^^^^^^^^^^
+VisIVO Viewer creates data points views from the input data file. The Input data file must be in VBT format. The input data file must fit the available RAM.
+
+Options:
+
+-x <field>
+    (Optional) Selects the first coordinate.
+-y <field>
+    (Optional) Selects the second coordinate.
+-z <field>
+    (Optional) Selects the third coordinate.
+--scale
+    (Optional) Enables data normalization. It always allows you to visualize a cubic region even if the coordinates system has different scales. The field names containing X,Y,Z or RA,DE and Mag are assumed to be default values for the x y z system, or the first three table columns, if these options are not given.
+    
+    .. note:: It is strongly recommended to fix these parameters to prevent unpredictable behavior.
+--colorscalar <field>
+    (Optional) Selects the field for the palette.
+--logscale
+    (Optional) Uses the logarithmic scale for the palette. If the select field has values less than or equal to 0 this option is ignored and the linear scale will be used.
+--glyphs <name>
+    (Optional) Data points are displayed with different geometrical form. The following forms are available: pixel, sphere, cone, cylinder, cube. This option has no effect if the data point number is more than 1000.
+--radius <vaulue>
+    (Optional) Radius of the geometrical form.
+--height <value>
+    (Optional) Height of the geometrical form (where applicable).
+--opacity <double>
+    (Optional) Data points opacity. Default value 0.66.
+--opacityTF <three double values>
+    (Optional) Data smoothed points opacity representation. They fix the curve slope for opacity transfer function when smoothed representation is given. The three values must not be negative. Suggested ranges are [3-10] [1-5] [2-5]. Default values are 5.0 3.0 2.5.
+--scaleglyphs
+    (Optional) Enables the geometrical form to be scaled with a scalar field.
+--scenario
+    (Optional) In a smoothed representation it gives the colors for data point. Each scenario is represented by a string name. The active current scenario is called etna. This is the default value.
+--radiusscalar <field>
+    (Optional) Sets the scalar field for radius scaling.
+--heightscalar <field>
+    (Optional) Sets the scalar field for height scaling.
+
+Examples:
+
+Palette usage
+
+.. code-block:: console
+
+    $ VisIVOViewer --x X --y Y --z Z --color --colorscalar scalar0 --colortable temperature --logscale /home/user/inputFile.bin
+
+Normal glyphs
+
+.. code-block:: console
+
+    $ VisIVOViewer --x X --y Y --z Z --glyphs cone --radius 1 --height 2 /home/user/inputFile.bin
+
+Scaled glyphs
+
+.. code-block:: console
+
+    $ VisIVOViewer --x X --y Y --z Z --glyphs cone --scaleglyphs --radiusscalar scalar0 --heigthscalar scalar1 /home/user/inputFile.bin
 
 
 Volumes
 ^^^^^^^
+VisIVOViewer creates a volume view of data points from the input data file that contains a volume. The input data file must be in VBT format and must have the number of mesh elements on each dimension. The input data file must fit the available RAM.
+
+A volume can be visualized with the volume rendering technique, with an isosurface or with slices. A color table must be given. The default color table will be used if the colortable option is not given.
+
+Specific volume options:
+
+--volume
+    (Optional) Enables volume visualization.
+--vrendering
+    (Optional) Enables volume rendering view. The volume rendering view is the default when --volume is given.
+--vrenderingfield <field>
+    Sets the scalar to be represented in the view.
+--shadow
+    (Optional) Enables shadow view in the rendering view.
+        
+Example
+
+.. code-block:: console
+
+    $ VisIVOViewer --volume --vrendering --vrenderingfield density –colortable temperature /home/user/inputFile.bin
+
+Specific isosurface options:
+
+--isosurface
+    (Optional) Enables isosurface view.
+--isosurfacefield <field>
+    (Optional) Sets the scalar to be represented in the view.
+--isosurfacevalue <field>
+    (Optional) Fixes the isocontur value: from 0 to 255.
+--wireframe
+    (Optional) Visualizes the isosurface with wireframe.
+--isosmooth
+    (Optional) Smoothes the isosurface visualization. It may assume the following values: none (default), medium, high.
+    
+Example
+
+.. code-block:: console
+
+    $ VisIVOViewer --volume --isosurface --isosurfacefield density --isosurfacevalue 200 /home/user/inputFile.bin
+
+Specific slider options:
+
+--slice
+    (Optional) Enables slice view.
+--slicefield <field>
+    (Optional) Sets the scalar to be represented in the slice view.
+--sliceplane <plane>
+    (Optional) Sets the plane to be represented in the view. It must be one of the following: x, y, z. The camera is always positioned in front of the plane.
+--sliceposition <position>
+    (Optional) Sets the plane coordinate position to be represented in the view. It must be an integer value from 0 to the maximum number of cells in the selected direction. Ignored if cycle option is given.
+
+VisIVOViewer can also visualize oblique planes. In this case sliceplane and sliceposition options must not be given. The camera is positioned using azimuth and elevation options.
+
+--sliceplanepoint
+    (Optional) Sets the three coordinates of a point in the plane. It is ignored in case of cycle file.
+--sliceplanenormal
+    (Optional) Sets the three coordinates of a point belonging to the normal axes to the slice. The sliceplanepoint and the sliceplanenormal fix the points and anthe axis in the space. The slice is normal to this axis and the point in sliceplanepoint is a point of this plane. It is ignored in case of cycle file.
+
+*Important Remarks*. One of the following options must be specified: sliceplane, sliceplanenormal and/or sliceplanepoint. If sliceplane is selected orthogonal slices will be produced. If sliceplane is not given but sliceplanenormal and/or sliceplanepoint are given, generic slices will be produced. In case of cycle the specific values of sliceposition, sliceplanenormal and sliceplanepoint are ignored and the cycle file values will be used, even if the options must be given to select the type of slice visualization.
+
+.. note:: The stereoscopic visualization is ignored in case of slice.
+.. note:: Cycle can be given for Orthogonal Normal planes (x, y or z). In this case the cycle file must contain a sequence of integers (one for each row) inside the volume range (e.g 0-64).
+.. note:: Cycle can be given for point-planenormal slice. In this case the cycle file must contain a sequence of six values: three point coordinates and three plane normal coordinates. Lines with less than 6 values are ignored. In this case the showbox option is recommended.
+
+Example:
+
+.. code-block:: console
+
+    $ VisIVOViewer --volume -–slice --slicefield density --sliceplane x –sliceposition 3 –color --colortable default /home/user/inputFile.bin
 
 
 Vectors
 ^^^^^^^
+VisIVOViewer creates a view of vectors created from the input data file that contains data points. The input data file must fit the available RAM.
+
+Options:
+
+--vector
+    (Optional) Enables vector visualization.
+--x <field>
+    (Optional) First component of the vector application point.
+--y <field> 
+    (Optional) Second component of the vector application point.
+--z <field>
+    (Optional) Third component of the vector application point.
+--vx <field>
+    (Optional) First component of the vector.
+--vy <field>
+    (Optional) Second component of the vector.
+--vz <field>
+    (Optional) Third component of the vector.
+--colorscalar <field>
+    (Optional) Selects the field of the VBT to be used for the palette. The vectors are displayed with the color palette based on the value of the active scalar given in this option. If this option is not given, the palette is based on is the magnitude of the vector. This option set the active scalar.
+--vectorline
+    (Optional) Enables the vector representation with a line. Default is arrows.
+--vectorscalefactor <field>
+    (Optional) Scale factor for vector representation.
+--vectorscale <field>
+    (Optional) Assumes the following values. Value 0: the scale of the vector dimension is given by the active scalar (colorscalar option). Value 1: the scale of the vector dimension is given by the vector magnitude. Value -1 (default): the vectors are not scaled.
+
+Example:
+
+.. code-block:: console
+
+    $ VisIVOViewer --x X --y Y --z Z -–vx Vx –-vy Vy –-vz Vz --color --colorscalar scalar0 --colortable temperature --vectroscalefactor 1.3 --vectorscale 0 /home/user/inputFile.bin
