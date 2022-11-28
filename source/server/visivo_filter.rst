@@ -343,6 +343,40 @@ Multi-list ascii file example:
     23
     42
 
+Extract Subvolume
+^^^^^^^^^^^^^^^^^
+This operation extract a table which is a sub-volume from the original volume.
+
+Usage: 
+
+.. code-block:: console
+    
+    $ VisIVOFilters --op extractsubvolume --startingcell X Y Z --resolution x_res y_res z_res [--field column_names] [--out filename_out.bin] [--help] [--file] inputFile.bin
+    
+As an example the following command:
+
+.. code-block:: console
+
+    $ VisIVOFilters --op extractsubvolume --startingcell 8 8 8 --field Mass Temperature --resolution 16 16 16 --out mysubvolume.bin --file inputFile.bin
+
+produces a new table volume (:file:`mysubvolume.bin` and :file:`mysubvolume.bin.head`) that is a sub-volume of resolution 16x16x16 from the original volume and starting from the cell (8,8,8) of the original mesh. Only Mass and Temperature fields will be reported in the new table.
+
+Options:
+
+--startingcell
+    X Y Z number of the first cell to be extracted: 0 0 0 is the first cell of the original grid.
+
+--resolution
+    Grid size (3D) of the new subgrid.
+
+--field
+    Valid columns name list to be reported in the new table.
+    
+--out
+    Name of the new table. Default name is given.
+
+--file
+    Input table filename.
 
 Grid2Point
 ^^^^^^^^^^
