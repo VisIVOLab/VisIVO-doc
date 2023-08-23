@@ -18,6 +18,10 @@ VisIVOServer is distributed with GNU General Public License v2.0 License for NON
 VisIVOServer source code is on `GitHub <https://github.com/VisIVOTeam/VisIVOServer>`_.
 
 
+Installation
+-------------------
+To install VisIVO Server, follow the instructions indicated in the INSTALL.md file in the GitHub repository https://github.com/VisIVOLab/VisIVOServer. 
+
 VisIVO Binary Table
 -------------------
 A VisIVO Binary Table (VBT) is a highly-efficient data representation used by VisIVO Server internally. A VBT is realized through a header file (extension ``.bin.head``) containing all necessary metadata, and a raw data file (extension ``.bin``) storing actual data values.
