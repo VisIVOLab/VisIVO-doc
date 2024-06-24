@@ -363,6 +363,12 @@ Specific volume options:
     Sets the scalar to be represented in the view.
 --shadow
     (Optional) Enables shadow view in the rendering view.
+--autorange
+    (Optional) Enables auto range feature, which allows to get an automatically computed view range for the image.
+--autorangemin <value>
+    (Optional) Sets the minimum value of view range for the image, it is ignored if --autorange option is not enabled.
+--autorangemax <value>
+    (Optional) Sets the maximum value of view range for the image, it is ignored if --autorange option is not enabled.
         
 Example
 
