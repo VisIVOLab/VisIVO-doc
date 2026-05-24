@@ -1,0 +1,607 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Getting started" href="user-guide/getting-started.html">
+        <link rel="prefetch" href="_static/visivo_logo_light.svg" as="image">
+        <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
+
+    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>VisIVO Visual Analytics dev</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0b5fff;
+  --color-brand-content: #0b5fff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">VisIVO Visual Analytics dev</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/visivo_logo_light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/visivo_logo_white.svg" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/getting-started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/cube-viewer.html">Spectral cube viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/image-viewer.html">Image viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/moment-maps.html">Moment maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/spectral-tools.html">Spectral analysis tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async-patterns.html">Async Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service-mapping-note.html">Service Mapping Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_server.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_importer.html">VisIVO Importer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_filter.html">VisIVO Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_viewer.html">VisIVO Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_utils.html">VisIVO Utils</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="visivo-visual-analytics">
+<h1>VisIVO Visual Analytics<a class="headerlink" href="#visivo-visual-analytics" title="Link to this heading">¶</a></h1>
+<p><strong>An interactive desktop tool for exploring radio-astronomy data —
+spectral cubes, 2-D maps, 3-D catalogues, and HiPS surveys — backed by a
+scientific compute service.</strong></p>
+<p>VisIVO Visual Analytics gives astronomers a fast workspace for inspecting
+FITS data and deriving the products needed for science: moment maps,
+position–velocity diagrams, spectral profiles, line-width and equivalent-width
+maps, baseline-subtracted cubes, stacked spectra, isosurfaces, region
+statistics, and source overlays. Visualisation runs on the desktop;
+heavy computation runs on a co-located backend that can be embedded with the
+app or deployed on an HPC cluster.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-3 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🚀 Getting started</div>
+<p class="sd-card-text">Install, launch the backend, open your first FITS dataset.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/getting-started.html"><span class="doc">Getting started</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🧊 Spectral cube viewer</div>
+<p class="sd-card-text">The 3-D + 2-D workspace: slice navigation, cutting plane, probe spectra,
+camera ROI, animations.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/cube-viewer.html"><span class="doc">Spectral cube viewer</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🗺️ Moment maps</div>
+<p class="sd-card-text">Orders 0–10 explained, channel range, RMS mask, scientific interpretation.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/moment-maps.html"><span class="doc">Moment maps</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+📈 Spectral analysis</div>
+<p class="sd-card-text">Line-width (FWHM + EW) maps, baseline subtraction, spectral stacking
+across multiple cubes.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/spectral-tools.html"><span class="doc">Spectral analysis tools</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+✏️ Regions, PV, noise</div>
+<p class="sd-card-text">Box / circle / polygon / annulus statistics, position–velocity
+extraction, MAD-based noise.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/region-pv-noise.html"><span class="doc">Regions, PV diagrams, noise</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🌌 Catalogues, images, HiPS</div>
+<p class="sd-card-text">3-D catalogue scatter, multi-layer 2-D images, all-sky HiPS surveys,
+SAMP messaging with TOPCAT/Aladin.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/catalogues-hips.html"><span class="doc">Catalogues, HiPS, and SAMP</span></a></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<hr class="docutils" />
+<section id="what-you-can-do-with-it">
+<h2>What you can do with it<a class="headerlink" href="#what-you-can-do-with-it" title="Link to this heading">¶</a></h2>
+<p>Tools are grouped consistently between the <em>Tools</em> menu and the <em>Tools</em>
+sidebar tab in the cube viewer — same four groups (EXPLORATION,
+ANALYSIS, REGIONS, CATALOGUE) in the same order. The table below lists
+every tool together with the page that documents its scientific use.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 28.0%" />
+<col style="width: 30.0%" />
+<col style="width: 18.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Where in the UI</p></th>
+<th class="head"><p>Output</p></th>
+<th class="head"><p>Documented in</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>General</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Open a remote FITS cube / image</p></td>
+<td><p><strong>Data Hub → Open Remote Dataset</strong> (or ⌘O)</p></td>
+<td><p>Cube viewer or Image viewer</p></td>
+<td><p><a class="reference internal" href="user-guide/getting-started.html"><span class="doc std std-doc">Getting started</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Navigate the spectral axis</p></td>
+<td><p>Slice slider, ▶ Play animation</p></td>
+<td><p>Slice tile + textured 3-D cutting plane</p></td>
+<td><p><a class="reference internal" href="user-guide/cube-viewer.html"><span class="doc std std-doc">Cube viewer</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>EXPLORATION tools</strong> (cube viewer → Tools menu / sidebar)</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Extract a spectrum at a pixel</p></td>
+<td><p><strong>Tools → Extract Spectrum</strong> (Probe), or <em>Pick Spectrum on Plane Click</em> (3-D)</p></td>
+<td><p>Spectral profile window</p></td>
+<td><p><a class="reference internal" href="#user-guide/cube-viewer#extract-spectrum-probe-a-single-pixel"><span class="xref myst">Cube viewer · Extract Spectrum</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Open the cube in a VR headset (Windows / Linux, opt-in build)</p></td>
+<td><p><strong>Tools → Open in VR</strong></p></td>
+<td><p>OpenXR stereo render — LUT / threshold / opacity TF synced live</p></td>
+<td><p><a class="reference internal" href="#user-guide/cube-viewer#open-in-vr"><span class="xref myst">Cube viewer · Open in VR</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ANALYSIS tools</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Estimate the cube noise (per-channel MAD)</p></td>
+<td><p><strong>Tools → Estimate Noise</strong> + pick a line-free region</p></td>
+<td><p>Per-channel σ vector + scalar median σ</p></td>
+<td><p><a class="reference internal" href="#user-guide/region-pv-noise#noise-estimation"><span class="xref myst">Regions, PV, noise · Noise estimation</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Compute a moment map (M0–M10)</p></td>
+<td><p><strong>Tools → Compute Moment</strong></p></td>
+<td><p>2-D map (M0 / M1 / M2 / …)</p></td>
+<td><p><a class="reference internal" href="user-guide/moment-maps.html"><span class="doc std std-doc">Moment maps</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Per-pixel line-width map</p></td>
+<td><p><strong>Tools → Line-Width Map…</strong></p></td>
+<td><p>FWHM + EW maps</p></td>
+<td><p><a class="reference internal" href="#user-guide/spectral-tools#line-width-maps-s-02"><span class="xref myst">Spectral tools · Line-width</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Subtract a polynomial baseline</p></td>
+<td><p><strong>Tools → Baseline Subtraction…</strong></p></td>
+<td><p>New cube dataset (registered in the session)</p></td>
+<td><p><a class="reference internal" href="#user-guide/spectral-tools#baseline-subtraction-s-03"><span class="xref myst">Spectral tools · Baseline</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Stack multiple cubes</p></td>
+<td><p><strong>Tools → Stack Spectral Cubes…</strong></p></td>
+<td><p>1-D stacked spectrum</p></td>
+<td><p><a class="reference internal" href="#user-guide/spectral-tools#spectral-stacking-s-04"><span class="xref myst">Spectral tools · Stacking</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Position-velocity diagram</p></td>
+<td><p><strong>Tools → Extract PV Diagram</strong> + polyline on the slice</p></td>
+<td><p>2-D PV map</p></td>
+<td><p><a class="reference internal" href="#user-guide/region-pv-noise#position-velocity-diagrams"><span class="xref myst">Regions, PV, noise · PV</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>REGIONS tools</strong> (draw on the 2-D slice / moment)</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Box / Circle / Polygon / Annulus statistics</p></td>
+<td><p><strong>Tools → Box / Circle / Polygon / Annulus Region Analysis</strong></p></td>
+<td><p>Per-region mean / median / σ / sum + spectral profile</p></td>
+<td><p><a class="reference internal" href="#user-guide/region-pv-noise#region-statistics"><span class="xref myst">Regions, PV, noise · Region statistics</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CATALOGUE overlay</strong> (menu-only state toggles)</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Load a source catalogue overlay</p></td>
+<td><p><strong>Tools → Load Catalogue Overlay</strong> (CSV / VOTable)</p></td>
+<td><p>Sources rendered + table dock</p></td>
+<td><p><a class="reference internal" href="#user-guide/catalogues-hips#catalogue-overlay-on-cubes--images"><span class="xref myst">Catalogues · Overlay</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Show / hide the overlay glyphs and labels</p></td>
+<td><p><strong>Tools → Show Catalogue Overlay</strong> / <strong>Show Catalogue Labels</strong></p></td>
+<td><p>Glyph or label visibility toggled (state preserved)</p></td>
+<td><p><a class="reference internal" href="#user-guide/catalogues-hips#catalogue-overlay-on-cubes--images"><span class="xref myst">Catalogues · Overlay</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Drop the overlay</p></td>
+<td><p><strong>Tools → Clear Catalogue Overlay</strong></p></td>
+<td><p>Glyphs + table dock removed</p></td>
+<td><p><a class="reference internal" href="#user-guide/catalogues-hips#catalogue-overlay-on-cubes--images"><span class="xref myst">Catalogues · Overlay</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Interop</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>SAMP send / receive with TOPCAT / Aladin</p></td>
+<td><p>Built-in SAMP hub bridge (auto-discovers running hub)</p></td>
+<td><p>File / catalogue exchange</p></td>
+<td><p><a class="reference internal" href="#user-guide/catalogues-hips#samp"><span class="xref myst">Catalogues · SAMP</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Open VBT / volume binary tables produced by the VisIVO Server CLI</p></td>
+<td><p><strong>File → Open</strong> (or <em>Data Hub</em>) — any <code class="docutils literal notranslate"><span class="pre">.bin</span></code> / <code class="docutils literal notranslate"><span class="pre">.head</span></code> VBT pair</p></td>
+<td><p>Particle viewer (<code class="docutils literal notranslate"><span class="pre">vtkWindowVbt</span></code> / <code class="docutils literal notranslate"><span class="pre">vtkWindowCatalogue3D</span></code>)</p></td>
+<td><p><a class="reference internal" href="server/visivo_server.html"><span class="doc std std-doc">VisIVO Server</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="quick-install">
+<h2>Quick install<a class="headerlink" href="#quick-install" title="Link to this heading">¶</a></h2>
+<p>For full instructions see <a class="reference internal" href="user-guide/getting-started.html"><span class="doc std std-doc">Getting started</span></a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. backend (FastAPI)</span>
+<span class="nb">cd</span><span class="w"> </span>backend
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>--port<span class="w"> </span><span class="m">8000</span>
+<span class="c1"># A bearer token is printed at startup (and saved to ~/.visivo_token)</span>
+
+<span class="c1"># 2. desktop client (Qt 6.5+ / VTK 9.5+ / C++17)</span>
+cmake<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-S<span class="w"> </span>.
+cmake<span class="w"> </span>--build<span class="w"> </span>build
+./build/VisIVOVisualAnalytics.app/Contents/MacOS/VisIVOVisualAnalytics
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="status">
+<h2>Status<a class="headerlink" href="#status" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Active branch</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">next-server</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Backend</p></td>
+<td><p>FastAPI + Python 3.12+</p></td>
+</tr>
+<tr class="row-even"><td><p>Client</p></td>
+<td><p>Qt 6.5+ / VTK 9.5+ / C++17</p></td>
+</tr>
+<tr class="row-odd"><td><p>License</p></td>
+<td><p>See repository <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Repo</p></td>
+<td><p><a class="reference external" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics">https://github.com/VisIVOLab/ViaLacteaVisualAnalytics</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="user-guide/getting-started.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Getting started</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, VisIVOLab
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">VisIVO Visual Analytics</a><ul>
+<li><a class="reference internal" href="#what-you-can-do-with-it">What you can do with it</a></li>
+<li><a class="reference internal" href="#quick-install">Quick install</a></li>
+<li><a class="reference internal" href="#status">Status</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=f26bd01d"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>

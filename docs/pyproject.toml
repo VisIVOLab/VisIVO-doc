@@ -1,0 +1,13 @@
+[project]
+name = "visivo-docs"
+version = "0.0.2"
+description = "Documentation build for VisIVO Visual Analytics (Sphinx + MyST + Furo)."
+requires-python = ">=3.12"
+dependencies = [
+    "sphinx>=7.4",
+    "furo>=2024.8.6",
+    "myst-parser>=4.0",
+    "linkify-it-py>=2.0",
+    "sphinx-copybutton>=0.5.2",
+    "sphinx-design>=0.6.1",
+]

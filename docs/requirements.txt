@@ -1,0 +1,11 @@
+# VisIVO Visual Analytics — docs build dependencies (Sphinx + MyST + Furo).
+# Used by both local `make html` and Read the Docs (via .readthedocs.yaml).
+#
+# Pinned to compatible minimum versions. Tighter pins live in uv.lock if you
+# want reproducible local builds.
+sphinx>=7.4
+furo>=2024.8.6
+myst-parser>=4.0
+linkify-it-py>=2.0          # required by myst_enable_extensions = ["linkify"]
+sphinx-copybutton>=0.5.2
+sphinx-design>=0.6.1
