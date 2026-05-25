@@ -8,7 +8,7 @@
         <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
 
     <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>VisIVO Visual Analytics dev</title>
+        <title>VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -171,7 +171,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">VisIVO Visual Analytics dev</div></a>
+      <a href="#"><div class="brand">VisIVO dev</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -265,29 +265,63 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="visivo-visual-analytics">
-<h1>VisIVO Visual Analytics<a class="headerlink" href="#visivo-visual-analytics" title="Link to this heading">¶</a></h1>
-<p><strong>An interactive desktop tool for exploring radio-astronomy data —
-spectral cubes, 2-D maps, 3-D catalogues, and HiPS surveys — backed by a
-scientific compute service.</strong></p>
-<p>VisIVO Visual Analytics gives astronomers a fast workspace for inspecting
-FITS data and deriving the products needed for science: moment maps,
-position–velocity diagrams, spectral profiles, line-width and equivalent-width
-maps, baseline-subtracted cubes, stacked spectra, isosurfaces, region
-statistics, and source overlays. Visualisation runs on the desktop;
-heavy computation runs on a co-located backend that can be embedded with the
-app or deployed on an HPC cluster.</p>
+          <section id="visivo">
+<h1>VisIVO<a class="headerlink" href="#visivo" title="Link to this heading">¶</a></h1>
+<p><strong>Tools for exploring and analysing astronomy data — interactive desktop
+viewing plus a command-line processing toolkit.</strong></p>
+<p>VisIVO is a family of two complementary components developed at INAF,
+sharing the same data formats (FITS, plus VisIVO’s own Volume Binary
+Table — VBT) so workflows mix freely between them:</p>
+<ul class="simple">
+<li><p><strong>VisIVO Visual Analytics</strong> — desktop GUI for spectral cubes, 2-D maps,
+3-D catalogues, HiPS surveys, source overlays. Backed by a scientific
+compute service that runs either embedded with the app or on a remote
+HPC cluster. Interactive slice navigation, moment maps, position–velocity
+diagrams, line-width / equivalent-width maps, baseline subtraction,
+spectral stacking, region statistics, MAD-based noise, optional VR.</p></li>
+<li><p><strong>VisIVO Server</strong> — command-line toolkit for <em>building</em>, <em>filtering</em>,
+<em>viewing</em>, and <em>managing</em> large particle catalogues / volume data as
+VBTs. Used to prepare datasets that the desktop client then opens
+(numerical simulations, exoplanet samples, randomly-downsampled mock
+fields, etc.).</p></li>
+</ul>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
-<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-3 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-body docutils">
 <div class="sd-card-title sd-font-weight-bold docutils">
-🚀 Getting started</div>
-<p class="sd-card-text">Install, launch the backend, open your first FITS dataset.</p>
+🖥️ VisIVO Visual Analytics</div>
+<p class="sd-card-text">The desktop tool — start here for FITS cubes and images.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Install, launch the backend, open your first FITS dataset →
+<a class="reference internal" href="user-guide/getting-started.html"><span class="doc std std-doc">Getting started</span></a></p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/getting-started.html"><span class="doc">Getting started</span></a></div>
 </div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+⚙️ VisIVO Server</div>
+<p class="sd-card-text">The CLI toolkit — build / filter / view VBTs from the shell.</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Importer, Filter, Viewer, Utils →
+<a class="reference internal" href="server/visivo_server.html"><span class="doc std std-doc">VisIVO Server</span></a></p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="server/visivo_server.html"><span class="doc">Introduction</span></a></div>
+</div>
+</div>
+</div>
+<section id="visual-analytics-quick-tour">
+<h2>Visual Analytics — quick tour<a class="headerlink" href="#visual-analytics-quick-tour" title="Link to this heading">¶</a></h2>
+<p>The desktop tool is organised around six main areas. Each card below
+opens the page that documents both the UI workflow and the scientific
+interpretation of the products it produces.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-3 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-body docutils">
@@ -337,6 +371,62 @@ SAMP messaging with TOPCAT/Aladin.</p>
 </div>
 <a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/catalogues-hips.html"><span class="doc">Catalogues, HiPS, and SAMP</span></a></div>
 </div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🛠️ Troubleshooting</div>
+<p class="sd-card-text">Backend not reachable, sanity warnings, slow swaps, common pitfalls.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="user-guide/troubleshooting.html"><span class="doc">Troubleshooting</span></a></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visivo-server-quick-tour">
+<h2>VisIVO Server — quick tour<a class="headerlink" href="#visivo-server-quick-tour" title="Link to this heading">¶</a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+📥 Importer</div>
+<p class="sd-card-text">Convert HDF5 / ASCII / FITS / binary inputs into VBT — the format both
+the Server tools and the desktop viewer consume natively.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="server/visivo_importer.html"><span class="doc">VisIVO Importer</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔬 Filter</div>
+<p class="sd-card-text">Operations on VBTs: extraction, decimation, randomisation, merging,
+sub-volume selection, scalar generation.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="server/visivo_filter.html"><span class="doc">VisIVO Filter</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+👁 Viewer</div>
+<p class="sd-card-text">Render VBTs from the shell into images / movies (headless), useful for
+HPC post-processing pipelines.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="server/visivo_viewer.html"><span class="doc">VisIVO Viewer</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🧰 Utils</div>
+<p class="sd-card-text">Helpers for inspecting VBTs, converting between encodings, batch
+operations.</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="server/visivo_utils.html"><span class="doc">VisIVO Utils</span></a></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -346,6 +436,7 @@ SAMP messaging with TOPCAT/Aladin.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
+</section>
 <hr class="docutils" />
 <section id="what-you-can-do-with-it">
 <h2>What you can do with it<a class="headerlink" href="#what-you-can-do-with-it" title="Link to this heading">¶</a></h2>
@@ -581,7 +672,11 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">VisIVO Visual Analytics</a><ul>
+<li><a class="reference internal" href="#">VisIVO</a><ul>
+<li><a class="reference internal" href="#visual-analytics-quick-tour">Visual Analytics — quick tour</a></li>
+<li><a class="reference internal" href="#visivo-server-quick-tour">VisIVO Server — quick tour</a><ul>
+</ul>
+</li>
 <li><a class="reference internal" href="#what-you-can-do-with-it">What you can do with it</a></li>
 <li><a class="reference internal" href="#quick-install">Quick install</a></li>
 <li><a class="reference internal" href="#status">Status</a></li>
