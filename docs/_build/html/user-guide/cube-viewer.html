@@ -426,31 +426,80 @@ overlay management is menu-only (the four entries are state toggles, not
 <h3>Extract Spectrum (probe a single pixel)<a class="headerlink" href="#extract-spectrum-probe-a-single-pixel" title="Link to this heading">¶</a></h3>
 <p>The cheapest interactive lookup the cube can offer. You pick a pixel; the
 backend returns the 1-D intensity profile along the spectral axis at that
-line of sight, drawn in a <em>Profile</em> window.</p>
+line of sight, drawn in a <em>Spectral Profile</em> window.</p>
 <p><strong>How to use it:</strong></p>
 <ol class="arabic simple">
 <li><p><strong>Tools → Extract Spectrum</strong> in the cube viewer (or the <em>Data Probe</em>
 sidebar button, or the probe icon in the 2-D toolbar). The cursor
 becomes a cross-hair on the slice.</p></li>
-<li><p>Click anywhere on the 2-D slice. A <em>Profile</em> window opens with the
-spectrum at that pixel and the X-axis already converted to the cube’s
-spectral unit (velocity / frequency / channel).</p></li>
-<li><p>Keep clicking to update the probe interactively. Toggle <strong>freeze</strong> in
-the Profile window to keep the current pick while you mouse over other
-positions for visual comparison.</p></li>
+<li><p><strong>Hover</strong> the slice → the profile updates live to whichever pixel is
+under the cursor. The header status badge says <strong>🟢 Live</strong> in this
+mode.</p></li>
+<li><p><strong>Click</strong> a pixel → that spectrum gets <strong>pinned</strong> (frozen). Moving the
+mouse afterwards no longer overwrites it. The badge switches to <strong>🔒
+Pinned</strong> and the meta row hint changes to <em>“Click the slice again to
+unpin and resume live updates.”</em></p></li>
+<li><p><strong>Click again</strong> → unpins, live mode resumes.</p></li>
 </ol>
 <p>You can also pick a spectrum directly from the <strong>3-D view</strong>: enable
 <em>View → Pick Spectrum on Plane Click</em> (or the <em>Cube Extras</em> sidebar
 checkbox). Clicking on the textured cutting plane extracts the spectral
-profile at that (RA, Dec) position and raises the <em>Profile</em> window
-automatically.</p>
+profile at that (RA, Dec) position and raises the <em>Spectral Profile</em>
+window automatically.</p>
+<p><strong>What the Spectral Profile window shows:</strong></p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 76.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Area</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Header band</strong></p></td>
+<td><p>File name · pixel coords <em>(x, y)</em> · WCS coords (RA/Dec or l/b,
+formatted in the active sky frame, sexagesimal or decimal as set in
+the cube viewer). Plus the live / pinned status badge and a one-line
+interaction hint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Plot</strong></p></td>
+<td><p>Intensity vs spectral axis (velocity / frequency / channel — picked
+from the cube WCS, with BUNIT on the Y axis). Drag and scroll-wheel
+zoom both axes. A dashed brand-blue vertical line marks the channel
+currently shown in the 2-D slice viewer — so when you scroll the
+slice slider, the marker moves with it and you can see exactly which
+sample of the spectrum corresponds to the slice on screen.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Stats bar</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">N</span></code> (finite samples) · <code class="docutils literal notranslate"><span class="pre">Min</span></code> / <code class="docutils literal notranslate"><span class="pre">Max</span></code> / <code class="docutils literal notranslate"><span class="pre">Mean</span></code> · <code class="docutils literal notranslate"><span class="pre">RMS</span></code> · <code class="docutils literal notranslate"><span class="pre">∫</span></code>
+(integrated value over the visible spectrum, ≈ flux density × <code class="docutils literal notranslate"><span class="pre">Δv</span></code>,
+a quick column-density / line-flux proxy). All recomputed on every
+new probe.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Footer</strong></p></td>
+<td><p><em>Save spectrum as PNG…</em> exports the plot as an image; <em>Save spectrum
+as CSV…</em> exports the actual data (two columns: spectral axis +
+intensity), prefaced by <code class="docutils literal notranslate"><span class="pre">#</span></code> comment lines carrying the dataset name,
+pixel + WCS coords, and sample count — so the file is self-
+documenting and parses straight into pandas / astropy / TOPCAT.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><strong>Why it matters scientifically:</strong> moment maps and region statistics
 average away the per-channel detail. The single-pixel spectrum is what
 you need to identify line shape (Gaussian vs multi-peak vs absorption),
 spot self-absorption dips, hand-pick line-free channels before running
 <a class="reference internal" href="#spectral-tools#baseline-subtraction-s-03"><span class="xref myst">Baseline Subtraction</span></a>, or
 visually confirm a <a class="reference internal" href="moment-maps.html"><span class="doc std std-doc">moment-1 velocity gradient</span></a> is driven by
-a real shift in line centroid rather than by a noise feature.</p>
+a real shift in line centroid rather than by a noise feature. The CSV
+export is the bridge to downstream analysis tools (Gauss-fit, line
+identification, comparison with synthetic spectra) — keep the
+provenance preamble in the file and your future self will know exactly
+which pixel of which cube that spectrum came from.</p>
 </section>
 <section id="open-in-vr">
 <h3>Open in VR<a class="headerlink" href="#open-in-vr" title="Link to this heading">¶</a></h3>
