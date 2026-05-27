@@ -107,7 +107,8 @@ heavier compute, in this order:
   - Cheap, interactive — look at one spectrum, immerse in the cube.
 * - **ANALYSIS**
   - Estimate Noise, Compute Moment, Line-width Map, Baseline Subtraction,
-    Stack Spectral Cubes, Extract PV Diagram
+    Stack Spectral Cubes, Extract PV Diagram, **Channel Maps**,
+    Export Sub-Cube as FITS, Export Moment Map as FITS
   - Compute-on-cube tools that produce a derived map / cube / spectrum.
     All run on the backend with the heavy-task throttle, so the viewer
     stays interactive.
@@ -186,6 +187,51 @@ and raises the *Spectral Profile* window automatically.
     documenting and parses straight into pandas / astropy / TOPCAT.
 ```
 
+#### Spectral smoothing
+
+The **Smooth:** combo box in the spectrum header lets you apply a 1-D
+convolution kernel to the displayed profile without altering the
+underlying data. Available kernels:
+
+- **None** — raw spectrum (default).
+- **Hanning** — three-point [0.25, 0.5, 0.25] smoothing; good for
+  suppressing Gibbs ringing.
+- **Boxcar 3 / 5 / 7** — simple running average over 3, 5, or 7
+  channels.
+- **Gaussian σ=1 / σ=2** — Gaussian convolution with standard deviation
+  1 or 2 channels.
+
+The kernel is **NaN-safe**: channels flagged as NaN are excluded from
+the convolution so they don't propagate into neighbouring values. The
+stats bar (Min, Max, Mean, RMS, ∫) is recomputed on the smoothed data.
+Smoothing is also active during **live probe hover**, so you can compare
+kernels in real time as you move across the slice.
+
+```{note}
+Smoothing is **display-only**. *Save spectrum as CSV…* always exports
+the raw (unsmoothed) data so downstream analysis tools receive the
+original channel values.
+```
+
+#### Line identification overlay
+
+The **Load Lines…** button in the spectrum header lets you overlay
+expected spectral-line positions on the plot:
+
+1. Click **Load Lines…** and select a CSV (or tab-separated) text file
+   with two columns: `frequency,label` (e.g. `115.271,CO(1-0)`). Lines
+   starting with `#` are ignored.
+2. Each entry is drawn as a **vertical dashed amber line** at the given
+   frequency, with a **rotated label** alongside it.
+3. Click **Clear Lines** to remove all markers.
+
+```{note}
+Frequencies in the file must be in the **same unit as the plot's X
+axis**. If the spectrum is displayed in velocity, convert your rest
+frequencies to velocity first (or switch the cube's spectral axis to
+frequency). No automatic unit conversion is performed.
+```
+
 **Why it matters scientifically:** moment maps and region statistics
 average away the per-channel detail. The single-pixel spectrum is what
 you need to identify line shape (Gaussian vs multi-peak vs absorption),
@@ -260,6 +306,42 @@ for spotting where lines from different velocity ranges connect spatially
 — typical use cases are outflow lobes, expanding bubbles, and filament
 networks where the eye benefits from real parallax.
 
+### Channel Maps (velocity mosaic)
+
+A standard radio-astronomy display: an N × M grid of 2-D channel slices,
+all rendered with the same colour map and data range, so coherent
+structures across the spectral axis jump out at a glance — outflow
+lobes, expanding shells, velocity gradients, and cloud morphology.
+
+**How to use it:**
+
+1. **Tools → Channel Maps…** in the cube viewer (also available in the
+   *Tools* sidebar under ANALYSIS).
+2. Set the **start** and **end** channel, the **stride** (skip every
+   N-th channel), the number of **columns** in the grid (default 8),
+   and the **colour map** (with gradient preview in the dropdown).
+3. Click **Generate**. The backend fetches the entire z-range in one
+   shot; the mosaic window renders all panels within a few seconds even
+   for 64+ channels.
+4. The header shows the channel range, stride and LUT; each cell shows
+   **CH N** (the 0-indexed channel index). Axis ticks appear only on
+   edge panels (bottom row = X, left column = Y) to keep the grid
+   clean.
+5. **Double-click** any panel to open it in a standalone resizable
+   window with the full colour bar, axes, and drag + zoom. Useful for
+   inspecting a single channel in detail without leaving the mosaic
+   context.
+6. **Save mosaic as PNG…** composites all panels (retina-quality) into
+   one image with a title bar and saves it at the user-chosen path.
+
+```{tip}
+Start with a small stride and wide range to identify the interesting
+velocity window, then narrow the range and set stride=1 for a
+publication-ready mosaic. The colour scale is shared across all panels
+(auto-ranged from the finite min/max of the entire sub-volume), so
+faint emission and strong peaks are directly comparable.
+```
+
 ## Regions, PV diagrams, noise
 
 These are all explained on a dedicated page:
@@ -275,6 +357,26 @@ These are all explained on a dedicated page:
   spatial reference when rotating the camera.
 - *Tools → Load Catalogue Overlay* lets you overlay sources from a CSV /
   VOTable on the slice; see [Catalogues](catalogues-hips).
+
+### Beam indicator
+
+When the FITS header contains `BMAJ` and `BMIN` (and optionally `BPA`),
+the 2-D slice view draws a **filled white semi-transparent ellipse** in
+the bottom-left corner representing the synthesised beam. The ellipse is
+sized in pixels using the angular beam axes (`BMAJ`, `BMIN` in degrees)
+divided by `|CDELT1|`, so it scales correctly with the image pixel scale.
+`BPA` (beam position angle, degrees) controls the orientation.
+
+If `BMAJ` or `BMIN` are absent from the header (e.g. single-dish data
+without a restoring beam), the ellipse is hidden automatically — no
+action needed.
+
+```{tip}
+The beam indicator helps you judge whether spatial structures in the
+slice are resolved. Any feature whose angular size is comparable to the
+beam ellipse is only marginally resolved — treat its morphology with
+caution.
+```
 
 ## Saving and exporting
 

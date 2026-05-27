@@ -314,6 +314,72 @@ Implementation notes:
   bounds; `applyCubeOpenResult()` refreshes the actor whenever the cube
   bounds change (preview → full-res, ROI switch).
 
+### Beam indicator ellipse (2-D slice view)
+
+The beam indicator is a filled ellipse rendered in the bottom-left corner
+of the 2-D slice renderer. It visualises the synthesised beam reported by
+the FITS header keywords `BMAJ`, `BMIN`, and `BPA`.
+
+Implementation notes:
+
+- **Backend**: `geometry_metadata()` in `backend/app/fits_dataset.py` reads
+  `BMAJ`, `BMIN`, and `BPA` from the primary header and returns them (in
+  degrees) as `beam_major`, `beam_minor`, `beam_pa`. The
+  `OpenDatasetResponse` schema (`backend/app/schemas.py`) carries them as
+  optional floats; the client receives them via `BackendOpenDatasetResult`
+  fields `beamMajorDeg`, `beamMinorDeg`, `beamPaDeg`.
+- **Frontend**: `vtkWindowCube::setBeamInfo()` builds an ellipse from
+  parametric points (cos/sin sampled at ~64 steps), converts angular sizes
+  to pixels via `|CDELT1|`, and creates a filled `vtkActor2D` with white
+  colour and semi-transparent opacity. The actor is added to the 2-D slice
+  renderer at a fixed position in the bottom-left corner (viewport-relative
+  coordinates).
+- If `BMAJ` or `BMIN` are absent (i.e. the optional fields are unset), the
+  ellipse actor is not created or is set invisible — no fallback drawing
+  occurs.
+
+### Spectral smoothing (ProfileWidget)
+
+The `ProfileWidget` spectrum header exposes a **Smooth:** `QComboBox` that
+applies a 1-D convolution kernel to the displayed profile.
+
+Implementation notes:
+
+- Kernels available: None, Hanning `[0.25, 0.5, 0.25]`, Boxcar 3/5/7,
+  Gaussian σ=1, Gaussian σ=2. The kernel array is applied via a
+  `convolve1D` helper function.
+- The convolution is **NaN-safe**: NaN samples are excluded from the
+  weighted sum and the normalisation factor is adjusted to compensate, so
+  NaN values do not propagate into neighbouring channels.
+- The stats bar (N, Min, Max, Mean, RMS, ∫) is recomputed on the
+  **smoothed** data vector, giving the user immediate quantitative feedback
+  on the effect of the kernel.
+- Smoothing is active during **live probe hover**: every
+  `updateProbePlot()` call re-applies the selected kernel before plotting,
+  so changing kernels while hovering is responsive.
+- CSV export always writes the **raw** (unsmoothed) data to preserve
+  scientific provenance.
+
+### Line identification overlay (ProfileWidget)
+
+**Load Lines…** and **Clear Lines** buttons in the `ProfileWidget` header
+allow the user to overlay expected spectral-line positions.
+
+Implementation notes:
+
+- The CSV parser accepts comma- or tab-separated files with two columns
+  (`frequency`, `label`). Lines beginning with `#` are skipped as
+  comments. No header row is required.
+- Each loaded line is rendered as a `QCPItemLine` (vertical, dashed, amber
+  pen) spanning the full Y range of the plot. The label is rendered as a
+  `QCPItemText` positioned at the line's X coordinate with a viewport-ratio
+  Y coordinate (fixed fraction of the plot height, e.g. 0.85) so that
+  labels stay readable regardless of zoom level. Labels are rotated 90°.
+- **Clear Lines** removes all `QCPItemLine` + `QCPItemText` items that
+  belong to the line-ID overlay set and replots.
+- No unit conversion is performed: frequencies in the file must match the
+  plot's current X-axis unit.
+
 ### Optional: VR (OpenXR) offload
 
 The cube viewer can hand off the current `vtkVolume` (with its live LUT /
@@ -424,6 +490,56 @@ The panel auto-refreshes on every backend health tick
 (`DataHubWidget::refreshStatus()`); cube viewers also emit
 `workspaceExportsChanged()` after a successful export so the panel
 updates within frames of the operation instead of on the next 4s tick.
+
+---
+
+## Channel Maps (`ChannelMapsWindow`)
+
+Displays an N × M grid of 2-D channel slices with a shared colour scale,
+rendered with **QCustomPlot** (`QCPColorMap`) instead of VTK to avoid the
+macOS OpenGL context limit (~16 simultaneous contexts — a 64-cell grid
+would crash). Each cell is a lightweight raster widget.
+
+| Component | File | Role |
+|-----------|------|------|
+| Config dialog | `ChannelMapsDialog.{h,cpp}` | Start/End/Stride/Columns/LUT picker (gradient preview icons via `CubeUiAssembler::buildLutPreview`) |
+| Mosaic window | `ChannelMapsWindow.{h,cpp}` | Non-modal `QMainWindow` with a `QScrollArea` → `QGridLayout` of QCPColorMap cells |
+| LUT mapping | `lutToGradient()` (local to `ChannelMapsWindow.cpp`) | Samples a `vtkLookupTable` at 256 points → `QCPColorGradient` with matching colour stops |
+
+**Data flow**: one `BackendClient::requestSubvolume(did, 0, W-1, 0, H-1, z0, z1)`
+call (extended with `range_min/max`, `spectral_axis_type/unit`, `bunit`)
+fetches the full z-slab. Client-side slicing extracts each stride-selected
+plane and populates the `QCPColorMap::data()` cells. The shared data
+range (`rangeMin..rangeMax` from the subvolume response) is applied to
+every colour map so the LUT is directly comparable across panels.
+
+**Double-click → enlarged view**: opens a `QDialog` with a single
+full-size `QCPColorMap` + `QCPColorScale` (colour bar). The gradient is
+passed by value from the mosaic (not copied from the source cell, because
+`QCPColorMap::setColorScale()` resets the gradient to the scale's
+default — the gradient must be set *after* the colour-scale link).
+Drag + zoom are enabled for detail inspection.
+
+**PNG export**: iterates over cells, `resize()` + `replot()` each to
+the export geometry (400 × 340 @ 2× DPR) before `toPixmap()` so
+`QCPTextElement` title labels ("CH 28") lay out at the export width
+rather than the on-screen widget size. Composited into a single `QImage`
+with a file-name + range title bar.
+
+---
+
+## Image viewer (`vtkWindowImage`) — recent additions
+
+Several features were ported from (or inspired by) the cube viewer:
+
+| Feature | Implementation | Notes |
+|---------|---------------|-------|
+| **Beam indicator** | `setBeamInfo()` — same parametric ellipse as the cube viewer, added to the 2-D renderer. `BMAJ`/`BMIN` come from `OpenDatasetResponse` (wired in `MainWindow`). | Hidden when beam keywords are absent. |
+| **Region ExclusiveOptional** | `QActionGroup::ExclusionPolicy::ExclusiveOptional` on the four region-shape actions. | Same fix as the cube viewer — prevents multiple shapes checked simultaneously. |
+| **WCS SegmentedToggle** | Coordinate format (`Sexagesimal \| Decimal`) and coordinate frame (`Galactic \| FK5 \| Ecliptic`) replaced from individual `QToolButton`s to `SegmentedToggle` pills. | Toggle writes into the original `QAction`s via `trigger()` for backward compat. |
+| **Linear / Log scale** | Old `QRadioButton` pair replaced with a `SegmentedToggle` (`Linear \| Log`). The hidden radios remain the canonical state holder; the toggle syncs into them. | Same pattern as cutting-plane Show Contours in the cube sidebar. |
+| **Contour overlay** | `vtkFlyingEdges2D` pipeline (same as the cube's slice contours) connected to the master layer. Level / Lower / Upper controls in the sidebar. External FITS contours via `vtkContourFilter` + `vtkFITSReader`. | `setupContourPipeline()` is re-called in `applyRemoteMasterLayer()` so it connects to the real image data, not the placeholder. |
+| **FITS export → Workspace** | `POST /v1/exports/copy_dataset` copies the source FITS into the Workspace Exports dir. `BackendClient::copyDatasetToWorkspace()` on the client side. | Simpler than the cube's crop/moment flow — just a file copy with collision-safe basename. |
 
 ---
 
