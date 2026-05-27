@@ -14,7 +14,7 @@ The window is split into two synchronised dock areas plus a side panel:
 |------|---------------|
 | **3-D view** | Volume / isosurface rendering of the whole cube, with an orientation marker and the *cutting plane* indicator. |
 | **2-D view** | The currently selected slice along the spectral axis (or a moment map, see below). |
-| **Sidebar** | Tabs for *3-D View Settings*, *2-D View Settings*, *Tools*, *Cube Extras*, *Info / Stats*. |
+| **Sidebar** | Tabs for *3-D View Settings*, *2-D View Settings*, *Tools*, *Info / Stats*. |
 | **Toolbar (top)** | Dataset path pill, tag chips (resolution, mode), and the **Find / Command / Export** buttons. |
 
 The bottom **status bar** carries three live indicators: the **data state**
@@ -43,9 +43,9 @@ cutting-plane indicator in the 3-D view updates in real time.
 ```{tip}
 The cutting plane is **textured with the live slice contents** — what you
 see on the plane is exactly what is shown in the 2-D dock. Its opacity is
-adjustable from *View → Cutting Plane Opacity* (or the *Cube Extras*
-sidebar): lower opacity to see the volume behind, higher opacity to
-emphasise the slice.
+adjustable from *View → Cutting Plane Opacity* (or the **CUTTING PLANE**
+section of the *3-D View Settings* sidebar): lower opacity to see the
+volume behind, higher opacity to emphasise the slice.
 ```
 
 ### Slice animation (movie mode)
@@ -54,8 +54,9 @@ Auto-advance the slice axis as a movie — useful for spotting coherent
 structures across velocity channels:
 
 - **Play / Pause** — *View → Play Slice Animation* (or <kbd>Space</kbd>),
-  or the *Cube Extras* sidebar button.
-- **Speed** — 2, 5, 10, 15, 30 frames/s.
+  or the **SLICE ANIMATION** section in the *2-D View Settings* sidebar.
+- **Speed** — preset only: 2, 5, 10, 15, 30 fps (picked from the dropdown
+  to stay in sync with *View → Animation Speed*).
 - **Mode** — *Loop*, *Bounce* (back and forth), or *Stop at End*.
 
 ## 3-D rendering modes
@@ -147,10 +148,10 @@ line of sight, drawn in a *Spectral Profile* window.
 4. **Click again** → unpins, live mode resumes.
 
 You can also pick a spectrum directly from the **3-D view**: enable
-*View → Pick Spectrum on Plane Click* (or the *Cube Extras* sidebar
-checkbox). Clicking on the textured cutting plane extracts the spectral
-profile at that (RA, Dec) position and raises the *Spectral Profile*
-window automatically.
+*View → Pick Spectrum on Plane Click* (or the **3D INTERACTION** toggle
+button in the *3-D View Settings* sidebar). Clicking on the textured
+cutting plane extracts the spectral profile at that (RA, Dec) position
+and raises the *Spectral Profile* window automatically.
 
 **What the Spectral Profile window shows:**
 
@@ -196,6 +197,17 @@ export is the bridge to downstream analysis tools (Gauss-fit, line
 identification, comparison with synthetic spectra) — keep the
 provenance preamble in the file and your future self will know exactly
 which pixel of which cube that spectrum came from.
+
+```{note}
+The same window is reused as the **Region Spectral Profile** when you
+draw a Box / Circle / Polygon / Annulus region (see
+[Regions, PV, noise](region-pv-noise)). In that mode the Live / Pinned
+status badge is hidden (the spectrum is a one-shot mean over the region,
+not a live probe) and the header shows the region descriptor instead of
+the pixel hint — e.g. *"Circle region · 195 / 195 valid pixels · 2D
+stats: current slice · spectrum: full cube"*. Plot, stats bar, channel
+marker and CSV export behave identically.
+```
 
 ### Open in VR
 
@@ -272,6 +284,43 @@ These are all explained on a dedicated page:
   registers them in the same session); see [Moment maps](moment-maps).
 - Baseline-subtracted cubes are also registered as a new `dataset_id` you
   can open in a fresh cube viewer; see [Spectral tools](spectral-tools).
+
+### FITS exports → Workspace
+
+Two entries under **Tools** persist derived FITS artefacts into a backend
+*Workspace Exports* directory (default ``~/.visivo/exports/``, override
+with the ``VISIVO_EXPORTS_DIR`` environment variable):
+
+- **Tools → Export Sub-Cube as FITS…** — crop the current cube to a
+  spatial+spectral ROI and save it as a standalone FITS. The bounds
+  dialog defaults to the AABB of the currently-drawn region (if any),
+  otherwise to the full cube extent. WCS is preserved: ``CRPIX1/2/3`` is
+  shifted so every pixel in the cropped FITS keeps its original sky /
+  spectral coordinates. The sub-cube is also registered as a new dataset
+  in the active session, so you can immediately open it in a new cube
+  viewer.
+- **Tools → Export Moment Map as FITS…** — persist the moment currently
+  on screen as a 2-D FITS (celestial WCS, ``BUNIT`` derived from the
+  cube). Disabled until a moment has been computed.
+
+Both flows ask only for a **basename** (e.g. ``m31_m0.fits``). The
+backend stores the file in the Workspace Exports dir and auto-suffixes
+collisions (``cube.fits`` → ``cube_1.fits`` → …). The completion dialog
+shows the chosen filename and on-disk path.
+
+Once in the workspace, artefacts are listed in the **Workspace Exports**
+panel of the Data Hub. Per-entry actions:
+
+- **Open** — register the FITS as a new session dataset and open the
+  matching viewer (cube viewer for cubes, image viewer for 2-D maps).
+- **Download…** — native Save As dialog → streams the bytes from the
+  backend (over HTTP, so it works the same when the backend lives on a
+  remote host) and writes to the chosen local path.
+- **Delete** — removes the FITS from the workspace (confirmation
+  prompt; irreversible).
+
+The panel auto-refreshes every few seconds, so new exports from any
+cube viewer appear without manual action.
 
 ## Performance notes
 
