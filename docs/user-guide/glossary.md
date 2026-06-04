@@ -13,6 +13,12 @@ Beam (synthesised beam)
   view when these keywords are present. See
   [Cube viewer — Beam indicator](cube-viewer#beam-indicator).
 
+Blink / Compare
+  Rapid alternation of visibility between layers 0 and 1 in the image
+  viewer, controlled by a configurable timer (50–1000 ms). Standard
+  technique for detecting transients, proper motion, or artefact
+  differences. See [Image viewer — Blink / Compare](image-viewer#blink-compare).
+
 BUNIT
   FITS header keyword carrying the brightness / pixel-value unit (e.g.
   `Jy/beam`, `K`, `counts`). All region statistics and moment maps
@@ -91,6 +97,12 @@ MAD
   Multiplied by 1.4826 it gives a robust 1σ estimate for Gaussian data,
   insensitive to outliers. Used in noise estimation and region stats.
 
+Measurement tools (Ruler / Angle)
+  Interactive distance and angle measurement on the image viewer. Ruler
+  shows pixel and angular distance (Haversine); Angle shows the angle
+  at the middle vertex of three clicked points. See
+  [Image viewer — Measurement tools](image-viewer#measurement-tools).
+
 Moment (M0, M1, M2, …)
   Statistical summary of a spectral line projected on the spatial axes.
   See [Moment maps](moment-maps) for the formulas and use cases.
@@ -138,6 +150,17 @@ Spectral axis
   CTYPE3 examples: `VELO-LSR`, `VRAD`, `VOPT`, `FREQ`. VisIVO reports the
   active axis kind, unit, and trustworthiness in the cube viewer status
   bar.
+
+SPECVAL (SPECTYPE, SPECUNIT)
+  Non-standard FITS keywords written by VisIVO when *Tools → Export
+  Current Channel as 2-D FITS…* extracts a single channel of a spectral
+  cube. Since the output drops the spectral axis (NAXIS=2), VisIVO
+  preserves the channel's spectral coordinate as a scalar:
+  `SPECVAL` stores the value (e.g. `1.284e+09` for 1.284 GHz),
+  `SPECTYPE` mirrors the source cube's `CTYPE3` (e.g. `FREQ`,
+  `VRAD`), and `SPECUNIT` mirrors `CUNIT3` (e.g. `Hz`, `km/s`). The
+  Stokes / spectral-index / Faraday-RM dialogs in the image viewer use
+  these to prompt the user with the right frequency at recall time.
 
 VBT
   *VisIVO Binary Table* — efficient column-oriented binary format used
