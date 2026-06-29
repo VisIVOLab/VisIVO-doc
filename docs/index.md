@@ -168,6 +168,8 @@ backend-api
 async-patterns
 service-mapping-note
 catalogue3d-viewer
+velocity-field-viewer
+kinematic-model
 testing
 ```
 
