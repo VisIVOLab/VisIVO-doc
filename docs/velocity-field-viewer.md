@@ -10,6 +10,10 @@ grids.
 
 This is feature **F1** of the cosmic-flow roadmap.
 
+> Ready-made test data: see [Demo datasets](demo-datasets) —
+> `velocity_field.fits` (two-sink field for basins) and the co-registered
+> `combo/velocity.fits` + `combo/galaxies.csv` for the galaxy overlay.
+
 ## Opening a velocity field
 
 **Data ▸ Open Velocity Field…** → pick a FITS file from the backend file
@@ -147,6 +151,85 @@ all computed per axis so non-cubic grids are handled.
 | Define ROI / Load full-res ROI | full-resolution region fetch (LOD grids only) |
 | Show basins | gravitational-basin (watershed) regions — Laniakea-style superclusters |
 | Basin type | attraction (superclusters) vs repulsion (voids) |
+| Overlay galaxy catalogue… | load a catalogue and draw its galaxies as points in this field's frame |
+| Show galaxies / Galaxy size | toggle the overlay / point size |
+| Galaxy color | Uniform, or colour by a numeric attribute / Speed \|v\| |
+| Galaxy shape | Points, or Velocity arrows (peculiar-velocity glyphs) when vx/vy/vz exist |
+| Galaxy density / Density level % | overdensity isosurface from the galaxies + its level |
+
+## Galaxy overlay (CosmicFlows combo)
+
+*Overlay galaxy catalogue…* draws a galaxy point cloud **in the same frame as
+the velocity field** — the "where do galaxies sit in the flow" view. The viewer
+reuses its live backend session to open a catalogue (`BackendClient::openCatalogue`
+→ `queryTabularCatalogue` → `Catalogue3DParser::parseBackendSubset`, the same path
+as the 3-D catalogue viewer, capped at 100 000 rows for context) and adds the
+parsed `sceneX/Y/Z` positions as a gold point actor to the field's renderer.
+
+Because the overlay uses **physical Cartesian Mpc** positions, two conditions
+matter for alignment, and the viewer guards both:
+
+- **Cartesian positions** — if the catalogue provides X/Y/Z (backend `cartesian`
+  always implies them) the parser's Cartesian branch is forced, so a catalogue
+  that *also* carries RA/Dec still uses its physical XYZ rather than an
+  RA/Dec-derived shell. A non-Cartesian (sky) catalogue is still overlaid but the
+  status warns its positions may not match the field frame.
+- **Physical box set** — the field is only in Mpc once *Box size (Mpc)* is set;
+  while it is `0` (grid units) the overlay asks for confirmation, since Mpc
+  galaxies won't align with a unitless grid.
+
+The camera reframes on the first overlay (so the galaxies are visible — or a
+zoom-out makes a frame mismatch obvious); later re-overlays keep the current
+view. *Show galaxies* toggles visibility and *Galaxy size* sets the point size
+live.
+
+**Galaxy color** colours the points by a catalogue attribute rather than a flat
+gold. On overlay, a named `vtkFloatArray` is attached to the point cloud for each
+numeric column (values via the shared parser accessor), plus a derived
+**Speed |v|** = √(vx²+vy²+vz²) when vx/vy/vz are present, and — when vx/vy/vz are
+present *and* a field is loaded — a **Field agreement** scalar: the cosine of the
+angle between each galaxy's peculiar velocity and the reconstructed field
+sampled at its position (`vtkProbeFilter`, with the galaxies' own arrays not
+passed through so the interpolated field velocity isn't shadowed). +1 = the
+galaxy flows *with* the reconstruction, −1 = against it, 0 = outside the field
+box. This is the CosmicFlows "does the reconstruction predict the observed
+motions?" diagnostic. Selecting a key drives
+the mapper via `SetScalarModeToUsePointFieldData` + `SelectColorArray` through a
+blue→red LUT auto-ranged to the attribute; *Uniform* returns to the flat colour.
+Re-colouring never re-fetches.
+
+A second **scalar bar** (legend) titled with the attribute appears on the **left**
+(clear of the field's speed bar on the right and the orientation-axes marker in
+the corner). It shares the galaxy LUT, retitles/reranges as you switch keys, and
+is shown only while the galaxies are visible *and* attribute-coloured (hidden on
+*Uniform*, when *Show galaxies* is off, or on a fresh overlay).
+
+**Galaxy shape** switches the overlay between plain **Points** and **Velocity
+arrows** — available when the catalogue carries vx/vy/vz. In arrow mode a
+`vtkGlyph3DMapper` draws a `vtkArrowSource` per galaxy, oriented and scaled by a
+3-component `velocity` point array (built at overlay), with the fastest arrow
+≈ 4 % of the data diagonal. This is the CosmicFlows comparison: individual galaxy
+peculiar velocities against the reconstructed flow field. Colour still follows
+*Galaxy color* (so *Speed |v|* colours the arrows too); *Galaxy size* is a
+point-size and is disabled in arrow mode. The overlay keeps both a points mapper
+and a glyph mapper on the same point cloud, so shape/colour switch with no
+re-fetch.
+
+**Galaxy density** overlays an **overdensity isosurface** built from the galaxies
+themselves — where large-scale structure (filaments/clusters) sits relative to
+the flow. On first toggle the points are accumulated onto a 48³ grid over the
+catalogue bounds, Gaussian-smoothed into a density field (`vtkImageGaussianSmooth`),
+and contoured (`vtkFlyingEdges3D`) at *Density level %* of the peak — a translucent
+pale-cyan surface you can see the flow through. The grid is cached (rebuilt only
+on a new overlay); moving the level slider just re-contours. (All client-side on
+the GUI thread — a 48³ smooth of ≤100k points is milliseconds.)
+
+The open/query/parse runs **off the GUI thread** (`QtConcurrent` +
+`QFutureWatcher`), so a large catalogue doesn't freeze the UI: the worker
+(`fetchCatalogueOverlay`, capturing only value copies, exceptions caught →
+`ok=false`) returns the parsed positions + schema, and `onCatalogueOverlayReady()`
+builds the VTK actor on the GUI thread. The button is disabled while a fetch runs
+(re-entry guarded by `isRunning()`). (Still future: multiple overlays.)
 
 ## Tests
 
