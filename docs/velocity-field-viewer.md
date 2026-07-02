@@ -118,6 +118,38 @@ convergence on a smoothed, downsampled field), not a publication-grade watershed
 appropriate for interactive exploration, consistent with how the original
 analyses work on smoothed fields.
 
+## Density from the velocity divergence
+
+**Overdensity (−∇·v)** renders the *density field implied by the flow*: in linear
+theory the density contrast δ ∝ −∇·v, so **converging flow (∇·v < 0) marks
+overdensities**. `buildFieldDensity()` runs `vtkGradientFilter`
+(`ComputeDivergenceOn`) on the display grid's `velocity` array to get ∇·v, and
+`updateFieldDensityContour()` draws a translucent orange `vtkFlyingEdges3D`
+isosurface of the convergent cores at *Overdensity level %* of the most-negative
+∇·v (higher % → tighter, denser cores). The ∇·v field is cached and
+re-contoured on the slider; a box-size change invalidates it (the divergence
+depends on the grid spacing) and rebuilds if shown.
+
+**Void (+∇·v)** is the symmetric companion: an isosurface of the *divergent*
+cores (∇·v > 0), i.e. underdensities / repellers (the Local Void, the Dipole
+Repeller). It shares the ∇·v field and the level slider (which maps its % to each
+side's extremum independently), and draws a cool-blue surface. Overdensity and
+Void can be shown together — an attractor glows orange, a repeller blue.
+
+For a **downsampled (large) field**, the ≤128³ display LOD is too coarse to
+resolve the ∇·v cores, so the viewer fetches a higher-resolution divergence from
+the backend (`POST /v1/velocity/density_bin` → `BackendClient::fetchVelocityDensity`,
+capped at 256³) and places it at the client box geometry — full-res for fields
+≤256³. A full-resolution display computes ∇·v locally with no round-trip. The
+backend worker (`velocity_density_worker`) is unit-tested (radial in/outflow →
+∇·v = ∓3 at unit spacing).
+
+Because each isosurface is a *level set* of ∇·v, it needs a **structured** field:
+a flow with distinct convergence/divergence peaks shows cores at those peaks,
+while a uniform-divergence flow (a pure radial infall) has none — the status bar
+says so. These are **density proxies** (∝ δ, not calibrated by faH), the "where's
+the matter / where's the emptiness" complement to the flow itself.
+
 ## Rendering
 
 - **Arrows** — `vtkGlyph3DMapper` (GPU instancing) fed by `vtkMaskPoints` in
@@ -140,6 +172,11 @@ all computed per axis so non-cubic grids are handled.
 
 ## Sidebar controls
 
+The panel is grouped into **Flow** (glyphs / streamlines / display scale),
+**Structure** (ROI + derived cosmography: basins, ∇·v overdensity/void), and
+**Galaxy overlay** sections, in a scroll area so the (now sizeable) toolkit fits
+any window height.
+
 | Control | Effect |
 | --- | --- |
 | Arrows / Streamlines | toggle each actor set |
@@ -150,6 +187,9 @@ all computed per axis so non-cubic grids are handled.
 | Colormap | speed LUT |
 | Define ROI / Load full-res ROI | full-resolution region fetch (LOD grids only) |
 | Show basins | gravitational-basin (watershed) regions — Laniakea-style superclusters |
+| Overdensity (−∇·v) / Void (+∇·v) | density-from-divergence isosurfaces — convergent (orange) / divergent (blue) cores |
+| ∇·v level % | shared isosurface level for both (% of peak convergence/divergence) |
+| Field bulk flow vs radius | plot the reconstruction's own volume-weighted bulk flow \|⟨v⟩\| in spheres (no catalogue needed; ≈0 for a symmetric field, non-zero for a coherent one) |
 | Basin type | attraction (superclusters) vs repulsion (voids) |
 | Overlay galaxy catalogue… | load a catalogue and draw its galaxies as points in this field's frame |
 | Show galaxies / Galaxy size | toggle the overlay / point size |
@@ -181,19 +221,39 @@ matter for alignment, and the viewer guards both:
 The camera reframes on the first overlay (so the galaxies are visible — or a
 zoom-out makes a frame mismatch obvious); later re-overlays keep the current
 view. *Show galaxies* toggles visibility and *Galaxy size* sets the point size
-live.
+live. **Remove overlay** drops all overlay actors (points/arrows, density,
+legend) and resets the controls. When Field agreement is computed the status
+also reports the **mean field agreement** over the in-box galaxies — a single
+number for how well the whole catalogue matches the reconstruction.
 
 **Galaxy color** colours the points by a catalogue attribute rather than a flat
 gold. On overlay, a named `vtkFloatArray` is attached to the point cloud for each
 numeric column (values via the shared parser accessor), plus a derived
 **Speed |v|** = √(vx²+vy²+vz²) when vx/vy/vz are present, and — when vx/vy/vz are
-present *and* a field is loaded — a **Field agreement** scalar: the cosine of the
-angle between each galaxy's peculiar velocity and the reconstructed field
-sampled at its position (`vtkProbeFilter`, with the galaxies' own arrays not
-passed through so the interpolated field velocity isn't shadowed). +1 = the
-galaxy flows *with* the reconstruction, −1 = against it, 0 = outside the field
-box. This is the CosmicFlows "does the reconstruction predict the observed
-motions?" diagnostic. Selecting a key drives
+present *and* a field is loaded — two field-comparison scalars from a single
+`vtkProbeFilter` sampling of the field at each galaxy (with the galaxies' own
+arrays not passed through so the interpolated field velocity isn't shadowed):
+
+- **Field agreement** — cos(angle) between the galaxy's peculiar velocity and
+  the field at its position. +1 = flows *with* the reconstruction, −1 = against,
+  0 = outside the field box.
+- **Residual |v|** — the magnitude |v_galaxy − v_field|: the part of the observed
+  motion the reconstruction *fails to explain* (highlights missing attractors /
+  bulk flow beyond the model).
+
+After loading, the status bar reports the sample statistics over the in-box
+galaxies: **agreement** (mean cosine), **residual** (mean |v_galaxy − v_field|),
+and **bulk** (the coherent bulk flow, |mean v_galaxy|) — the last two are genuine
+cosmic-flow quantities (bulk-flow amplitude tests ΛCDM). All velocity numbers
+assume the field and catalogue share units (km/s in the CosmicFlows data path).
+
+**Bulk flow vs radius…** opens a plot of the bulk-flow amplitude |⟨v⟩| in spheres
+of growing radius about the observer (origin) — the Watkins–Feldman–Hudson curve.
+Two curves share the *same galaxy selection*: the **galaxies** (observed
+peculiar velocities) and the **reconstruction at galaxies** (the field sampled at
+each galaxy position, stored as `field_velocity` during the overlay probe). Where
+the two diverge, the reconstruction under- or over-predicts the coherent flow at
+that scale. (The radius axis is Mpc when a box size is set, else grid units.) Selecting a key drives
 the mapper via `SetScalarModeToUsePointFieldData` + `SelectColorArray` through a
 blue→red LUT auto-ranged to the attribute; *Uniform* returns to the flat colour.
 Re-colouring never re-fetches.
@@ -204,12 +264,16 @@ the corner). It shares the galaxy LUT, retitles/reranges as you switch keys, and
 is shown only while the galaxies are visible *and* attribute-coloured (hidden on
 *Uniform*, when *Show galaxies* is off, or on a fresh overlay).
 
-**Galaxy shape** switches the overlay between plain **Points** and **Velocity
-arrows** — available when the catalogue carries vx/vy/vz. In arrow mode a
-`vtkGlyph3DMapper` draws a `vtkArrowSource` per galaxy, oriented and scaled by a
-3-component `velocity` point array (built at overlay), with the fastest arrow
-≈ 4 % of the data diagonal. This is the CosmicFlows comparison: individual galaxy
-peculiar velocities against the reconstructed flow field. Colour still follows
+**Galaxy shape** switches the overlay between **Points**, **Velocity arrows**
+(when the catalogue carries vx/vy/vz), and **Residual arrows** (when a field is
+also loaded). A `vtkGlyph3DMapper` draws a `vtkArrowSource` per galaxy, oriented
+and scaled by the chosen 3-component array — `velocity` (peculiar velocity) or
+`residual` (v_galaxy − v_field, the *unexplained* motion). Both arrow modes share
+**one physical scale** (from the peculiar-velocity magnitude — largest velocity
+arrow ≈ 4 % of the data diagonal), so residual arrows are directly comparable:
+short where the reconstruction fits, long and coherent where it misses. This is
+the CosmicFlows comparison — individual galaxy motions, and their reconstruction
+residuals, against the flow field. Colour still follows
 *Galaxy color* (so *Speed |v|* colours the arrows too); *Galaxy size* is a
 point-size and is disabled in arrow mode. The overlay keeps both a points mapper
 and a glyph mapper on the same point cloud, so shape/colour switch with no
