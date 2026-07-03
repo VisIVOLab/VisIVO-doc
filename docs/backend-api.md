@@ -219,7 +219,7 @@ Cross-match the image footprint against an external catalogue via `astroquery`.
 
 Query params: `catalogue` (`simbad` | `2MASS` | `NVSS` | `FIRST`, default `simbad`), `radius_arcsec` (default 60), `max_sources` (1–5000, default 500).
 
-Response: `{ valid, error, n_sources, sources, truncated, centre_ra_deg, centre_dec_deg }`, where each source is `{ ra_deg, dec_deg, name, catalogue_id, separation_arcsec }`. The `X-Truncated` header mirrors `truncated`. Catalogue column names are resolved case-insensitively (robust across `astroquery` versions), and unparseable rows are skipped rather than failing the whole query. Errors map to HTTP: missing `astroquery` → 503, unknown catalogue → 422.
+Response: `{ valid, error, n_sources, sources, truncated, centre_ra_deg, centre_dec_deg }`, where each source is `{ ra_deg, dec_deg, name, catalogue_id, separation_arcsec }`. The `X-Truncated` header mirrors `truncated`. Sources are cropped to the **valid (finite) image pixels** — those projecting onto the blank/NaN border of a non-rectangular footprint are dropped. When the field exceeds `max_sources`, the retained set is a **uniform spatial sub-sample** across the footprint (queried against a generous upstream row cap) rather than only the sources nearest the image centre, so coverage stays representative. Catalogue column names are resolved case-insensitively (robust across `astroquery` versions), and unparseable rows are skipped rather than failing the whole query. Errors map to HTTP: missing `astroquery` → 503, unknown catalogue → 422.
 
 ### `POST /v1/astrometry/reproject/{dataset_id}`
 ```json
@@ -256,10 +256,23 @@ Cancel and remove.
 ```json
 { "dataset_id": "...", "max_longest_side": 1024 }
 ```
-Returns RGBA PNG bytes (base64) + `width`, `height`, `range_min`, `range_max`, `bunit`.
+Returns a downsampled float32 image (base64) + `width`, `height`, `full_width`, `full_height`, `range_min`, `range_max`, `is_preview`, `preview_scale_factor`, `bunit`. **Out-of-core**: reads only the decimated pixels from the memmap (via `np.ix_`), so a multi-GB mosaic is never fully loaded just to preview it.
 
 ### `POST /v1/image/full`
-Same, no size cap.
+Same, no size cap. **Loads the whole plane into RAM** — use `/v1/image/tile` (or `/v1/image/preview`) for large mosaics.
+
+### `POST /v1/image/tile`
+Out-of-core pyramid tile of a 2-D image mosaic — reads only the requested tile
+region from the memmap, so multi-GB mosaics can be panned / zoomed without
+materialising the full plane (unlike `full` / `preview`).
+```json
+{ "dataset_id": "...", "level": 0, "tile_x": 0, "tile_y": 0, "tile_size": 256 }
+```
+- `level` — pyramid level: `0` = full resolution, `L` decimates by `2**L` (nearest-neighbour). Must be `0..num_levels-1`.
+- `tile_x` / `tile_y` — tile indices at that level; each tile covers `tile_size` downsampled pixels per axis.
+- `tile_size` — output tile edge in pixels (1–4096, default 256).
+
+Response: `width` / `height` (actual tile dims, smaller at edges), `full_width` / `full_height`, `level`, `num_levels`, `tile_x`, `tile_y`, `tile_size`, `range_min` / `range_max`, `compression`, base64 `data`. Out-of-range tile or `level ≥ num_levels` → 422; non-image dataset → 422.
 
 ---
 
