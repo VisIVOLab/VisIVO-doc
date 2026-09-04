@@ -1,0 +1,566 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Movie Export (F3)" href="movie-export.html"><link rel="prev" title="Tilted-Ring Kinematic Model (F2)" href="kinematic-model.html">
+        <link rel="prefetch" href="_static/visivo_logo_light.svg" as="image">
+        <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
+
+    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>Kinematic Lasso — interactive 3-D object selection &amp; masking (F2) - VisIVO dev</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0b5fff;
+  --color-brand-content: #0b5fff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">VisIVO dev</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/visivo_logo_light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/visivo_logo_white.svg" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/getting-started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/cube-viewer.html">Spectral cube viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/image-viewer.html">Image viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/vbt-viewer.html">VBT viewer (point clouds and volumes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/velocity-fields.html">Velocity fields and cosmic flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/moment-maps.html">Moment maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/spectral-tools.html">Spectral analysis tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/source-finding.html">Source finding and cross-matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/publication-output.html">Figures, movies and linked views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot.html">Scientific Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-backend.html">Copilot backend &amp; engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async-patterns.html">Async Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service-mapping-note.html">Service Mapping Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocity-field-viewer.html">Velocity Field Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinematic-model.html">Tilted-Ring Kinematic Model (F2)</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Kinematic Lasso — interactive 3-D object selection &amp; masking (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="movie-export.html">Movie Export (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linked-views.html">Linked Cube Views (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo-datasets.html">Demo datasets (feature test matrix)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_server.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_importer.html">VisIVO Importer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_filter.html">VisIVO Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_viewer.html">VisIVO Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_utils.html">VisIVO Utils</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="kinematic-lasso-interactive-3-d-object-selection-masking-f2">
+<h1>Kinematic Lasso — interactive 3-D object selection &amp; masking (F2)<a class="headerlink" href="#kinematic-lasso-interactive-3-d-object-selection-masking-f2" title="Link to this heading">¶</a></h1>
+<p>Select a source you can <strong>see</strong> in the volume render with a single double-click,
+and the analysis backend grows the whole connected object in
+position–position–velocity (PPV) space — following its real morphology and
+velocity structure, not a box or a coordinate list. The selection can be refined
+live (reach / velocity coupling), extended or trimmed with extra clicks, hand-
+edited channel-by-channel on the 2-D map, and finally applied to write a new
+masked cube (isolate the object, or remove it and keep the residual).</p>
+<p>This is VisIVO’s answer to the 3-D selection problem that VR tools (iDaVIE) and
+coordinate-typing dialogs solve awkwardly: the interaction is a click on the
+thing you want, and the <em>analysis backend</em> — not a hand-drawn box — decides the
+extent.</p>
+<p>Backend: <code class="docutils literal notranslate"><span class="pre">backend/app/compute/selection.py</span></code> + endpoints in
+<code class="docutils literal notranslate"><span class="pre">backend/app/routers/cube.py</span></code>. Desktop: <code class="docutils literal notranslate"><span class="pre">src/gui/vtkWindowCube_Lasso.cpp</span></code>.</p>
+<hr class="docutils" />
+<section id="what-one-double-click-does">
+<h2>What one double-click does<a class="headerlink" href="#what-one-double-click-does" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">vtkVolumePicker</span></code> ray-casts the click through the volume to the <strong>seed
+voxel</strong> (the visible surface of whatever you clicked).</p></li>
+<li><p>The backend takes the connected component of the ~<code class="docutils literal notranslate"><span class="pre">nσ</span></code> emission that contains
+the seed — i.e. <strong>the whole object</strong>, however large and however it bends
+through velocity — and grows a geodesic, velocity-weighted region over it.</p></li>
+<li><p>The selection comes back as a bounding-box binary mask, contoured as a green
+isosurface in the 3-D view and outlined on the 2-D channel map.</p></li>
+</ol>
+<p>Because the grow is bounded by the <em>object</em> (its connected ~<code class="docutils literal notranslate"><span class="pre">nσ</span></code> component), not
+by a fixed ROI box, a single click on a galaxy grabs the entire disk in one shot
+— including its rotating extent across channels.</p>
+<section id="the-algorithm">
+<h3>The algorithm<a class="headerlink" href="#the-algorithm" title="Link to this heading">¶</a></h3>
+<p>Given the seed and a robust noise scale <code class="docutils literal notranslate"><span class="pre">σ</span></code> (1.4826·MAD, from a strided sample so
+it stays cheap on huge memmapped cubes):</p>
+<ul class="simple">
+<li><p><strong>Candidate emission</strong> = finite voxels above the <code class="docutils literal notranslate"><span class="pre">nσ·σ</span></code> contour that defines the
+object. Below that the soft-threshold traversal cost blows up anyway.</p></li>
+<li><p><strong>Connected component</strong> (6-connectivity) containing the seed → the object.
+Isolated noise specks above <code class="docutils literal notranslate"><span class="pre">nσ</span></code> are their own tiny components and are dropped.</p></li>
+<li><p><strong>Faint shell</strong>: the component is dilated by a margin so <code class="docutils literal notranslate"><span class="pre">reach</span></code> / <code class="docutils literal notranslate"><span class="pre">velocity</span> <span class="pre">coupling</span></code> can bleed the selection a little past the <code class="docutils literal notranslate"><span class="pre">nσ</span></code> contour into the
+object’s faint outskirts (the geodesic, not the dilation, decides the final
+extent).</p></li>
+<li><p><strong>Geodesic grow</strong>: a Dijkstra over the component’s voxels. Entering a voxel
+costs <code class="docutils literal notranslate"><span class="pre">exp(nσ</span> <span class="pre">−</span> <span class="pre">I/σ)</span></code> — bright voxels are ~free (the grow flows through the
+object), voxels near <code class="docutils literal notranslate"><span class="pre">nσ</span></code> cost ~1, fainter ones blow up (a barrier). NaN voxels
+are hard barriers. Steps <strong>along the velocity axis</strong> are weighted by <code class="docutils literal notranslate"><span class="pre">λv</span></code> — the
+<em>kinematic knob</em>. Growth stops at the <code class="docutils literal notranslate"><span class="pre">reach</span></code> cost budget.</p></li>
+</ul>
+<p>All work runs inside a seed-centred window, so the connected-component and graph
+temporaries are bounded by the object, not the whole cube — it stays out-of-core
+on large datasets.</p>
+</section>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Control</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Reach</strong></p></td>
+<td><p>geodesic cost budget — larger selects further along the object, into its fainter (near-<code class="docutils literal notranslate"><span class="pre">nσ</span></code>) margins.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Velocity coupling</strong> (<code class="docutils literal notranslate"><span class="pre">λv</span></code>)</p></td>
+<td><p>weight of a step along the spectral (velocity) axis. <code class="docutils literal notranslate"><span class="pre">λv</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> → cheap velocity steps, the selection follows the source further <em>along velocity</em> (a rotating disk, an outflow); <code class="docutils literal notranslate"><span class="pre">λv</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> → stays spatially compact. <code class="docutils literal notranslate"><span class="pre">1</span></code> = isotropic.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nσ</span></code></p></td>
+<td><p>soft-threshold contour that defines the object (default <code class="docutils literal notranslate"><span class="pre">2.5</span></code>, backend default).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">roi_radius</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> = object-bounded (grab the whole connected source, the GUI default); <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code> = confine the grow to a hard half-box around the seed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="refining-the-selection">
+<h2>Refining the selection<a class="headerlink" href="#refining-the-selection" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Reach / Velocity coupling sliders</strong> re-grow the selection live.</p></li>
+<li><p><strong>⇧-double-click</strong> adds a <em>separate</em> source to the selection (union of grows).</p></li>
+<li><p><strong>⌥-double-click</strong> carves a region out (subtract a grow).</p></li>
+<li><p><strong>Double-click</strong> elsewhere starts a fresh selection.</p></li>
+</ul>
+<p>One double-click already grabs the whole connected object; the multi-seed clicks
+are for combining genuinely <em>distinct</em> sources, not for tiling one object.</p>
+<section id="per-channel-2-d-refinement">
+<h3>Per-channel 2-D refinement<a class="headerlink" href="#per-channel-2-d-refinement" title="Link to this heading">¶</a></h3>
+<p>For pixel-level control the auto-grown mask can be hand-edited channel-by-channel
+— the professional mask-editing step (SoFiA / kvis / SlicerAstro) that the
+automatic grow can’t always nail on blended or low-S/N emission.</p>
+<ul class="simple">
+<li><p>The selection is drawn as a <strong>green outline on the 2-D channel map</strong>, following
+the channel (CH) slider so you can see exactly which pixels are selected at each
+velocity.</p></li>
+<li><p>Toggle <strong>Refine on 2-D map…</strong> and pick <strong>Add</strong> or <strong>Subtract</strong>.</p></li>
+<li><p><strong>Click</strong> points on the channel map to trace a polygon (the in-progress outline
+is drawn live); <strong>right-click</strong>, or click near the first point, to <strong>close</strong> it.</p></li>
+<li><p>The enclosed pixels are added to / removed from the mask <strong>on the current
+channel</strong>; the 3-D isosurface and the 2-D outline update immediately.</p></li>
+</ul>
+<p>While 2-D refinement is active it owns the channel-map pointer (probe / PV /
+region interactions are suspended and restored on exit); the window/level image
+style is restored when you leave the mode or switch views.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Phase-2 edits are clamped to the current selection’s bounding box — you can trim
+and add within the object’s extent, but adding pixels far outside it (growing the
+bounding box) is not yet supported. Draw a fresh ⇧-double-click seed there
+instead.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="applying-the-selection">
+<h2>Applying the selection<a class="headerlink" href="#applying-the-selection" title="Link to this heading">¶</a></h2>
+<p>Two buttons turn the selection — exactly as shown, including any 2-D edits — into
+a <strong>new cube dataset</strong> in the Workspace Exports (open it from the Data Hub to run
+moment maps, profiles, etc. on just the selection):</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Button</p></th>
+<th class="head"><p>Effect</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Isolate → new cube</strong></p></td>
+<td><p>blank everything <em>outside</em> the selection</p></td>
+<td><p>the object on a blank (NaN) background</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Remove → new cube</strong></p></td>
+<td><p>blank everything <em>inside</em> the selection</p></td>
+<td><p>the cube with the object removed — the <em>residual</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Blanked voxels are written as NaN (full dimensions + WCS preserved) and render as
+transparent in the 2-D channel map, so a “Remove” residual reads cleanly.</p>
+<p>The apply sends the <strong>exact mask</strong> the isosurface shows — it is not re-grown from
+the seed — so a hand-refined mask is written verbatim.</p>
+</section>
+<hr class="docutils" />
+<section id="backend-endpoints">
+<h2>Backend endpoints<a class="headerlink" href="#backend-endpoints" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Endpoint</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/cube/kinematic_select_bin</span></code></p></td>
+<td><p>grow the selection; returns the bounding-box binary mask (little-endian float32 <code class="docutils literal notranslate"><span class="pre">0/1</span></code>, x-fastest) + its origin/dims + selected count, for the isosurface preview and the 2-D overlay.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/cube/mask_selection</span></code></p></td>
+<td><p>grow from seeds <strong>and</strong> apply (isolate / remove) → new dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/cube/mask_apply_bin</span></code></p></td>
+<td><p>apply an <strong>explicit</strong> mask (raw float32 body + origin/dims as query params) verbatim → new dataset. This is what applies a hand-refined mask; no re-grow.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Request fields (<code class="docutils literal notranslate"><span class="pre">kinematic_select_bin</span></code> / <code class="docutils literal notranslate"><span class="pre">mask_selection</span></code>): <code class="docutils literal notranslate"><span class="pre">dataset_id</span></code>,
+<code class="docutils literal notranslate"><span class="pre">seed_z/y/x</span></code>, <code class="docutils literal notranslate"><span class="pre">add_seeds</span></code> / <code class="docutils literal notranslate"><span class="pre">sub_seeds</span></code> (<code class="docutils literal notranslate"><span class="pre">[z,y,x]</span></code> each), <code class="docutils literal notranslate"><span class="pre">reach</span></code>, <code class="docutils literal notranslate"><span class="pre">lambda_v</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sigma</span></code> (<code class="docutils literal notranslate"><span class="pre">0</span></code> → robust auto), <code class="docutils literal notranslate"><span class="pre">nsigma</span></code>, <code class="docutils literal notranslate"><span class="pre">roi_radius</span></code> (<code class="docutils literal notranslate"><span class="pre">0</span></code> = object-bounded). A seed
+outside the cube or on a blank/NaN voxel is user error → HTTP 422.</p>
+</section>
+<hr class="docutils" />
+<section id="limits-future-work">
+<h2>Limits &amp; future work<a class="headerlink" href="#limits-future-work" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>SKA-scale cubes.</strong> The connected-component + geodesic is bounded to a
+seed-centred window (safety radius 256), so it is safe on cubes far larger than
+the object, but a single grow can still peak around a GB on a 512³ cube, and the
+window caps objects wider than ~512 voxels. Truly gigantic cubes want a
+blocked / streaming connected-component + geodesic (memory ∝ object).</p></li>
+<li><p><strong>Bounding-box growth</strong> for 2-D edits (adding pixels beyond the current
+selection extent) is not yet implemented.</p></li>
+<li><p><strong>VRAD vs VOPT</strong> velocity conventions are both treated as “velocity”.</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="movie-export.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Movie Export (F3)</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="kinematic-model.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Tilted-Ring Kinematic Model (F2)</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, VisIVOLab
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Kinematic Lasso — interactive 3-D object selection &amp; masking (F2)</a><ul>
+<li><a class="reference internal" href="#what-one-double-click-does">What one double-click does</a><ul>
+<li><a class="reference internal" href="#the-algorithm">The algorithm</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#refining-the-selection">Refining the selection</a><ul>
+<li><a class="reference internal" href="#per-channel-2-d-refinement">Per-channel 2-D refinement</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#applying-the-selection">Applying the selection</a></li>
+<li><a class="reference internal" href="#backend-endpoints">Backend endpoints</a></li>
+<li><a class="reference internal" href="#limits-future-work">Limits &amp; future work</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=f26bd01d"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>

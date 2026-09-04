@@ -1,0 +1,945 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html">
+        <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
+        <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
+
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>Step 2 — 2D pane geometry (patch) - VisIVO dev</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0b5fff;
+  --color-brand-content: #0b5fff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">VisIVO dev</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/visivo_logo_light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/visivo_logo_white.svg" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/getting-started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/cube-viewer.html">Spectral cube viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/image-viewer.html">Image viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/vbt-viewer.html">VBT viewer (point clouds and volumes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/velocity-fields.html">Velocity fields and cosmic flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/moment-maps.html">Moment maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/spectral-tools.html">Spectral analysis tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/source-finding.html">Source finding and cross-matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/publication-output.html">Figures, movies and linked views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/copilot.html">Scientific Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../velocity-field-viewer.html">Velocity Field Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kinematic-model.html">Tilted-Ring Kinematic Model (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kinematic-lasso.html">Kinematic Lasso — interactive 3-D object selection &amp; masking (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../movie-export.html">Movie Export (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_server.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_importer.html">VisIVO Importer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_filter.html">VisIVO Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_viewer.html">VisIVO Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_utils.html">VisIVO Utils</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="step-2-2d-pane-geometry-patch">
+<h1>Step 2 — 2D pane geometry (patch)<a class="headerlink" href="#step-2-2d-pane-geometry-patch" title="Link to this heading">¶</a></h1>
+<p>Verified against the build in the 15.45 screenshot. Step 1’s three blockers are closed:
+<code class="docutils literal notranslate"><span class="pre">MinIP</span></code> and <code class="docutils literal notranslate"><span class="pre">0.188071</span></code> render in full, the Inspector tabs read <code class="docutils literal notranslate"><span class="pre">Properties</span> <span class="pre">/</span> <span class="pre">Analysis</span> <span class="pre">/</span> <span class="pre">Provenance</span></code>, and the 3D header carries a real Auto / Local / Remote segmented control.</p>
+<p>Two things remain before Step 3. <strong>2.0</strong> is a one-line leftover from Step 1; <strong>2.1–2.5</strong> are
+Step 2 proper.</p>
+<hr class="docutils" />
+<section id="mom-map-is-still-elided">
+<h2>2.0 <code class="docutils literal notranslate"><span class="pre">Mom…Map</span></code> is still elided<a class="headerlink" href="#mom-map-is-still-elided" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">SegmentedToggle</span></code> gives every segment <code class="docutils literal notranslate"><span class="pre">QSizePolicy::Expanding</span></code> and <code class="docutils literal notranslate"><span class="pre">setMinimumWidth(0)</span></code>, so
+a <code class="docutils literal notranslate"><span class="pre">setMaximumWidth()</span></code> on the container silently elides the labels instead of overflowing.
+That is why <code class="docutils literal notranslate"><span class="pre">Moment</span> <span class="pre">Map</span></code> renders as <code class="docutils literal notranslate"><span class="pre">Mom…Map</span></code> under the 128 px cap in the 2D pane header,
+and it will bite again on every future segmented control.</p>
+<p>Fix it once, in the widget — the segments become <em>at least</em> as wide as their text, so a cap
+that is too small is now visibly ignored rather than quietly destructive.</p>
+<p><code class="docutils literal notranslate"><span class="pre">theme/SegmentedToggle.cpp</span></code>, in <code class="docutils literal notranslate"><span class="pre">addItem()</span></code>, replacing <code class="docutils literal notranslate"><span class="pre">btn-&gt;setMinimumWidth(0);</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// Segments share surplus width equally (flex), but never shrink below their</span>
+<span class="w">    </span><span class="c1">// own label — an over-tight setMaximumWidth() on the container must overflow</span>
+<span class="w">    </span><span class="c1">// visibly, not elide ("Moment Map" → "Mom…Map").</span>
+<span class="w">    </span><span class="n">btn</span><span class="o">-&gt;</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="n">btn</span><span class="o">-&gt;</span><span class="n">fontMetrics</span><span class="p">().</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">18</span><span class="p">);</span><span class="w">  </span><span class="c1">// 8 px padding × 2 + 2</span>
+</pre></div>
+</div>
+<p>Then drop the two caps that were sized by eye, in <code class="docutils literal notranslate"><span class="pre">vtkWindowCube::setupPaneChrome()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">        </span><span class="n">rmode</span><span class="o">-&gt;</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">168</span><span class="p">);</span><span class="w">      </span><span class="c1">// delete — content width is correct</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">        </span><span class="n">c2</span><span class="o">-&gt;</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span><span class="w">         </span><span class="c1">// delete</span>
+</pre></div>
+</div>
+<p>The pane header has a stretch before the controls, so both size to content. Re-run the
+<code class="docutils literal notranslate"><span class="pre">[leftdock]</span></code> instrumentation after this: <code class="docutils literal notranslate"><span class="pre">DISPLAY</span> <span class="pre">—</span> <span class="pre">3D</span></code>’s two toggles get a real minimum
+width now, and the log line must still say <code class="docutils literal notranslate"><span class="pre">OK</span> <span class="pre">(fits)</span></code> at 272 px. If it flips to
+<code class="docutils literal notranslate"><span class="pre">OVERFLOW</span> <span class="pre">→</span> <span class="pre">clips</span></code>, shorten the <em>label</em> (<code class="docutils literal notranslate"><span class="pre">MinIP</span></code> stays, <code class="docutils literal notranslate"><span class="pre">Composite</span></code> → <code class="docutils literal notranslate"><span class="pre">Comp.</span></code> before you
+touch the dock width) rather than restoring a max-width cap.</p>
+</section>
+<hr class="docutils" />
+<section id="what-is-actually-wrong-in-the-2d-pane">
+<h2>2.1 What is actually wrong in the 2D pane<a class="headerlink" href="#what-is-actually-wrong-in-the-2d-pane" title="Link to this heading">¶</a></h2>
+<p>The overlay code already implements the gutter. <code class="docutils literal notranslate"><span class="pre">updateSliceWcsOverlay()</span></code> draws the axis
+frame at <code class="docutils literal notranslate"><span class="pre">axisX</span> <span class="pre">=</span> <span class="pre">136</span></code>, <code class="docutils literal notranslate"><span class="pre">bottomMargin</span> <span class="pre">=</span> <span class="pre">58</span></code>, <code class="docutils literal notranslate"><span class="pre">rightMargin</span> <span class="pre">=</span> <span class="pre">34</span></code>, <code class="docutils literal notranslate"><span class="pre">topMargin</span> <span class="pre">=</span> <span class="pre">28</span></code> — display
+pixels, measured from the window edge.</p>
+<p>What is missing is the other half: <strong>the image renderer still occupies the whole viewport</strong>
+(<code class="docutils literal notranslate"><span class="pre">ren-&gt;ResetCamera()</span></code> in <code class="docutils literal notranslate"><span class="pre">setupRemoteSliceRenderer()</span></code> / <code class="docutils literal notranslate"><span class="pre">setupMomentRenderer()</span></code>), so the
+pixels are drawn <em>under</em> the gutter the axes were placed in. Hence latitude ticks over the
+data, <code class="docutils literal notranslate"><span class="pre">Galactic</span> <span class="pre">Longitude</span></code> across the bottom of the image, and the colorbar — parked at a
+hard-coded normalized <code class="docutils literal notranslate"><span class="pre">(0.9,</span> <span class="pre">0.1)</span></code> — covering a column of real data.</p>
+<p>So this is not “add a gutter”. It is “make the camera respect the gutter that already
+exists, and put the colorbar in it”.</p>
+<p><strong>Do not shrink <code class="docutils literal notranslate"><span class="pre">renderer-&gt;SetViewport()</span></code> to do this.</strong> Every overlay in the file
+(<code class="docutils literal notranslate"><span class="pre">configureAxisActor</span></code>, the tick actors, the catalogue labels, the probe readout) positions
+in <em>display</em> coordinates while reading <code class="docutils literal notranslate"><span class="pre">renderer-&gt;GetSize()</span></code> for the extents — those two
+agree only while the viewport is full-window. Shrinking the viewport desynchronises them
+and breaks the catalogue and probe overlays as collateral. Fit the <strong>camera</strong> instead:
+single renderer, full viewport, all existing overlay maths untouched.</p>
+</section>
+<hr class="docutils" />
+<section id="shared-geometry-cubeviewportgeometry">
+<h2>2.2 Shared geometry: <code class="docutils literal notranslate"><span class="pre">CubeViewportGeometry</span></code><a class="headerlink" href="#shared-geometry-cubeviewportgeometry" title="Link to this heading">¶</a></h2>
+<p>The margins must stop being duplicated as four <code class="docutils literal notranslate"><span class="pre">constexpr</span></code> blocks (slice overlay, moment
+overlay, and now the camera fit). One source of truth, next to the other viewport helpers.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CubeViewportGeometry.h</span></code>, add to <code class="docutils literal notranslate"><span class="pre">namespace</span> <span class="pre">CubeGeom</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">vtkScalarBarActor</span><span class="p">;</span><span class="w">   </span><span class="c1">// with the other forward declarations</span>
+
+<span class="c1">// Pixel gutter reserved around the 2-D data area for WCS ticks, axis titles and</span>
+<span class="c1">// the colorbar. `left` is the x of the y-axis line (tick labels sit to its left);</span>
+<span class="c1">// `right` holds the colorbar + its value labels.</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ImageGutter</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">left</span><span class="p">{</span><span class="w"> </span><span class="mf">136.</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">right</span><span class="p">{</span><span class="w"> </span><span class="mf">96.</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">bottom</span><span class="p">{</span><span class="w"> </span><span class="mf">58.</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">top</span><span class="p">{</span><span class="w"> </span><span class="mf">28.</span><span class="w"> </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">/// The gutter in force for the 2-D panes. Collapses to a thin inset when the WCS</span>
+<span class="c1">/// overlay is off, but always keeps room for the colorbar.</span>
+<span class="n">ImageGutter</span><span class="w"> </span><span class="nf">imageGutter</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">wcsAxesVisible</span><span class="p">);</span>
+
+<span class="c1">/// Aspect-preserving parallel-projection fit of `image` into the gutter's inner</span>
+<span class="c1">/// box. Sets ParallelScale + focal point; leaves the view direction alone.</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">fitImageInGutter</span><span class="p">(</span><span class="n">vtkRenderer</span><span class="w"> </span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span><span class="w"> </span><span class="n">vtkImageData</span><span class="w"> </span><span class="o">*</span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ImageGutter</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">);</span>
+
+<span class="c1">/// Parks a vertical scalar bar in the right gutter, aligned to the data area.</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">layoutColorbarInGutter</span><span class="p">(</span><span class="n">vtkScalarBarActor</span><span class="w"> </span><span class="o">*</span><span class="n">bar</span><span class="p">,</span><span class="w"> </span><span class="n">vtkRenderer</span><span class="w"> </span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">ImageGutter</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CubeViewportGeometry.cpp</span></code> — add the includes <code class="docutils literal notranslate"><span class="pre">&lt;vtkScalarBarActor.h&gt;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&lt;vtkTextProperty.h&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;vtkCoordinate.h&gt;</span></code>, then:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ImageGutter</span><span class="w"> </span><span class="nf">imageGutter</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">wcsAxesVisible</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ImageGutter</span><span class="w"> </span><span class="n">g</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">wcsAxesVisible</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">g</span><span class="p">.</span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.</span><span class="p">;</span>
+<span class="w">        </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.</span><span class="p">;</span>
+<span class="w">        </span><span class="n">g</span><span class="p">.</span><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g</span><span class="p">;</span><span class="w">   </span><span class="c1">// `right` is the colorbar's — it survives the axes being hidden</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">fitImageInGutter</span><span class="p">(</span><span class="n">vtkRenderer</span><span class="w"> </span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span><span class="w"> </span><span class="n">vtkImageData</span><span class="w"> </span><span class="o">*</span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ImageGutter</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">renderer</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">image</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">renderer</span><span class="o">-&gt;</span><span class="n">GetSize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">size</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+<span class="w">    </span><span class="n">image</span><span class="o">-&gt;</span><span class="n">GetBounds</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">validBounds</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">innerW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">left</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">right</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">innerH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">top</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">innerW</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">16.</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">innerH</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">16.</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">   </span><span class="c1">// pane too small to letterbox meaningfully — leave the camera</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// World units per screen pixel, aspect preserved: the BINDING axis is whichever</span>
+<span class="w">    </span><span class="c1">// of the two is scarcer, which in a 552 × 363 pane is the height, not the width.</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">perPixel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">innerW</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.</span><span class="p">),</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">innerH</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="n">cam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">renderer</span><span class="o">-&gt;</span><span class="n">GetActiveCamera</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cam</span><span class="o">-&gt;</span><span class="n">ParallelProjectionOn</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cam</span><span class="o">-&gt;</span><span class="n">SetParallelScale</span><span class="p">(</span><span class="n">perPixel</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Offset the focal point so the image centre lands in the inner box centre</span>
+<span class="w">    </span><span class="c1">// rather than the viewport centre — this is what puts the letterbox bands</span>
+<span class="w">    </span><span class="c1">// around the whole group instead of between the image and its own axis.</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dxPx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="p">.</span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">innerW</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dyPx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">innerH</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">cx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dxPx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">perPixel</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">cy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dyPx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">perPixel</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">cz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cam</span><span class="o">-&gt;</span><span class="n">GetDistance</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">std</span><span class="o">::</span><span class="n">isfinite</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">cam</span><span class="o">-&gt;</span><span class="n">SetFocalPoint</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span><span class="w"> </span><span class="n">cy</span><span class="p">,</span><span class="w"> </span><span class="n">cz</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cam</span><span class="o">-&gt;</span><span class="n">SetPosition</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span><span class="w"> </span><span class="n">cy</span><span class="p">,</span><span class="w"> </span><span class="n">cz</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">distance</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cam</span><span class="o">-&gt;</span><span class="n">SetViewUp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">);</span>
+<span class="w">    </span><span class="n">renderer</span><span class="o">-&gt;</span><span class="n">ResetCameraClippingRange</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">layoutColorbarInGutter</span><span class="p">(</span><span class="n">vtkScalarBarActor</span><span class="w"> </span><span class="o">*</span><span class="n">bar</span><span class="p">,</span><span class="w"> </span><span class="n">vtkRenderer</span><span class="w"> </span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">ImageGutter</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">bar</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">renderer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">renderer</span><span class="o">-&gt;</span><span class="n">GetSize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">size</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">gap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">14.</span><span class="p">;</span><span class="w">                              </span><span class="c1">// data area → bar</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">boxW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">g</span><span class="p">.</span><span class="n">right</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">gap</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">6.</span><span class="p">,</span><span class="w"> </span><span class="mf">24.</span><span class="p">);</span><span class="w">  </span><span class="c1">// bar + value labels</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">boxH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">H</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">top</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetOrientationToVertical</span><span class="p">();</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">GetPositionCoordinate</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">SetCoordinateSystemToNormalizedViewport</span><span class="p">();</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetPosition</span><span class="p">((</span><span class="n">W</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">right</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gap</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">W</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">H</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetWidth</span><span class="p">(</span><span class="n">boxW</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">W</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetHeight</span><span class="p">(</span><span class="n">boxH</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">H</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetMaximumWidthInPixels</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">boxW</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetMaximumHeightInPixels</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">boxH</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetNumberOfLabels</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetTitle</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">UnconstrainedFontSizeOn</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="n">tp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">GetLabelTextProperty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">SetFontSize</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>
+<span class="w">        </span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">SetColor</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span><span class="w"> </span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mf">0.95</span><span class="p">);</span>
+<span class="w">        </span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">BoldOff</span><span class="p">();</span>
+<span class="w">        </span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">ShadowOff</span><span class="p">();</span>
+<span class="w">        </span><span class="n">tp</span><span class="o">-&gt;</span><span class="n">SetJustificationToLeft</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">UnconstrainedFontSizeOn()</span></code> matters: without it VTK rescales the label font to the bar’s
+box and the mono 9 px of the spec becomes whatever fits.</p>
+</section>
+<hr class="docutils" />
+<section id="the-two-overlays-read-the-shared-gutter">
+<h2>2.3 The two overlays read the shared gutter<a class="headerlink" href="#the-two-overlays-read-the-shared-gutter" title="Link to this heading">¶</a></h2>
+<p>In <strong>both</strong> <code class="docutils literal notranslate"><span class="pre">updateSliceWcsOverlay()</span></code> and <code class="docutils literal notranslate"><span class="pre">updateMomentWcsOverlay()</span></code>, replace the local
+constants:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">leftMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">168.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">axisX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">136.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">bottomMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">58.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rightMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">34.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">topMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">28.</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>with:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">gutter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">imageGutter</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">showWcsAxes</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">axisX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">left</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">leftMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">left</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.235</span><span class="p">;</span><span class="w">   </span><span class="c1">// y-title column, unchanged ratio</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">bottomMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">bottom</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rightMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">right</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">topMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">top</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Nothing else in either function changes — the axis, title and tick positions are already
+expressed in these five names. <code class="docutils literal notranslate"><span class="pre">rightMargin</span></code> going 34 → 96 shortens the x-axis line to stop
+at the colorbar, which is correct: the axis must span the data area, not the gutter.</p>
+</section>
+<hr class="docutils" />
+<section id="own-the-colorbars-and-re-fit-on-resize">
+<h2>2.4 Own the colorbars, and re-fit on resize<a class="headerlink" href="#own-the-colorbars-and-re-fit-on-resize" title="Link to this heading">¶</a></h2>
+<p>The two scalar bars are <code class="docutils literal notranslate"><span class="pre">vtkNew</span></code> locals in the setup functions, so nothing can re-layout
+them. Promote them to members.</p>
+<p><code class="docutils literal notranslate"><span class="pre">vtkWindowCube.h</span></code> — add <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;vtkScalarBarActor.h&gt;</span></code> and, next to the other 2-D state:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">vtkNew</span><span class="o">&lt;</span><span class="n">vtkScalarBarActor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_sliceColorbar</span><span class="p">;</span><span class="w">    </span><span class="c1">///&lt; 2D slice colorbar (right gutter)</span>
+<span class="w">    </span><span class="n">vtkNew</span><span class="o">&lt;</span><span class="n">vtkScalarBarActor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_momentColorbar</span><span class="p">;</span><span class="w">   </span><span class="c1">///&lt; moment-map colorbar (right gutter)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_slice2dFitSize</span><span class="p">{</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_moment2dFitSize</span><span class="p">{</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">/// Aspect-preserving gutter fit + colorbar placement for the active 2-D pane.</span>
+<span class="w">    </span><span class="c1">/// Cheap and idempotent: returns immediately unless the viewport changed size,</span>
+<span class="w">    </span><span class="c1">/// so it cannot fight a user zoom/pan. Pass force = true after new data.</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">layout2dPane</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">force</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">setupRemoteSliceRenderer()</span></code> and <code class="docutils literal notranslate"><span class="pre">setupMomentRenderer()</span></code>, replace</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">vtkNew</span><span class="o">&lt;</span><span class="n">vtkScalarBarActor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">colorbar</span><span class="p">;</span>
+<span class="w">    </span><span class="n">colorbar</span><span class="o">-&gt;</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">lutMoment</span><span class="p">);</span>
+<span class="w">    </span><span class="n">colorbar</span><span class="o">-&gt;</span><span class="n">SetMaximumWidthInPixels</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="w">    </span><span class="n">colorbar</span><span class="o">-&gt;</span><span class="n">SetPosition</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ren</span><span class="o">-&gt;</span><span class="n">AddViewProp</span><span class="p">(</span><span class="n">colorbar</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>with (the slice one uses <code class="docutils literal notranslate"><span class="pre">lutSlice</span></code> / <code class="docutils literal notranslate"><span class="pre">m_sliceColorbar</span></code>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_momentColorbar</span><span class="o">-&gt;</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">lutMoment</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ren</span><span class="o">-&gt;</span><span class="n">AddViewProp</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_momentColorbar</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">layoutColorbarInGutter</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_momentColorbar</span><span class="p">,</span><span class="w"> </span><span class="n">ren</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">imageGutter</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">showWcsAxes</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>and replace the trailing <code class="docutils literal notranslate"><span class="pre">ren-&gt;ResetCamera();</span></code> in each with</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">ren</span><span class="o">-&gt;</span><span class="n">ResetCamera</span><span class="p">();</span><span class="w">                 </span><span class="c1">// keep: establishes a sane camera distance</span>
+<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">layout2dPane</span><span class="p">(</span><span class="cm">/*force=*/</span><span class="nb">true</span><span class="p">);</span><span class="w"> </span><span class="c1">// then letterbox it into the gutter</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">layout2dPane()</span></code> itself, next to the overlay code in <code class="docutils literal notranslate"><span class="pre">vtkWindowCube_Wcs.cpp</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">vtkWindowCube::layout2dPane</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">force</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">slice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">viewingSlice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="n">win</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">sliceWin</span><span class="p">.</span><span class="n">GetPointer</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">momentWin</span><span class="p">.</span><span class="n">GetPointer</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">win</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="n">renderers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">win</span><span class="o">-&gt;</span><span class="n">GetRenderers</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="n">renderer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">renderers</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">renderers</span><span class="o">-&gt;</span><span class="n">GetFirstRenderer</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">renderer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">renderer</span><span class="o">-&gt;</span><span class="n">GetSize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">size</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">viewport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lastFit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_slice2dFitSize</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_moment2dFitSize</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">force</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">viewport</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">lastFit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w">   </span><span class="c1">// same geometry — do NOT touch the camera, the user may have zoomed</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">lastFit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewport</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="n">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span>
+<span class="w">            </span><span class="o">?</span><span class="w"> </span><span class="n">vtkImageData</span><span class="o">::</span><span class="n">SafeDownCast</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">remoteSliceDisplaySource</span><span class="o">-&gt;</span><span class="n">GetOutputDataObject</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="w">            </span><span class="o">:</span><span class="w"> </span><span class="n">vtkImageData</span><span class="o">::</span><span class="n">SafeDownCast</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">momentDisplaySource</span><span class="o">-&gt;</span><span class="n">GetOutputDataObject</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">gutter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">imageGutter</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">showWcsAxes</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">fitImageInGutter</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span><span class="w"> </span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="n">gutter</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">layoutColorbarInGutter</span><span class="p">(</span><span class="n">slice</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_sliceColorbar</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_momentColorbar</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">renderer</span><span class="p">,</span><span class="w"> </span><span class="n">gutter</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">invalidateWcsOverlayCache</span><span class="p">();</span><span class="w">   </span><span class="c1">// margins/extent moved — force a tick recompute</span>
+<span class="w">    </span><span class="n">win</span><span class="o">-&gt;</span><span class="n">Render</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Call it from exactly four places — <strong>not</strong> from the <code class="docutils literal notranslate"><span class="pre">vtkCommand::EndEvent</span></code> observers, which
+would recurse through <code class="docutils literal notranslate"><span class="pre">win-&gt;Render()</span></code>:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Where</p></th>
+<th class="head"><p>Call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eventFilter()</span></code>, <code class="docutils literal notranslate"><span class="pre">QEvent::Resize</span></code> on <code class="docutils literal notranslate"><span class="pre">ui-&gt;vtkImage</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">QTimer::singleShot(0,</span> <span class="pre">this,</span> <span class="pre">[this]{</span> <span class="pre">layout2dPane();</span> <span class="pre">});</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">changeImageRenderer()</span></code>, after <code class="docutils literal notranslate"><span class="pre">setRenderWindow()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">layout2dPane(true);</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">applyRemoteSliceResult()</span></code>, after the new image is set</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">layout2dPane(true);</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">applyMomentMapResult()</span></code>, after <code class="docutils literal notranslate"><span class="pre">momentDisplaySource-&gt;SetOutput()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">layout2dPane(true);</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">setupPaneChrome()</span></code> already installs <code class="docutils literal notranslate"><span class="pre">this</span></code> as an event filter on the pane headers, so add
+<code class="docutils literal notranslate"><span class="pre">ui-&gt;vtkImage-&gt;installEventFilter(this)</span></code> beside it and extend the existing filter:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">QEvent</span><span class="o">::</span><span class="n">Resize</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">watched</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ui</span><span class="o">-&gt;</span><span class="n">vtkImage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">QTimer</span><span class="o">::</span><span class="n">singleShot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">this</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">layout2dPane</span><span class="p">();</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The deferral is deliberate — during <code class="docutils literal notranslate"><span class="pre">QEvent::Resize</span></code> the VTK render window has not yet
+adopted the new size, so an immediate fit uses the old one.</p>
+</section>
+<hr class="docutils" />
+<section id="acceptance">
+<h2>2.5 Acceptance<a class="headerlink" href="#acceptance" title="Link to this heading">¶</a></h2>
+<p>Open <code class="docutils literal notranslate"><span class="pre">hi_cube.fits</span></code>, two panes, 1440 × 900.</p>
+<ol class="arabic simple">
+<li><p>No tick label, axis title or colorbar pixel overlaps the data area. The colorbar sits
+in a column to the right of the image with its values to <em>its</em> right.</p></li>
+<li><p>The image keeps <code class="docutils literal notranslate"><span class="pre">NAXIS1</span> <span class="pre">:</span> <span class="pre">NAXIS2</span></code> and is centred in the inner box. Letterbox bands are
+<code class="docutils literal notranslate"><span class="pre">#000004</span></code> and fall outside the whole group — never between the image and its own axis.</p></li>
+<li><p>Drag the splitter narrow, then tall: the fit follows on both, and the binding axis
+changes with the pane (height-bound when short and wide).</p></li>
+<li><p>Zoom with the scroll wheel: the fit does <strong>not</strong> snap back. Only a resize re-fits.</p></li>
+<li><p>Switch Slice → Moment → Slice: both panes are laid out, neither camera is lost.</p></li>
+<li><p>Turn the WCS overlay off: the image grows into the freed left/bottom gutter, the
+colorbar stays put.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Moment</span> <span class="pre">Map</span></code> reads in full in the 2D pane header, and the <code class="docutils literal notranslate"><span class="pre">[leftdock]</span></code> line still says
+<code class="docutils literal notranslate"><span class="pre">OK</span> <span class="pre">(fits)</span></code>.</p></li>
+</ol>
+<p>Once this passes, Step 3 (scrubber overlay, inset 10 px) is unblocked — it lands inside the
+same inner box this patch just defined, so do them in this order.</p>
+</section>
+<hr class="docutils" />
+<section id="corrections-after-the-16-24-build">
+<h2>2.6 Corrections after the 16.24 build<a class="headerlink" href="#corrections-after-the-16-24-build" title="Link to this heading">¶</a></h2>
+<p>2.1–2.5 are in and correct: the image is square, centred, and nothing overlaps the data.
+Three things are still off, and two of them are the same mistake — <strong>the gutter’s inner box
+is not the data area</strong>. The image is letterboxed <em>inside</em> the inner box, so anything aligned
+to the box instead of to the image annotates empty space. That is exactly what item 2 of
+Step 2’s own rules warned about; the patch only applied it to the image.</p>
+<section id="a-the-colorbar-spans-the-viewport-not-the-data">
+<h3>(a) The colorbar spans the viewport, not the data<a class="headerlink" href="#a-the-colorbar-spans-the-viewport-not-the-data" title="Link to this heading">¶</a></h3>
+<p>It runs the full inner height — roughly 320 → 1360 px — while the data ends at 590 and 1090.
+So its top and bottom fifths map values onto letterbox. The bar must be exactly as tall as
+the image and share its top and bottom edge.</p>
+<p>Make the fit report where the image actually landed, and align to that.
+<code class="docutils literal notranslate"><span class="pre">CubeViewportGeometry.h</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Where the fitted image landed, in display pixels — the DATA AREA, which is</span>
+<span class="c1">/// the gutter's inner box minus the letterbox. Everything that annotates the</span>
+<span class="c1">/// data (colorbar, WCS axes, ticks) aligns to this, never to the inner box.</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">ImageRect</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">valid</span><span class="p">{</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">{</span><span class="w"> </span><span class="mf">0.</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">{</span><span class="w"> </span><span class="mf">0.</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="p">{</span><span class="w"> </span><span class="mf">0.</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">height</span><span class="p">{</span><span class="w"> </span><span class="mf">0.</span><span class="w"> </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">fitImageInGutter</span><span class="p">(</span><span class="n">vtkRenderer</span><span class="w"> </span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span><span class="w"> </span><span class="n">vtkImageData</span><span class="w"> </span><span class="o">*</span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ImageGutter</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">ImageRect</span><span class="w"> </span><span class="o">*</span><span class="n">dataArea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nullptr</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">layoutColorbarInGutter</span><span class="p">(</span><span class="n">vtkScalarBarActor</span><span class="w"> </span><span class="o">*</span><span class="n">bar</span><span class="p">,</span><span class="w"> </span><span class="n">vtkRenderer</span><span class="w"> </span><span class="o">*</span><span class="n">renderer</span><span class="p">,</span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">ImageGutter</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ImageRect</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dataArea</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">fitImageInGutter()</span></code>, after <code class="docutils literal notranslate"><span class="pre">perPixel</span></code> is known and before returning true:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dataArea</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">drawnW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">perPixel</span><span class="p">;</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">drawnH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">perPixel</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dataArea</span><span class="o">-&gt;</span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dataArea</span><span class="o">-&gt;</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">innerW</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">drawnW</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dataArea</span><span class="o">-&gt;</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">innerH</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">drawnH</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dataArea</span><span class="o">-&gt;</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drawnW</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dataArea</span><span class="o">-&gt;</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">drawnH</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">layoutColorbarInGutter()</span></code>, replace the <code class="docutils literal notranslate"><span class="pre">boxH</span></code> line and the two position/height calls:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">barY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataArea</span><span class="p">.</span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">dataArea</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">boxH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">dataArea</span><span class="p">.</span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">dataArea</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">top</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// …</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetPosition</span><span class="p">((</span><span class="n">W</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">right</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">gap</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">W</span><span class="p">,</span><span class="w"> </span><span class="n">barY</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">H</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetHeight</span><span class="p">(</span><span class="n">boxH</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">H</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">layout2dPane()</span></code> keeps the rect and hands it on:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">ImageRect</span><span class="w"> </span><span class="n">dataArea</span><span class="p">;</span>
+<span class="w">    </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">fitImageInGutter</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span><span class="w"> </span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="n">gutter</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dataArea</span><span class="p">);</span>
+<span class="w">    </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">layoutColorbarInGutter</span><span class="p">(</span><span class="n">slice</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_sliceColorbar</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_momentColorbar</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">renderer</span><span class="p">,</span><span class="w"> </span><span class="n">gutter</span><span class="p">,</span><span class="w"> </span><span class="n">dataArea</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_slice2dDataArea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataArea</span><span class="p">;</span><span class="w">   </span><span class="c1">// or m_moment2dDataArea — see (b)</span>
+</pre></div>
+</div>
+</section>
+<section id="b-the-wcs-axes-have-the-same-bug-latent">
+<h3>(b) The WCS axes have the same bug, latent<a class="headerlink" href="#b-the-wcs-axes-have-the-same-bug-latent" title="Link to this heading">¶</a></h3>
+<p>In this build the binding axis happens to be the width, so the drawn image fills the inner
+box horizontally and the longitude ticks line up by luck. Make the pane tall and narrow —
+or go to four panes, where the binding axis is the height — and the latitude ticks will
+annotate letterbox. Fix it now, in the same pass, or Step 3’s 4-pane layout will look broken
+for a reason that has nothing to do with Step 3.</p>
+<p>Store the rect per view (<code class="docutils literal notranslate"><span class="pre">ImageRect</span> <span class="pre">m_slice2dDataArea,</span> <span class="pre">m_moment2dDataArea;</span></code> in the header),
+then in <strong>both</strong> overlay functions derive the frame from it instead of from the margins:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">gutter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">imageGutter</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">showWcsAxes</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_slice2dDataArea</span><span class="p">;</span><span class="w">          </span><span class="c1">// moment: m_moment2dDataArea</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">axisX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">left</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">axisRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">right</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">axisTop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">top</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">bottomMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">bottom</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">leftMargin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gutter</span><span class="p">.</span><span class="n">left</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.235</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>and swap the two <code class="docutils literal notranslate"><span class="pre">configureAxisActor</span></code> calls plus the tick loop to use <code class="docutils literal notranslate"><span class="pre">axisRight</span></code> / <code class="docutils literal notranslate"><span class="pre">axisTop</span></code>
+where they currently compute <code class="docutils literal notranslate"><span class="pre">size[0]</span> <span class="pre">-</span> <span class="pre">rightMargin</span></code> / <code class="docutils literal notranslate"><span class="pre">size[1]</span> <span class="pre">-</span> <span class="pre">topMargin</span></code>. The x tick
+labels stay at <code class="docutils literal notranslate"><span class="pre">bottomMargin</span> <span class="pre">-</span> <span class="pre">18</span></code> and the y labels at <code class="docutils literal notranslate"><span class="pre">axisX</span> <span class="pre">-</span> <span class="pre">10</span></code>, so the label offsets
+are unchanged — only the endpoints move.</p>
+<p>Because the axes now depend on the fit, <code class="docutils literal notranslate"><span class="pre">layout2dPane()</span></code> must run <strong>before</strong> the overlay
+update. It already calls <code class="docutils literal notranslate"><span class="pre">invalidateWcsOverlayCache()</span></code>, which is what makes the next
+<code class="docutils literal notranslate"><span class="pre">EndEvent</span></code> recompute — keep that call last.</p>
+</section>
+<section id="c-colorbar-labels-are-clipped-and-too-long">
+<h3>(c) Colorbar labels are clipped, and too long<a class="headerlink" href="#c-colorbar-labels-are-clipped-and-too-long" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">0.038…</span></code>, <code class="docutils literal notranslate"><span class="pre">-0.017</span></code> and <code class="docutils literal notranslate"><span class="pre">-0.036</span></code> are cut by the pane edge: the 96 px right gutter leaves ~35 px
+for labels after VTK’s own bar width, and <code class="docutils literal notranslate"><span class="pre">%g</span></code>’s default precision wants more. Two changes
+in <code class="docutils literal notranslate"><span class="pre">imageGutter()</span></code> / <code class="docutils literal notranslate"><span class="pre">layoutColorbarInGutter()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">g</span><span class="p">.</span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">116.</span><span class="p">;</span><span class="w">                  </span><span class="c1">// bar ≈ 19 + values ≈ 70 + padding</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">bar</span><span class="o">-&gt;</span><span class="n">SetLabelFormat</span><span class="p">(</span><span class="s">"%.3g"</span><span class="p">);</span><span class="w">     </span><span class="c1">// 0.0386 → "0.0386", -0.0361 → "-0.0361"</span>
+</pre></div>
+</div>
+<p>Three significant figures is the right precision for a colorbar — the exact extrema are in
+Inspector › Properties › STATISTICS, which is where a number you intend to quote comes from.</p>
+</section>
+<section id="d-the-cursor-readout-is-a-raw-dump">
+<h3>(d) The cursor readout is a raw dump<a class="headerlink" href="#d-the-cursor-readout-is-a-raw-dump" title="Link to this heading">¶</a></h3>
+<p>Unrelated to the geometry but now the most visibly broken thing in the toolbar: it reads
+<code class="docutils literal notranslate"><span class="pre">X=54</span> <span class="pre">Y=25</span> <span class="pre">Z=0</span> <span class="pre">Value=0.013683276</span> <span class="pre">Galactic</span> <span class="pre">Longitude=104.89</span> <span class="pre">Galactic</span> <span class="pre">Latitude=68.53</span> <span class="pre">Radio</span> <span class="pre">Velo…</span></code> and clips. Spec §1.1 asks for JetBrains Mono 10 px in the compact form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>l 104.89  b +68.53  ·  1.37e-02 Jy/beam  ·  ch 1
+</pre></div>
+</div>
+<p>Rules: WCS first (it is what the user reads out loud), value in scientific notation with the
+unit from the header, voxel indices <strong>only</strong> when there is no WCS solution, and no <code class="docutils literal notranslate"><span class="pre">KEY=</span></code>
+labels — the axis names live on the axes. Cap the label with <code class="docutils literal notranslate"><span class="pre">setMinimumWidth()</span></code> on the
+longest expected string so the toolbar stops reflowing as the cursor moves, and elide the
+tail rather than the head if it still overflows.</p>
+</section>
+<section id="re-check">
+<h3>Re-check<a class="headerlink" href="#re-check" title="Link to this heading">¶</a></h3>
+<p>On top of §2.5: the colorbar’s top and bottom edges are level with the image’s, its labels
+are fully visible, and in a <strong>tall narrow</strong> pane (drag the splitter to ~380 px wide) the
+latitude ticks still sit against the image edge with letterbox left and right of the whole
+group.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="the-data-area-must-be-derived-not-cached">
+<h2>2.7 The data area must be derived, not cached<a class="headerlink" href="#the-data-area-must-be-derived-not-cached" title="Link to this heading">¶</a></h2>
+<p>The rails (Step 4.1) exposed a real bug in §2.6(b). Same build, three dock states:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dock state</p></th>
+<th class="head"><p>Where the x tick row lands</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>both rails collapsed</p></td>
+<td><p><strong>on top of the pixels</strong>, ~70 px inside the image</p></td>
+</tr>
+<tr class="row-odd"><td><p>left collapsed, right open</p></td>
+<td><p>~70 px <strong>below</strong> the image’s bottom edge</p></td>
+</tr>
+<tr class="row-even"><td><p>left open, right collapsed</p></td>
+<td><p>roughly correct</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The cause: <code class="docutils literal notranslate"><span class="pre">m_slice2dDataArea</span></code> is written by <code class="docutils literal notranslate"><span class="pre">layout2dPaneFor()</span></code> and read by the overlay, and
+the two do not run at the same viewport size. The fit is deferred a tick
+(<code class="docutils literal notranslate"><span class="pre">QTimer::singleShot(0)</span></code>, correctly — VTK has not adopted the new size during
+<code class="docutils literal notranslate"><span class="pre">QEvent::Resize</span></code>), while the overlay runs off <code class="docutils literal notranslate"><span class="pre">vtkCommand::EndEvent</span></code> with whatever size the
+window has <em>now</em>. Collapsing a dock resizes the pane twice in quick succession, so the
+overlay draws its frame from a rect measured for the previous width. Where the pane got
+taller the stale <code class="docutils literal notranslate"><span class="pre">data.y</span></code> falls inside the new image; where it got shorter it falls below it.</p>
+<p>Caching a derived geometric value in a member is the bug. The rect is a pure function of
+three things the overlay already has — viewport size, image bounds, gutter — so derive it at
+the point of use and delete the member.</p>
+<p>Split the calculation out of <code class="docutils literal notranslate"><span class="pre">fitImageInGutter()</span></code>; the fit then calls it too, so there is one
+formula and nothing to keep in sync:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// CubeViewportGeometry.h</span>
+<span class="c1">/// Where an aspect-preserved image lands inside the gutter, for a GIVEN viewport</span>
+<span class="c1">/// size. Pure — no renderer state, no caching. Both the camera fit and the WCS</span>
+<span class="c1">/// overlays call this, so they cannot disagree about where the data is.</span>
+<span class="n">ImageRect</span><span class="w"> </span><span class="nf">dataAreaFor</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">vtkImageData</span><span class="w"> </span><span class="o">*</span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ImageGutter</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// CubeViewportGeometry.cpp</span>
+<span class="n">ImageRect</span><span class="w"> </span><span class="nf">dataAreaFor</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">vtkImageData</span><span class="w"> </span><span class="o">*</span><span class="n">image</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ImageGutter</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ImageRect</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">size</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">image</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+<span class="w">    </span><span class="n">image</span><span class="o">-&gt;</span><span class="n">GetBounds</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">validBounds</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">innerW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">left</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">right</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">innerH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">top</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">innerW</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">16.</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">innerH</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">16.</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="mf">1e-9</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">perPixel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">innerW</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.</span><span class="p">),</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">innerH</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.</span><span class="p">));</span>
+<span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">perPixel</span><span class="p">;</span>
+<span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">perPixel</span><span class="p">;</span>
+<span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">innerW</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">;</span>
+<span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">bottom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">innerH</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">height</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fitImageInGutter()</span></code> keeps the camera work and takes its numbers from the same call —
+<code class="docutils literal notranslate"><span class="pre">perPixel</span></code> is recoverable as <code class="docutils literal notranslate"><span class="pre">w</span> <span class="pre">/</span> <span class="pre">rect.width</span></code>, or return it in the struct; either way it is
+computed in one place.</p>
+<p>In <strong>both</strong> overlay functions, replace the cached read with a local derivation. <code class="docutils literal notranslate"><span class="pre">size</span></code> is
+already in scope from <code class="docutils literal notranslate"><span class="pre">renderer-&gt;GetSize()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">gutter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">imageGutter</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">showWcsAxes</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CubeGeom</span><span class="o">::</span><span class="n">dataAreaFor</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">imageData</span><span class="p">,</span><span class="w"> </span><span class="n">gutter</span><span class="p">);</span><span class="w">   </span><span class="c1">// never cached</span>
+</pre></div>
+</div>
+<p>Then <strong>delete</strong> <code class="docutils literal notranslate"><span class="pre">m_slice2dDataArea</span></code> / <code class="docutils literal notranslate"><span class="pre">m_moment2dDataArea</span></code> and every write to them. Keep
+<code class="docutils literal notranslate"><span class="pre">m_slice2dFitSize</span></code> / <code class="docutils literal notranslate"><span class="pre">m_moment2dFitSize</span></code> — those guard the <em>camera</em>, which must not be
+re-fitted on every render, and that is a different concern.</p>
+<p>The overlay is then correct for whatever size it is drawing at, regardless of how many
+resizes a dock toggle produced or when the deferred fit ran.</p>
+<section id="the-axis-titles-travel-with-their-axis">
+<h3>The axis titles travel with their axis<a class="headerlink" href="#the-axis-titles-travel-with-their-axis" title="Link to this heading">¶</a></h3>
+<p>Second, smaller mistake, visible in all three shots: <code class="docutils literal notranslate"><span class="pre">Galactic</span> <span class="pre">Longitude</span></code> sits ~250 px below
+the image, at the pane’s bottom edge. §2.6 anchored it to <code class="docutils literal notranslate"><span class="pre">gutter.bottom</span> <span class="pre">/</span> <span class="pre">2</span> <span class="pre">-</span> <span class="pre">2</span></code> — fixed to
+the <em>window</em>, which is right when the letterbox is thin and absurd when it is 250 px tall.
+An axis label belongs to its axis:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// x title: centred under the tick row, which sits at data.y - 18</span>
+<span class="w">    </span><span class="n">xTitle</span><span class="o">-&gt;</span><span class="n">SetDisplayPosition</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">),</span>
+<span class="w">                               </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">38.</span><span class="p">,</span><span class="w"> </span><span class="mf">10.</span><span class="p">)));</span>
+<span class="w">    </span><span class="c1">// y title: left of the tick column, which sits at data.x - 10</span>
+<span class="w">    </span><span class="n">yTitle</span><span class="o">-&gt;</span><span class="n">SetDisplayPosition</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">74.</span><span class="p">,</span><span class="w"> </span><span class="mf">12.</span><span class="p">)),</span>
+<span class="w">                               </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">std::max</span></code> floors keep both titles on screen when the gutter is tight; otherwise they
+follow the letterbox and stay ~20 px from their own tick row. The y title is already rotated
+90° and centre-justified, so the position is its midpoint — no other change.</p>
+</section>
+<section id="id1">
+<h3>Re-check<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>Cycle all four dock states (both open → left collapsed → right collapsed → both collapsed)
+and <code class="docutils literal notranslate"><span class="pre">⌥⇧F</span></code> twice. In every state the tick rows sit <strong>just outside</strong> the image — never on the
+pixels, never adrift in the letterbox — and both titles stay with their tick row. Then drag
+the splitter through the aspect flip (wide → tall), which changes the binding axis rather
+than the size, and confirm the same.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, VisIVOLab
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Step 2 — 2D pane geometry (patch)</a><ul>
+<li><a class="reference internal" href="#mom-map-is-still-elided">2.0 <code class="docutils literal notranslate"><span class="pre">Mom…Map</span></code> is still elided</a></li>
+<li><a class="reference internal" href="#what-is-actually-wrong-in-the-2d-pane">2.1 What is actually wrong in the 2D pane</a></li>
+<li><a class="reference internal" href="#shared-geometry-cubeviewportgeometry">2.2 Shared geometry: <code class="docutils literal notranslate"><span class="pre">CubeViewportGeometry</span></code></a></li>
+<li><a class="reference internal" href="#the-two-overlays-read-the-shared-gutter">2.3 The two overlays read the shared gutter</a></li>
+<li><a class="reference internal" href="#own-the-colorbars-and-re-fit-on-resize">2.4 Own the colorbars, and re-fit on resize</a></li>
+<li><a class="reference internal" href="#acceptance">2.5 Acceptance</a></li>
+<li><a class="reference internal" href="#corrections-after-the-16-24-build">2.6 Corrections after the 16.24 build</a><ul>
+<li><a class="reference internal" href="#a-the-colorbar-spans-the-viewport-not-the-data">(a) The colorbar spans the viewport, not the data</a></li>
+<li><a class="reference internal" href="#b-the-wcs-axes-have-the-same-bug-latent">(b) The WCS axes have the same bug, latent</a></li>
+<li><a class="reference internal" href="#c-colorbar-labels-are-clipped-and-too-long">(c) Colorbar labels are clipped, and too long</a></li>
+<li><a class="reference internal" href="#d-the-cursor-readout-is-a-raw-dump">(d) The cursor readout is a raw dump</a></li>
+<li><a class="reference internal" href="#re-check">Re-check</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-data-area-must-be-derived-not-cached">2.7 The data area must be derived, not cached</a><ul>
+<li><a class="reference internal" href="#the-axis-titles-travel-with-their-axis">The axis titles travel with their axis</a></li>
+<li><a class="reference internal" href="#id1">Re-check</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=f26bd01d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>

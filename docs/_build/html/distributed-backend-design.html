@@ -1,0 +1,1136 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html">
+        <link rel="prefetch" href="_static/visivo_logo_light.svg" as="image">
+        <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
+
+    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>Distributed VisIVO Backend — Architecture &amp; Design - VisIVO dev</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0b5fff;
+  --color-brand-content: #0b5fff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">VisIVO dev</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/visivo_logo_light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/visivo_logo_white.svg" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/getting-started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/cube-viewer.html">Spectral cube viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/image-viewer.html">Image viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/vbt-viewer.html">VBT viewer (point clouds and volumes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/velocity-fields.html">Velocity fields and cosmic flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/moment-maps.html">Moment maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/spectral-tools.html">Spectral analysis tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/source-finding.html">Source finding and cross-matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/publication-output.html">Figures, movies and linked views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot.html">Scientific Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-backend.html">Copilot backend &amp; engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async-patterns.html">Async Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service-mapping-note.html">Service Mapping Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocity-field-viewer.html">Velocity Field Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinematic-model.html">Tilted-Ring Kinematic Model (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso — interactive 3-D object selection &amp; masking (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="movie-export.html">Movie Export (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linked-views.html">Linked Cube Views (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo-datasets.html">Demo datasets (feature test matrix)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_server.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_importer.html">VisIVO Importer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_filter.html">VisIVO Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_viewer.html">VisIVO Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_utils.html">VisIVO Utils</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="distributed-visivo-backend-architecture-design">
+<h1>Distributed VisIVO Backend — Architecture &amp; Design<a class="headerlink" href="#distributed-visivo-backend-architecture-design" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>Status: <strong>desktop side implemented</strong> (July 2026); SKAVA server side still design
+Author: VisIVO integration, June 2026
+Related: SKAVA D3.1 (§3.4 Data Locality), SKAVA D3.1 (§13.3 Data Staging)</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Implementation status (July 2026).</strong> The desktop side of this design is
+built and shipped: the <code class="docutils literal notranslate"><span class="pre">Settings</span></code> multi-backend registry (§6.1), the
+<code class="docutils literal notranslate"><span class="pre">BackendsSettingsWidget</span></code> dialog tab (§6.2), <code class="docutils literal notranslate"><span class="pre">BackendClientFactory</span></code> session
+caching (§6.3), SKAVA <code class="docutils literal notranslate"><span class="pre">visivo-backend</span></code> descriptor parsing (§6.4), and the
+<code class="docutils literal notranslate"><span class="pre">pickBackendForSkavaDataset</span></code> / <code class="docutils literal notranslate"><span class="pre">doOpenSkavaDataset</span></code> routing (§4.2 / §6.5).
+The routing decision is unit-tested (<code class="docutils literal notranslate"><span class="pre">tests/TestBackendRouting</span></code>, see
+<a class="reference internal" href="testing.html"><span class="doc std std-doc">Testing</span></a>). What remains design-only is the <strong>SKAVA server side</strong>
+(§7 — the <code class="docutils literal notranslate"><span class="pre">nodes.visivo_backend_url</span></code> column and DataLink descriptor
+emission), which lives in the SKAVA repository, not this one.</p>
+</div>
+<section id="executive-summary">
+<h2>1. Executive Summary<a class="headerlink" href="#executive-summary" title="Link to this heading">¶</a></h2>
+<p>VisIVO today opens FITS / HDF5 datasets by talking to a single FastAPI
+backend, typically hosted on the same machine as the desktop client
+(<code class="docutils literal notranslate"><span class="pre">localhost:8001</span></code>). For large SKA-class datasets that pattern stops
+scaling: a 50 GB HI cube hosted at an SKA Regional Centre (SRC)
+should not be copied across the network to every analyst’s laptop.</p>
+<p>This document proposes the <strong>distributed VisIVO backend</strong> model: each
+SRC (or data centre) hosts its own VisIVO backend co-located with the
+data, and the desktop client transparently routes its compute requests
+to the backend that owns each dataset. Discovery and routing are
+SKAVA-driven; the desktop holds a registry of known backends and
+picks the right one per-dataset based on metadata returned by
+SKAVA’s DataLink layer.</p>
+<p>The result is the “compute next to data” pattern: raw data stays put,
+only previews, slices, derived products and 1-D summaries travel to
+the desktop. This is the same architectural principle SKA-SRC adopts
+for its analysis services.</p>
+<p>The proposal is <strong>fully incremental</strong> on top of the existing
+single-backend model — the local backend remains the default, the
+registry is opt-in, and unconfigured SKAVA peers transparently fall
+back to today’s “download to local backend” behaviour.</p>
+</section>
+<section id="background-motivation">
+<h2>2. Background &amp; motivation<a class="headerlink" href="#background-motivation" title="Link to this heading">¶</a></h2>
+<section id="the-current-single-backend-model">
+<h3>2.1 The current single-backend model<a class="headerlink" href="#the-current-single-backend-model" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────────┐    ┌────────────────────┐
+│  Desktop (Qt)      │───▶│  VisIVO backend    │
+│  ─ open by path    │    │  (FastAPI)         │
+│  ─ open by SKAVA   │    │  ─ FITS reader     │
+│  ─ region stats    │    │  ─ moment workers  │
+│  ─ moments         │    │  ─ exports cache   │
+│  ─ etc.            │    └────────────────────┘
+└────────────────────┘             │
+                              filesystem
+                              (local disk
+                              or NFS mount)
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Settings::getBackendUrl()</span></code> returns a single URL. Every viewer window
+constructs a <code class="docutils literal notranslate"><span class="pre">BackendClient(url,</span> <span class="pre">token)</span></code> and that’s the only backend
+in play. For SKAVA opens the flow today is:</p>
+<ol class="arabic simple">
+<li><p>Desktop queries SKAVA discovery</p></li>
+<li><p>Desktop hands SKAVA’s <code class="docutils literal notranslate"><span class="pre">access_url</span></code> to the local VisIVO backend</p></li>
+<li><p>Backend <strong>downloads</strong> the remote file into
+<code class="docutils literal notranslate"><span class="pre">&lt;workspace_exports&gt;/skava_cache/</span></code></p></li>
+<li><p>Standard local-path open pipeline kicks in</p></li>
+</ol>
+</section>
+<section id="why-this-doesn-t-scale">
+<h3>2.2 Why this doesn’t scale<a class="headerlink" href="#why-this-doesn-t-scale" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Multi-GB datasets</strong>: WALLABY HI cubes are ~10 GB, MeerKAT
+Galactic-Centre mosaics are ~800 MB, SKA SDC2 simulated cubes
+~6 GB. Downloading each before opening is minutes-to-hours of
+one-way wait, and worse for users on metered home connections.</p></li>
+<li><p><strong>Embargo / proprietary data</strong>: SKA proprietary period datasets
+legally cannot leave the SRC. Local download is <strong>forbidden</strong>, not
+just impractical.</p></li>
+<li><p><strong>Storage at the desktop</strong>: A typical analyst working across 10
+datasets quickly fills the laptop’s disk with cached copies of
+data that is already pristine at the SRC.</p></li>
+<li><p><strong>Compute resources</strong>: Moment maps, source-finding and
+dedispersion benefit from the SRC’s compute fleet. Running them on
+a laptop wastes both time and the SRC’s existing capacity.</p></li>
+</ul>
+</section>
+<section id="skava-s-design-intent">
+<h3>2.3 SKAVA’s design intent<a class="headerlink" href="#skava-s-design-intent" title="Link to this heading">¶</a></h3>
+<p>SKAVA D3.1 explicitly anticipates this evolution:</p>
+<ul class="simple">
+<li><p>§3.4 <em>Data Locality and Replica Awareness</em> — “the design should
+prefer access endpoints closest to compute resources”.</p></li>
+<li><p>§13.3 <em>Data Staging and Prefetching</em> — “future SODA/staging
+services will materialise sub-products near compute”.</p></li>
+</ul>
+<p>The replica list returned by <code class="docutils literal notranslate"><span class="pre">/discovery/search</span></code> already includes a
+<code class="docutils literal notranslate"><span class="pre">node</span></code> with <code class="docutils literal notranslate"><span class="pre">base_url</span></code>, <code class="docutils literal notranslate"><span class="pre">latency_score</span></code>, <code class="docutils literal notranslate"><span class="pre">load_score</span></code>,
+<code class="docutils literal notranslate"><span class="pre">capability_score</span></code>. The DataLink response includes a
+<code class="docutils literal notranslate"><span class="pre">service_descriptors[]</span></code> array explicitly intended for “future
+services” at each node. Today this is unused; we propose to wire it
+to a VisIVO backend at each node.</p>
+</section>
+</section>
+<section id="goals-non-goals">
+<h2>3. Goals &amp; non-goals<a class="headerlink" href="#goals-non-goals" title="Link to this heading">¶</a></h2>
+<section id="goals">
+<h3>3.1 Goals<a class="headerlink" href="#goals" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Desktop client can talk to <strong>N backends concurrently</strong>, each
+identified by <code class="docutils literal notranslate"><span class="pre">(id,</span> <span class="pre">name,</span> <span class="pre">url,</span> <span class="pre">token)</span></code>.</p></li>
+<li><p>SKAVA tells the desktop, per dataset, which VisIVO backend owns
+the data — no hard-coded “SRC X = backend URL Y” tables in the
+client.</p></li>
+<li><p><strong>Backwards-compatible</strong>: a SKAVA peer that does not declare any
+visivo-backend descriptor causes the desktop to fall back to the
+current behaviour (download via local backend).</p></li>
+<li><p><strong>Transparent to viewers</strong>: <code class="docutils literal notranslate"><span class="pre">vtkWindowImage</span></code>, <code class="docutils literal notranslate"><span class="pre">vtkWindowCube</span></code>,
+etc. continue to receive a backend URL through their constructor
+— they don’t need to know which backend it is.</p></li>
+<li><p><strong>Single source of truth for sessions</strong>: each backend keeps its
+own session, no cross-backend session merging.</p></li>
+</ol>
+</section>
+<section id="non-goals">
+<h3>3.2 Non-goals<a class="headerlink" href="#non-goals" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Backend-to-backend orchestration</strong>. Backends do not talk to
+each other in this design. If two datasets live on two different
+SRCs, the desktop opens two viewer windows talking to two
+backends. No cross-backend joins.</p></li>
+<li><p><strong>Automatic deployment</strong> of VisIVO backends at SRCs. Each SRC’s
+operator deploys their own backend instance and registers it in
+SKAVA. The desktop only consumes the routing info.</p></li>
+<li><p><strong>OAuth / OIDC</strong> federation. The token model stays bearer-token
+per backend; OAuth is a separate work item (R10 in the roadmap).</p></li>
+<li><p><strong>SODA cutout integration</strong>. Out of scope for this proposal —
+tracked separately, lands when SKAVA exposes real <code class="docutils literal notranslate"><span class="pre">/soda/sync</span></code>.</p></li>
+</ol>
+</section>
+</section>
+<section id="architectural-overview">
+<h2>4. Architectural overview<a class="headerlink" href="#architectural-overview" title="Link to this heading">¶</a></h2>
+<section id="topology">
+<h3>4.1 Topology<a class="headerlink" href="#topology" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                      Desktop (Qt)
+                          │
+                          ▼
+              ┌───────────────────────┐
+              │  Backend Registry     │
+              │  (Settings)           │
+              │  ─ local              │
+              │  ─ src-it-inaf        │
+              │  ─ src-de-mpg         │
+              │  ─ …                  │
+              └───────┬───────────────┘
+                      │ HTTPS
+       ┌──────────────┼──────────────┐
+       │              │              │
+       ▼              ▼              ▼
+┌────────────┐ ┌────────────┐ ┌────────────┐
+│  Local     │ │  SRC-IT    │ │  SRC-DE    │
+│  backend   │ │  backend   │ │  backend   │
+│            │ │            │ │            │
+│  cache/    │ │  /data/    │ │  /data/    │
+│  exports/  │ │  …         │ │  …         │
+└────────────┘ └────────────┘ └────────────┘
+
+         SKAVA queries this map
+                  │
+                  ▼
+        ┌─────────────────────────┐
+        │  SKAVA Discovery        │
+        │                         │
+        │  for each dataset:      │
+        │    obs_id, replicas[],  │
+        │    service_descriptors  │
+        │    [visivo-backend]     │
+        └─────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="routing-decision">
+<h3>4.2 Routing decision<a class="headerlink" href="#routing-decision" title="Link to this heading">¶</a></h3>
+<p>For a single user action (Open dataset from SKAVA), the routing
+decision proceeds as:</p>
+<ol class="arabic simple">
+<li><p>Desktop calls SKAVA <code class="docutils literal notranslate"><span class="pre">/datalink/{obs_id}</span></code>.</p></li>
+<li><p>SKAVA returns <code class="docutils literal notranslate"><span class="pre">service_descriptors</span></code> including
+<code class="docutils literal notranslate"><span class="pre">{service_type:</span> <span class="pre">&quot;visivo-backend&quot;,</span> <span class="pre">endpoint,</span> <span class="pre">node_code}</span></code>.</p></li>
+<li><p>Desktop matches <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> against its known backend registry by
+URL (exact match) or <code class="docutils literal notranslate"><span class="pre">node_code</span></code> (preferred — stable identifier).</p></li>
+<li><p>If match found → open the dataset against <strong>that</strong> backend, no
+download.</p></li>
+<li><p>If no match found AND auto-add is enabled → prompt user to add
+the backend to the registry, then open.</p></li>
+<li><p>If no match found AND auto-add disabled → fall back to current
+behaviour (download to local backend cache, open from there).</p></li>
+</ol>
+</section>
+<section id="open-flow-comparison">
+<h3>4.3 Open flow comparison<a class="headerlink" href="#open-flow-comparison" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Today (single backend)</p></th>
+<th class="head"><p>Distributed</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Discovery / DataLink</p></td>
+<td><p>Discovery / DataLink</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Local backend <code class="docutils literal notranslate"><span class="pre">/v1/datasets/open_url</span></code></p></td>
+<td><p>Pick backend per dataset</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Backend downloads file (GB)</p></td>
+<td><p>Backend opens local file (instant)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Pixel reads on cached local file</p></td>
+<td><p>Pixel reads on backend’s native filesystem</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Identical viewer experience</p></td>
+<td><p>Identical viewer experience</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Step 3 saves the download (the dominant cost for large data).
+Step 4 is also faster: SRC storage is typically faster than a
+laptop SSD for sequential reads.</p>
+</section>
+</section>
+<section id="data-model">
+<h2>5. Data model<a class="headerlink" href="#data-model" title="Link to this heading">¶</a></h2>
+<section id="backendnode-desktop-side-settings">
+<h3>5.1 BackendNode (desktop-side, Settings)<a class="headerlink" href="#backendnode-desktop-side-settings" title="Link to this heading">¶</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">BackendNode</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">          </span><span class="c1">// stable id, e.g. "local", "src-it-inaf"</span>
+<span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">        </span><span class="c1">// display name shown in UI</span>
+<span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="n">url</span><span class="p">;</span><span class="w">         </span><span class="c1">// base URL (no trailing slash)</span>
+<span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="n">token</span><span class="p">;</span><span class="w">       </span><span class="c1">// bearer auth (empty for unauthenticated)</span>
+<span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="n">srcCode</span><span class="p">;</span><span class="w">     </span><span class="c1">// optional SKAVA node code for cross-ref</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w">    </span><span class="n">isLocal</span><span class="p">;</span><span class="w">     </span><span class="c1">// marks the default fallback</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w">    </span><span class="n">isBuiltin</span><span class="p">;</span><span class="w">   </span><span class="c1">// local backend is auto-managed</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Persisted in <code class="docutils literal notranslate"><span class="pre">QSettings</span></code> under <code class="docutils literal notranslate"><span class="pre">Backends/nodes</span></code> as a JSON array.
+<code class="docutils literal notranslate"><span class="pre">local</span></code> is auto-created with the value of the legacy
+<code class="docutils literal notranslate"><span class="pre">Settings::getBackendUrl()</span></code> for migration compatibility.</p>
+</section>
+<section id="skava-service-descriptor-extension">
+<h3>5.2 SKAVA service descriptor extension<a class="headerlink" href="#skava-service-descriptor-extension" title="Link to this heading">¶</a></h3>
+<p>The DataLink response gains entries of shape:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"service_descriptors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"service_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"access-resolution"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"service_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"visivo-backend"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://srcit.inaf.it/visivo"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"node_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INAF-IT"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"requires_auth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"supports_kinds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"image"</span><span class="p">,</span><span class="w"> </span><span class="s2">"cube"</span><span class="p">,</span><span class="w"> </span><span class="s2">"dynspec"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Server side, SKAVA stores per-node <code class="docutils literal notranslate"><span class="pre">visivo_backend_url</span></code>,
+<code class="docutils literal notranslate"><span class="pre">visivo_backend_requires_auth</span></code> on the <code class="docutils literal notranslate"><span class="pre">nodes</span></code> table. The DataLink
+builder emits the descriptor when populated; nodes without the
+column populated do not emit it (backwards compatibility).</p>
+</section>
+<section id="session-state">
+<h3>5.3 Session state<a class="headerlink" href="#session-state" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">BackendClient</span></code> already stores <code class="docutils literal notranslate"><span class="pre">m_sessionId</span></code> per instance. In the
+distributed model the desktop maintains a <code class="docutils literal notranslate"><span class="pre">QHash&lt;QString,</span> <span class="pre">QSharedPointer&lt;BackendClient&gt;&gt;</span></code> indexed by backend <code class="docutils literal notranslate"><span class="pre">id</span></code>, so each
+backend’s session id is preserved across the lifetime of the
+desktop.</p>
+</section>
+</section>
+<section id="component-design">
+<h2>6. Component design<a class="headerlink" href="#component-design" title="Link to this heading">¶</a></h2>
+<section id="settings-src-settings-h-cpp">
+<h3>6.1 Settings (<code class="docutils literal notranslate"><span class="pre">src/Settings.{h,cpp}</span></code>)<a class="headerlink" href="#settings-src-settings-h-cpp" title="Link to this heading">¶</a></h3>
+<p>New accessors:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">QList</span><span class="o">&lt;</span><span class="n">BackendNode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getBackendNodes</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="kt">void</span><span class="w">               </span><span class="nf">setBackendNodes</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QList</span><span class="o">&lt;</span><span class="n">BackendNode</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nodes</span><span class="p">);</span>
+<span class="n">BackendNode</span><span class="w">        </span><span class="nf">getBackendNode</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="n">BackendNode</span><span class="w">        </span><span class="nf">getLocalBackend</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="n">QString</span><span class="w">            </span><span class="nf">getDefaultBackendId</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="kt">void</span><span class="w">               </span><span class="nf">setDefaultBackendId</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id</span><span class="p">);</span>
+<span class="c1">/// Insert if not present, update if present (matched by id).</span>
+<span class="kt">void</span><span class="w">               </span><span class="nf">upsertBackendNode</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">BackendNode</span><span class="w"> </span><span class="o">&amp;</span><span class="n">node</span><span class="p">);</span>
+<span class="kt">void</span><span class="w">               </span><span class="nf">removeBackendNode</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Legacy <code class="docutils literal notranslate"><span class="pre">getBackendUrl()</span></code> / <code class="docutils literal notranslate"><span class="pre">getBackendToken()</span></code> remain as
+compatibility-layer methods returning the local backend’s URL/token,
+so older call sites keep working without change.</p>
+</section>
+<section id="settings-dialog-src-gui-settingsdialog-h-cpp">
+<h3>6.2 Settings dialog (<code class="docutils literal notranslate"><span class="pre">src/gui/SettingsDialog.{h,cpp}</span></code>)<a class="headerlink" href="#settings-dialog-src-gui-settingsdialog-h-cpp" title="Link to this heading">¶</a></h3>
+<p>A new tab <strong>Backends</strong> containing:</p>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">QListView</span></code> of registered backends.</p></li>
+<li><p><strong>Add</strong>, <strong>Edit</strong>, <strong>Remove</strong>, <strong>Set as default</strong> buttons.</p></li>
+<li><p>An edit form for each backend (id, display name, URL, token,
+SRC node code).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">local</span></code> backend is non-removable; it can be reconfigured but
+not deleted.</p></li>
+</ul>
+</section>
+<section id="backendclient-src-app-backendclient-h-cpp">
+<h3>6.3 BackendClient (<code class="docutils literal notranslate"><span class="pre">src/app/BackendClient.{h,cpp}</span></code>)<a class="headerlink" href="#backendclient-src-app-backendclient-h-cpp" title="Link to this heading">¶</a></h3>
+<p>Already takes <code class="docutils literal notranslate"><span class="pre">(url,</span> <span class="pre">token)</span></code> in the constructor — no API change. We
+add a desktop-side factory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BackendClientFactory</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">BackendClient</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nodeId</span><span class="p">);</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">BackendClient</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getLocal</span><span class="p">();</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">BackendClient</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getForUrl</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="o">&amp;</span><span class="n">url</span><span class="p">);</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">invalidate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nodeId</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The factory caches one <code class="docutils literal notranslate"><span class="pre">BackendClient</span></code> per backend <code class="docutils literal notranslate"><span class="pre">id</span></code> so session
+state persists. Cache is cleared on Settings change.</p>
+</section>
+<section id="skavaclient-updates">
+<h3>6.4 SkavaClient updates<a class="headerlink" href="#skavaclient-updates" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">SkavaDatalinkResponse</span></code> struct gains:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">SkavaVisivoBackendDescriptor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="n">endpoint</span><span class="p">;</span>
+<span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="n">nodeCode</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w">    </span><span class="n">requiresAuth</span><span class="p">{</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="n">QStringList</span><span class="w"> </span><span class="n">supportedKinds</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">SkavaDatalinkResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// … existing fields …</span>
+<span class="w">    </span><span class="c1">/// One entry per available VisIVO backend that can serve this</span>
+<span class="w">    </span><span class="c1">/// dataset (filtered from service_descriptors[]). May be empty,</span>
+<span class="w">    </span><span class="c1">/// in which case the desktop falls back to download.</span>
+<span class="w">    </span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">SkavaVisivoBackendDescriptor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">visivoBackends</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="mainwindow-routing">
+<h3>6.5 MainWindow routing<a class="headerlink" href="#mainwindow-routing" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">doOpenDataFromUrl()</span></code> becomes a thin facade over a new
+<code class="docutils literal notranslate"><span class="pre">doOpenSkavaDataset(obsId,</span> <span class="pre">datalinkResp)</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">MainWindow::doOpenSkavaDataset</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="o">&amp;</span><span class="n">obsId</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">SkavaDatalinkResponse</span><span class="w"> </span><span class="o">&amp;</span><span class="n">datalink</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. Try to match a known backend by SKAVA's visivo-backend descriptor</span>
+<span class="w">    </span><span class="n">BackendNode</span><span class="w"> </span><span class="n">chosen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pickBackendForDataset</span><span class="p">(</span><span class="n">datalink</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">chosen</span><span class="p">.</span><span class="n">url</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">chosen</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">"local"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Remote-backend open: backend already has the file</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BackendClientFactory</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="n">chosen</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">opened</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">-&gt;</span><span class="n">openDataset</span><span class="p">(</span><span class="cm">/* path from datalink */</span><span class="w"> </span><span class="p">...);</span>
+<span class="w">        </span><span class="n">openViewerFromOpenedDataset</span><span class="p">(</span><span class="n">displayPath</span><span class="p">,</span><span class="w"> </span><span class="n">opened</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">client</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 2. Fall back to download-into-local behaviour</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BackendClientFactory</span><span class="o">::</span><span class="n">getLocal</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">opened</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local</span><span class="o">-&gt;</span><span class="n">openDatasetFromUrl</span><span class="p">(</span><span class="n">datalink</span><span class="p">.</span><span class="n">primaryAccessUrl</span><span class="p">,</span><span class="w"> </span><span class="n">obsId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">openViewerFromOpenedDataset</span><span class="p">(</span><span class="n">displayPath</span><span class="p">,</span><span class="w"> </span><span class="n">opened</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">local</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pickBackendForDataset()</span></code> matches descriptors against the registry by
+(a) <code class="docutils literal notranslate"><span class="pre">endpoint</span> <span class="pre">==</span> <span class="pre">registry</span> <span class="pre">URL</span></code>, (b) <code class="docutils literal notranslate"><span class="pre">nodeCode</span> <span class="pre">==</span> <span class="pre">registry</span> <span class="pre">srcCode</span></code>,
+or (c) the user’s default backend if no SKAVA hint applies.</p>
+</section>
+<section id="skavasearchpanel-ui">
+<h3>6.6 SkavaSearchPanel UI<a class="headerlink" href="#skavasearchpanel-ui" title="Link to this heading">¶</a></h3>
+<p>The results table gains a column <strong>Served by</strong> showing the chosen
+backend’s display name (e.g. “Local”, “INAF-IT”, “—” when no
+visivo-backend descriptor present). The Open button updates its
+label dynamically to “Open via INAF-IT” / “Open via Local”
+depending on selection.</p>
+<p>A status line below the table reports the routing decision:</p>
+<blockquote>
+<div><p>Selected: <code class="docutils literal notranslate"><span class="pre">d22-mgcls-abell194-StokesI</span></code> → backend <strong>INAF-IT</strong>
+(compute next to data, no download required)</p>
+</div></blockquote>
+</section>
+<section id="viewer-window-indicator">
+<h3>6.7 Viewer window indicator<a class="headerlink" href="#viewer-window-indicator" title="Link to this heading">¶</a></h3>
+<p>Each viewer’s status bar gains a small badge:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[ INAF-IT 🌐 ]   for remote-backend datasets
+[ Local 💾 ]    for local-backend datasets
+</pre></div>
+</div>
+<p>Clicking the badge opens the Settings → Backends tab so the user can
+inspect/change the backend.</p>
+</section>
+</section>
+<section id="skava-side-extension">
+<h2>7. SKAVA-side extension<a class="headerlink" href="#skava-side-extension" title="Link to this heading">¶</a></h2>
+<section id="database-migration">
+<h3>7.1 Database migration<a class="headerlink" href="#database-migration" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">migrations/versions/0007_add_visivo_backend.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">upgrade</span><span class="p">():</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s2">"nodes"</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="s2">"visivo_backend_url"</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s2">"nodes"</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="s2">"visivo_backend_requires_auth"</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">server_default</span><span class="o">=</span><span class="s2">"false"</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="model-update">
+<h3>7.2 Model update<a class="headerlink" href="#model-update" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">app/models/node.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># … existing …</span>
+    <span class="n">visivo_backend_url</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span>
+        <span class="n">String</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">visivo_backend_requires_auth</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span>
+        <span class="n">Boolean</span><span class="p">,</span> <span class="n">server_default</span><span class="o">=</span><span class="s2">"false"</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="datalink-builder">
+<h3>7.3 DataLink builder<a class="headerlink" href="#datalink-builder" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">app/vo/datalink.py:build_service_descriptors()</span></code> accepts the
+selected replica’s node and appends a <code class="docutils literal notranslate"><span class="pre">visivo-backend</span></code> descriptor
+when the node has <code class="docutils literal notranslate"><span class="pre">visivo_backend_url</span></code> populated.</p>
+</section>
+<section id="seed-update">
+<h3>7.4 Seed update<a class="headerlink" href="#seed-update" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">app/services/seed_d22.py</span></code>: configure <code class="docutils literal notranslate"><span class="pre">VIS-LOCAL</span></code> and <code class="docutils literal notranslate"><span class="pre">INAF-PUB</span></code>
+nodes with their VisIVO backend URLs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">"VIS-LOCAL"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="n">visivo_backend_url</span><span class="o">=</span><span class="s2">"http://host.docker.internal:8001"</span><span class="p">,</span>
+    <span class="n">visivo_backend_requires_auth</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">),</span>
+</pre></div>
+</div>
+</section>
+<section id="backwards-compatibility">
+<h3>7.5 Backwards compatibility<a class="headerlink" href="#backwards-compatibility" title="Link to this heading">¶</a></h3>
+<p>Old clients that don’t recognise the new descriptor see it as an
+unknown <code class="docutils literal notranslate"><span class="pre">service_type</span></code> and ignore it (per SKAVA’s existing extension
+contract). Old SKAVA peers that don’t expose the descriptor still
+return the legacy <code class="docutils literal notranslate"><span class="pre">primary_access.access_url</span></code>, and the desktop’s
+fallback (download via local backend) handles them.</p>
+</section>
+</section>
+<section id="authentication-security">
+<h2>8. Authentication &amp; security<a class="headerlink" href="#authentication-security" title="Link to this heading">¶</a></h2>
+<section id="per-backend-tokens">
+<h3>8.1 Per-backend tokens<a class="headerlink" href="#per-backend-tokens" title="Link to this heading">¶</a></h3>
+<p>Each <code class="docutils literal notranslate"><span class="pre">BackendNode</span></code> carries its own bearer token. Tokens are stored in
+<code class="docutils literal notranslate"><span class="pre">QSettings</span></code> and protected by the OS keychain when available
+(<code class="docutils literal notranslate"><span class="pre">QSettings::Settings</span></code> on macOS uses the user’s profile, with
+filesystem permissions). A future enhancement could swap to the
+platform credential store explicitly.</p>
+</section>
+<section id="tls">
+<h3>8.2 TLS<a class="headerlink" href="#tls" title="Link to this heading">¶</a></h3>
+<p>All backend URLs are expected to be <code class="docutils literal notranslate"><span class="pre">https://</span></code> in production. The
+<code class="docutils literal notranslate"><span class="pre">QNetworkAccessManager</span></code> already enforces certificate validation; we
+do not weaken this.</p>
+</section>
+<section id="auth-scope">
+<h3>8.3 Auth scope<a class="headerlink" href="#auth-scope" title="Link to this heading">¶</a></h3>
+<p>A backend’s bearer token authorises <strong>only that backend’s API</strong>. It
+is never forwarded to other backends or to SKAVA. SKAVA’s token is
+separate (configured in the SKAVA tab).</p>
+</section>
+<section id="replicas-vs-backends">
+<h3>8.4 Replicas vs backends<a class="headerlink" href="#replicas-vs-backends" title="Link to this heading">¶</a></h3>
+<p>SKAVA’s <code class="docutils literal notranslate"><span class="pre">replicas[]</span></code> list contains storage endpoints (HTTP URLs to
+files). VisIVO backends are a separate concept — a backend may serve
+files from one or many replicas, depending on what its filesystem
+mounts. The mapping is established by SKAVA’s node-level
+configuration (<code class="docutils literal notranslate"><span class="pre">visivo_backend_url</span></code> lives on the <code class="docutils literal notranslate"><span class="pre">Node</span></code>, not on the
+<code class="docutils literal notranslate"><span class="pre">Replica</span></code>).</p>
+</section>
+</section>
+<section id="failure-modes-mitigations">
+<h2>9. Failure modes &amp; mitigations<a class="headerlink" href="#failure-modes-mitigations" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Failure</p></th>
+<th class="head"><p>Mitigation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Remote backend unreachable</p></td>
+<td><p>Try next replica’s backend; if all fail, fall back to download via local backend</p></td>
+</tr>
+<tr class="row-odd"><td><p>Remote backend returns 401</p></td>
+<td><p>Surface “auth required” message; if token already set, prompt for re-auth</p></td>
+</tr>
+<tr class="row-even"><td><p>Remote backend returns 5xx</p></td>
+<td><p>Mark as transient, retry once; if still failing show error and offer “open via local” fallback</p></td>
+</tr>
+<tr class="row-odd"><td><p>Remote backend serves wrong / corrupt FITS</p></td>
+<td><p>Same handling as local backend errors — message box with backend’s response</p></td>
+</tr>
+<tr class="row-even"><td><p>Network partition mid-operation</p></td>
+<td><p>Backend client times out, viewer surfaces “backend lost” status, user can retry or switch backends</p></td>
+</tr>
+<tr class="row-odd"><td><p>Backend session expired</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BackendClient</span></code> detects 401 with <code class="docutils literal notranslate"><span class="pre">session_invalid</span></code>, transparently re-opens session via <code class="docutils literal notranslate"><span class="pre">/v1/datasets/open</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="migration-from-single-backend">
+<h2>10. Migration from single-backend<a class="headerlink" href="#migration-from-single-backend" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>On first launch after upgrade, <code class="docutils literal notranslate"><span class="pre">Settings</span></code> migrates the legacy
+<code class="docutils literal notranslate"><span class="pre">Backend/url</span></code> + <code class="docutils literal notranslate"><span class="pre">Backend/token</span></code> to a <code class="docutils literal notranslate"><span class="pre">BackendNode</span> <span class="pre">{</span> <span class="pre">id:</span> <span class="pre">&quot;local&quot;,</span> <span class="pre">isLocal:</span> <span class="pre">true,</span> <span class="pre">isBuiltin:</span> <span class="pre">true,</span> <span class="pre">…</span> <span class="pre">}</span></code>.</p></li>
+<li><p>The legacy <code class="docutils literal notranslate"><span class="pre">getBackendUrl()</span></code> / <code class="docutils literal notranslate"><span class="pre">getBackendToken()</span></code> accessors are
+reimplemented as <code class="docutils literal notranslate"><span class="pre">getLocalBackend().url</span></code> / <code class="docutils literal notranslate"><span class="pre">.token</span></code> —
+transparent to existing call sites.</p></li>
+<li><p>Old SKAVA peers (no visivo-backend descriptor) cause the
+download-via-local behaviour, identical to today.</p></li>
+<li><p>Users gradually opt in to multi-backend by adding SRC entries
+to the registry via the new Settings UI.</p></li>
+</ol>
+</section>
+<section id="testing-strategy">
+<h2>11. Testing strategy<a class="headerlink" href="#testing-strategy" title="Link to this heading">¶</a></h2>
+<section id="unit-tests">
+<h3>11.1 Unit tests<a class="headerlink" href="#unit-tests" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Settings::upsertBackendNode()</span></code> round-trips correctly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BackendClientFactory::get(id)</span></code> returns the same instance on
+repeated calls (session-stable).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SkavaClient::parseDatalinkResponse()</span></code> extracts
+<code class="docutils literal notranslate"><span class="pre">visivo-backend</span></code> descriptors correctly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pickBackendForDataset()</span></code> matches by URL, by node_code, falls back
+to default.</p></li>
+</ul>
+</section>
+<section id="local-end-to-end">
+<h3>11.2 Local end-to-end<a class="headerlink" href="#local-end-to-end" title="Link to this heading">¶</a></h3>
+<p>Two-backend setup on localhost:</p>
+<ul class="simple">
+<li><p>Backend A on <code class="docutils literal notranslate"><span class="pre">:8001</span></code> serves <code class="docutils literal notranslate"><span class="pre">/data/</span></code></p></li>
+<li><p>Backend B on <code class="docutils literal notranslate"><span class="pre">:8002</span></code> serves <code class="docutils literal notranslate"><span class="pre">/data2/</span></code></p></li>
+<li><p>SKAVA seed associates dataset X with backend A, dataset Y with B</p></li>
+<li><p>Desktop registry has both</p></li>
+<li><p>Open dataset X → uses backend A (verifiable via backend logs)</p></li>
+<li><p>Open dataset Y → uses backend B</p></li>
+<li><p>Open dataset Z (no descriptor) → downloads via local backend</p></li>
+</ul>
+</section>
+<section id="src-style-end-to-end-manual">
+<h3>11.3 SRC-style end-to-end (manual)<a class="headerlink" href="#src-style-end-to-end-manual" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Set up a backend in a Docker container with a mounted data
+directory</p></li>
+<li><p>Configure SKAVA seed to point at it</p></li>
+<li><p>Verify desktop talks to the container, not to a local cache</p></li>
+</ul>
+</section>
+<section id="heterogeneous-architecture-testbed-power9">
+<h3>11.4 Heterogeneous-architecture testbed (Power9)<a class="headerlink" href="#heterogeneous-architecture-testbed-power9" title="Link to this heading">¶</a></h3>
+<p>VisIVO backend has no architecture-specific code: it is Python +
+FastAPI + numpy / scipy / astropy / healpy / photutils. All these
+have ppc64le wheels on conda-forge and Anaconda channels, and
+upstream CPython supports ppc64le natively. The backend therefore
+runs <strong>without code changes</strong> on IBM Power9 nodes, which are common
+in SKA-SRC infrastructures.</p>
+<p>Recommended testbed:</p>
+<ol class="arabic">
+<li><p>Provision an IBM Power9 node with Linux ppc64le (RHEL 8 / Ubuntu
+20.04+ both work).</p></li>
+<li><p>Install Docker for ppc64le.</p></li>
+<li><p>Build the backend image natively on the node:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>backend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>visivo-backend:ppc64le<span class="w"> </span>.
+</pre></div>
+</div>
+<p>(Multi-arch buildx is also possible but native build is simpler
+for a dedicated testbed.)</p>
+</li>
+<li><p>Mount the SRC dataset filesystem read-only into the container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>visivo-be<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/srv/data:/data:ro<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>/var/visivo/exports:/exports<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">8001</span>:8001<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>visivo-backend:ppc64le
+</pre></div>
+</div>
+</li>
+<li><p>Register the node in the local SKAVA seed (or production SKAVA)
+with <code class="docutils literal notranslate"><span class="pre">visivo_backend_url=https://&lt;power9-host&gt;:8001</span></code> so the
+desktop sees it as a routing target.</p></li>
+</ol>
+<p>For the wheel install path, prefer Anaconda / conda-forge over pure
+<code class="docutils literal notranslate"><span class="pre">pip</span></code> to avoid 20–30 min compile times for numba, scipy, healpy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>fastapi<span class="w"> </span>uvicorn<span class="w"> </span>numpy<span class="w"> </span>scipy<span class="w"> </span>astropy<span class="w"> </span>h5py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>healpy<span class="w"> </span>photutils<span class="w"> </span>scikit-image<span class="w"> </span>reproject<span class="w"> </span>numba<span class="w"> </span>pandas<span class="w"> </span>dask
+</pre></div>
+</div>
+<p>Optional GPU acceleration (<code class="docutils literal notranslate"><span class="pre">cupy-cuda*</span></code>) requires NVIDIA GPU on the
+Power9 node (V100/A100, Summit-class) — gracefully degrades to CPU
+when absent.</p>
+</section>
+</section>
+<section id="future-evolution">
+<h2>12. Future evolution<a class="headerlink" href="#future-evolution" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OAuth/OIDC federation</p></td>
+<td><p>Token model evolves to bearer with refresh, IdP integration</p></td>
+</tr>
+<tr class="row-odd"><td><p>Backend health monitor</p></td>
+<td><p>Desktop polls each registered backend’s <code class="docutils literal notranslate"><span class="pre">/health</span></code> periodically; UI shows green/yellow/red</p></td>
+</tr>
+<tr class="row-even"><td><p>Quota-aware routing</p></td>
+<td><p>SKAVA’s <code class="docutils literal notranslate"><span class="pre">load_score</span></code> becomes input to routing; desktop prefers under-loaded backends</p></td>
+</tr>
+<tr class="row-odd"><td><p>SODA cutout integration</p></td>
+<td><p>When SKAVA exposes server-side cutout, the request goes to the backend hosting the dataset</p></td>
+</tr>
+<tr class="row-even"><td><p>Workspace-to-backend push</p></td>
+<td><p>Reverse direction: user pushes a Workspace Export to a remote backend (already designed; gated on backend write API)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Backend discovery via VOSI</p></td>
+<td><p>SRC backends discovered via SKAVA’s <code class="docutils literal notranslate"><span class="pre">/capabilities</span></code> rather than explicit registry</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="roadmap">
+<h2>13. Roadmap<a class="headerlink" href="#roadmap" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Phase</p></th>
+<th class="head"><p>Work</p></th>
+<th class="head"><p>Estimated effort</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Settings backend registry (data model + accessors)</p></td>
+<td><p>0.5 day</p></td>
+<td><p>✅ done</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Settings dialog UI for backends</p></td>
+<td><p>0.5 day</p></td>
+<td><p>✅ done</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>BackendClientFactory + session caching</p></td>
+<td><p>0.5 day</p></td>
+<td><p>✅ done</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>SkavaClient: parse visivo-backend descriptors</p></td>
+<td><p>0.25 day</p></td>
+<td><p>✅ done</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>MainWindow routing + viewer badge</p></td>
+<td><p>0.5 day</p></td>
+<td><p>✅ done</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>SKAVA migration + model + DataLink builder</p></td>
+<td><p>0.5 day</p></td>
+<td><p>⏳ SKAVA repo</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>SKAVA seed_d22 update</p></td>
+<td><p>0.25 day</p></td>
+<td><p>⏳ SKAVA repo</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>End-to-end testing + docs</p></td>
+<td><p>0.5 day</p></td>
+<td><p>◑ unit tests + docs done; SRC e2e pending server side</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Total ≈ 3.5 days</strong> of focused work for the full implementation. The desktop
+phases (1–5) and their unit tests / docs are complete; phases 6–7 land in the
+SKAVA repository.</p>
+</section>
+<section id="out-of-scope">
+<h2>14. Out of scope<a class="headerlink" href="#out-of-scope" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Workspace-to-backend push from the Data Hub Workspace Exports
+panel (separate item)</p></li>
+<li><p>OAuth / OIDC across backends (separate work item)</p></li>
+<li><p>Automated SRC backend deployment / Helm chart (operator concern)</p></li>
+<li><p>SODA cutout dialog (depends on SKAVA exposing the real endpoint)</p></li>
+<li><p>Backend-side cross-replication or data movement (out of scope per
+SKAVA D3.1 §13.3 deferred-feature list)</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, VisIVOLab
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Distributed VisIVO Backend — Architecture &amp; Design</a><ul>
+<li><a class="reference internal" href="#executive-summary">1. Executive Summary</a></li>
+<li><a class="reference internal" href="#background-motivation">2. Background &amp; motivation</a><ul>
+<li><a class="reference internal" href="#the-current-single-backend-model">2.1 The current single-backend model</a></li>
+<li><a class="reference internal" href="#why-this-doesn-t-scale">2.2 Why this doesn’t scale</a></li>
+<li><a class="reference internal" href="#skava-s-design-intent">2.3 SKAVA’s design intent</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#goals-non-goals">3. Goals &amp; non-goals</a><ul>
+<li><a class="reference internal" href="#goals">3.1 Goals</a></li>
+<li><a class="reference internal" href="#non-goals">3.2 Non-goals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#architectural-overview">4. Architectural overview</a><ul>
+<li><a class="reference internal" href="#topology">4.1 Topology</a></li>
+<li><a class="reference internal" href="#routing-decision">4.2 Routing decision</a></li>
+<li><a class="reference internal" href="#open-flow-comparison">4.3 Open flow comparison</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-model">5. Data model</a><ul>
+<li><a class="reference internal" href="#backendnode-desktop-side-settings">5.1 BackendNode (desktop-side, Settings)</a></li>
+<li><a class="reference internal" href="#skava-service-descriptor-extension">5.2 SKAVA service descriptor extension</a></li>
+<li><a class="reference internal" href="#session-state">5.3 Session state</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#component-design">6. Component design</a><ul>
+<li><a class="reference internal" href="#settings-src-settings-h-cpp">6.1 Settings (<code class="docutils literal notranslate"><span class="pre">src/Settings.{h,cpp}</span></code>)</a></li>
+<li><a class="reference internal" href="#settings-dialog-src-gui-settingsdialog-h-cpp">6.2 Settings dialog (<code class="docutils literal notranslate"><span class="pre">src/gui/SettingsDialog.{h,cpp}</span></code>)</a></li>
+<li><a class="reference internal" href="#backendclient-src-app-backendclient-h-cpp">6.3 BackendClient (<code class="docutils literal notranslate"><span class="pre">src/app/BackendClient.{h,cpp}</span></code>)</a></li>
+<li><a class="reference internal" href="#skavaclient-updates">6.4 SkavaClient updates</a></li>
+<li><a class="reference internal" href="#mainwindow-routing">6.5 MainWindow routing</a></li>
+<li><a class="reference internal" href="#skavasearchpanel-ui">6.6 SkavaSearchPanel UI</a></li>
+<li><a class="reference internal" href="#viewer-window-indicator">6.7 Viewer window indicator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#skava-side-extension">7. SKAVA-side extension</a><ul>
+<li><a class="reference internal" href="#database-migration">7.1 Database migration</a></li>
+<li><a class="reference internal" href="#model-update">7.2 Model update</a></li>
+<li><a class="reference internal" href="#datalink-builder">7.3 DataLink builder</a></li>
+<li><a class="reference internal" href="#seed-update">7.4 Seed update</a></li>
+<li><a class="reference internal" href="#backwards-compatibility">7.5 Backwards compatibility</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#authentication-security">8. Authentication &amp; security</a><ul>
+<li><a class="reference internal" href="#per-backend-tokens">8.1 Per-backend tokens</a></li>
+<li><a class="reference internal" href="#tls">8.2 TLS</a></li>
+<li><a class="reference internal" href="#auth-scope">8.3 Auth scope</a></li>
+<li><a class="reference internal" href="#replicas-vs-backends">8.4 Replicas vs backends</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#failure-modes-mitigations">9. Failure modes &amp; mitigations</a></li>
+<li><a class="reference internal" href="#migration-from-single-backend">10. Migration from single-backend</a></li>
+<li><a class="reference internal" href="#testing-strategy">11. Testing strategy</a><ul>
+<li><a class="reference internal" href="#unit-tests">11.1 Unit tests</a></li>
+<li><a class="reference internal" href="#local-end-to-end">11.2 Local end-to-end</a></li>
+<li><a class="reference internal" href="#src-style-end-to-end-manual">11.3 SRC-style end-to-end (manual)</a></li>
+<li><a class="reference internal" href="#heterogeneous-architecture-testbed-power9">11.4 Heterogeneous-architecture testbed (Power9)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#future-evolution">12. Future evolution</a></li>
+<li><a class="reference internal" href="#roadmap">13. Roadmap</a></li>
+<li><a class="reference internal" href="#out-of-scope">14. Out of scope</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=f26bd01d"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>
