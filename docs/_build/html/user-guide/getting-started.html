@@ -308,7 +308,7 @@ about five minutes.</p>
 <td><p>9.5 or newer, built with Qt 6 support.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Python</strong></p></td>
-<td><p>3.12+ for the backend (FastAPI, NumPy, Astropy, SciPy).</p></td>
+<td><p><strong>3.11 or newer</strong> for the backend. The client checks this and says so if the interpreter it finds is older — note that macOS ships 3.9 and several Linux distributions ship 3.9 or 3.10, so a system <code class="docutils literal notranslate"><span class="pre">python3</span></code> is often not enough.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>GPU</strong></p></td>
 <td><p>Any Apple-Silicon GPU or a modern desktop GPU. Volume rendering uses <code class="docutils literal notranslate"><span class="pre">vtkGPUVolumeRayCastMapper</span></code>.</p></td>
@@ -326,8 +326,31 @@ about five minutes.</p>
 queries, …). The desktop client always talks to a backend instance —
 either one it starts itself (the default), or one you started by hand
 on the same machine or on a remote node.</p>
+<section id="letting-the-client-do-it">
+<h3>Letting the client do it<a class="headerlink" href="#letting-the-client-do-it" title="Link to this heading">¶</a></h3>
+<p>If you have Python 3.11 or newer, you do not have to do anything: start the
+client and it will find the backend that ships with it, create a virtual
+environment on first run, install the dependencies, and launch the server. The
+startup window reports progress.</p>
+<p>That first run downloads several hundred megabytes and takes a few minutes.
+Afterwards it is instant, because the environment is reused.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The client needs to <em>find</em> a suitable interpreter. It looks, in order, at
+<code class="docutils literal notranslate"><span class="pre">VISIVO_BACKEND_PYTHON</span></code>, an active virtual environment, the project’s own
+<code class="docutils literal notranslate"><span class="pre">.venv</span></code>, a Python shipped next to the application, and finally your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. If
+your 3.11+ is installed somewhere unusual, point at it explicitly:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>export VISIVO_BACKEND_PYTHON=/opt/python3.12/bin/python3
+</pre></div>
+</div>
+</div>
+</section>
+<section id="doing-it-by-hand">
+<h3>Doing it by hand<a class="headerlink" href="#doing-it-by-hand" title="Link to this heading">¶</a></h3>
+<p>Useful when the backend runs on another machine, or when you want to watch its
+log:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>backend
-python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+python3.11<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
 pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>--port<span class="w"> </span><span class="m">8000</span>
 </pre></div>
@@ -343,10 +366,11 @@ uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--host<span c
 either keep the file or set the env var.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>You can skip the manual backend launch entirely. When the client starts and
-no backend is reachable on the configured URL, it auto-spawns one for you
-(see <code class="docutils literal notranslate"><span class="pre">BackendLauncher</span></code> and the <em>Settings</em> dialog).</p>
+<p>A backend you started by hand always wins: the client probes the configured URL
+first and connects to whatever is already listening, rather than starting a
+second one (see <code class="docutils literal notranslate"><span class="pre">BackendLauncher</span></code> and the <em>Settings</em> dialog).</p>
 </div>
+</section>
 </section>
 <section id="launching-the-client">
 <h2>Launching the client<a class="headerlink" href="#launching-the-client" title="Link to this heading">¶</a></h2>
@@ -498,7 +522,11 @@ page to learn the workspace.</p></li>
             <ul>
 <li><a class="reference internal" href="#">Getting started</a><ul>
 <li><a class="reference internal" href="#what-you-need">What you need</a></li>
-<li><a class="reference internal" href="#starting-the-backend">Starting the backend</a></li>
+<li><a class="reference internal" href="#starting-the-backend">Starting the backend</a><ul>
+<li><a class="reference internal" href="#letting-the-client-do-it">Letting the client do it</a></li>
+<li><a class="reference internal" href="#doing-it-by-hand">Doing it by hand</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#launching-the-client">Launching the client</a></li>
 <li><a class="reference internal" href="#opening-your-first-dataset">Opening your first dataset</a></li>
 <li><a class="reference internal" href="#the-k-command-palette">The ⌘K Command Palette</a></li>
