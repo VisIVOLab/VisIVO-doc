@@ -98,6 +98,20 @@ background and the outer-vs-inner difference is shown automatically —
 useful for aperture photometry.
 ```
 
+Every region analysis leaves a row in **Session Data** carrying both its numbers
+and the shape they were measured on. Opening that row **redraws the region** and
+reopens the statistics, so a measurement taken twenty minutes and three regions
+ago can still be traced back to the pixels that produced it. The same holds for a
+pinned spectrum in the cube viewer: opening its row puts the crosshair back on
+the pixel it was probed at and returns to that channel.
+
+Drawing an annulus takes two steps: drag out the **outer** radius, then type the
+**inner** one when prompted. The inner ring is drawn **as you type it**, in the
+same amber the crop and mask previews use, so you can see the band you are about
+to measure before committing to it; it takes the region's own colour once you
+accept, and disappears if you cancel. (Before, the prompt was a bare number box
+and the ring appeared only after you had already chosen.)
+
 ### Sending the result somewhere
 
 - *Copy* the statistics block to the clipboard (CSV-ish format).
@@ -196,6 +210,17 @@ region and channel range.
    - **MAD per channel**, same four summary stats.
    - **Subtitle** with the selected region and a warning when too much of
      the selection is blank — see [Blank-pixel handling](#blank-pixel-handling).
+5. The estimate is also recorded in **Session Data** as a statistics row
+   (`Noise σ=… (x …, y …)`), with σ/MAD, the region and the channel range in
+   its **Provenance** tab. The result panel is a transient window, and σ is the
+   number you reach for afterwards — the moment-map threshold, the isosurface
+   level, the mask cut-off — so closing the panel no longer loses it. Re-running
+   the *same* region updates that row in place; a different region adds its own,
+   so two noise regions can be compared side by side.
+   **Double-click that row (or right-click ▸ Show the Numbers Again) to bring the
+   result panel back** exactly as it was: it is rebuilt from what the product
+   recorded, so it outlives the panel you closed, the tool window and anything
+   else you do in between.
 
 ### Live preview overlays
 

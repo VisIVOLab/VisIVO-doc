@@ -23,7 +23,7 @@ causes:
 
 ### "Session not found."
 
-You've requested an action (e.g. *Stack Spectral Cubes*) referencing a
+You've requested an action (e.g. *Stack Cubes to a Spectrum*) referencing a
 `session_id` that the backend no longer has — usually because the
 backend was restarted after the cube was opened.
 
@@ -156,6 +156,19 @@ If even the double-click does nothing:
   see it.
 - Click *on the plane itself*, not on the volume rendering behind it.
 
+### "Switch to Remote" is missing, or *View → Remote* is greyed out
+
+The backend told us it cannot render server-side. It reports that in the
+dataset-open response (`server_side_rendering_available`), and it is false for a
+CPU-only backend and for **any backend running on macOS** — server-side
+rendering needs an EGL context, which macOS does not provide. The tooltip on the
+disabled *Remote* mode says so.
+
+This is not a limitation of your cube: rendering simply happens in this process.
+For a cube above the local-load threshold, use **Load full resolution** (in the
+banner, or *View → Load Full Resolution*) and watch the memory — the whole volume
+becomes resident, in RAM and as a 3-D GPU texture.
+
 ### A tool in the Analysis list is greyed out
 
 Hover it: every disabled tool in this app states its own reason, and the
@@ -166,9 +179,10 @@ tooltip is the answer.
   it from a pane's ▾ menu (a tool does **not** need its pane to be the selected
   one — see [Cube viewer](cube-viewer#when-a-tool-is-available-and-where-it-acts)).
 - *"probe a pixel first"* (Pin Spectrum), *"draw or import a region first"*
-  (Export Region), *"open a 2D image viewer first"* (Send Slice to Image
-  Viewer), *"nothing to link yet"* (Link Views): the tool works on something
-  that does not exist yet.
+  (Export Region), *"open a 2D image viewer first"* (Overlay Slice on an Open
+  Image), *"nothing to link yet"* (Link Views): the tool works on something that
+  does not exist yet. **Hover the greyed entry to read the reason** — it is on
+  the row in Inspector ▸ Analysis as well as in the Tools menu.
 - *Export Moment Map as FITS* stays disabled until a moment map has actually
   been computed; *Open in VR* until a VR runtime is available.
 
@@ -209,7 +223,39 @@ The tool tells you which of the two happened.
 
 See [Line identification](spectral-tools#line-identification-overlaying-a-line-list).
 
-### "Stack Spectral Cubes" shows only one cube
+### I closed a tool window while it was computing
+
+The computation **keeps running on the backend** — it cannot be cancelled (these
+requests have no cancel route, and the backend cannot kill a running compute
+child) — and its result is discarded when the window that asked for it is gone.
+So the dialogs ask first: *Close and Discard* / *Keep Waiting*.
+
+If you close anyway, watch the status bar: "N running" counts it until it
+finishes, and Diagnostics has the line where it started. Until it does, it holds
+one of the session's compute slots, so another heavy tool may have to wait.
+
+### "Too many concurrent compute tasks" / the backend is busy
+
+The backend admits a limited number of concurrent computations **per session**
+(`VISIVO_MAX_CONCURRENT_TASKS`, default 3) and answers HTTP 429 beyond that.
+This is deliberate backpressure, not an error — it keeps a long compute from
+starving slice scrolling — but you should rarely see it:
+
+- the server now **waits** up to `VISIVO_TASK_SLOT_WAIT_S` (default 15 s) for a
+  slot before refusing, and
+- the client **retries** a refused heavy request (isosurface, moment, noise,
+  line-width, stacking) with backoff before reporting it.
+
+If you still get it, something long is genuinely running. It is most likely on a
+large cube, where opening the dataset itself launches heavy work — the
+full-resolution load and the whole-cube statistics — and a heavy request that is
+merely *queued* for a worker also holds a session slot. Check the
+*Diagnostics* panel (the status bar shows `N running · M queued`), let the
+running computation finish, and retry. Raising
+`VISIVO_MAX_CONCURRENT_TASKS` / `VISIVO_HEAVY_SLOTS` on the server trades
+interactive responsiveness for throughput.
+
+### "Stack Cubes to a Spectrum" shows only one cube
 
 You only have one cube open in the current backend session. Open the
 other cubes first (via *Data Hub → Open Remote Dataset*). The dialog
@@ -220,6 +266,10 @@ If you have multiple cubes open but only one appears in the list:
 - Their shapes are different. The dialog disables incompatible cubes
   (different `width × height × depth`); hover the disabled rows to read
   the tooltip with the actual shape.
+- They are the same file. The list shows one row per *file*, and a cube can be
+  registered in a session twice (a baseline run registers its output, and
+  opening that output from its Session Data row registers it again), so the
+  duplicate is collapsed rather than offered as a second cube to stack.
 
 ### Moment dialog says "Computing…" forever
 

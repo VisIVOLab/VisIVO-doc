@@ -82,6 +82,59 @@ Pick between two complementary 3-D views from the top-right viewer toolbar:
 You can switch render mode at any time. The colour map is shared between
 volume rendering and the slice view.
 
+### Where the rendering happens: Auto / Local / Remote
+
+Independently of *what* is rendered, there is a choice of *where* — the toolbar
+segment above the 3-D pane:
+
+- **Local** — the cube is loaded into this machine's GPU through VTK's volume
+  mapper. Full interactivity, and the whole volume has to fit in GPU memory as a
+  3-D texture (roughly `width × height × depth × 4` bytes).
+- **Remote** — the backend renders with EGL and streams frames over a
+  WebSocket. **Only if the backend has it**: the dataset-open response carries
+  `server_side_rendering_available`, and a CPU-only backend — or any backend on
+  **macOS**, where there is no EGL — reports false. The mode entry is then
+  disabled with that reason and the recommendation banner does not offer the
+  switch, because `/v1/render/*` would refuse the request. It uses the *same* mapper on the whole cube (it is **not**
+  out-of-core), so the memory has to exist there instead of here; what you gain
+  is that the backend loads the full grid where the client would fall back to a
+  decimated proxy, and that a large cube never crosses the network. The cost is
+  an encode/decode round trip per frame.
+- **Auto** — starts local and lets the recommendation below appear.
+
+A cube whose full resolution exceeds `Cube/local_full_threshold_mb`
+(`~/VisIVO Visual Analytics/Settings.ini`, default **256 MB**), or one the
+backend has tagged `preview_only`, is shown as a **decimated preview proxy**
+locally — the status bar says so — and a banner offers to switch to remote
+rendering.
+
+```{note}
+What that switch buys depends on **where the backend is**, and the banner says
+which case you are in:
+
+- a **remote** backend: the full-resolution cube never crosses the network — the
+  frames do, and they are the same size whatever the cube is;
+- a **local** backend (`127.0.0.1`): there is no elsewhere. Same machine, same
+  GPU, the same whole volume in memory — just held by the backend process
+  instead of this one — plus a per-frame encode. The only thing it gains you is
+  the **full grid** instead of the decimated proxy, and that is a limit this
+  client imposes on itself, not a property of the data.
+
+So on a local backend the banner leads with **Load full resolution**, which is
+what the threshold is actually holding back, and keeps *Switch to Remote* as the
+second option **when the backend can do it at all** (on a local macOS backend it
+cannot, and the button is not shown) — worth taking when you would rather not have the cube resident in
+the viewer process. Dismissing the banner with ✕ is remembered for that cube, and
+raising `Cube/local_full_threshold_mb` stops it being raised at all.
+
+```{tip}
+Server-side rendering earns its keep when the backend is on **another** machine:
+a GPU node with 80 GB of VRAM, or a cube on a filesystem you do not want to pull
+several GB across. On your own laptop, against your own backend, it is mostly a
+way around this client's threshold.
+```
+```
+
 ## Color maps and transfer function
 
 - The active **color map** is picked from the *3-D View Settings* sidebar
@@ -96,17 +149,48 @@ volume rendering and the slice view.
 
 ## Tools
 
-Every tool is reachable from three places, all fed by one list in the code, so
+Every tool is reachable from two places, both fed by one list in the code, so
 they cannot drift apart:
 
 - the **Tools menu**, one submenu per group;
-- the left dock's **TOOLS** section (collapsed by default — it is there for
-  reach, not for permanent display);
 - the Inspector's **Analysis** tab on the right.
 
 Wherever you reach a tool, it is the same action: a toggle switched on in one
-place shows as on in the other two, and one that is unavailable is greyed out in
-all three with the same explanation.
+place shows as on in the other, and one that is unavailable is greyed out in
+both with the same explanation.
+
+```{note}
+The tool list is **not** in the left dock. That panel answers "how is this view
+drawn" — colour map, scale, clip, layers, slice animation — while the tools
+answer "what can I compute", which is the Inspector's question, and it is where
+the state that goes with a tool lives: the reason a disabled tool gives, and the
+SPECTRUM controls of the product it just produced. The Tools menu and
+<kbd>⌘K</kbd> / <kbd>Ctrl+K</kbd> cover the case where the Inspector is
+collapsed.
+```
+
+#### Session Data: selecting vs showing
+
+The left panel's tree is a **table of contents**, and the two gestures do
+different things:
+
+- **Click** a row — the dataset's views (*3D Volume*, *2D Slice*) or any product
+  — to *inspect* it: the Inspector's Properties / Provenance follow the
+  selection. Nothing moves in the panes.
+- **Double-click** to *show* it: the row is mounted in a pane (a free one, else
+  the layout grows). A product with no pane renderer — a baseline-subtracted
+  cube, a noise estimate — raises its own window instead.
+- **Right-click ▸ Show in ▸** to choose the pane, with each entry naming what it
+  would replace.
+- The small **pane number** badge on a row says which pane already shows it;
+  clicking the badge activates that pane.
+
+```{note}
+Selecting a row used to mount it straight away. That replaced whatever the
+active pane was showing just because you clicked a row to read its provenance —
+and, since a right-click also makes a row current, it mounted the product before
+its own *Show in ▸* menu could open, which made that menu pointless.
+```
 
 #### When a tool is available, and where it acts
 
@@ -139,7 +223,7 @@ A tool is bound to a **view**, not to the pane you happen to have selected:
   - When you reach for them
 * - **Spectral**
   - Extract Spectrum, Pin Spectrum, Extract PV Diagram, Line-Width Map,
-    Baseline Subtraction, Stack Spectral Cubes
+    Baseline Subtraction, Stack Cubes to a Spectrum
   - Anything along the velocity axis, from a single line of sight to a stack.
 * - **Maps**
   - Compute Moment Map, Channel Maps
@@ -153,7 +237,7 @@ A tool is bound to a **view**, not to the pane you happen to have selected:
   - Draw a shape and measure inside it, or exchange one with CASA / DS9. See
     [Regions, PV, noise](region-pv-noise).
 * - **Sources & Kinematics**
-  - Kinematic Lasso, Kinematic Model Overlay
+  - Source Finding (SoFiA-2), Kinematic Lasso, Kinematic Model Overlay
   - Pick out one object and work with it. See
     [Kinematic Lasso](kinematic-lasso) for click-to-select segmentation, and
     *Kinematic Model Overlay* to draw a tilted-ring model over the data.
@@ -167,7 +251,7 @@ A tool is bound to a **view**, not to the pane you happen to have selected:
   - Getting results out. See
     [Figures, movies and linked views](publication-output).
 * - **Views**
-  - Send Slice to Image Viewer, Link Views, Open in VR
+  - Overlay Slice on an Open Image, Link Views, Open in VR
   - Move the data to another view, or keep several in step.
 ```
 
@@ -197,7 +281,7 @@ line of sight, drawn in a *Spectral Profile* window.
 
 **How to use it:**
 
-1. **Tools → Extract Spectrum** (menu, left dock, or Inspector ▸ Analysis).
+1. **Tools → Extract Spectrum** (menu bar, Inspector ▸ Analysis, or ⌘K).
    Arming it gives the 2D Slice pane the focus, puts a cross-hair on it, and
    opens a *Spectrum (live)* pane — in a free pane, or by growing the layout
    (1 → 2 → 4), or, when the grid is full, by **borrowing** the least relevant
@@ -228,7 +312,8 @@ curve *on the plot* as a comparison overlay, display only, nothing saved.
 ### Picking a spectrum from the 3-D view
 
 *Pick spectrum on cutting plane*, in the **INTERACTION** section of the left
-dock (or *View → Pick Spectrum on Plane Click*), arms a picker on the 3-D view.
+dock (or *Tools → Spectral → Pick Spectrum on Plane Click*, also in
+Inspector ▸ Analysis), arms a picker on the 3-D view.
 While it is armed the 3-D pane carries an amber border, so it is clear which
 view is listening, and it keeps taking clicks even if you select another pane —
 selecting the spectrum it just produced no longer switches the picker off.
@@ -560,10 +645,10 @@ distribution is enough to identify what it represents:
 
 ## WCS axes and overlays
 
-- *View → Show WCS Axes* paints sky-coordinate ticks on the 2-D slice and
+- *View → Sky Grid on the 2-D Panes* paints sky-coordinate ticks on the 2-D slice and
   moment maps. Toggle between **sexagesimal** (HMS / DMS) and **decimal**
   with the *WCS format* radio in the same menu.
-- *View → Show 3D WCS Axes* draws a labelled bounding box in the 3-D view
+- *View → WCS Box in the 3-D View* draws a labelled bounding box in the 3-D view
   with RA / Dec / Velocity ticks derived from the cube WCS. Useful as a
   spatial reference when rotating the camera.
 - *Tools → Load Catalogue Overlay* lets you overlay sources from a CSV /
@@ -612,6 +697,10 @@ with the ``VISIVO_EXPORTS_DIR`` environment variable):
   spectral coordinates. The sub-cube is also registered as a new dataset
   in the active session, so you can immediately open it in a new cube
   viewer.
+  As you type the X/Y/Z bounds, the region they describe is drawn live in the
+  viewer — an amber rectangle on the 2-D slice and a translucent box inside the
+  volume — so you can see what you are about to cut out before you cut it.
+  *Tools → Mask 3-D Region…* shows the same box.
 - **Tools → Export Current Channel as 2-D FITS…** — save the channel
   that is currently displayed on the slice slider as a **standalone
   2-D FITS image** (``NAXIS=2`` — the spectral axis is dropped, not
@@ -625,16 +714,18 @@ with the ``VISIVO_EXPORTS_DIR`` environment variable):
 - **Tools → Export Moment Map as FITS…** — persist the moment currently
   on screen as a 2-D FITS (celestial WCS, ``BUNIT`` derived from the
   cube). Disabled until a moment has been computed.
-- **Tools → Send Slice to Image Viewer…** — send the current 2-D slice
+- **Tools → Overlay Slice on an Open Image…** — draw the current 2-D slice
   to the first open image viewer as a contour overlay. No FITS
   round-trip required — the data travels in memory via the
   ``contourDataReady`` signal. Useful for quick radio + optical
   comparisons without persisting intermediate files.
 
-Both flows ask only for a **basename** (e.g. ``m31_m0.fits``). The
-backend stores the file in the Workspace Exports dir and auto-suffixes
-collisions (``cube.fits`` → ``cube_1.fits`` → …). The completion dialog
-shows the chosen filename and on-disk path.
+Both flows take a **basename** (e.g. ``m31_m0.fits``) — a field in the tool's
+own window, not a second prompt after it closes, which is how Export Sub-Cube
+used to ask. The backend stores the file in the Workspace Exports dir and
+auto-suffixes collisions (``cube.fits`` → ``cube_1.fits`` → …). The completion
+dialog shows the chosen filename and on-disk path, and the tool window stays
+open so you can crop another region straight away.
 
 Once in the workspace, artefacts are listed in the **Workspace Exports**
 panel of the Data Hub. Per-entry actions:

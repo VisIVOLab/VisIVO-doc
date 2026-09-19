@@ -23,6 +23,12 @@ Single 2-D dock with the image and a side panel for:
 - **Tools** — region statistics, profile / probe, WCS frame switch.
 - **Info / Stats** — pixel-value summary, BUNIT, image extent.
 
+Tools that have settings do not each open their own panel. Picking one mounts
+its controls in a single contextual **Parameters** tab in the Inspector, and
+switches to it — so "where are this tool's options" has one answer, and the
+answer is visible the moment you start the tool rather than behind a dock you
+have to find. The tab also carries the provenance of what the tool measured.
+
 ## Preview → full upgrade
 
 Like the cube viewer, the image viewer first shows a downsampled **preview**
@@ -70,7 +76,11 @@ You can overlay or compare multiple images in the same window:
 All layer sources go through the same `loadImageLayer()` / `AstroUtils` /
 `libwcs` pipeline, so alignment between layers is handled the same way
 regardless of whether they come from VLKB, the remote backend, or local
-disk.
+disk. Which path a file takes is decided by **where the backend is**, not
+by whether the path happens to exist on your own disk: against a remote
+backend the layer is opened there and its WCS built from the header the
+backend returns, so a path that also exists locally cannot silently load
+a different file.
 
 ## WCS overlay and frame
 
@@ -140,7 +150,7 @@ Iso-contour lines can be drawn on top of the image from two sources:
 - **Clear All Contours** removes every contour layer.
 
 - **Cube → Image direct** — if a cube viewer is open, use
-  *Tools → Send Slice to Image Viewer…* in the cube window. The
+  *Tools → Overlay Slice on an Open Image…* in the cube window. The
   current 2-D slice is sent to the first open image viewer as a
   contour overlay without requiring a FITS export round-trip.
 
@@ -169,16 +179,48 @@ Only one measurement mode can be active at a time (ExclusiveOptional
 group). Activating a measurement mode deactivates any active probe or
 region tool.
 
+## Products from this map
+
+*Inspector ▸ Analysis ▸ Products* (or the *Tools* menu) has two operations that
+take the single 2-D map this window shows:
+
+- **Publication Figure…** renders the map as a publication-ready PNG through
+  matplotlib on the backend: choose the stretch (linear / log / sqrt / asinh /
+  power), the colormap, an optional title, and whether to draw the WCS sky grid
+  and a colorbar labelled with BUNIT. The file lands in Workspace Exports.
+- **Image Quality / Artifacts…** reports the diagnostics you want before
+  trusting a map: blanked fraction, dynamic range, noise, and indicators for
+  striping and negative-bowl artefacts.
+
+```{note}
+Both were previously in the Data Hub's *Science* menu, where they ran against
+whichever dataset had been opened last rather than the one you were looking at.
+They now act on this window's dataset. Both reduce anything with more than two
+axes to its first plane, so on a cube they describe one channel; to render or
+measure a cube's collapsed emission, compute a moment map first and open that.
+```
+
 ## Pixel histogram
 
 *Tools → Pixel Histogram…* (or the **Histogram** card in the sidebar)
-opens a floating QCustomPlot window showing the pixel-value distribution
-of the master layer as a 256-bin bar chart.
+opens a window showing the pixel-value distribution of the master layer as a
+256-bin bar chart.
 
 Two draggable vertical cursors mark the current LUT clip range
 (red = low, green = high). Dragging either cursor updates the LUT
 range live, so you can interactively clip the display without opening
 the advanced LUT editor.
+
+Two checkboxes decide whether the histogram is readable at all:
+
+- **Clip to 0.5–99.5 %** — bins over a robust percentile range instead of the
+  full data range. Astronomical images are mostly sky with a few bright
+  outliers; over the full range every source lands in one bin at the far right
+  and the sky in one at the far left. On by default, unless a LUT cursor would
+  fall outside the clipped range — the cursors have to stay reachable.
+- **Log counts** — a logarithmic count axis. The sky bin is orders of magnitude
+  taller than everything else, so on a linear axis the astronomically
+  interesting tail is a flat line along the bottom.
 
 ## Annotations
 
@@ -228,9 +270,21 @@ image viewer has a dedicated **Stokes Analysis** workflow card in the
    - `*_I.fits` / `*_I_PB.fits` → replaces the role tag
    - Also tries `.fits.gz` variants for ASKAP / MeerKAT compressed
      releases
-3. Files found are loaded as additional layers, tagged with their
-   Stokes role. Missing roles trigger a file dialog so you can locate
-   them manually.
+3. The search is reported **once**, as a summary of what was found and
+   what was not, rather than as one file dialog per missing role. From
+   there you either accept the set or locate the missing companions
+   yourself; cancelling means cancelling, not being asked again for the
+   next role.
+4. Files found are loaded as additional layers, tagged with their Stokes
+   role, one after another.
+
+```{note}
+The search runs wherever the data actually is. With a **remote backend**
+the companions are looked for — and browsed for, if you have to locate
+them by hand — on the backend's filesystem, not on your laptop: the
+Stokes I file you opened lives there too, so its siblings almost
+certainly do.
+```
 
 ### Derived maps
 
@@ -526,10 +580,18 @@ available, otherwise from `OBSFREQ` / `OBSBW`.
 ## Catalogue overlay
 
 Same machinery as the cube viewer: load a CSV / VOTable from
-*Tools → Load Catalogue Overlay*. The sources are projected through the
-image WCS, drawn as glyphs, and listed in a sortable side table. Click a
-row to centre the view on the source; click on a glyph to highlight the
-matching table row.
+*Tools → Load Catalogue Overlay*, or query the VLKB directly with
+*Tools → Overlay VLKB Compact Sources* / *Overlay VLKB Filaments*. The sources are projected
+through the image WCS, drawn as glyphs, and listed in a table dock at the
+bottom of the window.
+
+Click a row to highlight the source, double-click to zoom to it, and
+right-click for *Fit SED of this source…*. The table shows every column the
+catalogue carries, groups a band-merged catalogue's per-band detections under
+their parent source, and exports to CSV. See
+[Catalogues · Overlay](catalogues-hips#catalogue-overlay-on-cubes--images) for
+the full description and [SED fitting](sed-fitting) for what to do with a
+source's fluxes once you have them.
 
 ### Cross-match with a catalogue
 
