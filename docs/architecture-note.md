@@ -624,6 +624,64 @@ It did find these:
   Dataset" were one action. File now keeps a single **Open Dataset…** (the
   conventional home) plus Exit; Data keeps what File has no convention for (3-D
   catalogue, VBT, velocity field, HiPS).
+- **The file types were the user's problem.** What remained after that tidying
+  was still three open actions — dataset, 3-D catalogue, VBT — and two of them
+  accepted `.fits`. So the first thing the application asked was a question the
+  user often could not answer: *is the FITS in your hand an image, a cube, or a
+  table?* The split was a picture of the backend's three open routes
+  (`/v1/datasets/open`, `/v1/catalogue/open`, `/v1/vbt/open`), not of anyone's
+  work. The Data Hub now leads with a single **Open…**: the file is chosen
+  first, `POST /v1/files/classify` says what it is from its own bytes (magic
+  number, extension, at most one FITS header — nothing is opened or converted),
+  and the matching viewer opens. The user is asked only when the *content* is
+  ambiguous — a FITS table is a source catalogue or an overlay, and nothing in
+  the file distinguishes them — and told, rather than asked, when nothing here
+  opens the file (a `.fits.gz`: no open route accepts a compressed file, so
+  offering the three viewers would only move the failure one dialog later). The
+  distinction the old menu buried — a *file* versus a *service* — is now the one
+  the panel makes: **Open…**, then an **Archives** group for HiPS and VLKB.
+  `openAnything()` / `dispatchOpenForPath()` in `MainWindow_Open.cpp` hold the
+  dispatch; the named catalogue and VBT entries stay in the Data menu as the
+  escape hatch when the user would rather be explicit.
+- **"Last 5 jobs" was always empty.** The Data Hub's activity panel renders
+  `recent_tasks` from `/v1/health`, which comes from the task registry — and
+  only two endpoints in the whole backend create a task (`/v1/tasks/moment`,
+  `/v1/tasks/pv`). Everything else is synchronous and registered nothing, so a
+  panel promising "run a tool to see history" showed nothing no matter what the
+  user ran. Teaching thirty routers to register a task would have been thirty
+  chances to forget, so the history is taken where every request already
+  passes: an HTTP middleware in `app/main.py` records each compute request when
+  its *response finishes* — the real duration, including a streamed body — into
+  a bounded deque that `TaskRegistry.snapshot()` merges with the real tasks. Two
+  details make it honest rather than merely populated: most routes report
+  failure as HTTP 200 with a `{"valid": false}` envelope, so the middleware
+  reads the head of a JSON body rather than trusting the status code; and what
+  the user calls a job is work they asked for and waited on, so browsing, image
+  tiles, session bookkeeping, channel scrubbing and job polling are excluded —
+  one slice per mouse move would otherwise erase the five jobs that mattered.
+- **The last five legacy features, and what they became.** *Filter FITS*,
+  the header modifier, hips2fits, cone search and the VLKB query composer were
+  the remaining gaps against ViaLactea Visual Analytics 1.7.4. Three of them ran
+  outside the application in the legacy — cone search and the VLKB composer
+  shelled out to bundled Python scripts through whichever interpreter
+  *setting.ini* named, so both stopped working whenever that path went stale —
+  and all five are backend routes now (`app/compute/imutils.py`,
+  `app/fits_header_edit.py`, `app/hips2fits.py`, `app/cone_search.py`,
+  `app/vlkb_tap.py`). That is not tidiness: it is what makes them testable
+  without a display, safe to point at a user-supplied URL (one SSRF guard, not
+  three), and correctable without releasing a client — the legacy compiled the
+  HiPS survey list and the VLKB schema into two dialogs.
+
+  Porting them turned up four defects worth naming, because each is the kind
+  that produces a plausible wrong answer rather than an error:
+  the smoothing filter spread every blank pixel over its kernel footprint and
+  left `BMAJ` describing a resolution the map no longer had; the regrid averaged
+  `Jy/pixel` blocks, which loses flux by the square of the factor; the header
+  modifier reported success whether or not the values typed produced a readable
+  WCS; and the bubble mode — a button, a rubber-band selector and an importer —
+  had no query behind it at all, so it ran the compact-source query and drew
+  sources. The first three are fixed in the arithmetic (and pinned by tests);
+  the fourth is now a query.
 - **The image viewer had the cube's old disease.** Its Tools menu was one flat
   run of **34** entries while Inspector ▸ Analysis listed **11**, hand-picked —
   so two thirds of the window's tools existed in one surface only. It now has an
@@ -1709,6 +1767,43 @@ would otherwise let a new cutout inherit it.
 watcher belongs to `MainWindow`, so the tree is held through a
 `QPointer` — including across `openVlkbImageLayer`, whose backend calls spin an
 event loop of their own.
+
+### The batch path (`app/vlkb_mcutout.py` + `McutoutJobDialog`)
+
+Twenty cutouts as twenty `sync` requests is twenty chances to lose one; the
+archive's own answer is a UWS job, which the legacy client drove from the
+desktop (`MCutoutSummary`, VLVA 1.7.4). Here the protocol is on the backend and
+the client owns the table and the polling — and the results are **unpacked**
+rather than handed over as a `.tar.gz`, which is where the legacy stopped.
+
+Three things carry the security weight, and each was found by review rather than
+by design:
+
+- **The job id is a path as well as a URL.** It comes back from the client on
+  every later call and is interpolated into both, so `validate_job_id` refuses
+  anything that is not a plain identifier — `.` and `..` included — and the
+  route's own model refuses it again with a 422 before the filesystem is
+  touched.
+- **A redirect carries the token.** `urllib` copies `Authorization` into the
+  redirected request, so a service answering 302 with a host of its choosing is
+  handed the user's VLKB bearer. Every call goes through one `_open()`, which
+  refuses redirects (`_RefuseRedirect`) and refuses to send a token over plain
+  HTTP. The two calls whose answer *is* a 3xx — the submit and the RUN command —
+  use `_CaptureRedirect`, which reads the `Location` without following it.
+  `submit_job` built its own request and observed neither rule until it was
+  routed through the same place.
+- **An archive is not its download size.** The byte cap on the transfer says
+  nothing about what it unpacks to, so the extraction is incremental and counts
+  members and extracted bytes; `filter="data"` does not impose quotas. A member
+  that resolves outside the target, a symlink, a device or a *sparse* member is
+  refused — for a sparse member `tarfile` does not verify that the map agrees
+  with the declared size, which is the bound the whole loop relies on.
+
+A submitted job is never dropped on the floor: if the submit succeeds and the
+first phase read fails, the route returns the id with `phase: "UNKNOWN"` rather
+than a 502, because the job is already running on the archive and a retry would
+submit a second one. Each fetch unpacks into a staging directory of its own,
+removed if anything fails — a half-written archive is not a result.
 
 ---
 

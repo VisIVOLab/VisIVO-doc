@@ -64,14 +64,29 @@ there are no controls; it just tracks your view.
 
 You can overlay or compare multiple images in the same window:
 
-- **Add New Layer…** — pick another FITS image from the *remote file
-  browser*. Backend-side check (`ImageLayerImportService`) validates the
-  layer's WCS against the base image and warns if the pixel grids don't
-  overlap.
+- **Add Image Layer…** (*File* menu, ⌘L, or the **+ Add…** beside the
+  *Layers* list) — pick another FITS image from the *remote file browser*.
 - Use the layer panel to **reorder**, **toggle visibility**, set a
   **per-layer colour map**, **opacity** and **z-order**.
-- Manual local files: drop a `.fits` from the OS file browser, or pick it
-  via *File → Add New FITS File…*
+- You can also drop a `.fits` from the OS file browser onto the window.
+
+### A layer has to cover the same sky
+
+Before anything is downloaded, the two headers are compared: a file that
+covers none of the sky the current image covers is not added. It is not a
+broken file — the WCS alignment would place it correctly, off the edge of the
+image, so the load would "succeed" and nothing would appear.
+
+Instead the viewer says so and offers:
+
+- **Open in New Window** — the sensible answer for an image of somewhere else;
+- **Add Anyway** — the sky bounds behind the refusal come from `wcsrange()`,
+  which is a bounding box, and a rotated field straddling RA = 0 can measure
+  narrower than it really is. This is how you overrule the check;
+- **Cancel**.
+
+An image whose header carries no celestial solution (pixel coordinates only)
+is refused outright: there is no position to line it up with.
 
 All layer sources go through the same `loadImageLayer()` / `AstroUtils` /
 `libwcs` pipeline, so alignment between layers is handled the same way
@@ -81,6 +96,46 @@ by whether the path happens to exist on your own disk: against a remote
 backend the layer is opened there and its WCS built from the header the
 backend returns, so a path that also exists locally cannot silently load
 a different file.
+
+## Smoothing and regridding
+
+*Tools → Smooth / Regrid…* (the legacy's *Filter FITS*) applies a Gaussian
+kernel and/or an integer shrink on the backend and adds the result as a layer.
+The dialog says what each choice means before you commit: the kernel FWHM in
+arcseconds, and the pixel size the regrid would produce.
+
+Three things it does that the legacy did not:
+
+- **blank pixels stay blank** and do not eat their neighbourhood — the
+  convolution is normalised by the smoothed coverage;
+- **the beam grows with the kernel** (`BMAJ`/`BMIN` summed in quadrature), so
+  the output still describes its own resolution — and for a map in Jy/beam the
+  pixels are scaled with it, so the integrated flux is the same before and
+  after. (Smoothing preserves the sum of the pixels; the flux is that sum over
+  the beam area, so a wider beam with unchanged numbers means less flux.) The
+  dialog reports the factor it applied;
+- **a per-pixel unit is summed, not averaged.** Block-averaging a `Jy/pixel` map
+  loses flux by the square of the factor; `BUNIT` decides, and the result says
+  which rule was used.
+
+The same entry exists in the cube viewer, where every plane is filtered — a
+spatial operation, so the spectral axis is left alone.
+
+## Editing the header
+
+Click the **IMAGE** tag in the toolbar to see the FITS header, then **Edit…**.
+Any keyword can be changed, added or removed; the result is written as a **new
+file** in the Workspace and offered for opening, and the file on disk is never
+modified.
+
+Structural keywords (`SIMPLE`, `BITPIX`, `NAXISn`) and the data-scaling ones
+(`BSCALE`, `BZERO`, `BLANK`) are not editable: they describe the bytes rather
+than the science, and editing them makes the header disagree with its own data.
+
+When you save, the backend builds the WCS from the edited header and tells you
+what it amounts to — *Celestial WCS (RA---TAN, DEC--TAN)*, or that there still
+is none. The legacy's header dialog reported "File has been saved!" either way,
+so a wrong guess was only discovered by reopening the copy.
 
 ## WCS overlay and frame
 
@@ -108,17 +163,15 @@ was changed.
 
 The *Layer Settings* sidebar exposes:
 
-- **Color map** combo (Inferno, Viridis, Magma, Plasma, Cividis, …) with
-  gradient preview icons.
-- **Scale** — a **Linear | Log** segmented toggle (same pill-style
-  control used throughout the cube viewer). Log scale compresses the
-  dynamic range and is useful for images spanning several orders of
-  magnitude (e.g. Hα narrowband, X-ray mosaics).
+- **Color map** — the combo (Inferno, Viridis, Magma, Plasma, Cividis, …)
+  with gradient preview icons, and an inline **Edit** beside it, as in the
+  cube viewer.
 - **Layer opacity** slider for blending when multiple layers are stacked.
 
-For more precise control open the *2-D LUT editor* (`Advanced…` button) —
-a non-modal QCustomPlot editor where you can drag the transfer-function
-control points.
+**Edit** opens the *2-D LUT editor* — a non-modal QCustomPlot editor where you
+drag the transfer-function control points. The scale (Linear, Log, Sqrt,
+Square, Power γ) lives there too: one place with the full set, rather than an
+inline Linear | Log toggle offering two of five.
 
 ## Regions and probes
 

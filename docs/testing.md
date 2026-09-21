@@ -43,13 +43,21 @@ tables such as `CubeToolGate` (which tools may act on what is on screen) or
 Both of those were extracted precisely because the only previous way to check
 them was to open the app and look at thirty buttons.
 
+`SkyOverlap` (`test_sky_overlap.cpp`) is there for the same reason: whether a
+FITS can be added as a layer to the image on screen is one interval comparison,
+and the case that breaks it — a field straddling RA = 0, which `wcsrange()`
+reports as `ra_min > ra_max` — cannot be reached from a GUI test. The rule is a
+header with no FITS and no VTK in it, so the wrap, the touching edges and the
+missing WCS solution are all checked directly.
+
 The same reasoning drives `SedBuilder` (`test_sed_builder.cpp`): reading a SED
 out of a catalogue is a pile of column-name rules, and a misread column does not
 crash — it produces a fit that runs and is wrong. The rules therefore live in a
 header with no widgets in it, where they can be checked directly.
 
-The **backend** has its own pytest suite under `backend/tests/`. Four of its
-files are worth knowing about when touching the science or the archive path:
+The **backend** has its own pytest suite under `backend/tests/`. A few of its
+files are worth knowing about when touching the science, the archive path or
+the way files get opened:
 
 - `test_sed_fit.py` (61) round-trips greybody fits against synthetic SEDs and
   checks the Δχ² = 1 uncertainty against its closed-form value;
@@ -58,6 +66,37 @@ files are worth knowing about when touching the science or the archive path:
   the attribute types that used to break the reply;
 - `test_soda_cutout.py` (20) covers what a VLKB cutout response has to be before
   it is called a FITS file;
+- `test_vlkb_mcutout.py` (39) covers the batch job either side of the wire — the
+  POS parsing, the job id, the report — and the parts that can do damage: path
+  traversal out of the results directory, redirects that would carry the access
+  token elsewhere, and an archive that unpacks to more than it downloaded;
+- `test_classify.py` (26) pins what the single **Open…** does with each kind of
+  file. Most of it is telling image, cube and table apart from the bytes — a
+  length-1 Stokes axis must not make a map into a cube — and the rest is about
+  refusing to guess: prose with commas is not a catalogue, a FITS table is
+  ambiguous on purpose, and a compressed file is refused rather than routed to
+  an opener that would reject it;
+- `test_operation_history.py` (32) covers "Last 5 jobs": that work is recorded
+  and that browsing, scrubbing and polling are not, and that a route answering
+  HTTP 200 with `{"valid": false}` is filed as failed;
+- `test_filter_fits.py` (38) is mostly about the three things the legacy's
+  *Filter FITS* got wrong and that only surface later, in the photometry: a
+  blank pixel eating its neighbourhood, a beam that no longer describes the map,
+  and flux lost by block-averaging a per-pixel unit. It also pins the WCS
+  arithmetic — the half-pixel terms in `CRPIX`, and the keywords of a squeezed
+  Stokes axis going with it;
+- `test_fits_header_edit.py` (35), `test_hips2fits.py` (33),
+  `test_cone_search.py` (24) and `test_vlkb_tap.py` (27) cover the four archive
+  and repair routes. The recurring theme is refusing *first*: a structural
+  keyword, a 64-Mpx cutout, a radius of zero, a box of zero width — each with
+  the reason, rather than a round trip and somebody else's error page. The other
+  half is reading what services actually send: a VO error carried inside a valid
+  VOTable, a TAP error returned as XML when CSV was asked for, an HTML gateway
+  page where a FITS was expected;
+- `test_safe_fetch.py` (4) stands on its own because the bug it guards against
+  has been fixed three times in this codebase and forgotten twice: a validated
+  URL that redirects into the private network. It runs a real local server that
+  answers 302, so the test fails if the redirect handler is ever dropped;
 - `test_contract.py` pins the REST route list the desktop client depends on —
   **add an endpoint and it fails until you regenerate the snapshot**:
 

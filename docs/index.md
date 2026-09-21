@@ -241,9 +241,29 @@ every tool together with the page that documents its scientific use.
   -
   -
 * - Open a remote FITS cube / image
-  - **Data Hub → Open Remote Dataset** (or ⌘O)
+  - **Data Hub → Open…** (or ⌘O)
   - Cube viewer or Image viewer
   - [Getting started](user-guide/getting-started)
+* - Smooth or regrid a map / cube
+  - **Tools → Smooth / Regrid…**
+  - A new FITS in the Workspace, added as a layer
+  - [Image viewer](user-guide/image-viewer)
+* - Repair a FITS header
+  - **IMAGE tag → Edit…**
+  - A corrected copy, with what its WCS now amounts to
+  - [Image viewer](user-guide/image-viewer)
+* - Cut a FITS out of a HiPS survey
+  - **Data → HiPS Cutout (hips2fits)…**
+  - Image viewer
+  - [Catalogues & HiPS](user-guide/catalogues-hips)
+* - Ask a VO service what is around a position
+  - **Data → Cone Search…**
+  - A table, saved as a catalogue
+  - [Catalogues & HiPS](user-guide/catalogues-hips)
+* - Query the VLKB catalogues
+  - **Tools → VLKB Catalogue Query…**
+  - A catalogue, or an overlay on the image
+  - [Catalogues & HiPS](user-guide/catalogues-hips)
 * - Navigate the spectral axis
   - Slice slider, ▶ Play animation
   - Slice tile + textured 3-D cutting plane
@@ -348,6 +368,10 @@ every tool together with the page that documents its scientific use.
   - Select them in the inventory → **Download & Open**
   - Images stack as layers in one viewer; cubes open in the cube viewer
   - [VLKB archive · Downloading](user-guide/vlkb-archive#downloading)
+* - Ask the archive for a long list as one job
+  - Select them → **Request as batch (N)…**
+  - One asynchronous job, collected and unpacked in one go; survives closing the window
+  - [VLKB archive · Many datasets at once](user-guide/vlkb-archive#many-datasets-at-once)
 * - **SIMULATIONS**
   -
   -
