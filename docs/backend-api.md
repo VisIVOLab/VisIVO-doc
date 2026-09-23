@@ -50,10 +50,19 @@ same tool run on twenty datasets reads as twenty runs of one operation rather
 than twenty different ones. `status` is `failed` both for an HTTP error and for
 the `{"valid": false}` envelope that most routes return with HTTP 200.
 
+A finished job reads `done` when the middleware recorded it and `completed` when
+it came from the task registry — the task API's own terminal status. Both are
+successes; a client that treats anything other than `done` as a failure marks
+every moment as broken. (The registry itself used to recognise only `done`, so
+no `/v1/tasks/*` job appeared in this list at all: not running, not finished.)
+
 Not recorded: browsing and classification (`/v1/files/*`), session bookkeeping,
 image tiles, SAMP, WebRTC signalling, interactive scrubbing (`/v1/cube/slice`,
-`/v1/spectral/probe`), job polling (`/v1/vlkb/mcutout/phase`), and the
-`/result/binary` collection of a product that was recorded when it was computed.
+`/v1/spectral/probe`), job polling (`/v1/vlkb/mcutout/phase`), the single-redshift
+`/v1/cosmology/distance` lookup, and the `/result/binary` collection of a product
+that was recorded when it was computed. The cosmology BATCH is recorded: it is
+asked for once, when a user picks a different cosmology, and it recomputes the
+position of every source in a catalogue.
 Only `POST`/`PUT`/`PATCH` count. The history holds the last 50 operations and is
 served to admin tokens only, as the rest of the snapshot is.
 
@@ -400,7 +409,39 @@ Single redshift.
 ```json
 { "redshifts": [0.1, 0.5, 1.0], "model": "Planck15" }
 ```
-Returns `distances_Mpc[]` in the same order. Supported models: `Planck18`, `Planck15`, `Planck13`, `WMAP9`.
+Returns `distances_Mpc[]` in the same order. Supported models: `Planck18`,
+`Planck15`, `Planck13`, `WMAP9`. Up to 100 000 redshifts; a negative or
+non-finite entry comes back as `null` at its position rather than as 0 Mpc,
+which would be indistinguishable from a genuine z = 0.
+
+### `GET /v1/cosmology/distances`
+The same quantities for one redshift plus lookback time and the age of the
+universe, for an arbitrary flat-or-open `LambdaCDM` (`H0`, `Om0`, `Ode0` as query
+parameters; omitted ones default to Planck18). No client binding yet — the
+desktop only offers the four named models above.
+
+### `POST /v1/cosmology/angular_power/{dataset_id}` · `GET /v1/cosmology/powerspectrum/{dataset_id}`
+Azimuthally averaged 2-D power spectrum of an image plane (the GET is the
+spec-conformant alias of the POST; same worker).
+
+It is a **relative texture spectrum, not a calibrated Cℓ**: a Hann-windowed
+`|FFT|²` with the window's power loss corrected, no mask or beam deconvolution.
+`calibrated` is `false` in every response for that reason.
+
+Returns `k_bins` (pixel⁻¹), `ell`, `cl` / `power`, `cl_err`, `n_modes`,
+`mode_coupling`, plus:
+
+| field | meaning |
+| --- | --- |
+| `ell_is_angular` | whether `ell` is an angular multipole at all. `false` when the header carries no celestial WCS — or when its celestial axes are not the plane that was sliced out — and `ell` then repeats `k_bins`. |
+| `pixel_scale_arcsec` | the scale the conversion used, `null` when there was none. |
+
+The distinction matters: `spatial_pixel_scale_arcsec()` answers 3600″ for a
+header with no WCS (astropy's one-degree-per-pixel default), so asking it
+unconditionally produced a multipole axis computed from a pixel size nobody had
+stated. `cl_err` is the uncertainty of THIS estimator and is `null` for a bin
+with fewer than 3 modes; judge a bin by its EFFECTIVE mode count,
+`n_modes / mode_coupling²`.
 
 ---
 
@@ -436,6 +477,18 @@ The starting survey list plus the accepted projections and stretches. The legacy
 carried these as a `QStringList` inside the dialog, so correcting a survey id
 meant releasing a client.
 
+### `GET /v1/hips/surveys?kind=image&refresh=false`
+Every HiPS registered with the CDS MOCServer: `id`, `title`, `url`, `category`,
+`regime`, `frame`, `tile_formats`, `kind` and `max_order`. `kind` is the
+registry's `dataproduct_type` (`image`, `catalog`, `cube`, …) and the default
+filter keeps only the imagery, which is all the viewer can draw as tiles; pass
+an empty `kind` for the lot. Surveys whose frame is a planetary body rather
+than a sky (`mars`, `moon`, `io`, …) are never returned — they have no
+celestial position. The raw document is cached under the HiPS cache
+directory for a week, in a file named after the query so changing the requested
+fields invalidates it; `refresh=true` fetches it again. A registry that cannot
+be reached answers `valid: false` with the reason rather than failing.
+
 ### `GET /v1/hips/{survey_id}/allsky?order=<N>`
 AllSky mosaic PNG/JPEG bytes.
 
@@ -443,10 +496,26 @@ AllSky mosaic PNG/JPEG bytes.
 Single HiPS tile bytes.
 
 ### `POST /v1/hips/{survey_id}/query_tiles`
-Given a viewport (RA/Dec center + FOV), return tile pixel indices at the appropriate order.
+Given a viewport (RA/Dec center + FOV), return the HEALPix tiles covering it —
+NESTED pixel index, centre and four corners per tile — at the requested order,
+clamped to the survey's `max_order`. A field of 360° means the whole sphere and
+returns every tile of the order (`12 × 4^order` of them), which is what the
+all-sky projections ask for. **The position is in ICRS and so is every position
+returned**, whatever frame the survey is tiled in: the centre is converted into
+the survey's frame to pick the tiles and the tile centres and corners are
+converted back. Over half the CDS registry is galactic, and reading those tile
+coordinates as RA/Dec puts the imagery nowhere near the field asked for. Requires **healpy** on the backend; without it the
+route answers `valid: false` with an install hint rather than failing.
 
 ### `POST /v1/hips/catalogue_overlay`
-Given a HiPS survey viewport, return catalogue sources within the field as `BackendHiPSCatalogueSource[]`.
+Given a HiPS survey viewport and the path of a **CSV/TSV on the backend
+filesystem** (confined to the configured data roots), return the rows falling
+inside the field as `BackendHiPSCatalogueSource[]`. Selection is by angular
+separation from the centre, not by a box in RA — near a pole every right
+ascension is in view and no interval says so. `radius_deg` is the radius the
+client measured for its own viewport, corners included; without it the radius
+is guessed from `fov_deg` and the corners are cut off. It does not query Simbad or
+VizieR — use `/v1/resolve/cone_search` for that and overlay the CSV it writes.
 
 ---
 

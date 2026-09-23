@@ -66,8 +66,15 @@ You can overlay or compare multiple images in the same window:
 
 - **Add Image Layer…** (*File* menu, ⌘L, or the **+ Add…** beside the
   *Layers* list) — pick another FITS image from the *remote file browser*.
-- Use the layer panel to **reorder**, **toggle visibility**, set a
-  **per-layer colour map**, **opacity** and **z-order**.
+- Each layer is a **card**: the visibility box, its name, and — on the second
+  line — a strip of that layer's own colour map with its stretch and opacity.
+  Before, those three were visible only in the panel above the list and only for
+  the selected layer, so telling six VLKB cutouts apart meant clicking each one
+  in turn. The base layer is tagged `base`.
+- Drag the cards to **reorder** them; that is the z-order. Clicking the
+  visibility box toggles the layer without changing which one the settings above
+  act on.
+- **＋ Add layer…** sits under the stack, and **Overlays** under that.
 - You can also drop a `.fits` from the OS file browser onto the window.
 
 ### A layer has to cover the same sky
@@ -142,7 +149,7 @@ so a wrong guess was only discovered by reopening the copy.
 - **Show WCS Axes** in the *View* menu paints ticks along the image axes
   according to its WCS metadata.
 - **Coordinate format** — a **Sexagesimal | Decimal** segmented toggle in
-  the sidebar's *Tools → WCS Display* card.
+  *Tools ▸ WCS Display*.
 - **Coordinate frame** — a **Galactic | FK5 | Ecliptic** segmented toggle
   in the same card. Conversions go through `wcscon()` from libwcs. The
   current frame label is shown in the bottom status bar.
@@ -159,6 +166,21 @@ If the WCS metadata is partial or invalid the backend sanitises it and the
 **WCS** badge in the status bar turns yellow with a tooltip listing what
 was changed.
 
+## Overlays
+
+Under the layer stack, one row per thing drawn *on top* of the image —
+catalogue sources, source labels, polarisation vectors, WCS axes, annotations —
+each with a count on the right.
+
+They were switched from four different places before: two entries in Tools, one
+in View, and annotations from nowhere at all (they could be added and cleared,
+never hidden). And none of them said how many objects were up there, so "is that
+all of them?" had no answer short of exporting the catalogue.
+
+A row whose overlay has nothing loaded is greyed out rather than failing
+silently when clicked. The rows and the menu entries are the same switches: use
+either.
+
 ## Color map & contrast
 
 The *Layer Settings* sidebar exposes:
@@ -173,7 +195,36 @@ drag the transfer-function control points. The scale (Linear, Log, Sqrt,
 Square, Power γ) lives there too: one place with the full set, rather than an
 inline Linear | Log toggle offering two of five.
 
+## Modes: what the next click will do
+
+Under the toolbar there is a **mode strip** — Pan · Probe · Region · Ruler ·
+Annotate. These five are mutually exclusive: arming one disarms the others, and
+which one is on decides what a click on the image does.
+
+That was always true; what is new is that you can see it. Before, the modes were
+armed from the Tools menu, whose checkmarks are invisible until you open it, so
+the way to find out which mode you were in was to click and watch what happened.
+
+- Picking a segment arms that mode; **Pan** disarms everything.
+- Choosing **Region** shows a second strip for the shape — Box, Circle, Poly,
+  Annulus — and remembers your last choice for the next time.
+- The strip is two-way: arming a mode from the Tools menu or the command palette
+  moves it, and leaving Annotate cancels an annotation that was waiting to be
+  placed, rather than leaving it to land on your next click.
+- To the right, a short line says what the armed mode expects — *drag on the
+  image*, *click each vertex · double-click to close*, *click the two ends*.
+
 ## Regions and probes
+
+While you drag a region, a small box in the bottom-left corner of the viewport
+shows what is inside it: **Σ** and **μ**, updating as you drag. Before, the
+numbers arrived only when you let go, in a dialog — so the region was chosen
+blind and adjusted by repetition.
+
+A **≈** in front of a figure means it was sampled rather than summed: the
+readout runs on every mouse move, so on a region of more than ~200 000 pixels it
+reads a grid of them and scales up. The full statistics on release use every
+pixel, and those are the ones to quote.
 
 The image viewer shares the same region / probe machinery as the cube
 viewer's 2-D dock:
@@ -192,7 +243,8 @@ The detailed semantics are documented in
 Iso-contour lines can be drawn on top of the image from two sources:
 
 - **Self contours** — computed from the image's own pixel values.
-  Toggle **Show Contours** in the *Tools* sidebar (or *Tools* menu),
+  Toggle **Show Contours** from the *Tools* menu (or the Inspector's *Analysis*
+  list),
   then adjust **Level** (number of contour lines), **Lower** and
   **Upper** (value range). The pipeline uses `vtkFlyingEdges2D`, the
   same filter as the cube viewer's slice contours.
@@ -216,8 +268,8 @@ optical comparison workflow.
 
 ## Measurement tools
 
-Two interactive measurement modes are available in the *Tools* sidebar
-**Measurement** card (or *Tools* menu):
+Two interactive measurement modes, from *Tools ▸ Measure* or the Inspector's
+*Analysis* list:
 
 - **Ruler (Distance)** — click two points on the image. A dashed
   orange line is drawn between them and the distance is displayed in
@@ -228,9 +280,12 @@ Two interactive measurement modes are available in the *Tools* sidebar
   B–C are drawn and the angle at vertex B is displayed in degrees.
 - **Clear Measurement** removes the current measurement overlay.
 
-Only one measurement mode can be active at a time (ExclusiveOptional
-group). Activating a measurement mode deactivates any active probe or
-region tool.
+Only one measurement mode can be active at a time (ExclusiveOptional group),
+and arming one disarms the probe, any region and a pending annotation — in both
+directions. That symmetry was missing until recently: arming a region from
+*Tools ▸ Regions* while the ruler was on left the ruler in charge, so the menu
+entry showed as checked, the mode strip still said Ruler, and dragging drew a
+distance instead of a region.
 
 ## Products from this map
 
@@ -255,7 +310,7 @@ measure a cube's collapsed emission, compute a moment map first and open that.
 
 ## Pixel histogram
 
-*Tools → Pixel Histogram…* (or the **Histogram** card in the sidebar)
+*Tools → Pixel Histogram…* (or the Inspector's *Analysis* list)
 opens a window showing the pixel-value distribution of the master layer as a
 256-bin bar chart.
 

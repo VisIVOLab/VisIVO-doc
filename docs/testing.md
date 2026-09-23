@@ -43,6 +43,14 @@ tables such as `CubeToolGate` (which tools may act on what is on screen) or
 Both of those were extracted precisely because the only previous way to check
 them was to open the app and look at thirty buttons.
 
+`ViewerModeState` (`test_viewer_mode_state.cpp`) is a smaller case of the same
+idea. The image viewer's five modes are mutually exclusive, and the flags that
+say so are cleared by four different code paths; the question the test pins is
+what the mode strip must show if two of them ever disagree — the answer being
+the mode that will consume the next click, which is `toggleProbeFreeze()`'s own
+dispatch order. Getting that backwards (the first version did) shows the user a
+tool they are not in, which is worse than showing nothing.
+
 `SkyOverlap` (`test_sky_overlap.cpp`) is there for the same reason: whether a
 FITS can be added as a layer to the image on screen is one interval comparison,
 and the case that breaks it — a field straddling RA = 0, which `wcsrange()`
@@ -93,6 +101,20 @@ the way files get opened:
   half is reading what services actually send: a VO error carried inside a valid
   VOTable, a TAP error returned as XML when CSV was asked for, an HTML gateway
   page where a FITS was expected;
+- `test_hips_tile_query.py` (9) covers the two routes that decide whether the
+  HiPS viewer shows anything — `query_tiles` and `catalogue_overlay`. Both had
+  no test and both shipped dead: a router refactor left them calling a name the
+  star-import does not re-export, and the surrounding `except Exception` dressed
+  the `NameError` up as a plausible "HEALPix query failed", so the viewer drew
+  an empty sky and nothing in CI noticed. The tests register a survey directly
+  in the session registry, so no network is involved;
+- `test_hips_registry.py` (19) covers the CDS survey registry behind the
+  viewer's survey picker: that a record without a service URL is dropped, that
+  one latin-1 byte in a title does not throw away the other 1500 records, and
+  that the on-disk cache behaves as a cache — stale, damaged, unreadable and
+  unwritable all fall back to the network rather than failing the request. It
+  is a separate module from `test_hips_tile_query.py` on purpose: none of this
+  needs healpy, and that one skips without it;
 - `test_safe_fetch.py` (4) stands on its own because the bug it guards against
   has been fixed three times in this codebase and forgotten twice: a validated
   URL that redirects into the private network. It runs a real local server that
@@ -103,6 +125,60 @@ the way files get opened:
 ```
 backend/.venv/bin/python backend/scripts/gen_contract.py
 ```
+
+---
+
+## Driving the real application (`tools/gui_smoke`)
+
+The unit suites answer *is this function right*, and the backend suite answers
+*is this route right*. Neither answers the question that keeps breaking: **does
+the thing the user clicks reach the thing that was tested?** A menu entry wired
+to nothing, a dialog opened on a window with no dataset, a result written to a
+file nobody opens — all of those pass every test above.
+
+`tools/gui_smoke/gui_smoke.py` launches the built application on a real FITS
+file and clicks through thirty-eight scenarios across the image, cube, catalogue
+and VBT viewers — moments, line-width, baseline subtraction, PV extraction, the
+kinematic lasso, source finding, the exports, the regions, the products, the
+cosmology selector, the shared docks — asserting on the backend's own job
+history, on the files that appear in the workspace (including their NAXIS), and
+on the labels the windows show. Never on a screenshot.
+
+```bash
+python3 tools/gui_smoke/gui_smoke.py --image 2d.fits --cube 3d.fits
+```
+
+The catalogue and VBT passes need no data of their own: the suite writes a
+300-source RA/Dec/redshift CSV, a 2000-point VisIVO Binary Table and a 24³ VBT
+volume into its artefacts directory unless `--catalogue` / `--vbt` name real
+ones.
+
+It is a **developer tool, not a test target**: it needs macOS, a display and
+Accessibility permission, and CI has none of the three. `tools/gui_smoke/README.md`
+documents the scenarios, the oracles, and the platform behaviour each helper
+exists to work around.
+
+It has already earned its keep several times over. Driving Compute Moment showed that no
+`/v1/tasks/*` job ever appeared in the activity panel — the task API's terminal
+status is `completed` and the registry snapshot recognised only `done`, so a
+moment showed up neither as running nor as finished. The unit test that covered
+the snapshot had used `done`, so nothing caught it. And arming a region from
+Tools ▸ Regions turned out to do nothing at all while the ruler was armed: the
+menu entry checked, the strip still saying Ruler, the drag drawing a distance.
+And a file that is not a FITS — an IPAC table, a `.speck`, a CSV, a VisIVO
+Binary Table — could not be opened from outside the application at all: the
+desktop entry point never reached the classifier, so a double-click was answered
+with "Unsupported file type. Expected FITS or HDF5" while the same file opened
+fine from Open….
+
+The same class of bug turned up once more in the Open dialog itself, reported by
+a user rather than by the suite: its Open button was enabled only for a row the
+listing had marked as FITS, so a VBT could be seen in the browser and not
+opened — the button just stayed grey.
+
+They are all the same shape — everything is wired, and the wire goes somewhere
+else. None of them is reachable by a unit test, and all of them are one click
+deep.
 
 ---
 

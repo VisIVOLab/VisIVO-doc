@@ -198,12 +198,19 @@ a velocity field (see the velocity-field viewer).
 
 For each entry, `Catalogue3DParser::detail::entryDistanceMpc(entry, schema)` applies in order:
 
-1. `entry.distanceMpc > 0` — cosmology-selector override (set by `onCosmologyFinished()`)
-2. Catalogue `distance` / `dist` / `dMpc` field — positive values only
-3. Redshift field (`z`, `REDSHIFT`, `ZSPEC`, `ZMEAN`, `ZPHOT`, …) → `comovingDistanceMpc(z)` — if result > 0
+0. **Redshift-space mode** (`CatalogueDistanceMode::RedshiftSpace`) — `hubbleDistanceMpc(z)` for any source with a usable z > 0, deliberately ignoring the override and the distance column; anything without one falls through to the list below
+1. `entry.distanceMpc` finite — cosmology-selector override (set by `onCosmologyFinished()`)
+2. Catalogue `distance` / `dist` / `dMpc` field — positive values only, converted to a comoving radius when the column is a luminosity or angular-diameter distance
+3. Redshift field (`z`, `REDSHIFT`, `ZSPEC`, `ZMEAN`, `ZPHOT`, …) → `comovingDistanceMpc(z)` — z > 0, since a redshift column holding 0 means "not measured"
 4. Hardcoded 300 Mpc fallback
 
-`comovingDistanceMpc(z)` uses a simple Riemann integral with Planck18 constants (H₀ = 67.74, Ωm = 0.3089, ΩΛ = 0.6911). It returns 0 for z ≤ 0.
+`comovingDistanceMpc(z)` is a 1000-step trapezoid over a flat **Planck 2018**
+model (H₀ = 67.66, Ωm = 0.3111, ΩΛ = 1 − Ωm, no radiation term). It returns 0
+for z ≤ 0. The constants were Planck 2015 (67.74 / 0.3089) while the UI called
+the branch "Planck18 (local)", which made the default disagree with the
+astropy-backed models by ~1 %; `tests/test_catalogue_cosmology.cpp` now pins it
+against astropy's Planck18 at ten redshifts out to z = 20, where the two agree
+to 0.06 %.
 
 ---
 
@@ -283,21 +290,38 @@ re-renders.
 
 ---
 
-## Sidebar pages
+## Window layout
 
-The sidebar uses a rail + stacked-widget layout with three pages:
+The same chrome as the image and cube viewers, built by `WorkspaceChrome`
+(`installCommandBar` / `installSessionDock` / `installInspectorDock`) rather than
+by a control rail of this window's own:
 
-1. **Visualization** — geometry / size mode + Axis Mapping card (X/Y/Z, size, colour field assignment) + scene controls (frame, cosmology, axes, shells)
-2. **Source Info** — selected source metadata (from `ui->pageInfo`)
-3. **Filters** — multi-filter list + Apply + Load more
+* **Command bar** (top) — path pill, the `CAT · N sources` kind tag (click it for
+  the catalogue's columns and which of them are its coordinates — this window's
+  answer to the FITS header dialog), ⌘K search, backend chip.
+* **Session Data** (left dock, 272 px) — the dataset row, then the visualization
+  controls: source representation, axis mapping, visual encoding, scene, and the
+  **Cosmology** card (model, distance mode, and a line saying which of them
+  produced the positions on screen).
+* **Inspector** (right dock, collapsed to a rail by default) — *Properties*
+  (dataset, type, sources, columns, path, session, backend + the selected
+  source's details), *Analysis* (the filter list, Apply, Load more),
+  *Parameters*, *Copilot*.
+* **Status rail** (bottom) — health, queue, cache, session.
 
-The full catalogue table view is a separate `QDockWidget`, not a sidebar page.
+The full catalogue table is a separate `QDockWidget` at the bottom.
+
+The source count and the session id are the two rows that change after the
+window is built — a filter, another page of sources, a recovered session — so
+they are held as labels and refreshed by `refreshViewerChrome()` instead of
+re-running `setProperties()`, which would delete the Source Info section mounted
+below them.
 
 ---
 
 ## Pagination
 
 Page size: 50 000 rows.
-"Load more (N remaining)" button appears in the Filter sidebar page when more rows are available.
+"Load more (N remaining)" appears in the Inspector's *Analysis* tab, under the filters, when more rows are available.
 Each load-more fetch uses the same active filters and increments the offset.
 After each append the full VTK scene is rebuilt (points, glyphs, labels).

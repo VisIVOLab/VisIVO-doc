@@ -8,7 +8,7 @@ conversion step.
 
 | | |
 |---|---|
-| **Open** | *File → Open…* (either the `.bin` or its `.head`), or *Data → Open VBT…* (the `.head`) |
+| **Open** | *File → Open…* or *Data → Open VBT…* — either half of the pair, `.bin` or `.head` |
 | **Point table** | one row per object → 3-D point cloud |
 | **Volume table** | a regular grid → volume rendering |
 
@@ -39,11 +39,24 @@ A **volume** table declares its geometry on the row-count line instead — row
 count, then `nx ny nz`, then the cell spacing — and VisIVO opens it in the
 volume renderer rather than as points.
 
-```{caution}
-Open the **`.head`**, not the binary. The binary alone carries no description of
-what its bytes mean, and the viewer will tell you the header was not found
-rather than guess.
+```{tip}
+Either half of the pair will do. Pick the `.head` or the `.bin` — the backend
+resolves a chosen binary to the header beside it. What it cannot do is open a
+binary whose header is missing: the bytes alone carry no description of what
+they mean, and you are told so rather than guessed at.
 ```
+
+---
+
+## The window
+
+Both VBT viewers — points and volumes — are laid out like the image and cube
+viewers: the command bar across the top (path, a `VBT · …` tag that opens the
+header, ⌘K, the backend chip), **Session Data** on the left with the display
+controls, the **Inspector** on the right (Properties, Analysis, Parameters,
+Copilot) collapsed to a rail until you need it, and the status rail along the
+bottom. *View ▸ Session Data Panel* and *View ▸ Inspector Panel* fold either
+column away.
 
 ---
 
@@ -122,10 +135,17 @@ The VBT viewer reads through the backend like everything else, so the file must
 be visible to the **backend's** filesystem — the HPC node, if that is where the
 backend runs, not your laptop.
 
-If the session expires (a backend restart, a dropped tunnel), the viewer says
-*Session expired — reconnecting…* and *Re-open Dataset* restores the view. Your
-filters and colour settings are part of the view, not the dataset, so they
-survive.
+If the session expires (a backend restart, a dropped tunnel) the **point**
+viewer recovers by itself on the next page of data: it reopens the dataset and
+carries on in the same window, with your filters and colour settings intact.
+*Re-open Dataset*, the explicit route, opens a fresh window and does not carry
+them over.
+
+```{caution}
+The **volume** viewer has no recovery path. After an expiry, changing the scalar
+field fails quietly — the selector moves and the volume on screen does not — and
+the way back is to open the file again.
+```
 
 ---
 
@@ -138,9 +158,10 @@ survive.
 * - Symptom
   - Cause / fix
 * - *"VBT header file not found."*
-  - You opened the binary, or the `.head` and its binary are not in the same
-    directory. Both must be present, and the binary's name is the header's name
-    with `.head` removed.
+  - The `.head` and its binary are not in the same directory, or one of them is
+    missing. Both must be present, and the binary's name is the header's name
+    with `.head` removed. (Which of the two you pick does not matter — the
+    backend resolves a chosen binary to its header.)
 * - *"Unknown VBT endian"* or *"VBT header too short"*
   - The header is missing a line. The order is fixed: scalar type, field count,
     row count (plus geometry for a volume), byte order, then one name per field.
