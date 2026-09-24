@@ -100,6 +100,38 @@ true value is 25**, a factor of 2.5, and the map looks perfectly plausible. If Q
 different files whose frequency grids disagree, the request is refused rather
 than silently combining measurements taken at different frequencies.
 
+## 4. Keeping the results
+
+Every map here is an ordinary 2-D product, and
+*Tools ▸ Export ▸ **Export Displayed Map as FITS…*** writes the one currently
+shown in a pane into Workspace Exports as a standalone 2-D FITS. It works for
+any map the cube viewer produces — polarised intensity, position angle, peak
+|F(φ)|, Faraday depth, line-width — not only for moments.
+
+What ends up in the file:
+
+- **a proper 2-D image** (`NAXIS=2`), with the spectral and Stokes axes
+  projected away rather than left degenerate, so it opens straight in the image
+  viewer;
+- **the celestial WCS** of the cube the map derives from. If the map covers a
+  drawn region, `CRPIX` is shifted by the crop origin — without that the file
+  would claim the whole field's astrometry and every position read off it would
+  be wrong by the offset;
+- **the map's own `BUNIT`**, not the cube's: `deg` for a position angle,
+  `rad m-2` for a Faraday depth, whatever the cube was measured in;
+- **the parameters, as `HISTORY` cards** — the φ grid, the channels, which file
+  supplied Q and U. The same rows the Inspector shows, so a result whose
+  provenance lived only in a screenshot becomes one somebody else can check.
+
+A moment map is exported differently and deliberately: the service recomputes
+it from its recipe at full precision, instead of uploading the displayed
+pixels.
+
+```{note}
+The action reports "no 2-D map is on screen" rather than doing nothing if no
+product is mounted in a visible pane. Show the map first.
+```
+
 ## Worked example: MeerKAT MGCLS
 
 The MeerKAT Galactic-plane full-Stokes release
