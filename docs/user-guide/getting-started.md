@@ -7,15 +7,15 @@ about five minutes.
 
 | | |
 |---|---|
-| **macOS** | 14 or newer (primary target). Linux works too; the build files are CMake-portable. |
+| **OS** | macOS 14 or newer (primary development platform), Linux (Ubuntu 22.04 or newer), Windows 10/11 x64. Release packages exist for all three. |
 | **Compiler** | Apple Clang 15+, GCC 11+, or MSVC 2022. C++17. |
-| **Qt** | 6.5 or newer (Core, Gui, Widgets, OpenGL, OpenGLWidgets, Concurrent, Network, NetworkAuth, Svg, PrintSupport). |
+| **Qt** | 6.10 or newer (Concurrent, Widgets, Xml, Svg, Network, NetworkAuth, PrintSupport, WebEngineWidgets, WebSockets). |
 | **VTK** | 9.5 or newer, built with Qt 6 support. |
 | **Python** | **3.11 or newer** for the backend. The client checks this and says so if the interpreter it finds is older — note that macOS ships 3.9 and several Linux distributions ship 3.9 or 3.10, so a system `python3` is often not enough. |
 | **GPU** | Any Apple-Silicon GPU or a modern desktop GPU. Volume rendering uses `vtkGPUVolumeRayCastMapper`. |
 
 For full build flags and dependency notes see the repository
-[`BUILDING.md`](https://github.com/VisIVOLab/VisIVO-next/blob/main/BUILDING.md).
+[`BUILDING.md`](https://github.com/VisIVOLab/VisIVOVisualAnalytics/blob/main/BUILDING.md).
 
 ## Starting the backend
 
@@ -84,6 +84,10 @@ open build/VisIVOVisualAnalytics.app                  # macOS bundle
 build/VisIVOVisualAnalytics                           # Linux binary
 ```
 
+On Windows the dependencies (zlib, cfitsio, VTK with Qt) are built from source
+first and the executable needs its DLLs beside it; follow the step-by-step
+Windows section of `BUILDING.md`, which is what the release workflow runs.
+
 The first window you see is the **Startup Dialog**:
 
 1. **Backend check** — the client pings the backend health endpoint and
@@ -114,6 +118,14 @@ the backend-side filesystem:
   You are asked only when the file itself is ambiguous. A FITS **table** is the
   usual case: it can be a source catalogue or a table to overlay on an image,
   and nothing in the file says which — so the client asks instead of guessing.
+
+  The image or cube need not be in the primary HDU. Archive products such as
+  ESO phase-3 or APEX cubes keep the primary empty and the data in an image
+  extension (`DATA_EXT`, with the variance beside it in `STAT_EXT`): the
+  backend opens the first extension that holds a real array, reads its WCS
+  and `BUNIT` from there, and carries the descriptive cards only the primary
+  has (`OBJECT`, the instrument) along with it. The header viewer lists the
+  two together, and an edit of a card goes back to the HDU that owns it.
 
 Under **Archives**:
 

@@ -1,7 +1,7 @@
 # Troubleshooting
 
 Common problems, what they mean, and how to fix them. Open a
-[GitHub issue](https://github.com/VisIVOLab/VisIVO-next/issues)
+[GitHub issue](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues)
 if you hit something not covered here.
 
 ## Backend / connection
@@ -59,6 +59,17 @@ pip install -r requirements.txt
 Then restart the app.
 
 ## Performance
+
+### "Full resolution" is refused: not enough memory
+
+Loading a cube at full resolution holds about three times its size while it
+arrives (the slabs, the assembled volume, the copy on the GPU). The client
+compares that with the machine's physical memory before fetching and, when it
+does not fit, keeps the decimated proxy and says so with the numbers. Crop the
+region you need (*Tools ▸ Crop Full Resolution*), or render on a remote
+backend. A load that fails part-way (a slab the backend could not serve)
+reports the failure instead of retrying through the JSON route, which on a
+multi-GB cube used to multiply the client's memory until the system killed it.
 
 ### The cube swap from preview to full-resolution takes several seconds
 
@@ -158,18 +169,21 @@ straddling RA = 0 can measure narrower than it is.
 
 ### "Pick Spectrum on Plane Click" does nothing when I click
 
-The pick uses a **double-click** on the textured cutting plane (not a
-single click, which is reserved for camera rotation).
+The pick is a **click** on the cutting plane, the volume or the isosurface. A
+press that moves more than a few pixels is a camera rotation, not a pick, so
+hold the mouse still.
 
-If even the double-click does nothing:
+If a click does nothing:
 
 - Make sure the toggle is on (cursor should be a cross-hair over the
   3-D view, and its pane should carry the amber armed border). Selecting
   another pane does **not** disarm it any more, so the border is the thing to
   check.
-- The cutting plane must be visible. Lower its opacity to make sure you
-  see it.
-- Click *on the plane itself*, not on the volume rendering behind it.
+- Click on something the pick can land on: the cutting plane (the spectrum at
+  the displayed channel), the volume rendering (the channel the ray reaches —
+  in Composite the front surface, in MIP the brightest), or the isosurface.
+  Empty space, the box outline and the axes are not picks.
+- With *3D rendering* off and the plane hidden, there is nothing to pick.
 
 ### "Switch to Remote" is missing, or *View → Remote* is greyed out
 

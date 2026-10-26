@@ -508,7 +508,7 @@ Three properties of the flush are load-bearing:
   previous). `doOpenDataPath()` makes synchronous backend calls that spin nested
   loops, so two independent queued opens interleave: the second one's dialog
   suspends the first one's health request until its own timeout fires, and a
-  reachable backend is reported unavailable (Codex).
+  reachable backend is reported unavailable.
 - **Never on top of a modal dialog** (`QApplication::activeModalWidget()` → retry
   in 250 ms), which also covers a file arriving during the startup sequence.
 
