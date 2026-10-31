@@ -114,6 +114,58 @@ came from, the protocol, the replica and the node that served it, so a
 reopen asks the same service again (and routes afresh) rather than reusing
 a path that may have moved.
 
+## How the desktop picks a node
+
+The DataLink answer lists, in SKAVA's ranking order, the VisIVO backend of
+each node that holds a replica (a `visivo-backend` service descriptor in the
+JSON API, one marked `enabled: false` being ignored; the `#auxiliary` row
+pointing at the backend's `/v1/node/status` in the VOTable). The desktop goes
+through them in that order and keeps, as candidates, those it can use:
+
+1. **A registered backend matches the descriptor.** First by URL, against
+   every entry of Settings ▸ Backends (the local backend included), then by
+   the entry's **SRC code** against the descriptor's node code (exact and
+   case-sensitive). The URL comparison ignores a trailing `/` and treats
+   `localhost`, `127.0.0.1`, `::1` and `host.docker.internal` as the same
+   host; the port and the path must match. The SRC code is for a backend the
+   desktop reaches at another address than the catalogue advertises (a
+   tunnel, a VPN).
+2. **The backend opens this kind of dataset**: the descriptor's
+   `supports_kinds` includes the dataset's type (a `timeseries` or dynamic
+   spectrum counts as `dynspec`).
+3. **There is a token for it** when the descriptor says the backend requires
+   authentication: the one stored with the registered entry or, for the
+   local backend registered without one, the automatic token described
+   below.
+4. **SKAVA lists a replica on that node.** The desktop opens that node's own
+   copy: it never hands one node's path to another node's backend.
+
+The candidates are tried in order (**Open via…** puts the chosen node first,
+the others keep SKAVA's order). A `file://` replica is opened in place
+(`POST /v1/datasets/open_skava`); an `http(s)` replica is fetched by that
+node's backend (`POST /v1/datasets/open_url` there), still next to the data.
+When a backend refuses (offline, wrong token, file missing, outside its data
+roots), the next candidate is tried, the status bar says so, and the desktop
+logs `[skava] backend <id> refused open: <reason>`. With no candidate left, an
+`http(s)` copy is downloaded through the local backend, which forwards the
+SKAVA token to the storage; a `file://` copy cannot be, and the dialog lists
+why each descriptor was passed over and offers **Register backend…** or
+**Enter backend token…**.
+
+Each registered backend is sent its own token and no other. The automatic
+token, `VISIVO_TOKEN` or `~/.visivo_token`, belongs to the desktop's local
+backend and is sent only to the configured local backend's address (a
+loopback host on the local backend's port, `http://127.0.0.1:8000` by
+default), never to another backend, even one on the same machine at another
+port. A tunnel to a cluster backend therefore uses another local port: the
+cluster helper's default, `18900`, already does (see
+[Running the backend on a cluster](../deployment/hpc-slurm.md#quick-start)).
+
+On the node, `open_skava` accepts only a `file://` URL on the local host and
+refuses a path outside the backend's data roots (`VISIVO_DATA_ROOT` or
+`VISIVO_DATA_ROOTS`, when set); the refusal comes back as `valid: false` with
+the reason, which moves the desktop to the next candidate.
+
 ## Compute next to data
 
 The **Compute next to data…** menu runs on the node, through the services
@@ -151,50 +203,23 @@ backend's token.
 
 ## Running a backend as an SRC node
 
-A backend next to a node's data serves `GET /v1/ping` and
-`GET /v1/node/status` (CPU, memory under the container's limits, queued
-tasks, finders) without a token, so a catalogue can measure the node. The
-settings that matter on a node:
-
-| Variable | Default | Meaning |
-|---|---|---|
-| `VISIVO_DATA_ROOTS` (or `VISIVO_DATA_ROOT`) | none | the directories the backend may open; every `file://` location a client or a catalogue gives it must lie inside them (see [Sharing one backend between users](../multi-user-backend.md)) |
-| `VISIVO_NODE_CODE` | none | the node's code as the catalogue knows it, reported in the status document |
-| `VISIVO_NODE_STATUS_PUBLIC` | `1` | `0` makes `/v1/node/status` require the backend token (`/v1/ping` stays open) |
-| `VISIVO_NODE_GPU` | unset | declares a GPU (`1`) or none (`0`) in the status document |
-| `VISIVO_SOFIA_BIN` | `sofia2` or `sofia` on `PATH` | the SoFiA-2 executable for source finding on the node |
-| `VISIVO_FINDER_TIMEOUT_S` | `3600` | the longest a source finder may run |
-
-The node's SODA service (`/soda/sync`, `/soda/async`) cuts and computes on
-the files under its data roots. A synchronous request with only `ID`, and
-no `POS`, `BAND` or `TIME`, returns the file as stored, byte for byte, with
-its own media type (`application/fits` for FITS).
-
-When the catalogue cannot reach the backend (a firewall, a NAT, a tunnel),
-the backend can report its status document to the catalogue instead, every
-few seconds:
-
-| Variable | Meaning |
-|---|---|
-| `VISIVO_SKAVA_TELEMETRY_URL` | the catalogue's base URL (`http` or `https`) |
-| `VISIVO_SKAVA_NODE_TOKEN` | this node's telemetry token, issued by the catalogue's operator |
-| `VISIVO_NODE_CODE` | this node's code in that catalogue |
-| `VISIVO_SKAVA_TELEMETRY_INTERVAL` | seconds between reports (default 10, at least 1) |
-
-Reporting is off unless the first three are set. The backend sends the
-token with each report and never follows a redirect with it. A report that
-fails is logged once per outage, without the token, and the backend keeps
-reporting.
-
-How the catalogue measures nodes, issues their tokens and uses the reports
-is described in the
-[SKAVA documentation](https://skava.readthedocs.io/en/latest/deployment/configuration.html#node-reports-telemetry-pushed-by-the-node).
+The node side, what a backend next to the data serves to the desktop and to a
+catalogue (node status and metrics, status reports to the catalogue, SODA,
+source finders) and the settings it needs, is described in
+[The backend as an SRC node](../deployment/src-node.md). Starting a backend on
+a SLURM compute node, with the SSH tunnel from the laptop, the Apptainer
+images and server-side rendering on the node's GPUs, is described in
+[Running the backend on a cluster](../deployment/hpc-slurm.md).
 
 ## Common failure modes
 
 * **`SKAVA base URL is not configured`**: fill the URL before searching.
 * **`… requires a sign-in`**: the service answered `401`. Sign in, or paste
   a token.
+* **`no_available_nodes - No available nodes for dataset …`**: the catalogue
+  knows the dataset but cannot reach any node that holds it: the node's
+  backend is stopped, or the tunnel to it is closed. It probes its nodes every
+  few seconds, so a node that comes back is used again by itself.
 * **`Search failed: invalid_query - POS must be ...`**: the spatial filter
   was rejected; set RA, Dec and radius together, or none.
 * **"… is stored on an SRC node and can only be opened by the VisIVO
