@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Moment maps - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -305,12 +343,15 @@ Defaults to the full cube. Restrict it to the channels containing the
 line to avoid integrating background.</p></li>
 <li><p><strong>Mask</strong> — <strong>on by default</strong>. Only voxels above the threshold contribute,
 which is what keeps M1/M2 physically clean (see the note below).</p></li>
-<li><p><strong>Auto threshold (≈ 3 σ)</strong> — <strong>on by default</strong>. The backend derives the
-mask threshold from the data itself (median + 3 · σ, with σ from the MAD),
-the same convention CASA/SoFiA use. Untick it to type a value by hand in
-<strong>Mask threshold</strong>; untick <strong>Mask</strong> entirely to compute an unmasked moment.</p></li>
-<li><p><strong>RMS</strong> — the cube noise level, used by some orders (e.g. weighted by
-1/σ²). Auto-filled from the latest noise estimate if available.</p></li>
+<li><p><strong>3σ of the noise estimate</strong> — shown, and chosen by default, once you have
+run <em>Tools → Estimate Noise</em> in this session: the threshold is 3σ of the σ
+you measured on a line-free region (the tooltip says where), and the
+product’s provenance records it as such.</p></li>
+<li><p><strong>Auto threshold (≈ 3 σ)</strong> — the default when there is no estimate. The
+backend derives the mask threshold from the data itself (median + 3 · σ,
+with σ from the MAD over the cube), the same convention CASA/SoFiA use.
+Untick both to type a value by hand in <strong>Mask threshold</strong>; untick <strong>Mask</strong>
+entirely to compute an unmasked moment.</p></li>
 </ul>
 </li>
 <li><p>Click <strong>Compute</strong>. The Moment card in the sidebar tracks the state
@@ -518,21 +559,27 @@ compute.</p></li>
 <li><p>Results are LRU-cached on the backend (<code class="docutils literal notranslate"><span class="pre">PRODUCT_CACHE</span></code>, default 32
 entries). Identical recomputes (same dataset + params) return in
 sub-milliseconds.</p></li>
-<li><p><strong>Out-of-core by default.</strong> M0/M1/M2 stream the cube in spectral slabs
-rather than loading the whole channel range, so a moment over a 100+ GB
-cube never materialises it in RAM. The streaming path kicks in when the
-selected subset would exceed <code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_STREAM_BYTES</span></code> (default 2 GiB);
-slab size is <code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_SLAB_CHANNELS</span></code> (default 64).</p></li>
-<li><p><strong>Dask is on by default</strong> (<code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MODE=auto</span></code>). Large moments
-(materialised subset ≥ <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MIN_BYTES</span></code>, default 512 MB) are computed
-with the chunked <code class="docutils literal notranslate"><span class="pre">dask.array</span></code> path — across a distributed cluster when
-<code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_SCHEDULER</span></code> is set, otherwise with a local threaded scheduler
-that parallelises across cores. This also gives the high-order moments
-(M3–M10) an out-of-core path they previously lacked. Small cubes stay on the
-fast in-process worker. Set <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MODE=off</span></code> to force the plain worker,
+<li><p><strong>In memory only when it fits.</strong> The selected channel range (channels ×
+width × height × 4 bytes) is held in memory only when it is no larger than
+the smaller of <code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_STREAM_BYTES</span></code> (default 2 GiB) and one twelfth
+of the memory the backend has available (its container’s headroom, when it
+runs in one). A larger range is computed out of core: M0, M1 and M2 stream
+the cube from disk in spectral slabs, M3 to M10 go through the chunked Dask
+path, so a moment over a 100+ GB cube never materialises it in RAM.</p></li>
+<li><p><strong>Block size is set in bytes.</strong> Each streamed slab or Dask block holds at
+most <code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_CHUNK_BYTES</span></code> (default 64 MiB), and at least one channel.
+<code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_SLAB_CHANNELS</span></code> (default 64) only caps the number of channels
+in a slab. Moments that need the centroid first (M2 to M5) read the data in
+two passes, so memory stays bounded by one block.</p></li>
+<li><p><strong>Dask is on by default</strong> (<code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MODE=auto</span></code>). With Dask installed,
+moments over a range of at least <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MIN_BYTES</span></code> (default 512 MiB)
+are computed with the chunked <code class="docutils literal notranslate"><span class="pre">dask.array</span></code> path and a local threaded
+scheduler that parallelises across cores; when <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_SCHEDULER</span></code> names
+a distributed cluster, every moment is computed there. Smaller ranges stay on
+the in-process worker. Set <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MODE=off</span></code> to force the plain worker,
 <code class="docutils literal notranslate"><span class="pre">local</span></code> to always use local threaded Dask, or <code class="docutils literal notranslate"><span class="pre">distributed</span></code> to require a
-cluster. See the <a class="reference internal" href="../backend-api.html"><span class="doc std std-doc">backend API reference</span></a> for the full
-tunables table.</p></li>
+cluster. All the moment and Dask variables are listed in the
+<a class="reference internal" href="../configuration.html#moments-and-dask"><span class="std std-ref">Configuration reference</span></a>.</p></li>
 </ul>
 </section>
 <section id="common-pitfalls">
@@ -620,7 +667,8 @@ recompute change any param (even by ±1 channel).</p></td>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>

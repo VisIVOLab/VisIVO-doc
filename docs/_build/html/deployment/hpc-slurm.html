@@ -1,0 +1,946 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="The backend as an SRC node" href="src-node.html"><link rel="prev" title="Troubleshooting" href="../user-guide/troubleshooting.html">
+        <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
+        <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
+
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Running the backend on a cluster - VisIVO dev</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0b5fff;
+  --color-brand-content: #0b5fff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">VisIVO dev</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/visivo_logo_light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/visivo_logo_white.svg" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/getting-started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/cube-viewer.html">Spectral cube viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/image-viewer.html">Image viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/vbt-viewer.html">VBT viewer (point clouds and volumes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/velocity-fields.html">Velocity fields and cosmic flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/moment-maps.html">Moment maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/spectral-tools.html">Spectral analysis tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/source-finding.html">Source finding and cross-matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/simulations.html">Simulation snapshots (AREPO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/publication-output.html">Figures, movies and linked views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/copilot.html">Scientific Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../velocity-field-viewer.html">Velocity Field Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kinematic-model.html">Tilted-Ring Kinematic Model (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kinematic-lasso.html">Kinematic Lasso — interactive 3-D object selection &amp; masking (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../movie-export.html">Movie Export (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_server.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_importer.html">VisIVO Importer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_filter.html">VisIVO Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_viewer.html">VisIVO Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server/visivo_utils.html">VisIVO Utils</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="running-the-backend-on-a-cluster">
+<h1>Running the backend on a cluster<a class="headerlink" href="#running-the-backend-on-a-cluster" title="Link to this heading">¶</a></h1>
+<p>On a SLURM cluster the backend runs in an Apptainer container on a compute
+node, not on the frontend (the login node), and the desktop reaches it through
+an SSH tunnel. Two scripts do this:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/launch_backend_slurm.sh</span></code>, run <strong>on the frontend</strong>, submits the job,
+waits for the backend to answer and prints the tunnel command and the token;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/visivo_slurm_tunnel.sh</span></code>, run <strong>on the laptop</strong>, does the same over
+SSH, opens the tunnel itself and keeps it open.</p></li>
+</ul>
+<p>Both print their full help with <code class="docutils literal notranslate"><span class="pre">--help</span></code>. A multi-node variant that spreads the
+heavy computations over a Dask cluster is described
+<a class="reference internal" href="#multi-node-backend-with-dask">below</a>.</p>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<p>From the laptop, with key-based SSH access to the frontend and a clone of the
+repository in the frontend’s home:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/visivo_slurm_tunnel.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--frontend<span class="w"> </span>&lt;frontend&gt;<span class="w"> </span>--user<span class="w"> </span>&lt;user&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--partition<span class="w"> </span>gpu<span class="w"> </span>--gres<span class="w"> </span>gpu:1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-root<span class="w"> </span>/path/to/data<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sif<span class="w"> </span>~/VisIVOVisualAnalytics/backend-egl.sif<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">18900</span>
+</pre></div>
+</div>
+<p>When it reports the tunnel ready, register the backend in the desktop under
+<strong>Settings ▸ Backends ▸ Remote Backends</strong> with the URL it prints
+(<code class="docutils literal notranslate"><span class="pre">http://localhost:18900</span></code>), the token (also saved in <code class="docutils literal notranslate"><span class="pre">~/.visivo_slurm_token</span></code>
+on the laptop) and, for an SRC node, the node’s code in the SKAVA catalogue.
+<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/visivo_slurm_tunnel.sh</span> <span class="pre">--stop</span></code> closes the tunnel and cancels the
+job.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The helper’s local port defaults to <code class="docutils literal notranslate"><span class="pre">18900</span></code>, not to the port of the desktop’s
+local backend (<code class="docutils literal notranslate"><span class="pre">8000</span></code> by default). Keep it that way if you pass <code class="docutils literal notranslate"><span class="pre">--port</span></code>: the
+desktop treats a loopback URL on its local backend’s port as the local backend
+and, when a local token exists (<code class="docutils literal notranslate"><span class="pre">VISIVO_TOKEN</span></code> or <code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code>), sends
+that instead of the one registered for the entry, which the cluster backend
+then refuses.</p>
+</div>
+</section>
+<section id="the-launcher-launch-backend-slurm-sh">
+<h2>The launcher: <code class="docutils literal notranslate"><span class="pre">launch_backend_slurm.sh</span></code><a class="headerlink" href="#the-launcher-launch-backend-slurm-sh" title="Link to this heading">¶</a></h2>
+<p>The launcher writes a batch script, submits it with <code class="docutils literal notranslate"><span class="pre">sbatch</span></code>, waits for the
+compute node to be assigned (up to <code class="docutils literal notranslate"><span class="pre">VISIVO_ASSIGN_TIMEOUT</span></code> seconds, 300 by
+default, set in the frontend’s environment), then polls the backend’s <code class="docutils literal notranslate"><span class="pre">/v1/health</span></code> over SSH
+from the frontend to the compute node until it answers. It then prints the job
+id, the compute node, the port, the <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-N</span> <span class="pre">-L</span></code> command to run on the laptop,
+and the entries for the desktop’s Backends page.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Environment default</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--partition</span> <span class="pre">P</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_PARTITION</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpu</span></code></p></td>
+<td><p>SLURM partition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--time</span> <span class="pre">HH:MM:SS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_TIME</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">08:00:00</span></code></p></td>
+<td><p>Wall-clock limit of the job.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--mem</span> <span class="pre">M</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MEM</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">64G</span></code></p></td>
+<td><p>Memory per node, passed to <code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">--mem</span></code> as given.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--cpus</span> <span class="pre">N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_CPUS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--cpus-per-task</span></code> of the job.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--workers</span> <span class="pre">N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_WORKERS</span></code></p></td>
+<td><p>the value of <code class="docutils literal notranslate"><span class="pre">--cpus</span></code></p></td>
+<td><p>Size of the backend’s process pool (<code class="docutils literal notranslate"><span class="pre">VISIVO_WORKERS</span></code> in the container). Lets a job take a whole node (<code class="docutils literal notranslate"><span class="pre">--cpus</span> <span class="pre">128</span></code>) while keeping the number of concurrent worker processes, and their CUDA initialisation, small.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--gres</span> <span class="pre">G</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_GRES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpu:1</span></code></p></td>
+<td><p>GPU request (<code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">--gres</span></code>). Empty or <code class="docutils literal notranslate"><span class="pre">0</span></code> requests no GPU and drops <code class="docutils literal notranslate"><span class="pre">--nv</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--no-gpu</span></code></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Same as <code class="docutils literal notranslate"><span class="pre">--gres</span> <span class="pre">&quot;&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--port</span> <span class="pre">N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_PORT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8000</span></code></p></td>
+<td><p>Port the backend listens on, on the compute node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--bind</span> <span class="pre">PATH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_BIND</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code></p></td>
+<td><p>A host path bound into the container at the same path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--data-root</span> <span class="pre">PATH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_DATA_ROOT</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>The data directory, bound at the same path and set as <code class="docutils literal notranslate"><span class="pre">VISIVO_DATA_ROOT</span></code> in the container, so the backend opens nothing outside it. Recommended for any shared or SRC deployment.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--sif</span> <span class="pre">PATH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SIF</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">apptainer/backend.sif</span></code> next to the script</p></td>
+<td><p>The Apptainer image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--backend-src</span> <span class="pre">PATH</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_BACKEND_SRC_OVERRIDE</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">backend/app</span></code> source tree bound over <code class="docutils literal notranslate"><span class="pre">/app/app</span></code> in the container, to try Python changes without rebuilding the image.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--token</span> <span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_TOKEN</span></code></p></td>
+<td><p>generated</p></td>
+<td><p>The backend token; a random one is generated when none is given.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--workspace</span> <span class="pre">DIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_WORKSPACE</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>A writable directory for everything the backend and the launcher write (see below). Needed where <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> is read-only.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--node-code</span> <span class="pre">CODE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_NODE_CODE</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>The node’s code in the SKAVA catalogue, reported in <code class="docutils literal notranslate"><span class="pre">/v1/node/status</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--version</span> <span class="pre">TEXT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VERSION</span></code></p></td>
+<td><p>the image’s</p></td>
+<td><p>What the status document reports as the backend version, for example the commit the image was built from.</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSIGN_TIMEOUT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code></p></td>
+<td><p>Seconds to wait for SLURM to assign the node before the launcher stops (the job stays queued; <code class="docutils literal notranslate"><span class="pre">--stop</span></code> cancels it).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>Print the help.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">VISIVO_LOG_DIR</span></code> (default <code class="docutils literal notranslate"><span class="pre">~/.visivo_logs</span></code>, or <code class="docutils literal notranslate"><span class="pre">&lt;workspace&gt;/logs</span></code> with a
+workspace) is where the job log <code class="docutils literal notranslate"><span class="pre">visivo_backend_&lt;jobid&gt;.log</span></code> goes.</p>
+<p>The token is saved, readable only by you, to <code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code> on the
+frontend, or to <code class="docutils literal notranslate"><span class="pre">&lt;workspace&gt;/token</span></code> with a workspace. A job that was given a
+GPU declares it in the status document (<code class="docutils literal notranslate"><span class="pre">VISIVO_NODE_GPU=1</span></code>, otherwise <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+<section id="the-workspace">
+<h3>The workspace<a class="headerlink" href="#the-workspace" title="Link to this heading">¶</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">--workspace</span> <span class="pre">DIR</span></code> the launcher creates and binds (at the same path):</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Path</p></th>
+<th class="head"><p>Used as</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DIR/exports</span></code></p></td>
+<td><p>the backend’s workspace exports (<code class="docutils literal notranslate"><span class="pre">VISIVO_EXPORTS_DIR</span></code>): products such as cutouts, moment maps and finder outputs. It is also a data root (<code class="docutils literal notranslate"><span class="pre">VISIVO_DATA_ROOTS</span></code> is the data root, if any, plus this directory), so a product opens where it was written.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DIR/cache/hips</span></code>, <code class="docutils literal notranslate"><span class="pre">DIR/cache/numba</span></code>, <code class="docutils literal notranslate"><span class="pre">DIR/cache/cupy</span></code></p></td>
+<td><p>the HiPS, Numba and CuPy caches</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DIR/logs</span></code></p></td>
+<td><p>the job logs (unless <code class="docutils literal notranslate"><span class="pre">VISIVO_LOG_DIR</span></code> is set)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DIR/token</span></code></p></td>
+<td><p>the token file</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="other-backend-settings">
+<h3>Other backend settings<a class="headerlink" href="#other-backend-settings" title="Link to this heading">¶</a></h3>
+<p>The launcher passes only the settings above into the container. Any other
+backend variable, for example <code class="docutils literal notranslate"><span class="pre">VISIVO_RENDER_MAX_SESSIONS</span></code> or
+<code class="docutils literal notranslate"><span class="pre">VISIVO_FULL_RES_THRESHOLD_BYTES</span></code>, can be exported with the <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_</span></code>
+prefix in the shell the launcher runs in: <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> hands that environment to
+the job, and Apptainer passes <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_&lt;NAME&gt;</span></code> into the container as
+<code class="docutils literal notranslate"><span class="pre">&lt;NAME&gt;</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">APPTAINERENV_VISIVO_RENDER_MAX_SESSIONS</span><span class="o">=</span><span class="m">4</span>
+bash<span class="w"> </span>scripts/launch_backend_slurm.sh<span class="w"> </span>--sif<span class="w"> </span>backend-egl.sif<span class="w"> </span>...
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-laptop-helper-visivo-slurm-tunnel-sh">
+<h2>The laptop helper: <code class="docutils literal notranslate"><span class="pre">visivo_slurm_tunnel.sh</span></code><a class="headerlink" href="#the-laptop-helper-visivo-slurm-tunnel-sh" title="Link to this heading">¶</a></h2>
+<p>The helper runs the launcher on the frontend over SSH, reads the job id, the
+compute node, the port and the token from its output, and opens the tunnel
+<code class="docutils literal notranslate"><span class="pre">localhost:&lt;port&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;node&gt;:&lt;port&gt;</span></code> through the frontend.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--frontend</span> <span class="pre">HOST</span></code></p></td>
+<td><p>required</p></td>
+<td><p>The SLURM frontend.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--user</span> <span class="pre">USER</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$USER</span></code></p></td>
+<td><p>The SSH login on the frontend.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--repo-dir</span> <span class="pre">DIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_REMOTE_REPO</span></code>, else <code class="docutils literal notranslate"><span class="pre">VisIVOVisualAnalytics</span></code></p></td>
+<td><p>The clone on the frontend, relative to the remote home.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--port</span> <span class="pre">N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_PORT</span></code>, else <code class="docutils literal notranslate"><span class="pre">18900</span></code></p></td>
+<td><p>The local port of the tunnel. When given, it is also passed to the launcher, so the backend listens on the same port on the node; otherwise the backend listens on the launcher’s default and the tunnel maps one to the other.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--stop</span></code></p></td>
+<td><p></p></td>
+<td><p>Stop the tunnel, cancel the job and remove the token file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>any other option</p></td>
+<td><p></p></td>
+<td><p>Passed unchanged to the launcher (<code class="docutils literal notranslate"><span class="pre">--partition</span></code>, <code class="docutils literal notranslate"><span class="pre">--gres</span></code>, <code class="docutils literal notranslate"><span class="pre">--sif</span></code>, <code class="docutils literal notranslate"><span class="pre">--data-root</span></code>, <code class="docutils literal notranslate"><span class="pre">--node-code</span></code>, <code class="docutils literal notranslate"><span class="pre">--workspace</span></code>, …).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The helper:</p>
+<ul class="simple">
+<li><p><strong>checks before submitting anything</strong>: it refuses to start while a tunnel
+from an earlier run is still active (stop it first with <code class="docutils literal notranslate"><span class="pre">--stop</span></code>) or while
+the local port is already in use, so a job is never submitted that its
+tunnel could not reach;</p></li>
+<li><p><strong>keeps the tunnel open</strong>: <code class="docutils literal notranslate"><span class="pre">ssh</span></code> runs in a loop in the background, with
+keep-alives (<code class="docutils literal notranslate"><span class="pre">ServerAliveInterval=15</span></code>, <code class="docutils literal notranslate"><span class="pre">ServerAliveCountMax=4</span></code>) so a dead
+connection is noticed within about a minute, and is started again three
+seconds after it ends (a network change, the laptop sleeping). It runs
+non-interactively (<code class="docutils literal notranslate"><span class="pre">BatchMode</span></code>), so it needs key-based SSH access to the
+frontend;</p></li>
+<li><p><strong>reports ready only when the backend answers through the tunnel</strong>: it polls
+<code class="docutils literal notranslate"><span class="pre">/v1/health</span></code> on the local port for up to 30 s. If the backend does not
+answer, it closes the tunnel and says that the job is still queued or
+running (<code class="docutils literal notranslate"><span class="pre">--stop</span></code> cancels it);</p></li>
+<li><p>saves the token in <strong><code class="docutils literal notranslate"><span class="pre">~/.visivo_slurm_token</span></code></strong> on the laptop, readable only
+by you. It is never written to <code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code>: that file belongs to the
+desktop’s local backend, and the desktop would then fail to authenticate
+against it.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">--stop</span></code> ends the reconnect loop (and the <code class="docutils literal notranslate"><span class="pre">ssh</span></code> it started), runs <code class="docutils literal notranslate"><span class="pre">scancel</span></code> on
+the frontend for the job it recorded (<code class="docutils literal notranslate"><span class="pre">~/.visivo_slurm_job</span></code>) and removes
+<code class="docutils literal notranslate"><span class="pre">~/.visivo_slurm_token</span></code>.</p>
+</section>
+<section id="multi-node-backend-with-dask">
+<h2>Multi-node backend with Dask<a class="headerlink" href="#multi-node-backend-with-dask" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">scripts/launch_backend_slurm_dask.sh</span></code> allocates several nodes, starts a Dask
+scheduler and Dask workers on the first node, Dask workers on each of the
+others, and the backend on the first node with <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_SCHEDULER</span></code>
+pointing at the scheduler, so heavy operations (moment maps, channel maps) are
+spread over all the workers. <code class="docutils literal notranslate"><span class="pre">scripts/visivo_slurm_tunnel_dask.sh</span></code> is its
+laptop helper.</p>
+<p>Launcher options (on the frontend):</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Environment default</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--nodes</span> <span class="pre">N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_NODES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4</span></code></p></td>
+<td><p>Nodes to allocate.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--cpus</span> <span class="pre">N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_CPUS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span></code></p></td>
+<td><p>CPUs per node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--workers</span> <span class="pre">N</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_WORKERS_PER_NODE</span></code></p></td>
+<td><p>the value of <code class="docutils literal notranslate"><span class="pre">--cpus</span></code></p></td>
+<td><p>Dask workers per node (one thread each).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--gres</span> <span class="pre">G</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_GRES</span></code></p></td>
+<td><p>empty (no GPU)</p></td>
+<td><p>GPUs per node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--partition</span></code>, <code class="docutils literal notranslate"><span class="pre">--mem</span></code>, <code class="docutils literal notranslate"><span class="pre">--time</span></code>, <code class="docutils literal notranslate"><span class="pre">--port</span></code>, <code class="docutils literal notranslate"><span class="pre">--bind</span></code>, <code class="docutils literal notranslate"><span class="pre">--data-root</span></code>, <code class="docutils literal notranslate"><span class="pre">--sif</span></code>, <code class="docutils literal notranslate"><span class="pre">--backend-src</span></code>, <code class="docutils literal notranslate"><span class="pre">--token</span></code>, <code class="docutils literal notranslate"><span class="pre">--no-gpu</span></code></p></td>
+<td><p>as for the single-node launcher</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>It has no <code class="docutils literal notranslate"><span class="pre">--workspace</span></code>, <code class="docutils literal notranslate"><span class="pre">--node-code</span></code> or <code class="docutils literal notranslate"><span class="pre">--version</span></code>. The scheduler listens
+on port 18786 and its dashboard on 18787 of the first node; the backend itself
+runs with four local workers. The token is written to <code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code> on the
+frontend, and the scheduler and worker logs go to <code class="docutils literal notranslate"><span class="pre">~/.visivo_logs</span></code>.</p>
+<p>Helper options (on the laptop): <code class="docutils literal notranslate"><span class="pre">--frontend</span></code>, <code class="docutils literal notranslate"><span class="pre">--user</span></code>, <code class="docutils literal notranslate"><span class="pre">--repo-dir</span></code> and
+<code class="docutils literal notranslate"><span class="pre">--port</span></code> as above, plus <code class="docutils literal notranslate"><span class="pre">--dashboard-port</span> <span class="pre">P</span></code> (the local port of a second tunnel
+to the Dask dashboard, default <code class="docutils literal notranslate"><span class="pre">VISIVO_DASHBOARD_PORT</span></code> or <code class="docutils literal notranslate"><span class="pre">18787</span></code>) and
+<code class="docutils literal notranslate"><span class="pre">--no-dashboard</span></code> (no dashboard tunnel). Every other option goes to the Dask
+launcher. The token is saved in <code class="docutils literal notranslate"><span class="pre">~/.visivo_slurm_dask_token</span></code>; <code class="docutils literal notranslate"><span class="pre">--stop</span></code> closes
+both tunnels and cancels the job.</p>
+<p>The Dask helper behaves like the single-node one: it refuses to start while
+an earlier tunnel or job is recorded or a local port is taken (and when
+<code class="docutils literal notranslate"><span class="pre">--port</span></code> and <code class="docutils literal notranslate"><span class="pre">--dashboard-port</span></code> are the same), reopens either tunnel when it
+drops, records the job as soon as the launcher prints its id, and is ready
+only when the backend answers through the tunnel.</p>
+</section>
+<section id="apptainer-images">
+<h2>Apptainer images<a class="headerlink" href="#apptainer-images" title="Link to this heading">¶</a></h2>
+<p>The definitions are in <code class="docutils literal notranslate"><span class="pre">apptainer/</span></code>. Build them from the repository root (the
+paths in their <code class="docutils literal notranslate"><span class="pre">%files</span></code> and <code class="docutils literal notranslate"><span class="pre">%setup</span></code> sections are relative to it).</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Definition</p></th>
+<th class="head"><p>Base</p></th>
+<th class="head"><p>What it contains</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">backend.def</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">python:3.12-slim</span></code></p></td>
+<td><p>The slim image. No VTK, Numba or llvmlite (no usable install on POWER9 from PyPI): no isosurfaces, no velocity-field products, no server-side rendering, and the moment kernels run unaccelerated. <code class="docutils literal notranslate"><span class="pre">ENABLE_CUPY=1</span></code> and <code class="docutils literal notranslate"><span class="pre">ENABLE_SOFIA=1</span></code> at build time add CuPy and SoFiA-2 (export them as <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_ENABLE_CUPY</span></code> and <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_ENABLE_SOFIA</span></code>: Apptainer passes only prefixed variables into the build).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">backend-conda.def</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">condaforge/miniforge3</span></code></p></td>
+<td><p>The full scientific stack from conda-forge (Numba, VTK, healpy), for ppc64le, x86_64 and aarch64, with SoFiA-2 (from conda-forge, or built from source where there is no package; the build does not fail without it). CuPy with <code class="docutils literal notranslate"><span class="pre">APPTAINERENV_ENABLE_CUPY=1</span></code> at build time. The recommended base for an SRC node.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">backend-x86.def</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">condaforge/mambaforge</span></code></p></td>
+<td><p>x86_64 with NVIDIA Blackwell GPUs (CUDA 12.8 runtime, CuPy on by default; NVIDIA driver 570 or later on the host).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">backend-conda-egl.def</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">backend-conda.sif</span></code> (local image)</p></td>
+<td><p>The conda image with VTK rebuilt from source with EGL, for server-side 3-D rendering on the node’s GPU. Built as <code class="docutils literal notranslate"><span class="pre">backend-egl.sif</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">backend-egl-h265-overlay.def</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">backend-egl.sif</span></code> (local image)</p></td>
+<td><p><strong>Not up to date</strong>, as its own help says: it targets an earlier EGL image that kept the stack in conda’s base environment, so it would install FFmpeg, PyAV and aiortc where the backend does not look. Server-side rendering does not need it (the JPEG stream is the default transport).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The launcher’s default image (<code class="docutils literal notranslate"><span class="pre">apptainer/backend.sif</span></code>) cannot render
+server-side, and neither can <code class="docutils literal notranslate"><span class="pre">backend-conda.sif</span></code> on POWER9. For the 3-D view to
+be rendered on the node, start the job with <code class="docutils literal notranslate"><span class="pre">--sif</span> <span class="pre">backend-egl.sif</span></code>. Without
+it the backend reports server-side rendering as unavailable and the desktop
+renders a decimated proxy of the cube locally.</p>
+</div>
+<section id="building-the-egl-image">
+<h3>Building the EGL image<a class="headerlink" href="#building-the-egl-image" title="Link to this heading">¶</a></h3>
+<p>conda-forge publishes VTK for <code class="docutils literal notranslate"><span class="pre">linux-ppc64le</span></code> only as the Qt/X11 build (9.2.6,
+9.3.0, 9.3.1); the EGL and OSMesa variants exist for <code class="docutils literal notranslate"><span class="pre">linux-64</span></code> only. The EGL
+definition is therefore a layer on the conda image that removes conda-forge’s
+VTK and its OpenGL libraries and builds VTK (tag <code class="docutils literal notranslate"><span class="pre">v9.3.1</span></code> by default) headless
+with EGL, keeping everything else of the base. The build fails if
+<code class="docutils literal notranslate"><span class="pre">vtkEGLRenderWindow</span></code> is not built or not linked to <code class="docutils literal notranslate"><span class="pre">libEGL</span></code>.</p>
+<p>In the directory that holds the conda image under the name <code class="docutils literal notranslate"><span class="pre">backend-conda.sif</span></code>
+(a symlink is enough):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-sf<span class="w"> </span>backend-conda-gpu.sif<span class="w"> </span>backend-conda.sif
+apptainer<span class="w"> </span>build<span class="w"> </span>--force<span class="w"> </span>--fakeroot<span class="w"> </span>backend-egl.sif<span class="w"> </span>VisIVOVisualAnalytics/apptainer/backend-conda-egl.def
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--force</span></code> is needed, or Apptainer keeps the base image’s help and labels.
+<code class="docutils literal notranslate"><span class="pre">APPTAINERENV_VTK_TAG</span></code> selects another VTK tag. The definition estimates 70 to
+90 minutes on 16 POWER9 cores; on PLEIADI-GPU, with 32 cores, it took about 20
+minutes. Build where Apptainer’s temporary directory (<code class="docutils literal notranslate"><span class="pre">APPTAINER_TMPDIR</span></code>) is
+node-local, for example in a SLURM job on a compute node.</p>
+</section>
+<section id="what-the-launcher-adds-for-egl">
+<h3>What the launcher adds for EGL<a class="headerlink" href="#what-the-launcher-adds-for-egl" title="Link to this heading">¶</a></h3>
+<p>Every job (the bindings are harmless where the libraries do not exist) gets:</p>
+<ul class="simple">
+<li><p>the host’s NVIDIA libraries (<code class="docutils literal notranslate"><span class="pre">libEGL_nvidia</span></code>, <code class="docutils literal notranslate"><span class="pre">libcuda</span></code>, <code class="docutils literal notranslate"><span class="pre">libnvidia-*</span></code>, from
+<code class="docutils literal notranslate"><span class="pre">/usr/lib64</span></code> or <code class="docutils literal notranslate"><span class="pre">/usr/lib/powerpc64le-linux-gnu</span></code>) and the glvnd vendor file
+<code class="docutils literal notranslate"><span class="pre">10_nvidia.json</span></code>, bound at their host paths, because Apptainer’s <code class="docutils literal notranslate"><span class="pre">--nv</span></code>
+misses several of them on some ppc64le installs; <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH=/usr/lib64</span></code>
+and <code class="docutils literal notranslate"><span class="pre">__EGL_VENDOR_LIBRARY_FILENAMES</span></code> pointing at the NVIDIA vendor file;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">XDG_CACHE_HOME</span></code>, <code class="docutils literal notranslate"><span class="pre">XDG_CONFIG_HOME</span></code>, <code class="docutils literal notranslate"><span class="pre">XDG_DATA_HOME</span></code> and <code class="docutils literal notranslate"><span class="pre">MPLCONFIGDIR</span></code> under
+<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, because fontconfig takes a file lock in <code class="docutils literal notranslate"><span class="pre">~/.cache</span></code>, and on an
+NFS-mounted home that lock can hang the first render for ever.</p></li>
+</ul>
+</section>
+</section>
+<section id="node-capacity-under-slurm">
+<h2>Node capacity under SLURM<a class="headerlink" href="#node-capacity-under-slurm" title="Link to this heading">¶</a></h2>
+<p>The backend reads the memory it may use where it is true for its process
+(<code class="docutils literal notranslate"><span class="pre">backend/app/node_status.py</span></code>):</p>
+<ol class="arabic simple">
+<li><p>the <strong>cgroup v2</strong> hierarchy: <code class="docutils literal notranslate"><span class="pre">memory.max</span></code> and usage at its own cgroup and
+every ancestor it can see, the tightest limit winning;</p></li>
+<li><p>if no v2 memory files are readable, the <strong>cgroup v1</strong> memory controller
+(<code class="docutils literal notranslate"><span class="pre">memory.limit_in_bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">memory.usage_in_bytes</span></code>), as on older SLURM
+clusters;</p></li>
+<li><p>inside a SLURM job (<code class="docutils literal notranslate"><span class="pre">SLURM_JOB_ID</span></code> set), the <strong>memory SLURM granted</strong> as one
+more limit: <code class="docutils literal notranslate"><span class="pre">SLURM_MEM_PER_NODE</span></code>, or <code class="docutils literal notranslate"><span class="pre">SLURM_MEM_PER_CPU</span></code> times
+<code class="docutils literal notranslate"><span class="pre">SLURM_CPUS_ON_NODE</span></code>. A grant counts even where the cluster does not enforce
+it with a cgroup; <code class="docutils literal notranslate"><span class="pre">--mem=0</span></code> (the whole node) sets no cap;</p></li>
+<li><p>otherwise the host’s memory (<code class="docutils literal notranslate"><span class="pre">/proc/meminfo</span></code>).</p></li>
+</ol>
+<p>Available memory is the limit minus the working set (usage without the
+reclaimable file cache), never more than the host has left.
+<code class="docutils literal notranslate"><span class="pre">VISIVO_CGROUP_ROOT</span></code> names the cgroup directory explicitly (and then cgroup v1
+is not consulted).</p>
+<p>This matters because the backend sizes its work by it rather than by the
+host’s RAM: the full-resolution threshold (see
+<a class="reference internal" href="../large-cube-loading.html"><span class="std std-doc">Large cube loading</span></a>) is at most a quarter of that
+limit, the compute paths choose between holding a range in memory and
+streaming it from the available figure, and the node status that a catalogue
+ranks nodes on reports the same numbers (see
+<a class="reference internal" href="src-node.html"><span class="std std-doc">The backend as an SRC node</span></a>). A job given <code class="docutils literal notranslate"><span class="pre">--mem</span> <span class="pre">64G</span></code> on a
+node with 512 GB is a 64 GB backend.</p>
+</section>
+<section id="server-side-rendering-on-the-node">
+<h2>Server-side rendering on the node<a class="headerlink" href="#server-side-rendering-on-the-node" title="Link to this heading">¶</a></h2>
+<p>With the EGL image, each remote 3-D view is a render session that runs in a
+<strong>child process of its own</strong> (<code class="docutils literal notranslate"><span class="pre">backend/app/render_session/_process.py</span></code>): VTK
+and the JPEG encoder then hold only that process’s GIL, so the backend keeps
+receiving commands and sending frames while the next frame is rendered, and a
+crash in VTK or the driver ends that session, not the backend.</p>
+<p>Sessions are <strong>spread over the job’s GPUs</strong> in turn. EGL lists every GPU of
+the node whatever <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> says, so each session asks the driver
+for the CUDA device behind each EGL device (<code class="docutils literal notranslate"><span class="pre">EGL_NV_device_cuda</span></code>): only the
+job’s GPUs answer, and the session binds VTK to one of them through
+<code class="docutils literal notranslate"><span class="pre">VTK_EGL_DEVICE_INDEX</span></code>. If no EGL device has that extension, the backend logs
+a warning and VTK picks the device; if the mapping shows none of the node’s
+GPUs in the job, the session does not start.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_RENDER_MAX_SESSIONS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+<td><p>Remote views the backend accepts at once; beyond it a new one is refused with HTTP 503.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_RENDER_IDLE_TTL_SECONDS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code></p></td>
+<td><p>A view with no command for this long is closed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_RENDER_IN_PROCESS</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> renders in the backend’s own process instead (slower: rendering then holds the process that serves the WebSocket).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VTK_EGL_DEVICE_INDEX</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Binds every view to that EGL device instead of spreading them over the job’s GPUs.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>How the view streams frames and lowers its quality while you rotate is
+described for users in the
+<a class="reference internal" href="../user-guide/cube-viewer.html#where-the-rendering-happens-auto-local-remote"><span class="std std-ref">Cube viewer</span></a>
+page. On PLEIADI-GPU (POWER9, V100), through an SSH tunnel, a 2540 x 1560 view
+of a 2 GB cube ran at about 26 frames per second once the drag level had
+settled; four views at once ran at 20.0 frames per second each when spread over
+four V100s, against 6.8 on one. The scripts that measure this and the recorded
+runs are in
+<a class="reference external" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics/tree/main/benchmark/remote_render"><code class="docutils literal notranslate"><span class="pre">benchmark/remote_render</span></code></a>.</p>
+<p>A complete, recorded run on PLEIADI-GPU together with a SKAVA catalogue is
+described in the
+<a class="reference external" href="https://skava.readthedocs.io/en/latest/operations/e2e-pleiadi-gpu-runbook.html">SKAVA documentation</a>.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<p><strong>The job stays pending.</strong> The launcher waits <code class="docutils literal notranslate"><span class="pre">VISIVO_ASSIGN_TIMEOUT</span></code> seconds
+(300 by default) for SLURM to assign a node, then stops with <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">compute</span> <span class="pre">node</span> <span class="pre">assigned</span></code>; the job stays queued and starts when the resources free up. The
+helper has recorded the job as soon as it was submitted, so <code class="docutils literal notranslate"><span class="pre">--stop</span></code> cancels
+it. To wait longer, set <code class="docutils literal notranslate"><span class="pre">VISIVO_ASSIGN_TIMEOUT</span></code> on the frontend; otherwise ask
+for fewer resources (a shorter <code class="docutils literal notranslate"><span class="pre">--time</span></code>, fewer GPUs, another <code class="docutils literal notranslate"><span class="pre">--partition</span></code>).
+A new run refuses to start while a job from an earlier run is still recorded:
+stop it first.</p>
+<p><strong>The backend does not become ready.</strong> The launcher polls for five minutes
+(ten for the Dask variant), then names the job log. Look there first: a
+missing image, a data root that does not exist, or a Python error at start.</p>
+<p><strong>The local port is in use.</strong> The helper refuses to start
+(<code class="docutils literal notranslate"><span class="pre">localhost:&lt;port&gt;</span> <span class="pre">is</span> <span class="pre">already</span> <span class="pre">in</span> <span class="pre">use</span></code>). Stop what holds it (often the
+desktop’s local backend on <code class="docutils literal notranslate"><span class="pre">8000</span></code>) or choose another <code class="docutils literal notranslate"><span class="pre">--port</span></code>.</p>
+<p><strong>A tunnel from an earlier run is still active.</strong> The helper refuses to start
+until it is stopped: <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/visivo_slurm_tunnel.sh</span> <span class="pre">--stop</span></code>.</p>
+<p><strong>The tunnel dropped.</strong> The helper reopens it by itself within a few seconds
+of the connection ending, and keep-alives notice a dead connection within
+about a minute. If it does not come back, check that <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">&lt;user&gt;&#64;&lt;frontend&gt;</span></code>
+still works without a password, and that the job is still running: when the
+job ends (its <code class="docutils literal notranslate"><span class="pre">--time</span></code> is over) there is nothing left to tunnel to.</p>
+<p><strong>The desktop gets 401 from the cluster backend.</strong> The token in the desktop’s
+entry is not the job’s. Each job has its own token unless <code class="docutils literal notranslate"><span class="pre">--token</span></code> is given:
+copy it again from <code class="docutils literal notranslate"><span class="pre">~/.visivo_slurm_token</span></code> (single node) or
+<code class="docutils literal notranslate"><span class="pre">~/.visivo_slurm_dask_token</span></code> (Dask), never from <code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code>, which is
+the local backend’s. If the entry’s URL is a loopback address on the local
+backend’s port, the desktop sends it the local token, when there is one,
+whatever the entry says: use another <code class="docutils literal notranslate"><span class="pre">--port</span></code>.</p>
+<p><strong>The 3-D view is never rendered on the node.</strong> The backend has no EGL. The
+dataset-open response reports <code class="docutils literal notranslate"><span class="pre">server_side_rendering_available:</span> <span class="pre">false</span></code>, the
+Remote mode is disabled, and the desktop renders a decimated proxy of the cube
+locally. Start the job with <code class="docutils literal notranslate"><span class="pre">--sif</span> <span class="pre">backend-egl.sif</span></code> and a GPU (<code class="docutils literal notranslate"><span class="pre">--gres</span></code>).
+<code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">test</span> <span class="pre">backend-egl.sif</span></code> runs the image’s own check, which fails when
+the backend would not offer server-side rendering.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="src-node.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">The backend as an SRC node</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../user-guide/troubleshooting.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Troubleshooting</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, VisIVOLab
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Running the backend on a cluster</a><ul>
+<li><a class="reference internal" href="#quick-start">Quick start</a></li>
+<li><a class="reference internal" href="#the-launcher-launch-backend-slurm-sh">The launcher: <code class="docutils literal notranslate"><span class="pre">launch_backend_slurm.sh</span></code></a><ul>
+<li><a class="reference internal" href="#the-workspace">The workspace</a></li>
+<li><a class="reference internal" href="#other-backend-settings">Other backend settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-laptop-helper-visivo-slurm-tunnel-sh">The laptop helper: <code class="docutils literal notranslate"><span class="pre">visivo_slurm_tunnel.sh</span></code></a></li>
+<li><a class="reference internal" href="#multi-node-backend-with-dask">Multi-node backend with Dask</a></li>
+<li><a class="reference internal" href="#apptainer-images">Apptainer images</a><ul>
+<li><a class="reference internal" href="#building-the-egl-image">Building the EGL image</a></li>
+<li><a class="reference internal" href="#what-the-launcher-adds-for-egl">What the launcher adds for EGL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#node-capacity-under-slurm">Node capacity under SLURM</a></li>
+<li><a class="reference internal" href="#server-side-rendering-on-the-node">Server-side rendering on the node</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=f26bd01d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>

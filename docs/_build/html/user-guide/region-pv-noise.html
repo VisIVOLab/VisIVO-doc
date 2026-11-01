@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Regions, PV diagrams, noise - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -299,7 +337,7 @@
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#position-velocity-diagrams">PV diagram</a></p></td>
 <td><p>intensity along a path × velocity</p></td>
-<td><p>polyline + Compute</p></td>
+<td><p>draw a path; edit it live</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#noise-estimation">Noise estimation</a></p></td>
 <td><p>per-channel MAD + 1σ</p></td>
@@ -354,37 +392,31 @@ actions (Box / Circle / Polygon / Annulus) are an exclusive group in
 both the menu and the sidebar (<code class="docutils literal notranslate"><span class="pre">ExclusiveOptional</span></code>: at most one
 checked, or none). Clicking the currently-active shape again unchecks
 it and disarms region drawing entirely. The region overlay drawn on
-the 2-D view <strong>persists until you close BOTH the Region Analysis
-result dialog and the Region Spectral Profile window</strong> — closing only
-one keeps the overlay alive (the result dialog might still be on
-screen while you inspect the spectrum, or vice versa). Closing the
-last one wipes it.</p>
+the 2-D view <strong>persists while its spectrum is still on screen</strong>, so the shape
+you measured stays visible next to the curve it produced; it is wiped when the
+spectrum plot goes away, or when you arm another region shape.</p>
 </div>
 </section>
-<section id="region-spectral-profile-per-channel-mean-over-the-region">
-<h3>Region Spectral Profile (per-channel mean over the region)<a class="headerlink" href="#region-spectral-profile-per-channel-mean-over-the-region" title="Link to this heading">¶</a></h3>
-<p>Releasing the region triggers two things at once:</p>
-<ol class="arabic simple">
-<li><p>A <strong>Region Analysis</strong> result dialog appears on the right edge of the
-cube viewer (width and height derived from the content, no scrolling
-for the standard 8-row report).</p></li>
-<li><p>A <strong>Region Spectral Profile</strong> window opens — the same
-<a class="reference internal" href="#cube-viewer#extract-spectrum-probe-a-single-pixel"><span class="xref myst"><em>Spectral Profile</em></span></a>
-widget as the pixel probe, but in <strong>region mode</strong>: the Live / Pinned
-status badge is hidden (the spectrum is one-shot, not live), and the
-header reads e.g. <em>“Circle region · 195 / 195 valid pixels · 2D
-stats: current slice · spectrum: full cube”</em> in place of the pixel
-hint.</p></li>
-</ol>
+<section id="region-spectrum-per-channel-mean-over-the-region">
+<h3>Region spectrum (per-channel mean over the region)<a class="headerlink" href="#region-spectrum-per-channel-mean-over-the-region" title="Link to this heading">¶</a></h3>
+<p>Releasing the region produces a <strong>SPEC product</strong>: it appears in Session Data
+and is placed in a pane straight away — a free one, or by growing the layout,
+and if there is no room the status bar says where to find it (a pane’s ▾ menu).
+The 2-D statistics of the region are <strong>not</strong> a separate window: they are the
+product’s Provenance, so selecting the row in Session Data and opening
+Inspector ▸ Provenance shows the region shape, the valid-pixel count and
+min / max / mean / median / σ, while the status bar reports the headline numbers.</p>
 <p>The plot itself is <strong>mean per channel over the region</strong> across <strong>all
 cube channels</strong> (not just the current slice). The stats bar
 (<code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">/</span> <span class="pre">Min</span> <span class="pre">/</span> <span class="pre">Max</span> <span class="pre">/</span> <span class="pre">Mean</span> <span class="pre">/</span> <span class="pre">RMS</span> <span class="pre">/</span> <span class="pre">∫</span></code>), channel marker, theme, and CSV
-export all work identically to pixel-probe mode.</p>
-<p>To <strong>compare several regions</strong>, click <strong>Pin Spectrum</strong> in the plot header
-before drawing the next region: the current mean spectrum is kept as a
+export all work identically to pixel-probe mode; so do
+<a class="reference internal" href="#spectral-tools#line-identification-overlaying-a-line-list"><span class="xref myst">line identification</span></a>
+and the <a class="reference internal" href="#spectral-tools#gaussian-line-fit"><span class="xref myst">Gaussian fit</span></a>.</p>
+<p>To <strong>compare several regions</strong>, click <strong>Compare</strong> in the Inspector’s SPECTRUM
+panel before drawing the next region: the current mean spectrum is kept as a
 colour-coded comparison curve and the next region’s spectrum overlays on
 the same axes with a legend. See
-<a class="reference internal" href="#cube-viewer#comparing-regions-pinned-spectra"><span class="xref myst">Comparing regions (pinned spectra)</span></a>.</p>
+<a class="reference internal" href="#cube-viewer#comparing-regions-overlaid-spectra"><span class="xref myst">Comparing regions (overlaid spectra)</span></a>.</p>
 </section>
 <section id="statistics-shown">
 <h3>Statistics shown<a class="headerlink" href="#statistics-shown" title="Link to this heading">¶</a></h3>
@@ -430,6 +462,18 @@ unit; otherwise they’re in raw counts.</p>
 background and the outer-vs-inner difference is shown automatically —
 useful for aperture photometry.</p>
 </div>
+<p>Every region analysis leaves a row in <strong>Session Data</strong> carrying both its numbers
+and the shape they were measured on. Opening that row <strong>redraws the region</strong> and
+reopens the statistics, so a measurement taken twenty minutes and three regions
+ago can still be traced back to the pixels that produced it. The same holds for a
+pinned spectrum in the cube viewer: opening its row puts the crosshair back on
+the pixel it was probed at and returns to that channel.</p>
+<p>Drawing an annulus takes two steps: drag out the <strong>outer</strong> radius, then type the
+<strong>inner</strong> one when prompted. The inner ring is drawn <strong>as you type it</strong>, in the
+same amber the crop and mask previews use, so you can see the band you are about
+to measure before committing to it; it takes the region’s own colour once you
+accept, and disappears if you cancel. (Before, the prompt was a bare number box
+and the ring appeared only after you had already chosen.)</p>
 </section>
 <section id="sending-the-result-somewhere">
 <h3>Sending the result somewhere<a class="headerlink" href="#sending-the-result-somewhere" title="Link to this heading">¶</a></h3>
@@ -447,84 +491,193 @@ useful for aperture photometry.</p>
 <p>A <strong>position–velocity (PV) diagram</strong> is a 2-D plot that shows intensity
 along a chosen spatial path (one axis) versus velocity / frequency (the
 spectral axis of the cube, the other axis). It is the standard way to
-inspect kinematic structure: rotation curves, outflows, jets, expansion.</p>
-<section id="extracting-a-pv">
-<h3>Extracting a PV<a class="headerlink" href="#extracting-a-pv" title="Link to this heading">¶</a></h3>
+inspect kinematic structure: rotation curves, warps, outflows, jets,
+expansion.</p>
+<section id="drawing-the-path">
+<h3>Drawing the path<a class="headerlink" href="#drawing-the-path" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
-<li><p>In the cube viewer click <strong>Tools → Extract PV Diagram</strong>. The cursor
-becomes a polyline tool.</p></li>
-<li><p>Draw a polyline on the 2-D slice:</p>
-<ul class="simple">
-<li><p>Click each vertex (one or more segments are fine).</p></li>
-<li><p>The path is rendered as a yellow line, with control points at every
-vertex.</p></li>
-</ul>
-</li>
-<li><p>Set the <strong>path width</strong> (in pixels) in the right-side card — this
-controls how many adjacent pixels perpendicular to the path are
-averaged to make the PV (default 3). Larger width → smoother PV but
-blurs narrow features.</p></li>
-<li><p>Click <strong>Compute</strong>. The backend reads the cube along the path and
-builds the PV map; the result opens in a dedicated <em>PV viewer</em> with
-its own LUT, range, and WCS overlay.</p></li>
+<li><p>In the cube viewer choose <strong>Tools → Extract PV Diagram</strong>. The cursor
+becomes a cross.</p></li>
+<li><p>Click on the 2-D slice to place the vertices of the path, as many as you
+like. Vertices are kept at sub-pixel precision.</p></li>
+<li><p><strong>Double-click</strong> or <strong>right-click</strong> to finish the path. The diagram is
+computed on the backend and opens in a pane.</p></li>
 </ol>
+<p>You can draw the path on a <strong>moment map</strong> instead of a channel: arm the tool
+while the map is on screen (see
+<a class="reference internal" href="#drawing-on-a-moment-map">Drawing on a moment map</a>).</p>
 </section>
-<section id="what-you-see">
-<h3>What you see<a class="headerlink" href="#what-you-see" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>X axis</strong> — position along the polyline (arcsec or pixels, depending
-on whether the cube has spatial WCS).</p></li>
-<li><p><strong>Y axis</strong> — spectral coordinate (velocity, frequency, channel).</p></li>
-<li><p><strong>Color</strong> — intensity (BUNIT).</p></li>
-</ul>
-<p>A small extras panel shows:</p>
+<section id="editing-the-path">
+<h3>Editing the path<a class="headerlink" href="#editing-the-path" title="Link to this heading">¶</a></h3>
+<p>The finished path stays on the image with a handle on each vertex, and while
+<em>Extract PV Diagram</em> is on it can be edited. The diagram follows every change.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p></p></th>
+<tr class="row-odd"><th class="head"><p>Gesture</p></th>
+<th class="head"><p>Effect</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>Total length</strong></p></td>
-<td><p>Polyline length in arcsec (if WCS is available)</p></td>
+<tr class="row-even"><td><p>Drag a handle</p></td>
+<td><p>moves that vertex</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Spatial unit</strong></p></td>
-<td><p>arcsec / pixel</p></td>
+<tr class="row-odd"><td><p>Drag the path</p></td>
+<td><p>moves the whole path</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Pixel scale</strong></p></td>
-<td><p>arcsec / pixel along the path</p></td>
+<tr class="row-even"><td><p><strong>Shift</strong> + drag the path</p></td>
+<td><p>rotates it about its centre</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>BUNIT</strong></p></td>
-<td><p>Cube brightness unit</p></td>
+<tr class="row-odd"><td><p>Double-click on the path</p></td>
+<td><p>adds a vertex there</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Beam</strong></p></td>
-<td><p>If the cube header carries beam metadata (BMAJ / BMIN / BPA)</p></td>
+<tr class="row-even"><td><p>Right-click on a vertex</p></td>
+<td><p>removes it (a path keeps at least two)</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>The mouse wheel zooms and the middle button pans while the tool is armed.</p>
+<p>While you drag, the diagram is recomputed a fraction of a second after the
+pointer pauses; if a computation is still running, only the latest shape is
+computed next, so nothing piles up.</p>
+<p>Turning <em>Extract PV Diagram</em> off keeps the path on screen but frozen; turning
+it on again resumes editing the same path. <strong>New path</strong> in the diagram starts
+over.</p>
+</section>
+<section id="the-diagram-window">
+<h3>The diagram window<a class="headerlink" href="#the-diagram-window" title="Link to this heading">¶</a></h3>
+<p>The footer of the diagram holds the path controls, so none of them needs a
+dialog:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Control</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Width</strong></p></td>
+<td><p>width of the cut across the path; the values across it are averaged</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Smooth curve</strong></p></td>
+<td><p>cut along a smooth curve through the vertices (centripetal Catmull-Rom) instead of straight segments</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>New path</strong></p></td>
+<td><p>discard this path and draw a new one</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Save as FITS…</strong></p></td>
+<td><p>write the diagram to the Workspace Exports (below)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Save as PNG…</strong></p></td>
+<td><p>save the picture</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The header repeats the path (start, end, vertices, length) and the sampling
+(width, spectral axis, spatial unit, scale). A colour bar on the right carries
+the cube’s <code class="docutils literal notranslate"><span class="pre">BUNIT</span></code>.</p>
+</section>
+<section id="what-is-computed">
+<h3>What is computed<a class="headerlink" href="#what-is-computed" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>X axis</strong>: offset along the path, in arcsec when the cube has a celestial
+WCS (pixels otherwise), starting at 0 at the first vertex.</p></li>
+<li><p><strong>Y axis</strong>: the cube’s spectral coordinate (velocity, frequency, …), placed
+by <strong>value</strong>, so a spectral axis that decreases (<code class="docutils literal notranslate"><span class="pre">CDELT3</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>, the usual case
+for HI cubes) or that is not linear (e.g. <code class="docutils literal notranslate"><span class="pre">VOPT-F2W</span></code>) is drawn where it
+belongs.</p></li>
+<li><p><strong>Sampling</strong>: one sample every pixel <em>along</em> the path (the finer pixel size
+when pixels are not square, measured on the sky), so the offset axis is
+exactly linear also for diagonal and curved paths. Values are bilinear at
+sub-pixel positions; a blank (NaN) neighbour is left out instead of blanking
+the sample. Across the path, <em>Width</em> samples one pixel apart are averaged.</p></li>
+<li><p>The computation runs on the backend, at <strong>full resolution</strong>, and reads only
+the pixels around the path, so it works on large and remote cubes.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Up to version 1.0.1 the diagram of a cube with a <strong>decreasing</strong> spectral axis was drawn
+mirrored against its own axis: emission appeared at the wrong velocity (e.g. a
+source at the centre of the band near one end). Diagrams made with earlier
+versions on such cubes should be redone.</p>
+</div>
+<p>The PV needs the spectral axis to be the cube’s last axis (e.g. <code class="docutils literal notranslate"><span class="pre">NAXIS3</span></code>); a
+transposed cube is refused with a message rather than cut along a spatial axis.</p>
+</section>
+<section id="saving-the-diagram-as-fits">
+<h3>Saving the diagram as FITS<a class="headerlink" href="#saving-the-diagram-as-fits" title="Link to this heading">¶</a></h3>
+<p><strong>Save as FITS…</strong> asks for a file name and writes a 2-D FITS image to the
+Workspace Exports (browsable from the Data Hub):</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Card</p></th>
+<th class="head"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CTYPE1</span> <span class="pre">=</span> <span class="pre">'OFFSET'</span></code>, <code class="docutils literal notranslate"><span class="pre">CUNIT1</span> <span class="pre">=</span> <span class="pre">'arcsec'</span></code></p></td>
+<td><p>offset along the path, <code class="docutils literal notranslate"><span class="pre">CRVAL1</span> <span class="pre">=</span> <span class="pre">0</span></code> at the first vertex, <code class="docutils literal notranslate"><span class="pre">CDELT1</span></code> = sample step</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CTYPE2</span></code>, <code class="docutils literal notranslate"><span class="pre">CUNIT2</span></code>, <code class="docutils literal notranslate"><span class="pre">CRVAL2</span></code>, <code class="docutils literal notranslate"><span class="pre">CDELT2</span></code>, <code class="docutils literal notranslate"><span class="pre">CRPIX2</span></code></p></td>
+<td><p>the cube’s <strong>own</strong> spectral axis, algorithm and parameters included, so a non-linear axis stays exact</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BUNIT</span></code>, <code class="docutils literal notranslate"><span class="pre">BMAJ</span></code>, <code class="docutils literal notranslate"><span class="pre">BMIN</span></code>, <code class="docutils literal notranslate"><span class="pre">BPA</span></code></p></td>
+<td><p>from the cube</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RESTFRQ</span></code>, <code class="docutils literal notranslate"><span class="pre">SPECSYS</span></code>, …</p></td>
+<td><p>copied when present</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PVWIDTH</span></code>, <code class="docutils literal notranslate"><span class="pre">PVSTEP</span></code></p></td>
+<td><p>width (cube pixels) and sample step (arcsec)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HISTORY</span></code></p></td>
+<td><p>every vertex, in pixels and in sky coordinates</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The file is computed from the path the <strong>displayed</strong> diagram was made from.</p>
+</section>
+<section id="drawing-on-a-moment-map">
+<h3>Drawing on a moment map<a class="headerlink" href="#drawing-on-a-moment-map" title="Link to this heading">¶</a></h3>
+<p>Open the moment map in a pane (Session Data, or the pane’s menu), then arm the
+tool — <em>Extract PV Diagram</em>, a region or the probe. The tool draws on the map:
+the pane keeps the map’s title and colours, and the path, region or probe sit
+on its pixels. This is the way to draw a PV path along a disk or a filament seen
+in moment 0, or across the velocity gradient of moment 1.</p>
+<p>Click in the moment pane first, so that it is the active one: the tool always
+works in the active pane. If the 2-D Slice was on screen in another pane, that
+pane becomes <strong>Channels</strong>: it keeps showing the current channel (display only),
+follows the channel bar, which moves onto it, and shows the PV path too, so you
+can follow the cut through the channels while you draw it on the map. The path
+is also drawn on every other map pane of the same field.</p>
+<p>Choose <em>2D Slice</em> in either pane’s menu (or in Session Data) to stop drawing on
+the map: the panes go back to how they were.
+A region measured on the map records the map (and its version) as what it
+measured, and the probe reports the map’s unit.</p>
 </section>
 <section id="tips">
 <h3>Tips<a class="headerlink" href="#tips" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>Place the polyline <strong>along</strong> the kinematic axis (the direction of
-rotation, the outflow axis, etc.) for the clearest signature.</p></li>
-<li><p>Two short segments at an angle let you trace a curved structure (jet
-break, S-shape).</p></li>
-<li><p>Use <em>Slice playback</em> in the cube viewer first to identify where the
-emission lives, then draw the PV path on a representative slice.</p></li>
+<li><p>Place the path <strong>along</strong> the kinematic axis (the major axis of a disk, the
+outflow axis) for the clearest signature; use <em>Smooth curve</em> for a warp or
+a spiral arm.</p></li>
+<li><p>Use <em>Slice playback</em> or a moment map first to see where the emission lives.</p></li>
+<li><p>For channel-by-channel comparison keep one colour scale: <em>DISPLAY → Same
+range on every channel</em> (see
+<a class="reference internal" href="cube-viewer.html#one-colour-range-for-every-channel"><span class="std std-ref">One colour range for every channel</span></a>).</p></li>
 </ul>
 </section>
 <section id="caveats">
 <h3>Caveats<a class="headerlink" href="#caveats" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>The PV is computed on the <strong>full-resolution</strong> cube on the backend, not
-on a downsampled preview, so the first PV after opening a cube may take
-longer if the high-res swap hasn’t completed.</p></li>
-<li><p>It’s a heavy backend task, so it’s throttled to leave a worker free for
-interactive slice scrolling; you can keep navigating the cube while
-the PV computes.</p></li>
+<li><p>The PV is computed on the full-resolution cube on the backend, not on the
+downsampled preview; a long, wide path on a very large cube takes longer.</p></li>
+<li><p>It is a heavy backend task, throttled so that slice scrolling stays
+responsive while it runs.</p></li>
 </ul>
 </section>
 </section>
@@ -562,6 +715,31 @@ summarised as <em>Mean / Median / Min / Max</em>.</p></li>
 <li><p><strong>Subtitle</strong> with the selected region and a warning when too much of
 the selection is blank — see <a class="reference internal" href="#blank-pixel-handling">Blank-pixel handling</a>.</p></li>
 </ul>
+</li>
+<li><p>The estimate is also recorded in <strong>Session Data</strong> as a statistics row
+(<code class="docutils literal notranslate"><span class="pre">Noise</span> <span class="pre">σ=…</span> <span class="pre">(x</span> <span class="pre">…,</span> <span class="pre">y</span> <span class="pre">…)</span></code>), with σ/MAD, the region and the channel range in
+its <strong>Provenance</strong> tab. The result panel is a transient window, and σ is the
+number you reach for afterwards — the moment-map threshold, the isosurface
+level, the mask cut-off — so closing the panel no longer loses it. Re-running
+the <em>same</em> region updates that row in place; a different region adds its own,
+so two noise regions can be compared side by side.
+<strong>Double-click that row (or right-click ▸ Show the Numbers Again) to bring the
+result panel back</strong> exactly as it was: it is rebuilt from what the product
+recorded, so it outlives the panel you closed, the tool window and anything
+else you do in between.</p></li>
+<li><p><strong>σ is then used by the tools that need a noise level</strong> — measured once, on
+a region you chose, instead of each tool guessing its own:</p>
+<ul class="simple">
+<li><p><em>Compute Moment</em> offers <strong>3σ of the noise estimate</strong> as the mask threshold
+(chosen by default; Auto and a typed value remain available);</p></li>
+<li><p>the <em>Line-Width Map</em> turns its mask on at 3σ of it;</p></li>
+<li><p>the <em>Kinematic Lasso</em> counts its threshold in units of it (its panel shows
+which σ it uses).</p></li>
+</ul>
+<p>Each records the σ and the region in its product’s provenance. The value is
+the median of the per-channel σ. Without an estimate every tool falls back to
+its own robust σ over the whole cube, as before. A new estimate replaces the
+previous one; a lasso selection on screen is grown again with it.</p>
 </li>
 </ol>
 </section>
@@ -696,7 +874,8 @@ channels you can identify with the noise tool.</p></li>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -719,14 +898,18 @@ channels you can identify with the noise tool.</p></li>
 <li><a class="reference internal" href="#">Regions, PV diagrams, noise</a><ul>
 <li><a class="reference internal" href="#region-statistics">Region statistics</a><ul>
 <li><a class="reference internal" href="#drawing-a-region">Drawing a region</a></li>
-<li><a class="reference internal" href="#region-spectral-profile-per-channel-mean-over-the-region">Region Spectral Profile (per-channel mean over the region)</a></li>
+<li><a class="reference internal" href="#region-spectrum-per-channel-mean-over-the-region">Region spectrum (per-channel mean over the region)</a></li>
 <li><a class="reference internal" href="#statistics-shown">Statistics shown</a></li>
 <li><a class="reference internal" href="#sending-the-result-somewhere">Sending the result somewhere</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#position-velocity-diagrams">Position-velocity diagrams</a><ul>
-<li><a class="reference internal" href="#extracting-a-pv">Extracting a PV</a></li>
-<li><a class="reference internal" href="#what-you-see">What you see</a></li>
+<li><a class="reference internal" href="#drawing-the-path">Drawing the path</a></li>
+<li><a class="reference internal" href="#editing-the-path">Editing the path</a></li>
+<li><a class="reference internal" href="#the-diagram-window">The diagram window</a></li>
+<li><a class="reference internal" href="#what-is-computed">What is computed</a></li>
+<li><a class="reference internal" href="#saving-the-diagram-as-fits">Saving the diagram as FITS</a></li>
+<li><a class="reference internal" href="#drawing-on-a-moment-map">Drawing on a moment map</a></li>
 <li><a class="reference internal" href="#tips">Tips</a></li>
 <li><a class="reference internal" href="#caveats">Caveats</a></li>
 </ul>

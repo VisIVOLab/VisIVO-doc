@@ -12,13 +12,10 @@ The full list, with current status, is on the [issue tracker](https://github.com
 
 ## Delivered
 
-Items of this roadmap that are now in the software (their issues are being closed):
+Items of this roadmap that are now in the software:
 
 - [Backend health and metrics endpoints for node operation](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/2) (#2): `/v1/ping`, `/v1/node/status`, `/v1/metrics` ([The backend as an SRC node](deployment/src-node.md)).
-- [Concurrent remote rendering sessions per backend](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/4) (#4): each 3-D view renders in its own process, spread over the node's GPUs ([Running the backend on a cluster](deployment/hpc-slurm.md)).
-- [Standard SODA service on the backend, with moments and PV as remote operations](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/7) (#7): SODA sync and UWS async with `OPERATION=MOMENT|PV`.
 - [Show which node serves a dataset and fall back to the next replica](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/1) (#1): the *Served by* column, *Open via…*, and the fallback to the next node when one refuses ([SKAVA discovery](user-guide/skava-discovery.md)).
-- [Linux releases: keep the sign-in across restarts](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/56) (#56): through libsecret, when it is installed (1.0.6).
 
 ## SKA and SRCNet
 
@@ -27,20 +24,27 @@ Running VisIVO Visual Analytics as part of the SKA Regional Centre Network: IVOA
 **Next**
 
 - [Benchmark out-of-core moments at SKA scale on an HPC node](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/3) (#3)
+- [Concurrent remote rendering sessions per backend](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/4) (#4): sessions in their own processes, capped per backend and spread over the node's GPUs; still to do: a queue above the cap, with its position shown in the client
 
 **2027**
 
 - [SRCNet sign-in through IAM (OIDC)](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/6) (#6): the client signs in to an OIDC provider with configurable endpoints (tested with Keycloak); still to do against the SRCNet IAM
+- [Standard SODA service on the backend, with moments and PV as remote operations](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/7) (#7): sync and UWS async with `OPERATION=MOMENT|PV` are in place; still to do: `POL`, and a check with TOPCAT
 - [Deploy the backend as an SRCNet node service](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/8) (#8)
 - [Plugin registry for source finders (SoFiA-2, PyBDSF, Aegean, photutils)](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/9) (#9): the registry, SoFiA-2 and photutils are in place; PyBDSF and Aegean remain
 - [Kinematic lasso: streaming connected components for very large objects](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/10) (#10)
 - [Kinematic lasso: multi-scale selection, 2-D edit growth and velocity conventions](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/11) (#11)
+- [Scaling remote 3-D rendering beyond one GPU and one node](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/73) (#73), one step at a time, each measured before the next:
+  - [Brick pyramid for cubes, built out of core](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/69) (#69)
+  - [Server-side out-of-core volume rendering from the brick pyramid](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/70) (#70)
 
 **Long term**
 
 - [Run source finders near the data through the SRCNet Computing Broker](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/12) (#12): the client submits finder jobs to a broker that follows the SRCNet job API (tested with a mock); still to do against the SRCNet broker
 - [Interface for deep-learning source finders](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/14) (#14)
 - [Bricked level-of-detail rendering for very large cubes](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/15) (#15)
+- [Multi-GPU rendering of one cube on one node](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/71) (#71), step 2 of #73
+- [Distributed rendering of one view across nodes](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/72) (#72), step 3 of #73
 
 ## SKAVA
 
@@ -60,6 +64,7 @@ Working across Galactic-plane surveys: aligned multi-band cutouts, compact sourc
 
 **Next**
 
+- [VLKB service URL: one default for queries and batch cutouts](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/76) (#76)
 - [Open multi-wavelength cutouts of one source on a common grid](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/16) (#16)
 - [Cross-match compact-source catalogues across surveys in the GUI](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/17) (#17)
 - [Polygon and rotated-box regions for VLKB cutouts](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/18) (#18)
@@ -136,6 +141,7 @@ Learned models that assist the user, beyond the copilot: object segmentation, so
 
 **Next**
 
+- [Self-hosted copilot: model default and base URL validation from the environment](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/75) (#75)
 - [Suggest SoFiA-2 parameters from the data](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/64) (#64)
 
 **2027**
@@ -158,11 +164,13 @@ Infrastructure shared by all areas.
 - [Common framework for asynchronous jobs: progress, cancel, outlive the dialog](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/53) (#53)
 - [Asynchronous movie export with chosen resolution](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/54) (#54)
 - [Documentation gaps: RM synthesis and time-series data](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/55) (#55)
+- [Linux releases: keep the sign-in across restarts](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/56) (#56): the code is in place; still to do: libsecret in the Linux release build
 - [Publish a backend container image for HPC and SRC nodes](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/66) (#66)
 - [Contributing guide and developer onboarding](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/67) (#67)
 
 **2027**
 
+- [One convention for shapes and bounds across the binary volume routes](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/74) (#74)
 - [Open compressed FITS directly](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/57) (#57)
 - [VR off the UI thread; server-side rendering on macOS and CPU-only hosts](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/58) (#58)
 - [Evaluate the scientific copilot](https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues/59) (#59)

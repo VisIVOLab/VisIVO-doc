@@ -7,7 +7,7 @@
         <link rel="prefetch" href="_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Catalogue 3D Viewer - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="user-guide/spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -397,6 +435,12 @@ subtables with <code class="docutils literal notranslate"><span class="pre">x</s
 format is inferred from the file suffix (<code class="docutils literal notranslate"><span class="pre">catalogueFormatForPath</span></code>). All formats
 can also be relayed over SAMP (<code class="docutils literal notranslate"><span class="pre">/v1/samp/send-catalogue</span></code> converts non-native
 formats to VOTable).</p>
+<p>Large IPAC tables whose columns are all declared numeric (the usual case for
+simulation snapshots) are read by a C parser: the 2.3-million-row
+<code class="docutils literal notranslate"><span class="pre">NKATZ_2.3M.tbl</span></code> opens in under a second. A table with string columns or
+declared null markers goes through astropy’s IPAC reader, which gives the same
+result more slowly. Either way the parse runs off the service’s event loop, so
+the backend keeps answering while a big table loads.</p>
 <section id="paging-load-more-load-all">
 <h3>Paging — Load more / Load all<a class="headerlink" href="#paging-load-more-load-all" title="Link to this heading">¶</a></h3>
 <p>The viewer loads sources in pages of 50 000 (<code class="docutils literal notranslate"><span class="pre">m_pageSize</span></code>); the <strong>Filters</strong> tab
@@ -410,9 +454,13 @@ loaded.</p>
 </section>
 <section id="multi-file-load">
 <h3>Multi-file load<a class="headerlink" href="#multi-file-load" title="Link to this heading">¶</a></h3>
-<p>When you pick a catalogue file that has same-extension siblings in its folder,
-the viewer offers to load <strong>all of them as one combined catalogue</strong> (e.g. the 27
-spatial subtables of a cosmological snapshot). The desktop sends the full path
+<p>When you pick a catalogue file whose name ends in a numeric partition index
+(<code class="docutils literal notranslate"><span class="pre">snap_p50n576_z0_1_1_1.tbl</span></code>, <code class="docutils literal notranslate"><span class="pre">part_001.csv</span></code>, …) and the folder holds other
+pieces with the same name and extension, the viewer lists them and offers to
+load <strong>all of them as one combined catalogue</strong> (e.g. the 27 spatial subtables of
+a cosmological snapshot). Other files with the same extension are not offered:
+a folder of unrelated tables, or two sizes of one sample such as
+<code class="docutils literal notranslate"><span class="pre">NKATZ_2.3M.tbl</span></code> and <code class="docutils literal notranslate"><span class="pre">NKATZ_4.6M.tbl</span></code>, opens one file at a time. The desktop sends the full path
 list; <code class="docutils literal notranslate"><span class="pre">/v1/catalogue/open</span></code> accepts <code class="docutils literal notranslate"><span class="pre">paths:</span> <span class="pre">[...]</span></code>, loads each (same format) and
 <code class="docutils literal notranslate"><span class="pre">pd.concat</span></code>s them — <strong>requiring identical columns</strong> (a mismatch is rejected,
 naming the offending file, so a silent NaN union can’t corrupt the data). The
@@ -472,13 +520,20 @@ a velocity field (see the velocity-field viewer).</p>
 <section id="distance-resolution-priority">
 <h2>Distance resolution priority<a class="headerlink" href="#distance-resolution-priority" title="Link to this heading">¶</a></h2>
 <p>For each entry, <code class="docutils literal notranslate"><span class="pre">Catalogue3DParser::detail::entryDistanceMpc(entry,</span> <span class="pre">schema)</span></code> applies in order:</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">entry.distanceMpc</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> — cosmology-selector override (set by <code class="docutils literal notranslate"><span class="pre">onCosmologyFinished()</span></code>)</p></li>
-<li><p>Catalogue <code class="docutils literal notranslate"><span class="pre">distance</span></code> / <code class="docutils literal notranslate"><span class="pre">dist</span></code> / <code class="docutils literal notranslate"><span class="pre">dMpc</span></code> field — positive values only</p></li>
-<li><p>Redshift field (<code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">REDSHIFT</span></code>, <code class="docutils literal notranslate"><span class="pre">ZSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">ZMEAN</span></code>, <code class="docutils literal notranslate"><span class="pre">ZPHOT</span></code>, …) → <code class="docutils literal notranslate"><span class="pre">comovingDistanceMpc(z)</span></code> — if result &gt; 0</p></li>
+<ol class="arabic simple" start="0">
+<li><p><strong>Redshift-space mode</strong> (<code class="docutils literal notranslate"><span class="pre">CatalogueDistanceMode::RedshiftSpace</span></code>) — <code class="docutils literal notranslate"><span class="pre">hubbleDistanceMpc(z)</span></code> for any source with a usable z &gt; 0, deliberately ignoring the override and the distance column; anything without one falls through to the list below</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entry.distanceMpc</span></code> finite — cosmology-selector override (set by <code class="docutils literal notranslate"><span class="pre">onCosmologyFinished()</span></code>)</p></li>
+<li><p>Catalogue <code class="docutils literal notranslate"><span class="pre">distance</span></code> / <code class="docutils literal notranslate"><span class="pre">dist</span></code> / <code class="docutils literal notranslate"><span class="pre">dMpc</span></code> field — positive values only, converted to a comoving radius when the column is a luminosity or angular-diameter distance</p></li>
+<li><p>Redshift field (<code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">REDSHIFT</span></code>, <code class="docutils literal notranslate"><span class="pre">ZSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">ZMEAN</span></code>, <code class="docutils literal notranslate"><span class="pre">ZPHOT</span></code>, …) → <code class="docutils literal notranslate"><span class="pre">comovingDistanceMpc(z)</span></code> — z &gt; 0, since a redshift column holding 0 means “not measured”</p></li>
 <li><p>Hardcoded 300 Mpc fallback</p></li>
 </ol>
-<p><code class="docutils literal notranslate"><span class="pre">comovingDistanceMpc(z)</span></code> uses a simple Riemann integral with Planck18 constants (H₀ = 67.74, Ωm = 0.3089, ΩΛ = 0.6911). It returns 0 for z ≤ 0.</p>
+<p><code class="docutils literal notranslate"><span class="pre">comovingDistanceMpc(z)</span></code> is a 1000-step trapezoid over a flat <strong>Planck 2018</strong>
+model (H₀ = 67.66, Ωm = 0.3111, ΩΛ = 1 − Ωm, no radiation term). It returns 0
+for z ≤ 0. The constants were Planck 2015 (67.74 / 0.3089) while the UI called
+the branch “Planck18 (local)”, which made the default disagree with the
+astropy-backed models by ~1 %; <code class="docutils literal notranslate"><span class="pre">tests/test_catalogue_cosmology.cpp</span></code> now pins it
+against astropy’s Planck18 at ten redshifts out to z = 20, where the two agree
+to 0.06 %.</p>
 </section>
 <hr class="docutils" />
 <section id="coordinate-frames">
@@ -644,21 +699,37 @@ no-ops when the nearest source is unchanged, so a still cursor triggers no
 re-renders.</p>
 </section>
 <hr class="docutils" />
-<section id="sidebar-pages">
-<h2>Sidebar pages<a class="headerlink" href="#sidebar-pages" title="Link to this heading">¶</a></h2>
-<p>The sidebar uses a rail + stacked-widget layout with three pages:</p>
-<ol class="arabic simple">
-<li><p><strong>Visualization</strong> — geometry / size mode + Axis Mapping card (X/Y/Z, size, colour field assignment) + scene controls (frame, cosmology, axes, shells)</p></li>
-<li><p><strong>Source Info</strong> — selected source metadata (from <code class="docutils literal notranslate"><span class="pre">ui-&gt;pageInfo</span></code>)</p></li>
-<li><p><strong>Filters</strong> — multi-filter list + Apply + Load more</p></li>
-</ol>
-<p>The full catalogue table view is a separate <code class="docutils literal notranslate"><span class="pre">QDockWidget</span></code>, not a sidebar page.</p>
+<section id="window-layout">
+<h2>Window layout<a class="headerlink" href="#window-layout" title="Link to this heading">¶</a></h2>
+<p>The same chrome as the image and cube viewers, built by <code class="docutils literal notranslate"><span class="pre">WorkspaceChrome</span></code>
+(<code class="docutils literal notranslate"><span class="pre">installCommandBar</span></code> / <code class="docutils literal notranslate"><span class="pre">installSessionDock</span></code> / <code class="docutils literal notranslate"><span class="pre">installInspectorDock</span></code>) rather than
+by a control rail of this window’s own:</p>
+<ul class="simple">
+<li><p><strong>Command bar</strong> (top) — path pill, the <code class="docutils literal notranslate"><span class="pre">CAT</span> <span class="pre">·</span> <span class="pre">N</span> <span class="pre">sources</span></code> kind tag (click it for
+the catalogue’s columns and which of them are its coordinates — this window’s
+answer to the FITS header dialog), ⌘K search, backend chip.</p></li>
+<li><p><strong>Session Data</strong> (left dock, 272 px) — the dataset row, then the visualization
+controls: source representation, axis mapping, visual encoding, scene, and the
+<strong>Cosmology</strong> card (model, distance mode, and a line saying which of them
+produced the positions on screen).</p></li>
+<li><p><strong>Inspector</strong> (right dock, collapsed to a rail by default) — <em>Properties</em>
+(dataset, type, sources, columns, path, session, backend + the selected
+source’s details), <em>Analysis</em> (the filter list, Apply, Load more),
+<em>Parameters</em>, <em>Copilot</em>.</p></li>
+<li><p><strong>Status rail</strong> (bottom) — health, queue, cache, session.</p></li>
+</ul>
+<p>The full catalogue table is a separate <code class="docutils literal notranslate"><span class="pre">QDockWidget</span></code> at the bottom.</p>
+<p>The source count and the session id are the two rows that change after the
+window is built — a filter, another page of sources, a recovered session — so
+they are held as labels and refreshed by <code class="docutils literal notranslate"><span class="pre">refreshViewerChrome()</span></code> instead of
+re-running <code class="docutils literal notranslate"><span class="pre">setProperties()</span></code>, which would delete the Source Info section mounted
+below them.</p>
 </section>
 <hr class="docutils" />
 <section id="pagination">
 <h2>Pagination<a class="headerlink" href="#pagination" title="Link to this heading">¶</a></h2>
 <p>Page size: 50 000 rows.
-“Load more (N remaining)” button appears in the Filter sidebar page when more rows are available.
+“Load more (N remaining)” appears in the Inspector’s <em>Analysis</em> tab, under the filters, when more rows are available.
 Each load-more fetch uses the same active filters and increments the offset.
 After each append the full VTK scene is rebuilt (points, glyphs, labels).</p>
 </section>
@@ -702,7 +773,8 @@ After each append the full VTK scene is rebuilt (points, glyphs, labels).</p>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -744,7 +816,7 @@ After each append the full VTK scene is rebuilt (points, glyphs, labels).</p>
 <li><a class="reference internal" href="#size-modes">Size modes</a></li>
 <li><a class="reference internal" href="#redshift-field-detection">Redshift field detection</a></li>
 <li><a class="reference internal" href="#interaction">Interaction</a></li>
-<li><a class="reference internal" href="#sidebar-pages">Sidebar pages</a></li>
+<li><a class="reference internal" href="#window-layout">Window layout</a></li>
 <li><a class="reference internal" href="#pagination">Pagination</a></li>
 </ul>
 </li>

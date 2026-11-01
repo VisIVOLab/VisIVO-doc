@@ -7,7 +7,7 @@
         <link rel="prefetch" href="_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Tilted-Ring Kinematic Model (F2) - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="user-guide/spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -380,13 +418,17 @@ by a few fixed-point iterations. Ring radii must be <strong>distinct</strong> (d
 <section id="velocity-units-freq-vs-velocity-axes">
 <h2>Velocity units (FREQ vs velocity axes)<a class="headerlink" href="#velocity-units-freq-vs-velocity-axes" title="Link to this heading">¶</a></h2>
 <p>The model is built in <strong>velocity</strong>. The backend converts the cube’s spectral
-axis to <strong>radio-convention velocity (km/s)</strong> before modelling, so <code class="docutils literal notranslate"><span class="pre">vsys</span> <span class="pre">/</span> <span class="pre">vrot</span> <span class="pre">/</span> <span class="pre">sigma</span></code> are always entered in km/s when the conversion succeeds:</p>
+axis to velocity in km/s before modelling, so <code class="docutils literal notranslate"><span class="pre">vsys</span> <span class="pre">/</span> <span class="pre">vrot</span> <span class="pre">/</span> <span class="pre">sigma</span></code> are always
+entered in km/s when the conversion succeeds:</p>
 <ul class="simple">
-<li><p><strong>Velocity axis</strong> (<code class="docutils literal notranslate"><span class="pre">VRAD</span></code>/<code class="docutils literal notranslate"><span class="pre">VELO</span></code>/… or a unit equivalent to km/s) → converted
-directly with astropy.</p></li>
+<li><p><strong>Velocity axis</strong> (<code class="docutils literal notranslate"><span class="pre">VOPT</span></code>/<code class="docutils literal notranslate"><span class="pre">VRAD</span></code>/<code class="docutils literal notranslate"><span class="pre">VELO</span></code>/… or a unit equivalent to km/s) → read
+in its own convention, converted to km/s with astropy.</p></li>
 <li><p><strong>Frequency axis</strong> (<code class="docutils literal notranslate"><span class="pre">FREQ</span></code>, Hz) with a rest frequency in the header
-(<code class="docutils literal notranslate"><span class="pre">RESTFRQ</span></code>/<code class="docutils literal notranslate"><span class="pre">RESTFREQ</span></code> &gt; 0) → <code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">c</span> <span class="pre">·</span> <span class="pre">(f₀</span> <span class="pre">−</span> <span class="pre">f)</span> <span class="pre">/</span> <span class="pre">f₀</span></code>.</p></li>
+(<code class="docutils literal notranslate"><span class="pre">RESTFRQ</span></code>/<code class="docutils literal notranslate"><span class="pre">RESTFREQ</span></code> &gt; 0) → <strong>optical velocity</strong>, <code class="docutils literal notranslate"><span class="pre">cz</span> <span class="pre">=</span> <span class="pre">c</span> <span class="pre">·</span> <span class="pre">(f₀/f</span> <span class="pre">−</span> <span class="pre">1)</span></code>, the
+convention HI galaxy catalogues quote.</p></li>
 </ul>
+<p>The <a class="reference internal" href="#fitting-the-parameters-from-a-selection">kinematic fit</a> uses the same
+axis, so parameters it fits draw the model they were fitted with.</p>
 <p>The realised working unit and mode are returned in the response headers and the
 GUI labels its fields accordingly:</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -469,6 +511,47 @@ requests return <strong>HTTP 413</strong> — crop the cube to a sub-region or r
 Chunked/streamed generation for very large cubes is future work.</p>
 </section>
 <hr class="docutils" />
+<section id="fitting-the-parameters-from-a-selection">
+<h2>Fitting the parameters from a selection<a class="headerlink" href="#fitting-the-parameters-from-a-selection" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/cube/kinematic_fit_bin</span></code> measures a <strong>selection</strong> — the Kinematic
+Lasso’s mask, sent as raw float32 bytes with its origin and size, exactly as for
+<code class="docutils literal notranslate"><span class="pre">/v1/cube/mask_apply_bin</span></code> — on the raw cube and fits the model to it. Query
+parameters: <code class="docutils literal notranslate"><span class="pre">dataset_id</span></code>, <code class="docutils literal notranslate"><span class="pre">origin_x/y/z</span></code>, <code class="docutils literal notranslate"><span class="pre">width/height/depth</span></code>, <code class="docutils literal notranslate"><span class="pre">sigma</span></code> (the
+noise; 0 = the cube’s own 1.4826·MAD), <code class="docutils literal notranslate"><span class="pre">min_ring_pix</span></code> (default 150).</p>
+<p>What it returns, in order of derivation:</p>
+<ol class="arabic simple">
+<li><p><strong>Measures under the mask:</strong> moment 0 (Jy km/s per pixel when <code class="docutils literal notranslate"><span class="pre">BUNIT</span></code> is
+Jy/beam), a moment-1 velocity field kept only where a pixel’s summed emission
+clears 3σ√(channels summed), the integrated spectrum, the flux (each channel
+weighted by its own width), the w20 and w50 widths and the systemic velocity
+at the w20 midpoint.</p></li>
+<li><p><strong>Geometry from moment 0:</strong> centre, position angle and axis ratio from the
+second moments of the light; inclination from cos i = b/a; disc radius
+2.5 σ of the light.</p></li>
+<li><p><strong>A flat disc fitted to the velocity field:</strong> the position angle scanned over
+the full circle in the model’s own frame, V_sys and V_rot solved by least
+squares at each; a negative amplitude is folded into the PA.</p></li>
+<li><p><strong>Rings:</strong> PA and V_rot per annulus (rings with fewer than <code class="docutils literal notranslate"><span class="pre">min_ring_pix</span></code>
+pixels are skipped), the inclination of each ring read from the moment-0
+isophotes — never from the velocity field, where V_rot and sin i are
+degenerate. Ring PAs stay continuous (e.g. 356 → 362), because the profile
+model interpolates them.</p></li>
+<li><p><strong>Model velocity fields</strong> (flat, and rings when at least three are populated)
+and the residual |v_data − v_model| statistics (median, 90th percentile,
+fraction within one channel).</p></li>
+</ol>
+<p>Maps are float32 base64 planes (width × height, NaN = no data); measures that
+could not be made are <code class="docutils literal notranslate"><span class="pre">null</span></code>. A cube larger than the voxel cap is refused (413);
+so is one whose spectral axis is not the last FITS axis (422).</p>
+<p>In the cube viewer, <strong>Fit from the lasso selection</strong> in the Kinematic Model
+dialog runs it on the selection on screen, with the session’s noise estimate
+(Tools ▸ Estimate Noise) as σ when there is one. It fills in the parameters and
+the ring table, which stay editable, and adds to Session Data the velocity field,
+the two model velocity fields, the two residual maps (signed, on a range
+symmetric about zero), the integrated spectrum and the source’s measures — each
+with the selection, σ and convention it was made with. <strong>Save rings as JSON…</strong>
+writes the ring table.</p>
+</section>
 <section id="desktop-overlay-cube-viewer">
 <h2>Desktop overlay (cube viewer)<a class="headerlink" href="#desktop-overlay-cube-viewer" title="Link to this heading">¶</a></h2>
 <p>In the 3-D cube viewer (<code class="docutils literal notranslate"><span class="pre">vtkWindowCube</span></code>): <strong>Tools ▸ Kinematic Model Overlay…</strong>.</p>
@@ -490,14 +573,14 @@ a real rotation curve (rising-then-flat) instead of one flat value. The
 table is seeded from the current scalar values; radii must be distinct.</p></li>
 </ul>
 </li>
-<li><p><strong>A live “Kinematic Model” dock panel</strong> then restyles the overlay with <strong>no
-re-fetch</strong> — the model cube and its FlyingEdges filter are kept client-side:</p>
+<li><p><strong>The Kinematic Model controls</strong> (Inspector ▸ Parameters, while an overlay
+exists) then restyle the overlay with <strong>no re-fetch</strong> — the model cube and its
+FlyingEdges filter are kept client-side:</p>
 <ul>
 <li><p><strong>Contour level (% peak)</strong> — re-<code class="docutils literal notranslate"><span class="pre">SetValue</span></code> on the kept filter.</p></li>
 <li><p><strong>Opacity</strong>, <strong>Colour</strong> (colour picker), <strong>Representation</strong> (Wireframe /
 Surface), <strong>Show overlay</strong> (visibility), <strong>Remove overlay</strong>.</p></li>
-<li><p><strong>Contour on 2D channel maps</strong> (default on) — see below.
-The panel is reachable again via <strong>View ▸ Kinematic Model</strong> if you close it.</p></li>
+<li><p><strong>Contour on 2D channel maps</strong> (default on) — see below.</p></li>
 </ul>
 </li>
 </ul>
@@ -555,8 +638,10 @@ render outside the visible data box.</p></li>
 <section id="limitations-phase-1-roadmap">
 <h2>Limitations (phase-1) / roadmap<a class="headerlink" href="#limitations-phase-1-roadmap" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Single PA/incl and a flat rotation curve; <strong>per-ring</strong> parameters (a real
-tilted-ring fit, à la 3DBarolo/TiRiFiC) are the next refinement.</p></li>
+<li><p>The fit is a comparator on the moment-1 field, not a 3-D fit à la
+3DBarolo/TiRiFiC: the model is a kinematic footprint, not convolved with the
+beam, so inner rings are beam-smeared and their V_rot is not to be read.</p></li>
+<li><p>One overlay at a time: overlaying a new model replaces the previous one.</p></li>
 <li><p>Uniform disk intensity (the overlay is about kinematics/footprint, not flux).</p></li>
 <li><p>Image-pixel PA rather than WCS sky PA (see convention note).</p></li>
 <li><p>Full in-memory materialisation bounded by the voxel cap.</p></li>
@@ -607,7 +692,8 @@ possible future cleanup.</p></li>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -636,6 +722,7 @@ possible future cleanup.</p></li>
 <li><a class="reference internal" href="#velocity-units-freq-vs-velocity-axes">Velocity units (FREQ vs velocity axes)</a></li>
 <li><a class="reference internal" href="#wire-format">Wire format</a></li>
 <li><a class="reference internal" href="#size-guard">Size guard</a></li>
+<li><a class="reference internal" href="#fitting-the-parameters-from-a-selection">Fitting the parameters from a selection</a></li>
 <li><a class="reference internal" href="#desktop-overlay-cube-viewer">Desktop overlay (cube viewer)</a><ul>
 <li><a class="reference internal" href="#d-channel-map-contour-model-vs-data">2-D channel-map contour (model-vs-data)</a></li>
 </ul>

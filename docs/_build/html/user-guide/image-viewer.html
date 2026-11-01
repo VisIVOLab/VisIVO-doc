@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Image viewer - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -304,6 +342,11 @@ composited).</p></li>
 <li><p><strong>Tools</strong> — region statistics, profile / probe, WCS frame switch.</p></li>
 <li><p><strong>Info / Stats</strong> — pixel-value summary, BUNIT, image extent.</p></li>
 </ul>
+<p>Tools that have settings do not each open their own panel. Picking one mounts
+its controls in a single contextual <strong>Parameters</strong> tab in the Inspector, and
+switches to it — so “where are this tool’s options” has one answer, and the
+answer is visible the moment you start the tool rather than behind a dock you
+have to find. The tab also carries the provenance of what the tool measured.</p>
 </section>
 <section id="preview-full-upgrade">
 <h2>Preview → full upgrade<a class="headerlink" href="#preview-full-upgrade" title="Link to this heading">¶</a></h2>
@@ -339,19 +382,81 @@ there are no controls; it just tracks your view.</p>
 <h2>Adding layers<a class="headerlink" href="#adding-layers" title="Link to this heading">¶</a></h2>
 <p>You can overlay or compare multiple images in the same window:</p>
 <ul class="simple">
-<li><p><strong>Add New Layer…</strong> — pick another FITS image from the <em>remote file
-browser</em>. Backend-side check (<code class="docutils literal notranslate"><span class="pre">ImageLayerImportService</span></code>) validates the
-layer’s WCS against the base image and warns if the pixel grids don’t
-overlap.</p></li>
-<li><p>Use the layer panel to <strong>reorder</strong>, <strong>toggle visibility</strong>, set a
-<strong>per-layer colour map</strong>, <strong>opacity</strong> and <strong>z-order</strong>.</p></li>
-<li><p>Manual local files: drop a <code class="docutils literal notranslate"><span class="pre">.fits</span></code> from the OS file browser, or pick it
-via <em>File → Add New FITS File…</em></p></li>
+<li><p><strong>Add Image Layer…</strong> (<em>File</em> menu, ⌘L, or the <strong>+ Add…</strong> beside the
+<em>Layers</em> list) — pick another FITS image from the <em>remote file browser</em>.</p></li>
+<li><p>Each layer is a <strong>card</strong>: the visibility box, its name, and — on the second
+line — a strip of that layer’s own colour map with its stretch and opacity.
+Before, those three were visible only in the panel above the list and only for
+the selected layer, so telling six VLKB cutouts apart meant clicking each one
+in turn. The base layer is tagged <code class="docutils literal notranslate"><span class="pre">base</span></code>.</p></li>
+<li><p>Drag the cards to <strong>reorder</strong> them; that is the z-order. Clicking the
+visibility box toggles the layer without changing which one the settings above
+act on.</p></li>
+<li><p><strong>＋ Add layer…</strong> sits under the stack, and <strong>Overlays</strong> under that.</p></li>
+<li><p>You can also drop a <code class="docutils literal notranslate"><span class="pre">.fits</span></code> from the OS file browser onto the window.</p></li>
 </ul>
+<section id="a-layer-has-to-cover-the-same-sky">
+<h3>A layer has to cover the same sky<a class="headerlink" href="#a-layer-has-to-cover-the-same-sky" title="Link to this heading">¶</a></h3>
+<p>Before anything is downloaded, the two headers are compared: a file that
+covers none of the sky the current image covers is not added. It is not a
+broken file — the WCS alignment would place it correctly, off the edge of the
+image, so the load would “succeed” and nothing would appear.</p>
+<p>Instead the viewer says so and offers:</p>
+<ul class="simple">
+<li><p><strong>Open in New Window</strong> — the sensible answer for an image of somewhere else;</p></li>
+<li><p><strong>Add Anyway</strong> — the sky bounds behind the refusal come from <code class="docutils literal notranslate"><span class="pre">wcsrange()</span></code>,
+which is a bounding box, and a rotated field straddling RA = 0 can measure
+narrower than it really is. This is how you overrule the check;</p></li>
+<li><p><strong>Cancel</strong>.</p></li>
+</ul>
+<p>An image whose header carries no celestial solution (pixel coordinates only)
+is refused outright: there is no position to line it up with.</p>
 <p>All layer sources go through the same <code class="docutils literal notranslate"><span class="pre">loadImageLayer()</span></code> / <code class="docutils literal notranslate"><span class="pre">AstroUtils</span></code> /
 <code class="docutils literal notranslate"><span class="pre">libwcs</span></code> pipeline, so alignment between layers is handled the same way
 regardless of whether they come from VLKB, the remote backend, or local
-disk.</p>
+disk. Which path a file takes is decided by <strong>where the backend is</strong>, not
+by whether the path happens to exist on your own disk: against a remote
+backend the layer is opened there and its WCS built from the header the
+backend returns, so a path that also exists locally cannot silently load
+a different file.</p>
+</section>
+</section>
+<section id="smoothing-and-regridding">
+<h2>Smoothing and regridding<a class="headerlink" href="#smoothing-and-regridding" title="Link to this heading">¶</a></h2>
+<p><em>Tools → Smooth / Regrid…</em> (the legacy’s <em>Filter FITS</em>) applies a Gaussian
+kernel and/or an integer shrink on the backend and adds the result as a layer.
+The dialog says what each choice means before you commit: the kernel FWHM in
+arcseconds, and the pixel size the regrid would produce.</p>
+<p>Three things it does that the legacy did not:</p>
+<ul class="simple">
+<li><p><strong>blank pixels stay blank</strong> and do not eat their neighbourhood — the
+convolution is normalised by the smoothed coverage;</p></li>
+<li><p><strong>the beam grows with the kernel</strong> (<code class="docutils literal notranslate"><span class="pre">BMAJ</span></code>/<code class="docutils literal notranslate"><span class="pre">BMIN</span></code> summed in quadrature), so
+the output still describes its own resolution — and for a map in Jy/beam the
+pixels are scaled with it, so the integrated flux is the same before and
+after. (Smoothing preserves the sum of the pixels; the flux is that sum over
+the beam area, so a wider beam with unchanged numbers means less flux.) The
+dialog reports the factor it applied;</p></li>
+<li><p><strong>a per-pixel unit is summed, not averaged.</strong> Block-averaging a <code class="docutils literal notranslate"><span class="pre">Jy/pixel</span></code> map
+loses flux by the square of the factor; <code class="docutils literal notranslate"><span class="pre">BUNIT</span></code> decides, and the result says
+which rule was used.</p></li>
+</ul>
+<p>The same entry exists in the cube viewer, where every plane is filtered — a
+spatial operation, so the spectral axis is left alone.</p>
+</section>
+<section id="editing-the-header">
+<h2>Editing the header<a class="headerlink" href="#editing-the-header" title="Link to this heading">¶</a></h2>
+<p>Click the <strong>IMAGE</strong> tag in the toolbar to see the FITS header, then <strong>Edit…</strong>.
+Any keyword can be changed, added or removed; the result is written as a <strong>new
+file</strong> in the Workspace and offered for opening, and the file on disk is never
+modified.</p>
+<p>Structural keywords (<code class="docutils literal notranslate"><span class="pre">SIMPLE</span></code>, <code class="docutils literal notranslate"><span class="pre">BITPIX</span></code>, <code class="docutils literal notranslate"><span class="pre">NAXISn</span></code>) and the data-scaling ones
+(<code class="docutils literal notranslate"><span class="pre">BSCALE</span></code>, <code class="docutils literal notranslate"><span class="pre">BZERO</span></code>, <code class="docutils literal notranslate"><span class="pre">BLANK</span></code>) are not editable: they describe the bytes rather
+than the science, and editing them makes the header disagree with its own data.</p>
+<p>When you save, the backend builds the WCS from the edited header and tells you
+what it amounts to — <em>Celestial WCS (RA—TAN, DEC–TAN)</em>, or that there still
+is none. The legacy’s header dialog reported “File has been saved!” either way,
+so a wrong guess was only discovered by reopening the copy.</p>
 </section>
 <section id="wcs-overlay-and-frame">
 <h2>WCS overlay and frame<a class="headerlink" href="#wcs-overlay-and-frame" title="Link to this heading">¶</a></h2>
@@ -359,7 +464,7 @@ disk.</p>
 <li><p><strong>Show WCS Axes</strong> in the <em>View</em> menu paints ticks along the image axes
 according to its WCS metadata.</p></li>
 <li><p><strong>Coordinate format</strong> — a <strong>Sexagesimal | Decimal</strong> segmented toggle in
-the sidebar’s <em>Tools → WCS Display</em> card.</p></li>
+<em>Tools ▸ WCS Display</em>.</p></li>
 <li><p><strong>Coordinate frame</strong> — a <strong>Galactic | FK5 | Ecliptic</strong> segmented toggle
 in the same card. Conversions go through <code class="docutils literal notranslate"><span class="pre">wcscon()</span></code> from libwcs. The
 current frame label is shown in the bottom status bar.</p></li>
@@ -376,24 +481,62 @@ keywords are absent the indicator is hidden automatically.</p>
 was changed.</p>
 </section>
 </section>
+<section id="overlays">
+<h2>Overlays<a class="headerlink" href="#overlays" title="Link to this heading">¶</a></h2>
+<p>Under the layer stack, one row per thing drawn <em>on top</em> of the image —
+catalogue sources, source labels, polarisation vectors, WCS axes, annotations —
+each with a count on the right.</p>
+<p>They were switched from four different places before: two entries in Tools, one
+in View, and annotations from nowhere at all (they could be added and cleared,
+never hidden). And none of them said how many objects were up there, so “is that
+all of them?” had no answer short of exporting the catalogue.</p>
+<p>A row whose overlay has nothing loaded is greyed out rather than failing
+silently when clicked. The rows and the menu entries are the same switches: use
+either.</p>
+</section>
 <section id="color-map-contrast">
 <h2>Color map &amp; contrast<a class="headerlink" href="#color-map-contrast" title="Link to this heading">¶</a></h2>
 <p>The <em>Layer Settings</em> sidebar exposes:</p>
 <ul class="simple">
-<li><p><strong>Color map</strong> combo (Inferno, Viridis, Magma, Plasma, Cividis, …) with
-gradient preview icons.</p></li>
-<li><p><strong>Scale</strong> — a <strong>Linear | Log</strong> segmented toggle (same pill-style
-control used throughout the cube viewer). Log scale compresses the
-dynamic range and is useful for images spanning several orders of
-magnitude (e.g. Hα narrowband, X-ray mosaics).</p></li>
+<li><p><strong>Color map</strong> — the combo (Inferno, Viridis, Magma, Plasma, Cividis, …)
+with gradient preview icons, and an inline <strong>Edit</strong> beside it, as in the
+cube viewer.</p></li>
 <li><p><strong>Layer opacity</strong> slider for blending when multiple layers are stacked.</p></li>
 </ul>
-<p>For more precise control open the <em>2-D LUT editor</em> (<code class="docutils literal notranslate"><span class="pre">Advanced…</span></code> button) —
-a non-modal QCustomPlot editor where you can drag the transfer-function
-control points.</p>
+<p><strong>Edit</strong> opens the <em>2-D LUT editor</em> — a non-modal QCustomPlot editor where you
+drag the transfer-function control points. The scale (Linear, Log, Sqrt,
+Square, Power γ) lives there too: one place with the full set, rather than an
+inline Linear | Log toggle offering two of five.</p>
+</section>
+<section id="modes-what-the-next-click-will-do">
+<h2>Modes: what the next click will do<a class="headerlink" href="#modes-what-the-next-click-will-do" title="Link to this heading">¶</a></h2>
+<p>Under the toolbar there is a <strong>mode strip</strong> — Pan · Probe · Region · Ruler ·
+Annotate. These five are mutually exclusive: arming one disarms the others, and
+which one is on decides what a click on the image does.</p>
+<p>That was always true; what is new is that you can see it. Before, the modes were
+armed from the Tools menu, whose checkmarks are invisible until you open it, so
+the way to find out which mode you were in was to click and watch what happened.</p>
+<ul class="simple">
+<li><p>Picking a segment arms that mode; <strong>Pan</strong> disarms everything.</p></li>
+<li><p>Choosing <strong>Region</strong> shows a second strip for the shape — Box, Circle, Poly,
+Annulus — and remembers your last choice for the next time.</p></li>
+<li><p>The strip is two-way: arming a mode from the Tools menu or the command palette
+moves it, and leaving Annotate cancels an annotation that was waiting to be
+placed, rather than leaving it to land on your next click.</p></li>
+<li><p>To the right, a short line says what the armed mode expects — <em>drag on the
+image</em>, <em>click each vertex · double-click to close</em>, <em>click the two ends</em>.</p></li>
+</ul>
 </section>
 <section id="regions-and-probes">
 <h2>Regions and probes<a class="headerlink" href="#regions-and-probes" title="Link to this heading">¶</a></h2>
+<p>While you drag a region, a small box in the bottom-left corner of the viewport
+shows what is inside it: <strong>Σ</strong> and <strong>μ</strong>, updating as you drag. Before, the
+numbers arrived only when you let go, in a dialog — so the region was chosen
+blind and adjusted by repetition.</p>
+<p>A <strong>≈</strong> in front of a figure means it was sampled rather than summed: the
+readout runs on every mouse move, so on a region of more than ~200 000 pixels it
+reads a grid of them and scales up. The full statistics on release use every
+pixel, and those are the ones to quote.</p>
 <p>The image viewer shares the same region / probe machinery as the cube
 viewer’s 2-D dock:</p>
 <ul class="simple">
@@ -411,7 +554,8 @@ read-out in the bottom-right.</p></li>
 <p>Iso-contour lines can be drawn on top of the image from two sources:</p>
 <ul class="simple">
 <li><p><strong>Self contours</strong> — computed from the image’s own pixel values.
-Toggle <strong>Show Contours</strong> in the <em>Tools</em> sidebar (or <em>Tools</em> menu),
+Toggle <strong>Show Contours</strong> from the <em>Tools</em> menu (or the Inspector’s <em>Analysis</em>
+list),
 then adjust <strong>Level</strong> (number of contour lines), <strong>Lower</strong> and
 <strong>Upper</strong> (value range). The pipeline uses <code class="docutils literal notranslate"><span class="pre">vtkFlyingEdges2D</span></code>, the
 same filter as the cube viewer’s slice contours.</p></li>
@@ -421,7 +565,7 @@ moment-0 map on an optical image). Contour levels are entered
 manually. Multiple external layers can be stacked.</p></li>
 <li><p><strong>Clear All Contours</strong> removes every contour layer.</p></li>
 <li><p><strong>Cube → Image direct</strong> — if a cube viewer is open, use
-<em>Tools → Send Slice to Image Viewer…</em> in the cube window. The
+<em>Tools → Overlay Slice on an Open Image…</em> in the cube window. The
 current 2-D slice is sent to the first open image viewer as a
 contour overlay without requiring a FITS export round-trip.</p></li>
 </ul>
@@ -435,8 +579,8 @@ optical comparison workflow.</p>
 </section>
 <section id="measurement-tools">
 <h2>Measurement tools<a class="headerlink" href="#measurement-tools" title="Link to this heading">¶</a></h2>
-<p>Two interactive measurement modes are available in the <em>Tools</em> sidebar
-<strong>Measurement</strong> card (or <em>Tools</em> menu):</p>
+<p>Two interactive measurement modes, from <em>Tools ▸ Measure</em> or the Inspector’s
+<em>Analysis</em> list:</p>
 <ul class="simple">
 <li><p><strong>Ruler (Distance)</strong> — click two points on the image. A dashed
 orange line is drawn between them and the distance is displayed in
@@ -447,19 +591,55 @@ uses the Haversine formula on the WCS sky coordinates.</p></li>
 B–C are drawn and the angle at vertex B is displayed in degrees.</p></li>
 <li><p><strong>Clear Measurement</strong> removes the current measurement overlay.</p></li>
 </ul>
-<p>Only one measurement mode can be active at a time (ExclusiveOptional
-group). Activating a measurement mode deactivates any active probe or
-region tool.</p>
+<p>Only one measurement mode can be active at a time (ExclusiveOptional group),
+and arming one disarms the probe, any region and a pending annotation — in both
+directions. That symmetry was missing until recently: arming a region from
+<em>Tools ▸ Regions</em> while the ruler was on left the ruler in charge, so the menu
+entry showed as checked, the mode strip still said Ruler, and dragging drew a
+distance instead of a region.</p>
+</section>
+<section id="products-from-this-map">
+<h2>Products from this map<a class="headerlink" href="#products-from-this-map" title="Link to this heading">¶</a></h2>
+<p><em>Inspector ▸ Analysis ▸ Products</em> (or the <em>Tools</em> menu) has two operations that
+take the single 2-D map this window shows:</p>
+<ul class="simple">
+<li><p><strong>Publication Figure…</strong> renders the map as a publication-ready PNG through
+matplotlib on the backend: choose the stretch (linear / log / sqrt / asinh /
+power), the colormap, an optional title, and whether to draw the WCS sky grid
+and a colorbar labelled with BUNIT. The file lands in Workspace Exports.</p></li>
+<li><p><strong>Image Quality / Artifacts…</strong> reports the diagnostics you want before
+trusting a map: blanked fraction, dynamic range, noise, and indicators for
+striping and negative-bowl artefacts.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both were previously in the Data Hub’s <em>Science</em> menu, where they ran against
+whichever dataset had been opened last rather than the one you were looking at.
+They now act on this window’s dataset. Both reduce anything with more than two
+axes to its first plane, so on a cube they describe one channel; to render or
+measure a cube’s collapsed emission, compute a moment map first and open that.</p>
+</div>
 </section>
 <section id="pixel-histogram">
 <h2>Pixel histogram<a class="headerlink" href="#pixel-histogram" title="Link to this heading">¶</a></h2>
-<p><em>Tools → Pixel Histogram…</em> (or the <strong>Histogram</strong> card in the sidebar)
-opens a floating QCustomPlot window showing the pixel-value distribution
-of the master layer as a 256-bin bar chart.</p>
+<p><em>Tools → Pixel Histogram…</em> (or the Inspector’s <em>Analysis</em> list)
+opens a window showing the pixel-value distribution of the master layer as a
+256-bin bar chart.</p>
 <p>Two draggable vertical cursors mark the current LUT clip range
 (red = low, green = high). Dragging either cursor updates the LUT
 range live, so you can interactively clip the display without opening
 the advanced LUT editor.</p>
+<p>Two checkboxes decide whether the histogram is readable at all:</p>
+<ul class="simple">
+<li><p><strong>Clip to 0.5–99.5 %</strong> — bins over a robust percentile range instead of the
+full data range. Astronomical images are mostly sky with a few bright
+outliers; over the full range every source lands in one bin at the far right
+and the sky in one at the far left. On by default, unless a LUT cursor would
+fall outside the clipped range — the cursors have to stay reachable.</p></li>
+<li><p><strong>Log counts</strong> — a logarithmic count axis. The sky bin is orders of magnitude
+taller than everything else, so on a linear axis the astronomically
+interesting tail is a flat line along the bottom.</p></li>
+</ul>
 </section>
 <section id="annotations">
 <h2>Annotations<a class="headerlink" href="#annotations" title="Link to this heading">¶</a></h2>
@@ -493,6 +673,14 @@ motion, or artefact differences between two epochs or bands.</p>
 </section>
 <section id="stokes-radio-polarimetry-analysis">
 <h2>Stokes / Radio polarimetry analysis<a class="headerlink" href="#stokes-radio-polarimetry-analysis" title="Link to this heading">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section is the <strong>image</strong> path: the companions are loaded as layers and
+combined here, pixel by pixel. For full-Stokes <strong>cubes</strong> — one cube per plane,
+as MeerKAT MGCLS and ASKAP/POSSUM publish them — use the cube viewer instead,
+where the arithmetic happens on the backend and nothing that large is loaded.
+See <a class="reference internal" href="polarimetry.html"><span class="doc std std-doc">Polarimetry (Stokes Q, U, V)</span></a>.</p>
+</div>
 <p>For continuum radio data with full polarimetry (Stokes I, Q, U, V), the
 image viewer has a dedicated <strong>Stokes Analysis</strong> workflow card in the
 <em>Tools</em> sidebar (also available under <em>Tools</em> menu):</p>
@@ -511,10 +699,22 @@ patterns:</p>
 releases</p></li>
 </ul>
 </li>
-<li><p>Files found are loaded as additional layers, tagged with their
-Stokes role. Missing roles trigger a file dialog so you can locate
-them manually.</p></li>
+<li><p>The search is reported <strong>once</strong>, as a summary of what was found and
+what was not, rather than as one file dialog per missing role. From
+there you either accept the set or locate the missing companions
+yourself; cancelling means cancelling, not being asked again for the
+next role.</p></li>
+<li><p>Files found are loaded as additional layers, tagged with their Stokes
+role, one after another.</p></li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The search runs wherever the data actually is. With a <strong>remote backend</strong>
+the companions are looked for — and browsed for, if you have to locate
+them by hand — on the backend’s filesystem, not on your laptop: the
+Stokes I file you opened lives there too, so its siblings almost
+certainly do.</p>
+</div>
 </section>
 <section id="derived-maps">
 <h3>Derived maps<a class="headerlink" href="#derived-maps" title="Link to this heading">¶</a></h3>
@@ -841,10 +1041,17 @@ can download it to your computer, re-open it in VisIVO, or delete it
 <section id="catalogue-overlay">
 <h2>Catalogue overlay<a class="headerlink" href="#catalogue-overlay" title="Link to this heading">¶</a></h2>
 <p>Same machinery as the cube viewer: load a CSV / VOTable from
-<em>Tools → Load Catalogue Overlay</em>. The sources are projected through the
-image WCS, drawn as glyphs, and listed in a sortable side table. Click a
-row to centre the view on the source; click on a glyph to highlight the
-matching table row.</p>
+<em>Tools → Load Catalogue Overlay</em>, or query the VLKB directly with
+<em>Tools → Overlay VLKB Compact Sources</em> / <em>Overlay VLKB Filaments</em>. The sources are projected
+through the image WCS, drawn as glyphs, and listed in a table dock at the
+bottom of the window.</p>
+<p>Click a row to highlight the source, double-click to zoom to it, and
+right-click for <em>Fit SED of this source…</em>. The table shows every column the
+catalogue carries, groups a band-merged catalogue’s per-band detections under
+their parent source, and exports to CSV. See
+<a class="reference internal" href="#catalogues-hips#catalogue-overlay-on-cubes--images"><span class="xref myst">Catalogues · Overlay</span></a> for
+the full description and <a class="reference internal" href="sed-fitting.html"><span class="doc std std-doc">SED fitting</span></a> for what to do with a
+source’s fluxes once you have them.</p>
 <section id="cross-match-with-a-catalogue">
 <h3>Cross-match with a catalogue<a class="headerlink" href="#cross-match-with-a-catalogue" title="Link to this heading">¶</a></h3>
 <p><em>Tools → Cross-match with Catalogue…</em> queries an external catalogue over the
@@ -929,7 +1136,8 @@ shows a single 2-D plane.</p>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -955,15 +1163,23 @@ shows a single 2-D plane.</p>
 <li><a class="reference internal" href="#viewport-driven-level-of-detail">Viewport-driven level of detail</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#adding-layers">Adding layers</a></li>
+<li><a class="reference internal" href="#adding-layers">Adding layers</a><ul>
+<li><a class="reference internal" href="#a-layer-has-to-cover-the-same-sky">A layer has to cover the same sky</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#smoothing-and-regridding">Smoothing and regridding</a></li>
+<li><a class="reference internal" href="#editing-the-header">Editing the header</a></li>
 <li><a class="reference internal" href="#wcs-overlay-and-frame">WCS overlay and frame</a><ul>
 <li><a class="reference internal" href="#beam-indicator">Beam indicator</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#overlays">Overlays</a></li>
 <li><a class="reference internal" href="#color-map-contrast">Color map &amp; contrast</a></li>
+<li><a class="reference internal" href="#modes-what-the-next-click-will-do">Modes: what the next click will do</a></li>
 <li><a class="reference internal" href="#regions-and-probes">Regions and probes</a></li>
 <li><a class="reference internal" href="#contour-overlay">Contour overlay</a></li>
 <li><a class="reference internal" href="#measurement-tools">Measurement tools</a></li>
+<li><a class="reference internal" href="#products-from-this-map">Products from this map</a></li>
 <li><a class="reference internal" href="#pixel-histogram">Pixel histogram</a></li>
 <li><a class="reference internal" href="#annotations">Annotations</a></li>
 <li><a class="reference internal" href="#blink-compare">Blink / Compare</a></li>

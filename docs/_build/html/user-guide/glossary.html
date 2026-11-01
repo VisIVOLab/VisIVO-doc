@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Troubleshooting" href="troubleshooting.html"><link rel="prev" title="Self-hosted copilot LLM" href="copilot-self-hosted.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Troubleshooting" href="troubleshooting.html"><link rel="prev" title="Scientific Copilot" href="copilot.html">
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Glossary - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -303,6 +341,11 @@ differences. See <a class="reference internal" href="#image-viewer#blink-compare
 <code class="docutils literal notranslate"><span class="pre">Jy/beam</span></code>, <code class="docutils literal notranslate"><span class="pre">K</span></code>, <code class="docutils literal notranslate"><span class="pre">counts</span></code>). All region statistics and moment maps
 report values in BUNIT when it is set on the source cube / image.</p>
 </dd>
+<dt id="term-Cone-search-SCS">Cone search (SCS)<a class="headerlink" href="#term-Cone-search-SCS" title="Link to this term">¶</a></dt><dd><p><em>Simple Cone Search</em> — the IVOA protocol for “what is within this radius
+of this position?”. A service takes <code class="docutils literal notranslate"><span class="pre">RA</span></code>, <code class="docutils literal notranslate"><span class="pre">DEC</span></code> and <code class="docutils literal notranslate"><span class="pre">SR</span></code> (search radius,
+degrees) and answers with a VOTable. See
+<a class="reference internal" href="#catalogues-hips#cone-search"><span class="xref myst">Catalogues &amp; HiPS — Cone Search</span></a>.</p>
+</dd>
 <dt id="term-CTYPE">CTYPE<a class="headerlink" href="#term-CTYPE" title="Link to this term">¶</a></dt><dd><p>FITS header keyword that names each WCS axis (e.g. <code class="docutils literal notranslate"><span class="pre">RA---SIN</span></code>,
 <code class="docutils literal notranslate"><span class="pre">DEC--SIN</span></code>, <code class="docutils literal notranslate"><span class="pre">VELO-LSR</span></code>). VisIVO inspects CTYPE to decide axis order,
 whether axis 3 is spectral, and which projection to use.</p>
@@ -340,6 +383,11 @@ epoch J2000.0. Default sky frame in VisIVO.</p>
 used by the IVOA to serve all-sky surveys. See
 <a class="reference internal" href="#catalogues-hips#hips-viewer"><span class="xref myst">HiPS viewer</span></a>.</p>
 </dd>
+<dt id="term-hips2fits">hips2fits<a class="headerlink" href="#term-hips2fits" title="Link to this term">¶</a></dt><dd><p>A CDS service that reprojects a HiPS survey onto a WCS you specify and
+returns a FITS (or a picture). It is how a survey becomes a file you can
+measure on, rather than tiles you can only look at. See
+<a class="reference internal" href="#catalogues-hips#hips-cutout-hips2fits"><span class="xref myst">Catalogues &amp; HiPS</span></a>.</p>
+</dd>
 <dt id="term-Isosurface">Isosurface<a class="headerlink" href="#term-Isosurface" title="Link to this term">¶</a></dt><dd><p>A closed 3-D surface where the cube’s intensity equals a given
 threshold. Useful to highlight dense clumps, jets, shells. Extracted
 server-side with <code class="docutils literal notranslate"><span class="pre">vtkFlyingEdges3D</span></code>.</p>
@@ -370,7 +418,8 @@ at the middle vertex of three clicked points. See
 See <a class="reference internal" href="moment-maps.html"><span class="doc std std-doc">Moment maps</span></a> for the formulas and use cases.</p>
 </dd>
 <dt id="term-PV">PV<a class="headerlink" href="#term-PV" title="Link to this term">¶</a></dt><dd><p><em>Position-Velocity diagram</em> — 2-D plot of intensity along a path on the
-sky (X) vs. velocity (Y). Standard tool for kinematic inspection. See
+sky (X) vs. velocity (Y). Standard tool for kinematic inspection. The path
+stays editable and the diagram can be saved as FITS. See
 <a class="reference internal" href="#region-pv-noise#position-velocity-diagrams"><span class="xref myst">Regions, PV, noise</span></a>.</p>
 </dd>
 <dt id="term-Probe">Probe<a class="headerlink" href="#term-Probe" title="Link to this term">¶</a></dt><dd><p>Click-to-extract spectral profile at a single pixel of the cube’s 2-D
@@ -415,6 +464,11 @@ preserves the channel’s spectral coordinate as a scalar:
 Stokes / spectral-index / Faraday-RM dialogs in the image viewer use
 these to prompt the user with the right frequency at recall time.</p>
 </dd>
+<dt id="term-TAP-ADQL">TAP / ADQL<a class="headerlink" href="#term-TAP-ADQL" title="Link to this term">¶</a></dt><dd><p><em>Table Access Protocol</em> and the query language it speaks — SQL with
+astronomy added (<code class="docutils literal notranslate"><span class="pre">POINT</span></code>, <code class="docutils literal notranslate"><span class="pre">CIRCLE</span></code>, <code class="docutils literal notranslate"><span class="pre">radians()</span></code>). The VLKB catalogues
+are queried this way. See
+<a class="reference internal" href="#catalogues-hips#vlkb-catalogue-query"><span class="xref myst">Catalogues &amp; HiPS — VLKB Catalogue Query</span></a>.</p>
+</dd>
 <dt id="term-VBT">VBT<a class="headerlink" href="#term-VBT" title="Link to this term">¶</a></dt><dd><p><em>VisIVO Binary Table</em> — efficient column-oriented binary format used
 by some VisIVO datasets for million-row point clouds.</p>
 </dd>
@@ -450,14 +504,14 @@ a free worker; see <a class="reference internal" href="#../async-patterns#heavy-
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="copilot-self-hosted.html">
+          <a class="prev-page" href="copilot.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Self-hosted copilot LLM</div>
+                <div class="title">Scientific Copilot</div>
                 
               </div>
             </a>
@@ -474,7 +528,8 @@ a free worker; see <a class="reference internal" href="#../async-patterns#heavy-
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>

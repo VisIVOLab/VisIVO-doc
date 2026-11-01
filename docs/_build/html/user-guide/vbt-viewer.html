@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>VBT viewer (point clouds and volumes) - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -297,7 +335,7 @@ conversion step.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Open</strong></p></td>
-<td><p><em>File → Open VBT…</em> (select the <code class="docutils literal notranslate"><span class="pre">.head</span></code> file, not the binary)</p></td>
+<td><p><em>File → Open…</em> or <em>Data → Open VBT…</em> — either half of the pair, <code class="docutils literal notranslate"><span class="pre">.bin</span></code> or <code class="docutils literal notranslate"><span class="pre">.head</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Point table</strong></p></td>
 <td><p>one row per object → 3-D point cloud</p></td>
@@ -329,12 +367,24 @@ Z
 <p>A <strong>volume</strong> table declares its geometry on the row-count line instead — row
 count, then <code class="docutils literal notranslate"><span class="pre">nx</span> <span class="pre">ny</span> <span class="pre">nz</span></code>, then the cell spacing — and VisIVO opens it in the
 volume renderer rather than as points.</p>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>Open the <strong><code class="docutils literal notranslate"><span class="pre">.head</span></code></strong>, not the binary. The binary alone carries no description of
-what its bytes mean, and the viewer will tell you the header was not found
-rather than guess.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Either half of the pair will do. Pick the <code class="docutils literal notranslate"><span class="pre">.head</span></code> or the <code class="docutils literal notranslate"><span class="pre">.bin</span></code> — the backend
+resolves a chosen binary to the header beside it. What it cannot do is open a
+binary whose header is missing: the bytes alone carry no description of what
+they mean, and you are told so rather than guessed at.</p>
 </div>
+</section>
+<hr class="docutils" />
+<section id="the-window">
+<h2>The window<a class="headerlink" href="#the-window" title="Link to this heading">¶</a></h2>
+<p>Both VBT viewers — points and volumes — are laid out like the image and cube
+viewers: the command bar across the top (path, a <code class="docutils literal notranslate"><span class="pre">VBT</span> <span class="pre">·</span> <span class="pre">…</span></code> tag that opens the
+header, ⌘K, the backend chip), <strong>Session Data</strong> on the left with the display
+controls, the <strong>Inspector</strong> on the right (Properties, Analysis, Parameters,
+Copilot) collapsed to a rail until you need it, and the status rail along the
+bottom. <em>View ▸ Session Data Panel</em> and <em>View ▸ Inspector Panel</em> fold either
+column away.</p>
 </section>
 <hr class="docutils" />
 <section id="point-clouds">
@@ -427,10 +477,17 @@ there is, because it discards everything but the maximum.</p></td>
 <p>The VBT viewer reads through the backend like everything else, so the file must
 be visible to the <strong>backend’s</strong> filesystem — the HPC node, if that is where the
 backend runs, not your laptop.</p>
-<p>If the session expires (a backend restart, a dropped tunnel), the viewer says
-<em>Session expired — reconnecting…</em> and <em>Re-open Dataset</em> restores the view. Your
-filters and colour settings are part of the view, not the dataset, so they
-survive.</p>
+<p>If the session expires (a backend restart, a dropped tunnel) the <strong>point</strong>
+viewer recovers by itself on the next page of data: it reopens the dataset and
+carries on in the same window, with your filters and colour settings intact.
+<em>Re-open Dataset</em>, the explicit route, opens a fresh window and does not carry
+them over.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The <strong>volume</strong> viewer has no recovery path. After an expiry, changing the scalar
+field fails quietly — the selector moves and the volume on screen does not — and
+the way back is to open the file again.</p>
+</div>
 </section>
 <hr class="docutils" />
 <section id="troubleshooting">
@@ -448,9 +505,10 @@ survive.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><em>“VBT header file not found.”</em></p></td>
-<td><p>You opened the binary, or the <code class="docutils literal notranslate"><span class="pre">.head</span></code> and its binary are not in the same
-directory. Both must be present, and the binary’s name is the header’s name
-with <code class="docutils literal notranslate"><span class="pre">.head</span></code> removed.</p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">.head</span></code> and its binary are not in the same directory, or one of them is
+missing. Both must be present, and the binary’s name is the header’s name
+with <code class="docutils literal notranslate"><span class="pre">.head</span></code> removed. (Which of the two you pick does not matter — the
+backend resolves a chosen binary to its header.)</p></td>
 </tr>
 <tr class="row-odd"><td><p><em>“Unknown VBT endian”</em> or <em>“VBT header too short”</em></p></td>
 <td><p>The header is missing a line. The order is fixed: scalar type, field count,
@@ -521,7 +579,8 @@ line against how the file was written.</p></td>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -543,6 +602,7 @@ line against how the file was written.</p></td>
             <ul>
 <li><a class="reference internal" href="#">VBT viewer (point clouds and volumes)</a><ul>
 <li><a class="reference internal" href="#the-file-pair">The file pair</a></li>
+<li><a class="reference internal" href="#the-window">The window</a></li>
 <li><a class="reference internal" href="#point-clouds">Point clouds</a><ul>
 <li><a class="reference internal" href="#choosing-what-to-plot">Choosing what to plot</a></li>
 <li><a class="reference internal" href="#filtering">Filtering</a></li>

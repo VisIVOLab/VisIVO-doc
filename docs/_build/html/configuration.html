@@ -1,0 +1,1020 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Architecture Note" href="architecture-note.html"><link rel="prev" title="Self-hosted copilot LLM" href="user-guide/copilot-self-hosted.html">
+        <link rel="prefetch" href="_static/visivo_logo_light.svg" as="image">
+        <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
+
+    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Configuration reference - VisIVO dev</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0b5fff;
+  --color-brand-content: #0b5fff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6aa6ff;
+  --color-brand-content: #6aa6ff;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">VisIVO dev</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/visivo_logo_light.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/visivo_logo_white.svg" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/getting-started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/cube-viewer.html">Spectral cube viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/image-viewer.html">Image viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/vbt-viewer.html">VBT viewer (point clouds and volumes)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/velocity-fields.html">Velocity fields and cosmic flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/moment-maps.html">Moment maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/spectral-tools.html">Spectral analysis tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/source-finding.html">Source finding and cross-matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/simulations.html">Simulation snapshots (AREPO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/publication-output.html">Figures, movies and linked views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot.html">Scientific Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Configuration reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-backend.html">Copilot backend &amp; engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async-patterns.html">Async Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service-mapping-note.html">Service Mapping Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocity-field-viewer.html">Velocity Field Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinematic-model.html">Tilted-Ring Kinematic Model (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso — interactive 3-D object selection &amp; masking (F2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="movie-export.html">Movie Export (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linked-views.html">Linked Cube Views (F3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo-datasets.html">Demo datasets (feature test matrix)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_server.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_importer.html">VisIVO Importer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_filter.html">VisIVO Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_viewer.html">VisIVO Viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server/visivo_utils.html">VisIVO Utils</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="configuration-reference">
+<h1>Configuration reference<a class="headerlink" href="#configuration-reference" title="Link to this heading">¶</a></h1>
+<p>The VisIVO Visual Analytics backend is configured through environment
+variables, read when the backend starts (a few are re-read on every request;
+those are marked). Set them in the shell that launches <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code>, in the
+container’s environment, or in the <code class="docutils literal notranslate"><span class="pre">environment:</span></code> block of a compose file.</p>
+<p>Every default below is the value in the backend code. Sizes are in bytes and
+times in seconds unless stated otherwise; <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">GiB</span></code> is 1073741824 bytes.
+Boolean switches name the values they accept, because they are not all parsed
+the same way.</p>
+<p>Variables marked <strong>secret</strong> hold credentials. Keep them out of shell history,
+scripts under version control and log files; prefer an env file readable only
+by the service account.</p>
+<p>The variables used by the cluster launch scripts (<code class="docutils literal notranslate"><span class="pre">VISIVO_PARTITION</span></code>,
+<code class="docutils literal notranslate"><span class="pre">VISIVO_TIME</span></code>, <code class="docutils literal notranslate"><span class="pre">VISIVO_SIF</span></code>, <code class="docutils literal notranslate"><span class="pre">VISIVO_GRES</span></code> and the others read by
+<code class="docutils literal notranslate"><span class="pre">scripts/launch_backend_slurm.sh</span></code>) configure the job, not the backend, and are
+documented in <a class="reference internal" href="deployment/hpc-slurm.html"><span class="std std-doc">Running the backend on a cluster</span></a>.</p>
+<section id="worker-pool-and-admission">
+<h2>Worker pool and admission<a class="headerlink" href="#worker-pool-and-admission" title="Link to this heading">¶</a></h2>
+<p>CPU-bound work runs in one process pool. Heavy tasks (moments, isosurfaces,
+PV slices, spectral fits) are throttled so that at least one worker stays free
+for interactive requests such as slice scrolling and probing; see
+<a class="reference internal" href="async-patterns.html"><span class="std std-doc">Async patterns</span></a> for the design.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_WORKERS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4</span></code></p></td>
+<td><p>Number of worker processes in the pool. The default is a fixed 4, not derived from the CPU count.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_HEAVY_SLOTS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">max(1,</span> <span class="pre">VISIVO_WORKERS</span> <span class="pre">-</span> <span class="pre">1)</span></code></p></td>
+<td><p>Heavy tasks allowed to occupy the pool at once. Set it to <code class="docutils literal notranslate"><span class="pre">VISIVO_WORKERS</span></code> to give up the reserved interactive slot, or to <code class="docutils literal notranslate"><span class="pre">1</span></code> to serialise heavy work.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_HEAVY_TIMEOUT_S</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">900</span></code></p></td>
+<td><p>Wall-clock ceiling for one heavy task; beyond it the request answers HTTP 504 and its slot is released. <code class="docutils literal notranslate"><span class="pre">0</span></code> disables the ceiling. The worker process itself may still run to completion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MAX_CONCURRENT_TASKS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+<td><p>Compute tasks one session may run at once; further requests wait (see below) and then answer HTTP 429.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_TASK_SLOT_WAIT_S</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">15</span></code></p></td>
+<td><p>How long a request waits for a free per-session slot before answering 429. <code class="docutils literal notranslate"><span class="pre">0</span></code> refuses immediately.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MP_START_METHOD</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">spawn</span></code></p></td>
+<td><p>Start method of the worker processes (<code class="docutils literal notranslate"><span class="pre">spawn</span></code>, <code class="docutils literal notranslate"><span class="pre">fork</span></code> or <code class="docutils literal notranslate"><span class="pre">forkserver</span></code>). <code class="docutils literal notranslate"><span class="pre">spawn</span></code> is required when workers use CUDA. An unknown value falls back to the platform default, with a warning.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_GPU_ROUND_ROBIN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>With <code class="docutils literal notranslate"><span class="pre">1</span></code>, each worker is pinned to one GPU in turn (through <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>), taken from the inherited <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> or, failing that, from <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span> <span class="pre">-L</span></code>. Any other value turns pinning off.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_PRODUCT_CACHE_ENTRIES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span></code></p></td>
+<td><p>Capacity of the in-memory LRU cache of computed products (moment, isosurface, PV, line width). Identical recomputations are served from it.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="memory-and-full-resolution-loading">
+<h2>Memory and full-resolution loading<a class="headerlink" href="#memory-and-full-resolution-loading" title="Link to this heading">¶</a></h2>
+<p>The backend measures the memory it can use from the tightest of: the cgroup
+memory limit at each level of its own cgroup (cgroup v2 <code class="docutils literal notranslate"><span class="pre">memory.max</span></code>, else
+cgroup v1 <code class="docutils literal notranslate"><span class="pre">memory.limit_in_bytes</span></code>), the memory SLURM granted the job, and,
+when none of these exists, the host’s physical memory. The <em>available</em> memory
+is the headroom under those limits, or the host’s available memory.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_FULL_RES_THRESHOLD_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">min(4</span> <span class="pre">GiB,</span> <span class="pre">memory</span> <span class="pre">limit</span> <span class="pre">/</span> <span class="pre">4)</span></code></p></td>
+<td><p>File size at or above which the backend tells the client to open a cube as a preview only (<code class="docutils literal notranslate"><span class="pre">recommended_load_mode</span> <span class="pre">=</span> <span class="pre">preview_only</span></code>). The user can still load full resolution or crop explicitly. When set, the value is used as is, with no memory check.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_CGROUP_ROOT</span></code></p></td>
+<td><p>the process’s own cgroup</p></td>
+<td><p>cgroup v2 directory to read the memory and CPU limits from. When set, cgroup v1 is not consulted. Useful when <code class="docutils literal notranslate"><span class="pre">/proc/self/cgroup</span></code> does not name the right group.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="moments-and-dask">
+<h2>Moments and Dask<a class="headerlink" href="#moments-and-dask" title="Link to this heading">¶</a></h2>
+<p>How a moment map is computed depends on the size of the selected channel
+range, <code class="docutils literal notranslate"><span class="pre">channels</span> <span class="pre">×</span> <span class="pre">NAXIS1</span> <span class="pre">×</span> <span class="pre">NAXIS2</span> <span class="pre">×</span> <span class="pre">4</span></code> bytes (float32):</p>
+<ol class="arabic simple">
+<li><p>With <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MODE=auto</span></code> (the default) and Dask installed, the moment
+is computed with chunked <code class="docutils literal notranslate"><span class="pre">dask.array</span></code>: always on the distributed cluster
+when <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_SCHEDULER</span></code> names a reachable one, otherwise with a local
+threaded scheduler once the range reaches <code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MIN_BYTES</span></code>. Blocks
+are read from disk on demand; each holds at most 64 channels and at most
+<code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_CHUNK_BYTES</span></code>, and at least one channel.</p></li>
+<li><p>Otherwise the worker keeps the range in memory only when it is no larger
+than <code class="docutils literal notranslate"><span class="pre">min(VISIVO_MOMENT_STREAM_BYTES,</span> <span class="pre">available</span> <span class="pre">memory</span> <span class="pre">/</span> <span class="pre">12)</span></code>. The factor 12
+covers the float64 temporaries of the reduction.</p></li>
+<li><p>A larger range is streamed from disk: M0, M1 and M2 in spectral slabs,
+M3 to M10 through the same chunked Dask path (if Dask is installed; without
+it they fall back to memory). Slabs are sized like the Dask blocks, by
+<code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_CHUNK_BYTES</span></code>, with <code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_SLAB_CHANNELS</span></code> as the cap
+on their channel count.</p></li>
+</ol>
+<p>Moments that need the centroid first (M2 to M5) are computed in two passes
+over the data on both out-of-core paths, so memory stays bounded by one block.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_STREAM_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">GiB</span></code></p></td>
+<td><p>Ceiling of the channel range kept in memory; the effective threshold is the smaller of this and one twelfth of the available memory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_CHUNK_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">64</span> <span class="pre">MiB</span></code></p></td>
+<td><p>Size of each streamed slab or Dask block, never less than one channel.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_SLAB_CHANNELS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">64</span></code></p></td>
+<td><p>Upper limit on the channels in a streamed slab. It only caps the slab; the size comes from <code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_CHUNK_BYTES</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MOMENT_THREADS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>Threads for the parallel moment kernels and the local Dask scheduler. <code class="docutils literal notranslate"><span class="pre">0</span></code> means <code class="docutils literal notranslate"><span class="pre">min(4,</span> <span class="pre">CPU</span> <span class="pre">count)</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MODE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code>: distributed if a scheduler is set, else local threaded Dask for large ranges. <code class="docutils literal notranslate"><span class="pre">off</span></code>: never Dask. <code class="docutils literal notranslate"><span class="pre">local</span></code>: always local threaded Dask. <code class="docutils literal notranslate"><span class="pre">distributed</span></code>: only a cluster, else the plain worker.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_MIN_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">512</span> <span class="pre">MiB</span></code></p></td>
+<td><p>In <code class="docutils literal notranslate"><span class="pre">auto</span></code> mode, smallest range sent to the local threaded Dask path.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_DASK_SCHEDULER</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Address of a <code class="docutils literal notranslate"><span class="pre">dask.distributed</span></code> scheduler (for example <code class="docutils literal notranslate"><span class="pre">tcp://host:8786</span></code>). When set, moments are computed on that cluster; its workers must see the same files.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="rendering">
+<h2>Rendering<a class="headerlink" href="#rendering" title="Link to this heading">¶</a></h2>
+<p>Remote 3-D views (<a class="reference internal" href="user-guide/cube-viewer.html"><span class="std std-doc">Cube viewer</span></a>) are rendered by the
+backend, each in a process of its own.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_RENDER_MAX_SESSIONS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+<td><p>Remote views accepted at once; beyond it a new view answers HTTP 503.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_RENDER_IDLE_TTL_SECONDS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code></p></td>
+<td><p>A view that receives no command for this long is closed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_RENDER_IN_PROCESS</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> renders inside the backend’s own process instead of a child process (slower: rendering then competes with the process that serves the clients).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="src-node">
+<h2>SRC node<a class="headerlink" href="#src-node" title="Link to this heading">¶</a></h2>
+<p>Settings for a backend that runs as a node of the SKA Regional Centre network
+and is discovered by a SKAVA catalogue; see
+<a class="reference internal" href="deployment/src-node.html"><span class="std std-doc">The backend as an SRC node</span></a> and
+<a class="reference internal" href="user-guide/skava-discovery.html"><span class="std std-doc">SKAVA discovery</span></a>.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_NODE_CODE</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>The node’s code in the catalogue, reported in <code class="docutils literal notranslate"><span class="pre">/v1/node/status</span></code> and in pushed telemetry.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_NODE_GPU</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code>/<code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">yes</span></code> declares a GPU, <code class="docutils literal notranslate"><span class="pre">0</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>/<code class="docutils literal notranslate"><span class="pre">no</span></code> declares none; unset reports “unknown”.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_NODE_STATUS_PUBLIC</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>/<code class="docutils literal notranslate"><span class="pre">no</span></code> makes <code class="docutils literal notranslate"><span class="pre">/v1/node/status</span></code> and the metrics require the backend token. <code class="docutils literal notranslate"><span class="pre">/v1/ping</span></code> always stays open. Re-read on every request.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VERSION</span></code></p></td>
+<td><p>the application version</p></td>
+<td><p>Version string reported in the node status.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_DATA_ROOT</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>A single directory that <code class="docutils literal notranslate"><span class="pre">file://</span></code> access URLs from SKAVA and the SODA service may point into. Combined with <code class="docutils literal notranslate"><span class="pre">VISIVO_DATA_ROOTS</span></code>; either is enough.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SKAVA_TELEMETRY_URL</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Base URL (<code class="docutils literal notranslate"><span class="pre">http</span></code> or <code class="docutils literal notranslate"><span class="pre">https</span></code>) of the catalogue to push the node status to. Pushing is off unless this, the token and the node code are all set.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SKAVA_NODE_TOKEN</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><strong>Secret.</strong> This node’s telemetry token, issued by the catalogue’s operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SKAVA_TELEMETRY_INTERVAL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p></td>
+<td><p>Seconds between pushed reports; at least 1.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="security-tokens-and-multi-user">
+<h2>Security, tokens and multi-user<a class="headerlink" href="#security-tokens-and-multi-user" title="Link to this heading">¶</a></h2>
+<p>See <a class="reference internal" href="multi-user-backend.html"><span class="std std-doc">Sharing one backend between users</span></a> for how these
+fit together.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_TOKEN</span></code></p></td>
+<td><p>generated at startup</p></td>
+<td><p><strong>Secret.</strong> The primary (operator) token. When unset, a random token is generated, printed at startup and written to <code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code> (mode 600). Re-read on every request, so it can be rotated.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_TOKENS</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><strong>Secret.</strong> Additional per-user tokens, comma- or whitespace-separated. More than one accepted token switches on multi-user mode. Re-read on every request.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_DATA_ROOTS</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Directories (separated by <code class="docutils literal notranslate"><span class="pre">:</span></code> on Linux and macOS, <code class="docutils literal notranslate"><span class="pre">;</span></code> on Windows) that path-based endpoints may read. Unset: unconfined with a single token, all path access denied in multi-user mode. Re-read on every request.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_STRICT_SESSIONS</span></code></p></td>
+<td><p>on in multi-user mode, off otherwise</p></td>
+<td><p>When on, only session ids minted by the backend are accepted. <code class="docutils literal notranslate"><span class="pre">0</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>/<code class="docutils literal notranslate"><span class="pre">no</span></code> turns it off, any other non-empty value on.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SESSION_TTL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1800</span></code></p></td>
+<td><p>A session idle for longer than this many seconds is removed and its datasets closed, unless a task of it is still running. The shared anonymous session stays, but its datasets are released.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MAX_SESSIONS_PER_TOKEN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span></code></p></td>
+<td><p>Live sessions one token may hold; a further session answers HTTP 429.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_TASK_TTL_SECONDS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1800</span></code></p></td>
+<td><p>A task record neither read nor updated for this many seconds is dropped from the task registry (at least 1), after which its status can no longer be polled. Running tasks are never dropped.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SNAPSHOT_SECRET</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ADMIN_SESSION_SECRET</span></code>, else random per process</p></td>
+<td><p><strong>Secret.</strong> HMAC key that signs reproducibility snapshots. Set it so signatures stay valid across restarts.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="files-and-caches">
+<h2>Files and caches<a class="headerlink" href="#files-and-caches" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_EXPORTS_DIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~/.visivo/exports</span></code></p></td>
+<td><p>The Workspace exports folder: saved cut-outs, moment FITS files and source-finding products. Created if missing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_HIPS_CACHE</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~/.cache/visivo/hips</span></code></p></td>
+<td><p>Directory of the HiPS tile cache.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_HIPS_CACHE_MAX_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">GiB</span></code></p></td>
+<td><p>Size cap of the HiPS cache; the least recently used tiles are evicted beyond it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_HIPS_CACHE_TTL_SECONDS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">604800</span></code> (7 days)</p></td>
+<td><p>Tiles older than this are deleted.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_HIPS_CACHE_CLEANUP_INTERVAL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">60</span></code></p></td>
+<td><p>Minimum seconds between two cleanup passes over the HiPS cache.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SAMP_FILE_TTL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3600</span></code></p></td>
+<td><p>Files staged for SAMP (in the system temporary directory, <code class="docutils literal notranslate"><span class="pre">visivo_samp_files</span></code>) are deleted after this many seconds.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="copilot">
+<h2>Copilot<a class="headerlink" href="#copilot" title="Link to this heading">¶</a></h2>
+<p>The copilot’s provider is chosen per session in the client; these variables
+give every new session its starting configuration. See
+<a class="reference internal" href="user-guide/copilot-self-hosted.html"><span class="std std-doc">Self-hosted copilot LLM</span></a> and
+<a class="reference internal" href="copilot-backend.html"><span class="std std-doc">Copilot backend</span></a>.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSISTANT_PROVIDER</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code>, <code class="docutils literal notranslate"><span class="pre">anthropic</span></code>, <code class="docutils literal notranslate"><span class="pre">openai</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code>. <code class="docutils literal notranslate"><span class="pre">auto</span></code> picks a self-hosted endpoint or OpenAI key first, then an Anthropic key, else <code class="docutils literal notranslate"><span class="pre">null</span></code> (tools only, no language model).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSISTANT_MODEL</span></code></p></td>
+<td><p>provider default</p></td>
+<td><p>Model name sent to the provider. Without it the Anthropic provider uses <code class="docutils literal notranslate"><span class="pre">claude-opus-4-8</span></code> and the OpenAI provider, cloud or self-hosted, uses <code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code>; a self-hosted server usually needs its own served name here.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_BASE_URL</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Base URL of an OpenAI-compatible server (for example <code class="docutils literal notranslate"><span class="pre">http://host:8000/v1</span></code>). Keep credentials out of it; the key belongs in <code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_API_KEY</span></code>. A URL set from the client must be <code class="docutils literal notranslate"><span class="pre">http</span></code>/<code class="docutils literal notranslate"><span class="pre">https</span></code> with no credentials, query or fragment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_API_KEY</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><strong>Secret.</strong> Key sent to <code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_BASE_URL</span></code>, and only there.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ANTHROPIC_API_KEY</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><strong>Secret.</strong> Key for the Anthropic provider.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><strong>Secret.</strong> Key for the cloud OpenAI provider; never sent to a self-hosted URL.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSISTANT_SLOTS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p>Copilot queries running at once, across all sessions (at least 1). Separate from the heavy-task slots.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSISTANT_TIMEOUT_S</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">120</span></code></p></td>
+<td><p>Wall-clock budget of one copilot query, tool calls included; beyond it the request answers HTTP 504.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="remote-services-vlkb-hips-cone-search-open-url-samp">
+<h2>Remote services: VLKB, HiPS, cone search, open URL, SAMP<a class="headerlink" href="#remote-services-vlkb-hips-cone-search-open-url-samp" title="Link to this heading">¶</a></h2>
+<p>Every URL the backend fetches on a client’s behalf is checked against an
+allowlist variable, separately for each service. <strong>When an allowlist is set,
+only the hosts it names (comma-separated, matched case-insensitively) are
+fetched and every other host is refused.</strong> When it is unset, only <code class="docutils literal notranslate"><span class="pre">http</span></code> and
+<code class="docutils literal notranslate"><span class="pre">https</span></code> URLs are accepted and, except for the open-URL route, addresses that
+resolve to private, loopback, link-local, reserved or multicast networks are
+refused. Redirects are checked with the same policy.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_URL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://vlkb.ia2.inaf.it/vlkb</span></code> for TAP queries; none for multi-cutout</p></td>
+<td><p>Default VLKB service when the client sends none.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_ALLOWED_HOSTS</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Allowlist for VLKB TAP, cut-out, multi-cutout and SED-fit requests.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_MAX_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">GiB</span></code></p></td>
+<td><p>Largest single cut-out download.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_MCUTOUT_TIMEOUT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code></p></td>
+<td><p>Socket timeout of each multi-cutout archive call.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_MCUTOUT_MAX_ITEMS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">500</span></code></p></td>
+<td><p>Datasets in one multi-cutout batch.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_MCUTOUT_MAX_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">16</span> <span class="pre">GiB</span></code></p></td>
+<td><p>Largest multi-cutout results archive.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_MCUTOUT_MAX_EXTRACTED</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span> <span class="pre">GiB</span></code></p></td>
+<td><p>Total unpacked size of that archive.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_MCUTOUT_MAX_MEMBERS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2000</span></code></p></td>
+<td><p>Entries in that archive.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_MCUTOUT_MAX_REPORT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">MiB</span></code></p></td>
+<td><p>Largest job report.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VLKB_SEDFIT_URL</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Base URL of the VLKB SED-fit model service.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SED_MODELS_TIMEOUT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">300</span></code></p></td>
+<td><p>Deadline of a whole SED model-fit request.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SED_MODELS_MAX_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">64</span> <span class="pre">MiB</span></code></p></td>
+<td><p>Largest response accepted from the SED-fit service.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SED_MAX_MODELS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2000</span></code></p></td>
+<td><p>Upper bound on the <code class="docutils literal notranslate"><span class="pre">max_models</span></code> a client may request.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_HIPS2FITS_URL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://alasky.cds.unistra.fr/hips-image-services/hips2fits</span></code></p></td>
+<td><p>hips2fits service, for a mirror.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_HIPS2FITS_ALLOWED_HOSTS</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Allowlist for hips2fits requests.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_CONE_SEARCH_ALLOWED_HOSTS</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Allowlist for cone-search requests.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_OPENURL_ALLOWED_HOSTS</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Allowlist for <code class="docutils literal notranslate"><span class="pre">/v1/datasets/open_url</span></code> (opening a dataset by URL, as SKAVA access URLs do).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_OPENURL_BLOCK_PRIVATE</span></code></p></td>
+<td><p>off</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code>/<code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">yes</span></code> refuses private and loopback addresses on the open-URL route too. Off by default because federated data nodes often sit on private networks.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SAMP_DIRECT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code> lets the backend register with a SAMP hub on its own machine and send messages directly. Without it, SAMP goes through the desktop client, which is the only way when the backend is remote.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="analysis-limits">
+<h2>Analysis limits<a class="headerlink" href="#analysis-limits" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_LINEWIDTH_SNR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3.0</span></code></p></td>
+<td><p>Pixels below this signal-to-noise ratio are skipped by the line-width fit; <code class="docutils literal notranslate"><span class="pre">0</span></code> fits every pixel.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_LINEWIDTH_CHUNKS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_WORKERS</span></code></p></td>
+<td><p>Row chunks a line-width map is split into; the chunks still pass the heavy-task throttle.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_KINEMATIC_MAX_VOXELS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">268435456</span></code> (256 Mi voxels)</p></td>
+<td><p>Largest kinematic model cube; larger requests answer HTTP 413. Zero or invalid values use the default.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_AREPO_MAX_CELLS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">600000000</span></code></p></td>
+<td><p>Largest grid an AREPO extraction may materialise.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_AREPO_MAX_LEVEL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">14</span></code></p></td>
+<td><p>Highest AREPO refinement level accepted.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SOFIA_BIN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sofia2</span></code>, else <code class="docutils literal notranslate"><span class="pre">sofia</span></code>, on <code class="docutils literal notranslate"><span class="pre">PATH</span></code></p></td>
+<td><p>The SoFiA-2 executable.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SOFIA_TIMEOUT_S</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">900</span></code></p></td>
+<td><p>Wall-clock limit of a SoFiA-2 run started from <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/sourcefind/{dataset_id}</span></code>; <code class="docutils literal notranslate"><span class="pre">0</span></code> disables it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_FINDER_TIMEOUT_S</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3600</span></code></p></td>
+<td><p>Wall-clock limit of a source finder run as a task (<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/tasks/sourcefind</span></code>); at least 1.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="velocity-fields">
+<h2>Velocity fields<a class="headerlink" href="#velocity-fields" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VELOCITY_STREAM_BYTES</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">512</span> <span class="pre">MiB</span></code></p></td>
+<td><p>Above this field size, the full-resolution divergence is computed in z-slabs read from disk instead of in memory. <code class="docutils literal notranslate"><span class="pre">0</span></code> always streams.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_VELOCITY_SLAB</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span></code></p></td>
+<td><p>z-planes per slab on the streamed path (at least 1).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="diagnostics">
+<h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_DIAGNOSTICS_LEVEL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+<td><p>Lowest Python logging level copied into the diagnostics buffer that <em>View → Diagnostics</em> shows (<code class="docutils literal notranslate"><span class="pre">DEBUG</span></code>, <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">WARNING</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>). An unknown name means <code class="docutils literal notranslate"><span class="pre">INFO</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_DIAGNOSTICS_BUFFER</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2000</span></code></p></td>
+<td><p>Log records kept in that buffer (at least 16); older ones are dropped.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="other-variables-the-backend-honours">
+<h2>Other variables the backend honours<a class="headerlink" href="#other-variables-the-backend-honours" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code></p></td>
+<td><p>The GPUs the job was given. Workers are spread over them (see <code class="docutils literal notranslate"><span class="pre">VISIVO_GPU_ROUND_ROBIN</span></code>), and so are remote render views.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VTK_EGL_DEVICE_INDEX</span></code></p></td>
+<td><p>Binds every remote render view to this EGL device instead of spreading views over the job’s GPUs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SLURM_JOB_ID</span></code></p></td>
+<td><p>Marks the backend as running in a SLURM job, so the memory grant below is taken into account.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SLURM_MEM_PER_NODE</span></code></p></td>
+<td><p>Memory granted to the job, in MiB; counts as a memory limit. <code class="docutils literal notranslate"><span class="pre">0</span></code> (the whole node) sets none.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SLURM_MEM_PER_CPU</span></code>, <code class="docutils literal notranslate"><span class="pre">SLURM_CPUS_ON_NODE</span></code></p></td>
+<td><p>Used together as the memory grant when <code class="docutils literal notranslate"><span class="pre">SLURM_MEM_PER_NODE</span></code> is absent.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ADMIN_SESSION_SECRET</span></code></p></td>
+<td><p><strong>Secret.</strong> Fallback for <code class="docutils literal notranslate"><span class="pre">VISIVO_SNAPSHOT_SECRET</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ANTHROPIC_API_KEY</span></code>, <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code></p></td>
+<td><p>See <a class="reference internal" href="#copilot">Copilot</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="architecture-note.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Architecture Note</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="user-guide/copilot-self-hosted.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Self-hosted copilot LLM</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, VisIVOLab
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Configuration reference</a><ul>
+<li><a class="reference internal" href="#worker-pool-and-admission">Worker pool and admission</a></li>
+<li><a class="reference internal" href="#memory-and-full-resolution-loading">Memory and full-resolution loading</a></li>
+<li><a class="reference internal" href="#moments-and-dask">Moments and Dask</a></li>
+<li><a class="reference internal" href="#rendering">Rendering</a></li>
+<li><a class="reference internal" href="#src-node">SRC node</a></li>
+<li><a class="reference internal" href="#security-tokens-and-multi-user">Security, tokens and multi-user</a></li>
+<li><a class="reference internal" href="#files-and-caches">Files and caches</a></li>
+<li><a class="reference internal" href="#copilot">Copilot</a></li>
+<li><a class="reference internal" href="#remote-services-vlkb-hips-cone-search-open-url-samp">Remote services: VLKB, HiPS, cone search, open URL, SAMP</a></li>
+<li><a class="reference internal" href="#analysis-limits">Analysis limits</a></li>
+<li><a class="reference internal" href="#velocity-fields">Velocity fields</a></li>
+<li><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
+<li><a class="reference internal" href="#other-variables-the-backend-honours">Other variables the backend honours</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=f26bd01d"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>

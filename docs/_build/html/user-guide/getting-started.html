@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Getting started - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -295,14 +333,14 @@ about five minutes.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>macOS</strong></p></td>
-<td><p>14 or newer (primary target). Linux works too; the build files are CMake-portable.</p></td>
+<tr class="row-even"><td><p><strong>OS</strong></p></td>
+<td><p>macOS 14 or newer (primary development platform), Linux (Ubuntu 22.04 or newer), Windows 10/11 x64. Release packages exist for all three.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Compiler</strong></p></td>
 <td><p>Apple Clang 15+, GCC 11+, or MSVC 2022. C++17.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Qt</strong></p></td>
-<td><p>6.5 or newer (Core, Gui, Widgets, OpenGL, OpenGLWidgets, Concurrent, Network, NetworkAuth, Svg, PrintSupport).</p></td>
+<td><p>6.10 or newer (Concurrent, Widgets, Xml, Svg, Network, NetworkAuth, PrintSupport, WebEngineWidgets, WebSockets).</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>VTK</strong></p></td>
 <td><p>9.5 or newer, built with Qt 6 support.</p></td>
@@ -317,7 +355,7 @@ about five minutes.</p>
 </table>
 </div>
 <p>For full build flags and dependency notes see the repository
-<a class="reference external" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics/blob/master/BUILDING.md"><code class="docutils literal notranslate"><span class="pre">BUILDING.md</span></code></a>.</p>
+<a class="reference external" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics/blob/main/BUILDING.md"><code class="docutils literal notranslate"><span class="pre">BUILDING.md</span></code></a>.</p>
 </section>
 <section id="starting-the-backend">
 <h2>Starting the backend<a class="headerlink" href="#starting-the-backend" title="Link to this heading">¶</a></h2>
@@ -381,40 +419,133 @@ open<span class="w"> </span>build/VisIVOVisualAnalytics.app<span class="w">     
 build/VisIVOVisualAnalytics<span class="w">                           </span><span class="c1"># Linux binary</span>
 </pre></div>
 </div>
+<p>On Windows the dependencies (zlib, cfitsio, VTK with Qt) are built from source
+first and the executable needs its DLLs beside it; follow the step-by-step
+Windows section of <code class="docutils literal notranslate"><span class="pre">BUILDING.md</span></code>, which is what the release workflow runs.</p>
 <p>The first window you see is the <strong>Startup Dialog</strong>:</p>
 <ol class="arabic simple">
 <li><p><strong>Backend check</strong> — the client pings the backend health endpoint and
 shows green when it is reachable.</p></li>
-<li><p><strong>Authentication</strong> — the static bearer token is loaded automatically if
-<code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code> exists. You can paste a different one in <em>Settings</em> if
-you point the client at a remote backend.</p></li>
+<li><p><strong>Authentication</strong> — the token in <code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code> is loaded
+automatically, and is sent only to the backend configured as the local
+one. Backends on other machines use the token they were registered with
+(see <em>Connecting to a remote backend</em> below).</p></li>
 <li><p><strong>Optional VLKB sign-in</strong> — if you plan to use VLKB-protected services
 (catalogue search, cutout staging) you can complete the OIDC sign-in here.
 Otherwise just continue.</p></li>
 </ol>
 <p>Click <strong>Continue</strong> to enter the main window.</p>
 </section>
+<section id="connecting-to-a-remote-backend">
+<h2>Connecting to a remote backend<a class="headerlink" href="#connecting-to-a-remote-backend" title="Link to this heading">¶</a></h2>
+<p>A backend on another machine, for example on a cluster node reached through an
+SSH tunnel, is registered in <strong>Settings ▸ Backends ▸ Remote Backends</strong> with
+its URL and its own token. The client then sends each backend its own token,
+never the local one, and uses the registry to tell a remote backend from the
+local one (which decides, for instance, whether the cube viewer offers
+server-side rendering). Starting a backend on a SLURM node and opening the
+tunnel is described in
+<a class="reference internal" href="../deployment/hpc-slurm.html"><span class="std std-doc">Running the backend on a cluster</span></a>; SRC nodes
+found through SKAVA are matched against the same registry
+(<a class="reference internal" href="skava-discovery.html"><span class="std std-doc">SKAVA discovery</span></a>).</p>
+</section>
+<section id="new-versions">
+<h2>New versions<a class="headerlink" href="#new-versions" title="Link to this heading">¶</a></h2>
+<p>At startup, at most once a day, the client asks GitHub for the latest release
+and tells you when a newer one exists. <strong>Help ▸ Check for Updates…</strong> asks at
+any time; the automatic check can be switched off in <em>Settings</em>.</p>
+</section>
 <section id="opening-your-first-dataset">
 <h2>Opening your first dataset<a class="headerlink" href="#opening-your-first-dataset" title="Link to this heading">¶</a></h2>
 <p>The <strong>Data Hub</strong> is the landing tab of the main window. Use it to browse
 the backend-side filesystem:</p>
-<ul class="simple">
-<li><p><strong>Open Remote Dataset…</strong> opens a remote file browser rooted at the
-backend’s working directory. Select a <code class="docutils literal notranslate"><span class="pre">.fits</span></code> file. The client classifies
-it server-side and decides whether it’s a 2-D image or 3-D spectral cube,
-then opens the appropriate viewer:</p>
 <ul>
+<li><p><strong>Open…</strong> (⌘O, also <em>File ▸ Open…</em>) opens a remote file browser rooted at the
+backend’s working directory. Pick any supported file: the backend identifies
+it from its contents and the matching viewer opens.</p>
+<ul class="simple">
 <li><p>2-D FITS image → <a class="reference internal" href="image-viewer.html"><span class="doc std std-doc">Image viewer</span></a></p></li>
 <li><p>3-D spectral cube → <a class="reference internal" href="cube-viewer.html"><span class="doc std std-doc">Spectral cube viewer</span></a></p></li>
+<li><p>FITS with time and frequency axes, or HDF5 → the dynamic-spectrum viewer</p></li>
+<li><p>CSV / VOTable / IPAC / speck → <a class="reference internal" href="catalogues-hips.html"><span class="doc std std-doc">3-D catalogue viewer</span></a></p></li>
+<li><p>VisIVO Binary Table (<code class="docutils literal notranslate"><span class="pre">.bin</span></code> + <code class="docutils literal notranslate"><span class="pre">.head</span></code>) → <a class="reference internal" href="vbt-viewer.html"><span class="doc std std-doc">VBT viewer</span></a></p></li>
 </ul>
+<p>You are asked only when the file itself is ambiguous. A FITS <strong>table</strong> is the
+usual case: it can be a source catalogue or a table to overlay on an image,
+and nothing in the file says which — so the client asks instead of guessing.</p>
+<p>The image or cube need not be in the primary HDU. Archive products such as
+ESO phase-3 or APEX cubes keep the primary empty and the data in an image
+extension (<code class="docutils literal notranslate"><span class="pre">DATA_EXT</span></code>, with the variance beside it in <code class="docutils literal notranslate"><span class="pre">STAT_EXT</span></code>): the
+backend opens the first extension that holds a real array, reads its WCS
+and <code class="docutils literal notranslate"><span class="pre">BUNIT</span></code> from there, and carries the descriptive cards only the primary
+has (<code class="docutils literal notranslate"><span class="pre">OBJECT</span></code>, the instrument) along with it. The header viewer lists the
+two together, and an edit of a card goes back to the HDU that owns it.</p>
 </li>
-<li><p><strong>Open 3-D Catalogue…</strong> (CSV / VOTable) launches the
-<a class="reference internal" href="catalogues-hips.html"><span class="doc std std-doc">3-D catalogue viewer</span></a>.</p></li>
-<li><p><strong>HiPS Viewer…</strong> opens the all-sky <a class="reference internal" href="catalogues-hips.html"><span class="doc std std-doc">HiPS viewer</span></a>.</p></li>
-<li><p><strong>VLKB Inventory</strong> browses VLKB-served sources behind the OIDC flow.</p></li>
 </ul>
+<p>Under <strong>Archives</strong>:</p>
+<ul class="simple">
+<li><p><strong>HiPS Viewer</strong> opens the all-sky <a class="reference internal" href="catalogues-hips.html"><span class="doc std std-doc">HiPS viewer</span></a>.</p></li>
+<li><p><strong>VLKB Inventory</strong> goes to the <a class="reference internal" href="vlkb-archive.html"><span class="doc std std-doc">VLKB archive</span></a> tab.</p></li>
+</ul>
+<p>Beside it sits the <strong>VLKB</strong> tab, which queries the ViaLactea Knowledge Base over
+a region of the Galactic plane and cuts out the images and cubes that cover it —
+see <a class="reference internal" href="vlkb-archive.html"><span class="doc std std-doc">VLKB archive</span></a>.</p>
 <p>You can also drag-and-drop a local FITS file onto the Data Hub — it will
 be staged on the backend automatically.</p>
+<section id="from-the-desktop-double-click-a-file">
+<h3>From the desktop: double-click a file<a class="headerlink" href="#from-the-desktop-double-click-a-file" title="Link to this heading">¶</a></h3>
+<p>VisIVO registers itself as a FITS viewer, so a <code class="docutils literal notranslate"><span class="pre">.fits</span></code> (<code class="docutils literal notranslate"><span class="pre">.fit</span></code>, <code class="docutils literal notranslate"><span class="pre">.fts</span></code>, <code class="docutils literal notranslate"><span class="pre">.fz</span></code>)
+file can be opened from the file manager or the command line — and so can
+anything else the application opens: a catalogue (CSV, VOTable, IPAC <code class="docutils literal notranslate"><span class="pre">.tbl</span></code>,
+<code class="docutils literal notranslate"><span class="pre">.speck</span></code>) or a VisIVO Binary Table.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>VisIVOVisualAnalytics<span class="w"> </span>/data/WALLABY.fits<span class="w">      </span><span class="c1"># also works with several paths</span>
+VisIVOVisualAnalytics<span class="w"> </span>/data/snapshot.tbl<span class="w">      </span><span class="c1"># catalogue → 3-D catalogue viewer</span>
+VisIVOVisualAnalytics<span class="w"> </span>/data/volume.bin<span class="w">        </span><span class="c1"># VBT → point or volume viewer</span>
+open<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;VisIVO Visual Analytics&quot;</span><span class="w"> </span>cube.fits<span class="w">    </span><span class="c1"># macOS</span>
+</pre></div>
+</div>
+<p>Whatever the file is, it goes through the same single decision as <em>File ▸
+Open…</em>: the backend classifies it and the right viewer opens. When the content
+is genuinely ambiguous — a FITS table can be either — you are asked which viewer
+to use rather than guessed at.</p>
+<p>If VisIVO is not running the startup sequence happens first — backend, then
+authentication — and the file opens as soon as the main window appears. If it is
+already running the file opens <strong>in that same instance</strong>, in a new viewer
+window: on macOS the double-click reaches the running app directly, and on
+Linux / Windows (where the desktop starts a new process for every double-click)
+the new process hands the file over and exits. A launch with no file always
+starts its own instance, so running two VisIVOs against two backends is still
+possible. Several files opened at once are opened one after another, never on
+top of each other’s dialogs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>macOS</strong>: the bundle claims FITS with handler rank <em>Alternate</em>, on purpose.
+It appears in <em>Open With</em> and macOS will pick it when nothing else claims the
+type, but it does not take the association away from DS9 / CARTA / QFitsView on
+a machine where one of those is installed. To make it the default: select a FITS
+file, ⌘I, <em>Open With</em> ▸ <em>VisIVO Visual Analytics</em> ▸ <em>Change All…</em>. After
+installing a new build, launch it once so LaunchServices re-reads the bundle
+(or run <code class="docutils literal notranslate"><span class="pre">lsregister</span> <span class="pre">-f</span> <span class="pre">/Applications/VisIVOVisualAnalytics.app</span></code>).</p>
+<p><strong>Linux</strong>: install the association from <code class="docutils literal notranslate"><span class="pre">deploy/linux/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xdg-mime<span class="w"> </span>install<span class="w"> </span>--novendor<span class="w"> </span>visivo-fits-mime.xml
+xdg-desktop-menu<span class="w"> </span>install<span class="w"> </span>--novendor<span class="w"> </span>visivo-visual-analytics.desktop
+update-mime-database<span class="w"> </span>~/.local/share/mime
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.desktop</span></code> file expects <code class="docutils literal notranslate"><span class="pre">VisIVOVisualAnalytics</span></code> on <code class="docutils literal notranslate"><span class="pre">PATH</span></code>; edit its <code class="docutils literal notranslate"><span class="pre">Exec=</span></code>
+line if the binary lives elsewhere.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+```{caution}
+The file is opened **by path, through the backend** — the same route as *Open
+Remote Dataset*, and the classification happens there too, so with the backend
+down you are told that rather than asked to choose a viewer. A double-clicked
+file therefore has to be readable by the backend process: with a local auto-started backend that is anything you can
+read, but with a remote backend the path must exist *there*. Use the Data Hub&#39;s
+drag-and-drop instead, which stages the file server-side.
+</pre></div>
+</div>
+</section>
 </section>
 <section id="the-k-command-palette">
 <h2>The ⌘K Command Palette<a class="headerlink" href="#the-k-command-palette" title="Link to this heading">¶</a></h2>
@@ -425,8 +556,9 @@ in the application and start typing — <em>“open”</em>, <em>“diagnostics�
 hunting through menus. It works from inside the viewer windows too.</p>
 <p>Searchable groups:</p>
 <ul class="simple">
-<li><p><strong>File</strong> — Open Remote Dataset, Open 3D Catalogue, Open VBT, HiPS
-Viewer, VLKB Inventory.</p></li>
+<li><p><strong>File</strong> — Open…, Open 3D Catalogue, Open VBT, HiPS Viewer, VLKB
+Inventory. (<strong>Open…</strong> takes any supported file; the two named entries are
+there for when you would rather say which opener to use.)</p></li>
 <li><p><strong>Recent datasets</strong> — last six datasets opened in this session
 (refreshed each time the palette is opened).</p></li>
 <li><p><strong>Application</strong> — Open Settings (⌘,), About, Quit VisIVO Visual
@@ -500,7 +632,8 @@ page to learn the workspace.</p></li>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -528,7 +661,12 @@ page to learn the workspace.</p></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#launching-the-client">Launching the client</a></li>
-<li><a class="reference internal" href="#opening-your-first-dataset">Opening your first dataset</a></li>
+<li><a class="reference internal" href="#connecting-to-a-remote-backend">Connecting to a remote backend</a></li>
+<li><a class="reference internal" href="#new-versions">New versions</a></li>
+<li><a class="reference internal" href="#opening-your-first-dataset">Opening your first dataset</a><ul>
+<li><a class="reference internal" href="#from-the-desktop-double-click-a-file">From the desktop: double-click a file</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#the-k-command-palette">The ⌘K Command Palette</a></li>
 <li><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
 <li><a class="reference internal" href="#where-to-go-next">Where to go next</a></li>

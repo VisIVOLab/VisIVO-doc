@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Glossary" href="glossary.html"><link rel="prev" title="Scientific Copilot" href="copilot.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Configuration reference" href="../configuration.html"><link rel="prev" title="Sharing one backend between users" href="../multi-user-backend.html">
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Self-hosted copilot LLM - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -204,7 +204,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cube-viewer.html">Spectral cube viewer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="image-viewer.html">Image viewer</a></li>
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -325,7 +363,7 @@ container. Two flavours:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>deploy/copilot-llm
 cp<span class="w"> </span>.env.example<span class="w"> </span>.env<span class="w">          </span><span class="c1"># set VLLM_API_KEY; set HUGGING_FACE_HUB_TOKEN (see below)</span>
 docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w">          </span><span class="c1"># first run downloads the model into ./hf-cache</span>
-docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w">        </span><span class="c1"># wait for "Application startup complete"</span>
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w">        </span><span class="c1"># wait for &quot;Application startup complete&quot;</span>
 ./validate.sh<span class="w">                 </span><span class="c1"># checks /models, a chat completion, AND a tool call</span>
 </pre></div>
 </div>
@@ -346,7 +384,7 @@ nvidia-ctk<span class="w"> </span>cdi<span class="w"> </span>list<span class="w"
 
 <span class="c1"># 2) Keep the container alive after you log out — rootless Podman otherwise KILLS</span>
 <span class="c1">#    all your processes when the last SSH session closes (the #1 gotcha):</span>
-loginctl<span class="w"> </span>enable-linger<span class="w"> </span><span class="s2">"</span><span class="nv">$USER</span><span class="s2">"</span><span class="w">          </span><span class="c1"># no root needed</span>
+loginctl<span class="w"> </span>enable-linger<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER</span><span class="s2">&quot;</span><span class="w">          </span><span class="c1"># no root needed</span>
 systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>podman-restart.service<span class="w">   </span><span class="c1"># also restart it on reboot</span>
 
 <span class="c1"># 3) Open the API port in the firewall (root, once):</span>
@@ -359,11 +397,11 @@ podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </sp
 <span class="w">  </span>--device<span class="w"> </span>nvidia.com/gpu<span class="o">=</span>all<span class="w"> </span><span class="se">\ </span><span class="w">        </span><span class="c1"># CDI GPU</span>
 <span class="w">  </span>--security-opt<span class="w"> </span><span class="nv">label</span><span class="o">=</span>disable<span class="w"> </span><span class="se">\ </span><span class="w">       </span><span class="c1"># SELinux would deny the container NVML access</span>
 <span class="w">  </span>--ipc<span class="o">=</span>host<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--env-file<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">/.env"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">/entrypoint.sh:/entrypoint.sh:ro,Z"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">/hf-cache:/root/.cache/huggingface:Z"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--env-file<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/.env&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/entrypoint.sh:/entrypoint.sh:ro,Z&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/hf-cache:/root/.cache/huggingface:Z&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--entrypoint<span class="w"> </span>/bin/sh<span class="w"> </span>docker.io/vllm/vllm-openai:latest<span class="w"> </span>/entrypoint.sh
-<span class="c1">#  ^ fully-qualified image name: short-name-mode=enforcing can't prompt over SSH.</span>
+<span class="c1">#  ^ fully-qualified image name: short-name-mode=enforcing can&#39;t prompt over SSH.</span>
 ./validate.sh
 </pre></div>
 </div>
@@ -396,6 +434,57 @@ in the package README. The <strong><code class="docutils literal notranslate"><s
 <p><code class="docutils literal notranslate"><span class="pre">docker-compose.full.yml</span></code> runs the VisIVO backend and the LLM on the same server,
 pre-wired so the copilot works with no extra config. The LLM uses the GPU; the
 backend runs CPU-only compute, so they share the machine fine.</p>
+</section>
+<section id="configuring-the-backend-instead-of-the-client">
+<h2>Configuring the backend instead of the client<a class="headerlink" href="#configuring-the-backend-instead-of-the-client" title="Link to this heading">¶</a></h2>
+<p>Instead of entering the URL in every client, the backend can start each new
+session already pointed at your server. Set these in the backend’s
+environment (the full stack compose file does exactly this):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">VISIVO_ASSISTANT_PROVIDER</span><span class="o">=</span>auto<span class="w">            </span><span class="c1"># or openai, to force it</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VISIVO_LLM_BASE_URL</span><span class="o">=</span>http://&lt;server-ip&gt;:8000/v1
+<span class="nb">export</span><span class="w"> </span><span class="nv">VISIVO_LLM_API_KEY</span><span class="o">=</span>&lt;the<span class="w"> </span>VLLM_API_KEY<span class="w"> </span>you<span class="w"> </span>set&gt;<span class="w">   </span><span class="c1"># secret</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VISIVO_ASSISTANT_MODEL</span><span class="o">=</span>&lt;served<span class="w"> </span>model<span class="w"> </span>name&gt;
+</pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSISTANT_PROVIDER</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code>, <code class="docutils literal notranslate"><span class="pre">anthropic</span></code>, <code class="docutils literal notranslate"><span class="pre">openai</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code>. <code class="docutils literal notranslate"><span class="pre">auto</span></code> uses <code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_BASE_URL</span></code> (or a cloud OpenAI key) when set, then an Anthropic key, else no model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_BASE_URL</span></code></p></td>
+<td><p>unset</p></td>
+<td><p>Your server’s OpenAI-compatible base URL, ending in <code class="docutils literal notranslate"><span class="pre">/v1</span></code>. Put no credentials, query string or fragment in it: the key goes in <code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_API_KEY</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_API_KEY</span></code></p></td>
+<td><p>unset</p></td>
+<td><p><strong>Secret.</strong> The key your server expects (<code class="docutils literal notranslate"><span class="pre">VLLM_API_KEY</span></code>). It is sent only to <code class="docutils literal notranslate"><span class="pre">VISIVO_LLM_BASE_URL</span></code>, never to a cloud provider.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSISTANT_MODEL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code> for OpenAI-compatible servers</p></td>
+<td><p>The model name to request. Set it to the name your server serves (<code class="docutils literal notranslate"><span class="pre">SERVED_NAME</span></code> in the package); the default only suits cloud OpenAI.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSISTANT_SLOTS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p>Copilot queries the backend runs at once.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_ASSISTANT_TIMEOUT_S</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">120</span></code></p></td>
+<td><p>Time budget of one query, tool calls included. A slow model on a long question may need more.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These are only the starting values: a user can still change the provider for
+their own session in <strong>Copilot ⚙</strong>, without affecting other sessions. All the
+backend variables are listed in the <a class="reference internal" href="../configuration.html#copilot"><span class="std std-ref">Configuration reference</span></a>.</p>
 </section>
 <section id="backend-requirement">
 <h2>Backend requirement<a class="headerlink" href="#backend-requirement" title="Link to this heading">¶</a></h2>
@@ -449,23 +538,23 @@ server. Without it the “Your server” / ChatGPT providers silently fall back 
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="glossary.html">
+          <a class="next-page" href="../configuration.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Glossary</div>
+                <div class="title">Configuration reference</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="copilot.html">
+          <a class="prev-page" href="../multi-user-backend.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Scientific Copilot</div>
+                <div class="title">Sharing one backend between users</div>
                 
               </div>
             </a>
@@ -482,7 +571,8 @@ server. Without it the “Your server” / ChatGPT providers silently fall back 
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -509,6 +599,7 @@ server. Without it the “Your server” / ChatGPT providers silently fall back 
 <li><a class="reference internal" href="#two-env-notes-that-matter">Two <code class="docutils literal notranslate"><span class="pre">.env</span></code> notes that matter</a></li>
 <li><a class="reference internal" href="#which-model">Which model?</a></li>
 <li><a class="reference internal" href="#full-stack-backend-llm-together">Full stack (backend + LLM together)</a></li>
+<li><a class="reference internal" href="#configuring-the-backend-instead-of-the-client">Configuring the backend instead of the client</a></li>
 <li><a class="reference internal" href="#backend-requirement">Backend requirement</a></li>
 <li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>

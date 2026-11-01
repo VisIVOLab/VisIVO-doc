@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Figures, movies and linked views" href="publication-output.html"><link rel="prev" title="Catalogues, HiPS, and SAMP" href="catalogues-hips.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Figures, movies and linked views" href="publication-output.html"><link rel="prev" title="Simulation snapshots (AREPO)" href="simulations.html">
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>SKAVA Discovery tab - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -283,98 +321,123 @@
         <article role="main" id="furo-main-content">
           <section id="skava-discovery-tab">
 <h1>SKAVA Discovery tab<a class="headerlink" href="#skava-discovery-tab" title="Link to this heading">¶</a></h1>
-<p>The <strong>SKAVA</strong> tab in the Data Hub queries an external SKAVA Data
-Discovery and Access service (see the SKAVA D3.1 design and
-<a class="reference external" href="https://github.com/your-org/SKAVA">SKAVA project page</a>) and lets you
-open the matching datasets directly in VisIVO without leaving the
-application.</p>
+<p>The <strong>SKAVA</strong> tab in the Data Hub queries a data discovery service of the
+SKA Regional Centre network, SKAVA (<a class="reference external" href="https://github.com/VisIVOLab/SKAVA">VisIVOLab/SKAVA</a>)
+or any service that speaks the IVOA standards, and opens the datasets it
+finds where they are: on the VisIVO backend of the node that holds the
+copy, when SKAVA advertises one, so that nothing is transferred. The same
+tab runs cutouts, moment maps, PV diagrams and source finders on that node,
+and shows the result in VisIVO.</p>
 <section id="how-the-flow-works">
 <h2>How the flow works<a class="headerlink" href="#how-the-flow-works" title="Link to this heading">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[SKAVA tab]  →  GET /discovery/search       → list of matching datasets
-                      (POS, BAND, TIME, COLLECTION, DPTYPE)
-[user picks one in the table]
-[Open button] →  GET /datalink/{obs_id}     → primary_access.access_url
-              →  POST /v1/datasets/open_url → VisIVO backend downloads
-                                              the FITS / HDF5 to its
-                                              cache and opens it in the
-                                              appropriate viewer
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[SKAVA tab]  →  GET /discovery/search  (or TAP on ivoa.obscore)
+                 → matching datasets, each with the replicas ranked by SKAVA
+                   and the reason for the ranking
+[user picks one]
+[Open]       →  GET /datalink/{obs_id}  (or the row&#39;s DataLink document)
+                 → the replicas, the VisIVO backend on each node, the node&#39;s
+                   SODA and product services
+             →  routing: the first registered backend in SKAVA&#39;s order
+             →  POST /v1/datasets/open_skava on that backend: opened in place
+                 (a refusal moves on to the next node; a download through the
+                 local backend is the last resort)
 </pre></div>
 </div>
-<p>Discovery is <strong>metadata-only</strong>: SKAVA holds an ObsCore-style catalogue
-of dataset descriptors plus replica routing information. The actual
-FITS / HDF5 files live on storage nodes (or, for a fully local demo,
-on your own VisIVO backend’s Workspace Exports endpoint). The desktop
-never bypasses the VisIVO backend — file downloads always go through
-<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/datasets/open_url</span></code>, which caches them under
-<code class="docutils literal notranslate"><span class="pre">&lt;workspace_exports&gt;/skava_cache/</span></code>.</p>
+<p>Discovery is metadata only: the service holds an ObsCore catalogue plus the
+replicas and their routing. The files stay on the nodes. The desktop talks
+to a node only through the VisIVO backend registered for it
+(Settings ▸ Backends), with that backend’s token.</p>
 </section>
-<section id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
-<p>Two settings persist between sessions (Settings dialog → <strong>SKAVA</strong>
-section, or via the connection bar at the top of the tab):</p>
-<ul class="simple">
-<li><p><strong>SKAVA URL</strong> — base URL of the SKAVA discovery service
-(e.g. <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code> for a dev container, or your SRC’s
-public discovery endpoint).</p></li>
-<li><p><strong>Token</strong> — optional bearer token. If SKAVA was started with
-<code class="docutils literal notranslate"><span class="pre">SKAVA_ACCESS_TOKENS</span></code> set, paste one of those tokens here. Empty
-when the service does not require authentication.</p></li>
-</ul>
-<p>The settings sync both ways: edits in the tab’s connection bar are
-saved as you press Enter; conversely, changes from the Settings
-dialog show up in the connection bar the next time the tab opens.</p>
-</section>
-<section id="scientific-filters">
-<h2>Scientific filters<a class="headerlink" href="#scientific-filters" title="Link to this heading">¶</a></h2>
-<p>The form mirrors the ObsCore parameters supported by SKAVA’s
-<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/discovery/search</span></code> (per the <em>discovery_queries</em> SKAVA guide).
-All filters combine with <code class="docutils literal notranslate"><span class="pre">AND</span></code> semantics; leave any field blank to
-skip it.</p>
+<section id="discovery-service">
+<h2>Discovery service<a class="headerlink" href="#discovery-service" title="Link to this heading">¶</a></h2>
+<p>The box at the top of the tab (saved in the settings, shared with the
+Settings dialog) has two rows, the service and the token; the endpoints a
+default deployment never sets are folded under <strong>Advanced</strong>:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>What it sends to SKAVA</p></th>
-<th class="head"><p>Notes</p></th>
+<th class="head"><p>Meaning</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>RA / Dec / Radius</strong> (deg)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">POS=CIRCLE</span> <span class="pre">&lt;ra&gt;</span> <span class="pre">&lt;dec&gt;</span> <span class="pre">&lt;radius&gt;</span></code></p></td>
-<td><p>CIRCLE is the only shape supported by the current SKAVA baseline. RA in [0, 360], Dec in [-90, 90].</p></td>
+<tr class="row-even"><td><p><strong>Service</strong> (protocol)</p></td>
+<td><p><em>SKAVA JSON API</em> (SKAVA’s own endpoints) or <em>IVOA TAP + DataLink</em> (ADQL on <code class="docutils literal notranslate"><span class="pre">ivoa.obscore</span></code> and DataLink VOTables, what the SRCNet global services speak).</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>BAND min / max</strong> + unit</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">BAND=&lt;λ_min&gt;</span> <span class="pre">&lt;λ_max&gt;</span></code> (metres)</p></td>
-<td><p>The unit selector (MHz / GHz / Hz / m) tells the panel how to convert from your input to <strong>metres</strong>, the unit SKAVA expects internally. Radio astronomers typically enter frequencies and let the panel handle the conversion.</p></td>
+<tr class="row-odd"><td><p><strong>Service</strong> (URL)</p></td>
+<td><p>The service’s base URL.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>TIME MJD min / max</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">TIME=&lt;mjd_min&gt;</span> <span class="pre">&lt;mjd_max&gt;</span></code></p></td>
-<td><p>Modified Julian Date floats.</p></td>
+<tr class="row-even"><td><p><strong>Token</strong></p></td>
+<td><p>A bearer token pasted by hand, or the one obtained with <strong>Sign in…</strong>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>COLLECTION</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">COLLECTION=&lt;value&gt;</span></code></p></td>
-<td><p>Free-form string matching ObsCore <code class="docutils literal notranslate"><span class="pre">obs_collection</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">MGCLS</span></code>, <code class="docutils literal notranslate"><span class="pre">LoTSS-DR2</span></code>, <code class="docutils literal notranslate"><span class="pre">WALLABY</span></code>).</p></td>
+<tr class="row-odd"><td><p><strong>Sign in… / IAM…</strong></p></td>
+<td><p>OpenID Connect sign-in to the IAM the service trusts (the SRCNet IAM, or Keycloak on a testbed), as a public client with <code class="docutils literal notranslate"><span class="pre">vlva://callback</span></code> as redirect URI. <strong>IAM…</strong> sets the endpoints, the client id and the scope. A service that answers <code class="docutils literal notranslate"><span class="pre">401</span></code> with an <code class="docutils literal notranslate"><span class="pre">ivoa_bearer</span></code> challenge names its IAM’s discovery document, and the tab configures the endpoints from it on its own. The sign-in is kept in the system’s secure store, so the next start signs in silently.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>DPTYPE</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">DPTYPE=&lt;value&gt;</span></code></p></td>
-<td><p>Dataproduct type: <code class="docutils literal notranslate"><span class="pre">image</span></code>, <code class="docutils literal notranslate"><span class="pre">cube</span></code>, <code class="docutils literal notranslate"><span class="pre">timeseries</span></code>, <code class="docutils literal notranslate"><span class="pre">spectrum</span></code>.</p></td>
+<tr class="row-even"><td><p><strong>Advanced: TAP URL</strong>, <strong>DataLink URL</strong></p></td>
+<td><p>For the IVOA protocol: the TAP service (<code class="docutils literal notranslate"><span class="pre">/sync</span></code> is appended) and the DataLink service used when a TAP row carries no DataLink <code class="docutils literal notranslate"><span class="pre">access_url</span></code> of its own. Empty: SKAVA’s own <code class="docutils literal notranslate"><span class="pre">/tap</span></code> and <code class="docutils literal notranslate"><span class="pre">/datalink/&lt;id&gt;</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>obs_id</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">obs_id=&lt;value&gt;</span></code></p></td>
-<td><p>Exact-match lookup of a known identifier.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>limit / offset</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">limit=…&amp;offset=…</span></code></p></td>
-<td><p>Pagination. <code class="docutils literal notranslate"><span class="pre">limit</span></code> ≤ 1000, <code class="docutils literal notranslate"><span class="pre">offset</span></code> ≤ 1 000 000.</p></td>
+<tr class="row-odd"><td><p><strong>Advanced: Broker URL</strong></p></td>
+<td><p>A Computing Broker (the SRCNet job API) that places and runs the source finder next to the data. Empty: the finder runs as a task on the dataset’s node, started by the desktop.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Press <strong>Search</strong> (or just hit Enter inside any field) to run the query.</p>
+<p>When a request comes back <code class="docutils literal notranslate"><span class="pre">401</span></code>, the tab offers to sign in and repeats the
+request afterwards.</p>
+</section>
+<section id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Link to this heading">¶</a></h2>
+<p>The <strong>Filters</strong> section (fold it away with its arrow to give the results
+more room) mirrors the ObsCore parameters of <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/discovery/search</span></code> and of
+the ADQL query built for TAP. All filters combine with <code class="docutils literal notranslate"><span class="pre">AND</span></code>; leave a field
+blank to skip it.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>What it sends</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Position</strong>: RA / Dec / radius (deg)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POS=CIRCLE</span> <span class="pre">&lt;ra&gt;</span> <span class="pre">&lt;dec&gt;</span> <span class="pre">&lt;radius&gt;</span></code></p></td>
+<td><p>RA in [0, 360], Dec in [-90, 90].</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Band</strong>: min / max + unit</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BAND=&lt;λ_min&gt;</span> <span class="pre">&lt;λ_max&gt;</span></code> (metres)</p></td>
+<td><p>The unit selector (MHz / GHz / Hz / m) converts your input to metres, the unit the services expect.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Time</strong>: MJD min / max</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TIME=&lt;mjd_min&gt;</span> <span class="pre">&lt;mjd_max&gt;</span></code></p></td>
+<td><p>Modified Julian Date.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Dataset</strong>: collection</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">COLLECTION=&lt;value&gt;</span></code></p></td>
+<td><p>ObsCore <code class="docutils literal notranslate"><span class="pre">obs_collection</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>type</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DPTYPE=&lt;value&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">image</span></code>, <code class="docutils literal notranslate"><span class="pre">cube</span></code>, <code class="docutils literal notranslate"><span class="pre">timeseries</span></code>, <code class="docutils literal notranslate"><span class="pre">spectrum</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>obs_id</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">obs_id=&lt;value&gt;</span></code></p></td>
+<td><p>Exact match.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>limit / offset</strong></p></td>
+<td><p>pagination</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> ≤ 1000.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="results-table">
 <h2>Results table<a class="headerlink" href="#results-table" title="Link to this heading">¶</a></h2>
-<p>Each row is one SKAVA discovery result. Columns:</p>
+<p>The table and the provenance of the selected row share the rest of the
+tab; drag the divider between them. Short columns fit their content, the
+<strong>Why</strong> column takes the remaining width, and a cell cut short shows its
+whole text on hover.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -384,7 +447,7 @@ skip it.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>obs_id</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">metadata.obs_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">metadata.obs_id</span></code> (hover for the title)</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Target</strong></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">metadata.target_name</span></code></p></td>
@@ -393,89 +456,168 @@ skip it.</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">metadata.dataproduct_type</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Sky position</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">metadata.s_ra</span></code> / <code class="docutils literal notranslate"><span class="pre">metadata.s_dec</span></code> (formatted as <code class="docutils literal notranslate"><span class="pre">RA°,</span> <span class="pre">Dec°</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s_ra</span></code> / <code class="docutils literal notranslate"><span class="pre">s_dec</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Band</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">metadata.em_min</span></code> / <code class="docutils literal notranslate"><span class="pre">em_max</span></code> (metres on the wire, formatted in MHz / GHz / μm depending on the value)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">em_min</span></code> / <code class="docutils literal notranslate"><span class="pre">em_max</span></code>, shown in MHz / GHz / μm</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Time</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">metadata.t_min</span></code> / <code class="docutils literal notranslate"><span class="pre">t_max</span></code> (MJD)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t_min</span></code> / <code class="docutils literal notranslate"><span class="pre">t_max</span></code> (MJD)</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Best node</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">best_node</span></code> from the routing block</p></td>
+<tr class="row-even"><td><p><strong>Served by</strong></p></td>
+<td><p>the node SKAVA ranked first, and how many other replicas there are</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Latency</strong></p></td>
-<td><p>best replica’s <code class="docutils literal notranslate"><span class="pre">latency_score</span></code> (ms)</p></td>
+<tr class="row-odd"><td><p><strong>Why</strong></p></td>
+<td><p>SKAVA’s reason for that ranking: with the resource-aware policy the measured round trip, CPU pressure, queue and memory margin of the node; with the static policy the declared scores</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Hover the <strong>obs_id</strong> cell for the full <code class="docutils literal notranslate"><span class="pre">obs_title</span></code> tooltip.</p>
-</section>
-<section id="provenance-panel">
-<h2>Provenance panel<a class="headerlink" href="#provenance-panel" title="Link to this heading">¶</a></h2>
-<p>Below the results table, a panel shows the <strong>selected dataset</strong>’s
-ObsCore provenance metadata:</p>
-<ul class="simple">
-<li><p><strong>Title</strong> — <code class="docutils literal notranslate"><span class="pre">obs_title</span></code></p></li>
-<li><p><strong>DOI</strong> — clickable link to <code class="docutils literal notranslate"><span class="pre">https://doi.org/&lt;doi&gt;</span></code> (or the raw
-value if it already starts with <code class="docutils literal notranslate"><span class="pre">http</span></code>)</p></li>
-<li><p><strong>PID</strong> — persistent identifier (e.g. <code class="docutils literal notranslate"><span class="pre">skava:demo:dataset-1</span></code>)</p></li>
-<li><p><strong>License</strong> — typically <code class="docutils literal notranslate"><span class="pre">CC-BY-4.0</span></code>, <code class="docutils literal notranslate"><span class="pre">Public</span> <span class="pre">Domain</span></code>, etc.</p></li>
-<li><p><strong>Citation</strong> — full citation string; <strong>Copy citation</strong> copies it to
-the clipboard for pasting into papers / notebooks.</p></li>
-</ul>
+<p>Hover <strong>Served by</strong> or <strong>Why</strong> for the whole decision: every replica in
+ranking order with its cost, reason and the age of the telemetry it was
+judged on.</p>
 </section>
 <section id="opening-a-dataset">
 <h2>Opening a dataset<a class="headerlink" href="#opening-a-dataset" title="Link to this heading">¶</a></h2>
-<p>Click <strong>Open selected in VisIVO</strong> (enabled once a row is selected).
-The panel:</p>
+<p><strong>Open</strong> (or a double-click on the row) resolves the dataset’s DataLink and opens it:</p>
 <ol class="arabic simple">
-<li><p>Resolves the access URL by querying
-<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/datalink/{obs_id}</span></code> on SKAVA and reading
-<code class="docutils literal notranslate"><span class="pre">primary_access.access_url</span></code>.</p></li>
-<li><p>Hands the URL to the VisIVO backend via
-<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/datasets/open_url</span></code>.</p></li>
-<li><p>The backend downloads the file with streaming <code class="docutils literal notranslate"><span class="pre">urllib</span></code> to
-<code class="docutils literal notranslate"><span class="pre">&lt;workspace_exports&gt;/skava_cache/</span></code>, classifies it with the same
-<code class="docutils literal notranslate"><span class="pre">_fits_metadata</span></code> used for local opens (so HDF5 / PSRFITS / dynamic
-spectrum sidecar conversion all kick in automatically), and
-registers it as a session dataset.</p></li>
-<li><p>The matching viewer opens (image viewer for <code class="docutils literal notranslate"><span class="pre">kind=image</span></code> or
-<code class="docutils literal notranslate"><span class="pre">dynspec</span></code>, cube viewer for <code class="docutils literal notranslate"><span class="pre">kind=cube</span></code>).</p></li>
-<li><p>The dataset is added to the <strong>Recent Datasets</strong> panel with the
-SKAVA <code class="docutils literal notranslate"><span class="pre">obs_id</span></code> as the display label, so reopening it later
-re-runs the full discovery → download → open chain.</p></li>
+<li><p>The DataLink lists the replicas in SKAVA’s order and, for each node, the
+VisIVO backend co-located with it (<code class="docutils literal notranslate"><span class="pre">visivo-backend</span></code> service descriptor,
+or the <code class="docutils literal notranslate"><span class="pre">#auxiliary</span></code> row pointing at the backend’s <code class="docutils literal notranslate"><span class="pre">/v1/node/status</span></code> in
+the VOTable).</p></li>
+<li><p>The desktop takes the first node whose backend is registered in
+Settings ▸ Backends, opens the dataset <em>in place</em> there
+(<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/datasets/open_skava</span></code> with the replica’s <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL), and
+shows the viewer. The backend badge in the status bar names the node;
+its tooltip gives SKAVA’s reason.</p></li>
+<li><p>If that backend refuses, the next node in the ranking is tried, and the
+status bar says so. When no node can serve it, the tab explains why for
+each descriptor and, when SKAVA advertises a backend that is not
+registered, offers to register it (or to enter its token).</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">http(s)</span></code> replica with no co-located backend is downloaded through
+the local backend (<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/datasets/open_url</span></code>).</p></li>
 </ol>
-<p>A status line under the action bar reports <code class="docutils literal notranslate"><span class="pre">Showing</span> <span class="pre">N</span> <span class="pre">of</span> <span class="pre">M</span> <span class="pre">results</span> <span class="pre">(limit=X,</span> <span class="pre">offset=Y)</span></code> so you know whether to paginate.</p>
+<p><strong>Open via…</strong> lists the replicas with SKAVA’s reasons: pick one to open on
+that node instead of the first-ranked one.</p>
+<p>The dataset is added to the Recent Datasets panel with the catalogue it
+came from, the protocol, the replica and the node that served it, so a
+reopen asks the same service again (and routes afresh) rather than reusing
+a path that may have moved.</p>
 </section>
-<section id="caching">
-<h2>Caching<a class="headerlink" href="#caching" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/datasets/open_url</span></code> keeps a hash-keyed cache under the
-backend’s Workspace Exports directory
-(<code class="docutils literal notranslate"><span class="pre">~/.visivo/exports/skava_cache/</span></code>). Re-opening the same SKAVA URL is
-free — no second download. To force a re-download (e.g. after the
-underlying file has changed upstream) delete the matching cache file
-manually.</p>
+<section id="how-the-desktop-picks-a-node">
+<h2>How the desktop picks a node<a class="headerlink" href="#how-the-desktop-picks-a-node" title="Link to this heading">¶</a></h2>
+<p>The DataLink answer lists, in SKAVA’s ranking order, the VisIVO backend of
+each node that holds a replica (a <code class="docutils literal notranslate"><span class="pre">visivo-backend</span></code> service descriptor in the
+JSON API, one marked <code class="docutils literal notranslate"><span class="pre">enabled:</span> <span class="pre">false</span></code> being ignored; the <code class="docutils literal notranslate"><span class="pre">#auxiliary</span></code> row
+pointing at the backend’s <code class="docutils literal notranslate"><span class="pre">/v1/node/status</span></code> in the VOTable). The desktop goes
+through them in that order and keeps, as candidates, those it can use:</p>
+<ol class="arabic simple">
+<li><p><strong>A registered backend matches the descriptor.</strong> First by URL, against
+every entry of Settings ▸ Backends (the local backend included), then by
+the entry’s <strong>SRC code</strong> against the descriptor’s node code (exact and
+case-sensitive). The URL comparison ignores a trailing <code class="docutils literal notranslate"><span class="pre">/</span></code> and treats
+<code class="docutils literal notranslate"><span class="pre">localhost</span></code>, <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>, <code class="docutils literal notranslate"><span class="pre">::1</span></code> and <code class="docutils literal notranslate"><span class="pre">host.docker.internal</span></code> as the same
+host; the port and the path must match. The SRC code is for a backend the
+desktop reaches at another address than the catalogue advertises (a
+tunnel, a VPN).</p></li>
+<li><p><strong>The backend opens this kind of dataset</strong>: the descriptor’s
+<code class="docutils literal notranslate"><span class="pre">supports_kinds</span></code> includes the dataset’s type (a <code class="docutils literal notranslate"><span class="pre">timeseries</span></code> or dynamic
+spectrum counts as <code class="docutils literal notranslate"><span class="pre">dynspec</span></code>).</p></li>
+<li><p><strong>There is a token for it</strong> when the descriptor says the backend requires
+authentication: the one stored with the registered entry or, for the
+local backend registered without one, the automatic token described
+below.</p></li>
+<li><p><strong>SKAVA lists a replica on that node.</strong> The desktop opens that node’s own
+copy: it never hands one node’s path to another node’s backend.</p></li>
+</ol>
+<p>The candidates are tried in order (<strong>Open via…</strong> puts the chosen node first,
+the others keep SKAVA’s order). A <code class="docutils literal notranslate"><span class="pre">file://</span></code> replica is opened in place
+(<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/datasets/open_skava</span></code>); an <code class="docutils literal notranslate"><span class="pre">http(s)</span></code> replica is fetched by that
+node’s backend (<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/datasets/open_url</span></code> there), still next to the data.
+When a backend refuses (offline, wrong token, file missing, outside its data
+roots), the next candidate is tried, the status bar says so, and the desktop
+logs <code class="docutils literal notranslate"><span class="pre">[skava]</span> <span class="pre">backend</span> <span class="pre">&lt;id&gt;</span> <span class="pre">refused</span> <span class="pre">open:</span> <span class="pre">&lt;reason&gt;</span></code>. With no candidate left, an
+<code class="docutils literal notranslate"><span class="pre">http(s)</span></code> copy is downloaded through the local backend, which forwards the
+SKAVA token to the storage; a <code class="docutils literal notranslate"><span class="pre">file://</span></code> copy cannot be, and the dialog lists
+why each descriptor was passed over and offers <strong>Register backend…</strong> or
+<strong>Enter backend token…</strong>.</p>
+<p>Each registered backend is sent its own token and no other. The automatic
+token, <code class="docutils literal notranslate"><span class="pre">VISIVO_TOKEN</span></code> or <code class="docutils literal notranslate"><span class="pre">~/.visivo_token</span></code>, belongs to the desktop’s local
+backend and is sent only to the configured local backend’s address (a
+loopback host on the local backend’s port, <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8000</span></code> by
+default), never to another backend, even one on the same machine at another
+port. A tunnel to a cluster backend therefore uses another local port: the
+cluster helper’s default, <code class="docutils literal notranslate"><span class="pre">18900</span></code>, already does (see
+<a class="reference internal" href="../deployment/hpc-slurm.html#quick-start"><span class="std std-ref">Running the backend on a cluster</span></a>).</p>
+<p>On the node, <code class="docutils literal notranslate"><span class="pre">open_skava</span></code> accepts only a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL on the local host and
+refuses a path outside the backend’s data roots (<code class="docutils literal notranslate"><span class="pre">VISIVO_DATA_ROOT</span></code> or
+<code class="docutils literal notranslate"><span class="pre">VISIVO_DATA_ROOTS</span></code>, when set); the refusal comes back as <code class="docutils literal notranslate"><span class="pre">valid:</span> <span class="pre">false</span></code> with
+the reason, which moves the desktop to the next candidate.</p>
+</section>
+<section id="compute-next-to-data">
+<h2>Compute next to data<a class="headerlink" href="#compute-next-to-data" title="Link to this heading">¶</a></h2>
+<p>The <strong>Compute next to data…</strong> menu runs on the node, through the services
+SKAVA’s DataLink advertises for the dataset (<code class="docutils literal notranslate"><span class="pre">node-soda-sync</span></code>,
+<code class="docutils literal notranslate"><span class="pre">node-soda-async</span></code>, <code class="docutils literal notranslate"><span class="pre">visivo-moment</span></code>, <code class="docutils literal notranslate"><span class="pre">visivo-pv</span></code> as JSON descriptors; the
+<code class="docutils literal notranslate"><span class="pre">#cutout</span></code> and <code class="docutils literal notranslate"><span class="pre">#proc</span></code> rows with their <code class="docutils literal notranslate"><span class="pre">adhoc:service</span></code> descriptors in the
+VOTable). The product stays in the node’s workspace and is opened from
+there.</p>
+<ul class="simple">
+<li><p><strong>SODA cutout…</strong>: a POS (CIRCLE or POLYGON), BAND and/or TIME subset,
+submitted to the node’s <code class="docutils literal notranslate"><span class="pre">/soda/async</span></code> as a UWS job (<code class="docutils literal notranslate"><span class="pre">PHASE=RUN</span></code>), polled
+until it ends, then opened in place. Without an advertised SODA job
+service, the backend’s own <code class="docutils literal notranslate"><span class="pre">/v1/datasets/cutout</span></code> route is used.</p></li>
+<li><p><strong>Moment map…</strong>: <code class="docutils literal notranslate"><span class="pre">OPERATION=MOMENT</span></code> with the order (0, 1, 2), an optional
+channel range and threshold.</p></li>
+<li><p><strong>PV diagram…</strong>: <code class="docutils literal notranslate"><span class="pre">OPERATION=PV</span></code> with the path’s vertices (degrees) and the
+slice width in pixels.</p></li>
+<li><p><strong>Source finder…</strong>: the finders the node offers (<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/v1/finders</span></code>:
+SoFiA-2 for cubes, photutils for images) with their parameters. With a
+<strong>Broker URL</strong> set, the job goes to the Computing Broker
+(<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/jobs</span></code>), which asks SKAVA where to run it, keeps to the nodes
+that have the finder and the memory it needs (each node states how much
+its finders need per byte of dataset in <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/v1/node/status</span></code>; the
+desktop sends no memory figure of its own) and starts the finder on that
+node’s backend; otherwise the desktop opens the dataset on the
+first-ranked node and starts the finder there as a task
+(<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/v1/tasks/sourcefind</span></code>). The dialog follows the run’s log, can
+cancel it, and opens the mask (as a cube) and the catalogue (VOTable)
+from the node.</p></li>
+</ul>
+<p>The desktop calls a node’s service at the address of the backend
+registered for that node (the DataLink names the node as the catalogue
+sees it, which need not be reachable from the desktop), with that
+backend’s token.</p>
+</section>
+<section id="running-a-backend-as-an-src-node">
+<h2>Running a backend as an SRC node<a class="headerlink" href="#running-a-backend-as-an-src-node" title="Link to this heading">¶</a></h2>
+<p>The node side, what a backend next to the data serves to the desktop and to a
+catalogue (node status and metrics, status reports to the catalogue, SODA,
+source finders) and the settings it needs, is described in
+<a class="reference internal" href="../deployment/src-node.html"><span class="std std-doc">The backend as an SRC node</span></a>. Starting a backend on
+a SLURM compute node, with the SSH tunnel from the laptop, the Apptainer
+images and server-side rendering on the node’s GPUs, is described in
+<a class="reference internal" href="../deployment/hpc-slurm.html"><span class="std std-doc">Running the backend on a cluster</span></a>.</p>
 </section>
 <section id="common-failure-modes">
 <h2>Common failure modes<a class="headerlink" href="#common-failure-modes" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">SKAVA</span> <span class="pre">base</span> <span class="pre">URL</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">configured</span></code></strong> — populate the URL field
-before searching.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Search</span> <span class="pre">failed:</span> <span class="pre">invalid_query</span> <span class="pre">—</span> <span class="pre">POS</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">...</span></code></strong> — SKAVA’s
-<code class="docutils literal notranslate"><span class="pre">parse_pos</span></code> rejected the spatial filter. Double-check ra / dec /
-radius are all set (or all blank).</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">from</span> <span class="pre">SKAVA:</span> <span class="pre">Remote</span> <span class="pre">returned</span> <span class="pre">HTTP</span> <span class="pre">404</span></code></strong> — the
-<code class="docutils literal notranslate"><span class="pre">primary_access.access_url</span></code> for the chosen dataset is unreachable.
-Causes: the storage node is down, the file has moved, or for the
-local demo seed the file is not in <code class="docutils literal notranslate"><span class="pre">~/.visivo/exports/</span></code> under the
-expected name. Check the SKAVA seed catalogue’s <code class="docutils literal notranslate"><span class="pre">access_endpoint</span></code>
-fields to see what filename the discovery layer expects.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Cached</span> <span class="pre">file</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">classified</span></code></strong> — the file downloaded
-fine but didn’t pass the FITS / HDF5 classifier (e.g. it’s HTML
-from an error page). Inspect the cache file directly to see what
-came back.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">SKAVA</span> <span class="pre">base</span> <span class="pre">URL</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">configured</span></code></strong>: fill the URL before searching.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">…</span> <span class="pre">requires</span> <span class="pre">a</span> <span class="pre">sign-in</span></code></strong>: the service answered <code class="docutils literal notranslate"><span class="pre">401</span></code>. Sign in, or paste
+a token.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">no_available_nodes</span> <span class="pre">-</span> <span class="pre">No</span> <span class="pre">available</span> <span class="pre">nodes</span> <span class="pre">for</span> <span class="pre">dataset</span> <span class="pre">…</span></code></strong>: the catalogue
+knows the dataset but cannot reach any node that holds it: the node’s
+backend is stopped, or the tunnel to it is closed. It probes its nodes every
+few seconds, so a node that comes back is used again by itself.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Search</span> <span class="pre">failed:</span> <span class="pre">invalid_query</span> <span class="pre">-</span> <span class="pre">POS</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">...</span></code></strong>: the spatial filter
+was rejected; set RA, Dec and radius together, or none.</p></li>
+<li><p><strong>“… is stored on an SRC node and can only be opened by the VisIVO
+backend running there”</strong>: no registered backend matches the nodes
+holding the dataset. Register the node’s backend (the dialog offers to),
+or check its token.</p></li>
+<li><p><strong>“SKAVA advertises no moment service”</strong>: the dataset is not a cube, or
+the node’s backend predates the operation; open the dataset and compute
+in the viewer instead.</p></li>
 </ul>
 </section>
 </section>
@@ -494,14 +636,14 @@ came back.</p></li>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="catalogues-hips.html">
+          <a class="prev-page" href="simulations.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Catalogues, HiPS, and SAMP</div>
+                <div class="title">Simulation snapshots (AREPO)</div>
                 
               </div>
             </a>
@@ -518,7 +660,8 @@ came back.</p></li>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -540,12 +683,13 @@ came back.</p></li>
             <ul>
 <li><a class="reference internal" href="#">SKAVA Discovery tab</a><ul>
 <li><a class="reference internal" href="#how-the-flow-works">How the flow works</a></li>
-<li><a class="reference internal" href="#configuration">Configuration</a></li>
-<li><a class="reference internal" href="#scientific-filters">Scientific filters</a></li>
+<li><a class="reference internal" href="#discovery-service">Discovery service</a></li>
+<li><a class="reference internal" href="#filters">Filters</a></li>
 <li><a class="reference internal" href="#results-table">Results table</a></li>
-<li><a class="reference internal" href="#provenance-panel">Provenance panel</a></li>
 <li><a class="reference internal" href="#opening-a-dataset">Opening a dataset</a></li>
-<li><a class="reference internal" href="#caching">Caching</a></li>
+<li><a class="reference internal" href="#how-the-desktop-picks-a-node">How the desktop picks a node</a></li>
+<li><a class="reference internal" href="#compute-next-to-data">Compute next to data</a></li>
+<li><a class="reference internal" href="#running-a-backend-as-an-src-node">Running a backend as an SRC node</a></li>
 <li><a class="reference internal" href="#common-failure-modes">Common failure modes</a></li>
 </ul>
 </li>

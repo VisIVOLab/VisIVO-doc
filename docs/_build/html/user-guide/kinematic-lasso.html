@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Source finding and cross-matching" href="source-finding.html"><link rel="prev" title="Regions, PV diagrams, noise" href="region-pv-noise.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Polarimetry (Stokes Q, U, V)" href="polarimetry.html"><link rel="prev" title="Regions, PV diagrams, noise" href="region-pv-noise.html">
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Kinematic Lasso - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -315,6 +353,12 @@ whatever happens to be spatially adjacent.</p>
 <tr class="row-even"><td><p><strong>Apply</strong></p></td>
 <td><p><em>Isolate → new cube</em> or <em>Remove → new cube</em></p></td>
 </tr>
+<tr class="row-odd"><td><p><strong>Controls</strong></p></td>
+<td><p>Inspector ▸ <strong>Parameters</strong>, which opens on the tool</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Close</strong></p></td>
+<td><p>un-check the menu entry, or <kbd>Esc</kbd> — this also clears the selection</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -335,9 +379,17 @@ without switching modes.</p>
 the connected component of the ≥ nσ emission that contains your click, so one
 click on a spiral arm grabs the whole galaxy. Isolated noise peaks above nσ are
 their own tiny components and are dropped.</p>
-<p>A yellow marker shows the seed voxel. The selection appears as a green
-isosurface, and its outline is drawn on the 2-D channel map as you step through
-channels.</p>
+<p>A yellow marker shows where the click landed while the grow runs, then steps
+aside once there is something better to look at: the selection itself, as a green
+isosurface, with its outline drawn on the 2-D channel map as you step through
+channels. The marker comes back on the next click, and stays if a grow returns
+nothing — so a marker with no green around it means the click found no source.</p>
+<p>The controls appear in the Inspector’s <strong>Parameters</strong> tab, which the tool opens
+for you. Un-checking <em>Kinematic Lasso</em> closes the tool: the selection, any 2-D
+refinement and the controls all go. Use <em>Clear selection</em> to start over without
+closing. Changing the pane layout so the 3-D view is no longer on screen only
+<strong>suspends</strong> the tool — it stops listening for clicks, and your selection is
+still there when the pane comes back.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If the double-click lands on empty sky you get <em>“click on visible emission”</em> —
@@ -355,8 +407,9 @@ and carve away the companion that touches it in projection with one ⌥-click.</
 </section>
 </section>
 <hr class="docutils" />
-<section id="the-two-controls">
-<h2>The two controls<a class="headerlink" href="#the-two-controls" title="Link to this heading">¶</a></h2>
+<section id="the-controls">
+<h2>The controls<a class="headerlink" href="#the-controls" title="Link to this heading">¶</a></h2>
+<p>The controls sit in Inspector › Parameters while the tool is on.</p>
 <div class="table-wrapper colwidths-given docutils container">
 <table class="docutils align-default">
 <colgroup>
@@ -385,9 +438,29 @@ grows readily along velocity (good for a rotating disc, whose emission moves
 across channels); above 1 it stays spatially compact (good for separating two
 objects that overlap on the sky at different velocities).</p></td>
 </tr>
+<tr class="row-even"><td><p><strong>Threshold</strong> nσ</p></td>
+<td><p>1.0 – 5.0σ</p></td>
+<td><p>The level that defines the connected emission the selection can grow
+through (default 2.5σ). Lower it to join a source to faint gas separated
+from it by sub-threshold voxels. σ is the session’s noise estimate
+(<em>Tools → Estimate Noise</em>) when there is one, otherwise the cube’s own
+robust σ; the panel’s <strong>Noise σ</strong> line says which, and Isolate / Remove
+record it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Smoothing</strong></p></td>
+<td><p>Off, Light (1, 3, 3), Medium (2, 4, 4), Strong (2, 6, 6)</p></td>
+<td><p>Smooth before thresholding, in voxels (velocity, y, x). A per-voxel
+threshold does not see a faint envelope that a smoothed one does; on the
+extended disc of NGC 3137 Strong takes a default click from 68 909 to
+319 793 voxels. The mask itself is still applied to the raw cube.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
+<p>Under the controls the panel shows the number of selected voxels, the <strong>selected
+pixels per channel</strong> as a small profile, and the channel extent (with its
+velocity or frequency when the axis has one). Lowering the velocity coupling
+widens the profile; a hand refinement on the 2-D map updates all three.</p>
 <p>Dragging <strong>Reach</strong> updates the surface immediately, with no round trip to the
 backend: the geodesic field is computed once when you click and every budget is
 a threshold on it. Changing <strong>λ_v</strong> alters the cost function itself, so it
@@ -455,6 +528,48 @@ residual.</p></td>
 </div>
 <p>Both write the mask exactly as displayed, including any 2-D refinements, so what
 you see is what is written. Neither modifies your original file.</p>
+<p>The new cube goes to the Workspace Exports and appears in Session Data as a
+<strong>LASSO</strong> product. Its Provenance (Inspector › Parameters) lists the seed, Reach,
+velocity coupling, threshold, smoothing, the number of selected voxels and
+whether the mask was refined by hand; the same recipe is written into the FITS
+<code class="docutils literal notranslate"><span class="pre">HISTORY</span></code> of the new cube, one card per item (<code class="docutils literal notranslate"><span class="pre">Lasso</span> <span class="pre">reach=8</span></code>, …).
+<em>Export recipe as JSON…</em> on that tab writes the record out: the product (its
+id, kind and the calls that replay it, in order: <code class="docutils literal notranslate"><span class="pre">/v1/cube/kinematic_select_bin</span></code>
+regrows the selection from the seed and parameters — the same voxels the
+slider’s level field gave, because the replay passes the recorded <em>Level-field
+budget</em> as <code class="docutils literal notranslate"><span class="pre">reach_max</span></code> — and <code class="docutils literal notranslate"><span class="pre">/v1/cube/mask_apply_bin</span></code> makes the cube; each
+call carries its <code class="docutils literal notranslate"><span class="pre">request</span></code> as the service takes it, under the API’s field names
+with numbers as numbers and seeds as <code class="docutils literal notranslate"><span class="pre">[z,</span> <span class="pre">y,</span> <span class="pre">x]</span></code>, so a script posts it back
+without parsing the labels, and names in <code class="docutils literal notranslate"><span class="pre">body</span></code> what travels as bytes: the
+float32 mask the grow returns, posted to the apply with the origin and
+dimensions of that response, which the record describes but does not carry;
+the request recorded is the one the mask on screen was grown with, not the
+sliders’ values at the time of the apply), the
+dataset it was made from (name, path, the backend’s dataset and session ids;
+a replay opens the path again and uses the dataset id that open returns),
+the parameters above as the tab shows them (extra seeds as coordinates, the
+noise estimate at full precision), the application version and the export
+time, under <code class="docutils literal notranslate"><span class="pre">&quot;schema&quot;:</span> <span class="pre">&quot;visivo-recipe/1&quot;</span></code>. When the parameters alone do not regenerate the
+product the record says so in <code class="docutils literal notranslate"><span class="pre">replay_caveat</span></code>: a hand-refined mask is not
+reducible to them (the recipe says <code class="docutils literal notranslate"><span class="pre">Hand-edited:</span> <span class="pre">yes</span></code>, and the masked cube
+itself, with its <code class="docutils literal notranslate"><span class="pre">HISTORY</span></code>, is the exact record), and a kinematic fit needs the
+selection mask it ran on, so its record points back to the selection’s recipe.</p>
+<p>A source larger than the grow’s graph budget (four million nodes) is cut to a
+seed-centred box; the selection is then exact within that box only. The status
+bar says so when it happens, and the product’s Provenance carries a <em>Domain
+trimmed</em> line (and the FITS <code class="docutils literal notranslate"><span class="pre">HISTORY</span></code> a <code class="docutils literal notranslate"><span class="pre">domain_trimmed=</span></code> card) with the largest
+box half-width, so a reader of the record knows the selection was bounded by
+the cap and not by the emission.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Neither one crops. The product keeps the source cube’s <strong>full dimensions</strong>, so
+isolating a compact source out of a 1.5 GB cube gives you another 1.5 GB file in
+which all but a few thousand voxels are NaN. That is deliberate: identical pixel
+coordinates and WCS mean the result overlays the original channel for channel,
+and anything you compute on it stays comparable without re-alignment. When you
+want the small file instead, follow up with <em>Tools → Export Sub-Cube as FITS…</em>,
+which does crop and shifts <code class="docutils literal notranslate"><span class="pre">CRPIX</span></code> accordingly.</p>
+</div>
 </section>
 <hr class="docutils" />
 <section id="what-it-is-good-at-and-what-it-is-not">
@@ -481,7 +596,9 @@ click. Try a few positions and compare.</p></td>
 <td><p><strong>Out of scope.</strong> A finder like SoFiA detects these by smoothing over many
 channels; individually their voxels sit below the nσ contour, and a
 voxel-level geodesic cannot follow emission that is nowhere above threshold.
-Use the finder for those.</p></td>
+Use the finder for those. The <strong>Smoothing</strong> control is for the faint
+envelope of a source that is detected, not for detecting one: its largest
+kernel is two channels by six pixels.</p></td>
 </tr>
 <tr class="row-even"><td><p>Blind detection over a field</p></td>
 <td><p>Not what this is. See <a class="reference internal" href="source-finding.html"><span class="doc std std-doc">Source finding</span></a>.</p></td>
@@ -561,12 +678,12 @@ function, the geodesic level field, and the out-of-core design.</p></li>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="source-finding.html">
+          <a class="next-page" href="polarimetry.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Source finding and cross-matching</div>
+                <div class="title">Polarimetry (Stokes Q, U, V)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -594,7 +711,8 @@ function, the geodesic level field, and the out-of-core design.</p></li>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -619,7 +737,7 @@ function, the geodesic level field, and the out-of-core design.</p></li>
 <li><a class="reference internal" href="#several-sources-at-once">Several sources at once</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#the-two-controls">The two controls</a><ul>
+<li><a class="reference internal" href="#the-controls">The controls</a><ul>
 <li><a class="reference internal" href="#there-is-no-universal-default-for-reach">There is no universal default for Reach</a></li>
 </ul>
 </li>

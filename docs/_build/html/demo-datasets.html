@@ -7,7 +7,7 @@
         <link rel="prefetch" href="_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Demo datasets (feature test matrix) - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="user-guide/spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -305,6 +343,8 @@ filenames in place.</p>
   tbl_snapshot/snap_demo_1_1_1.tbl  … _1_1_2.tbl  … _1_2_1.tbl
   velocity_field.fits          hi_cube.fits                image_2d.fits
   combo/velocity.fits          combo/galaxies.csv
+  stokes_DEMO_I.fits           stokes_DEMO_Q.fits
+  stokes_DEMO_U.fits           stokes_DEMO_V.fits
 </pre></div>
 </div>
 </section>
@@ -524,7 +564,7 @@ co-registered, so the overlay actually aligns.</p>
 <section id="hi-ppv-cube-hi-cube-fits">
 <h2>7 · HI PPV cube  ·  <code class="docutils literal notranslate"><span class="pre">hi_cube.fits</span></code><a class="headerlink" href="#hi-ppv-cube-hi-cube-fits" title="Link to this heading">¶</a></h2>
 <p>A rotating-disk HI cube (64³) with a velocity (VRAD) spectral axis + rest freq.</p>
-<p><strong>Open:</strong> <em>Data ▸ Open Remote Dataset…</em> → <code class="docutils literal notranslate"><span class="pre">hi_cube.fits</span></code> (opens the cube
+<p><strong>Open:</strong> <em>File ▸ Open…</em> → <code class="docutils literal notranslate"><span class="pre">hi_cube.fits</span></code> (opens the cube
 viewer).</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -571,7 +611,7 @@ Cubes</em> (open it twice). See the user-guide pages for each.</p>
 <section id="d-image-image-2d-fits">
 <h2>8 · 2-D image  ·  <code class="docutils literal notranslate"><span class="pre">image_2d.fits</span></code><a class="headerlink" href="#d-image-image-2d-fits" title="Link to this heading">¶</a></h2>
 <p>256² image with a celestial WCS, a beam (Jy/beam), and 8 Gaussian sources.</p>
-<p><strong>Open:</strong> <em>Data ▸ Open Remote Dataset…</em> → <code class="docutils literal notranslate"><span class="pre">image_2d.fits</span></code> (image viewer).</p>
+<p><strong>Open:</strong> <em>File ▸ Open…</em> → <code class="docutils literal notranslate"><span class="pre">image_2d.fits</span></code> (image viewer).</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -604,6 +644,64 @@ Cubes</em> (open it twice). See the user-guide pages for each.</p>
 </tbody>
 </table>
 </div>
+</section>
+<section id="full-stokes-cubes-stokes-demo-i-q-u-v-fits">
+<h2>9 · Full-Stokes cubes  ·  <code class="docutils literal notranslate"><span class="pre">stokes_DEMO_{I,Q,U,V}.fits</span></code><a class="headerlink" href="#full-stokes-cubes-stokes-demo-i-q-u-v-fits" title="Link to this heading">¶</a></h2>
+<p>Four 256² × 16 cubes, one per Stokes parameter, written in the file layout of
+the MeerKAT MGCLS release (doi:10.48479/f2a2-qw16) rather than a tidied-up
+version of it. Three properties of the real archive are reproduced on purpose,
+because a demo file cleaner than the data tests nothing:</p>
+<ul class="simple">
+<li><p>each file carries a <strong>degenerate Stokes axis</strong> — one plane, identified by
+<code class="docutils literal notranslate"><span class="pre">CRVAL4</span></code>. This is the layout the companion mechanism exists for;</p></li>
+<li><p>the spectral axis is the <strong>Obit MFImage</strong> one: <code class="docutils literal notranslate"><span class="pre">NTERM</span> <span class="pre">=</span> <span class="pre">2</span></code> <em>fitted</em> planes
+(total flux, spectral index) precede <code class="docutils literal notranslate"><span class="pre">NSPEC</span> <span class="pre">=</span> <span class="pre">14</span></code> sub-bands, whose real
+frequencies (908–1656 MHz) are in <code class="docutils literal notranslate"><span class="pre">FREQ0001</span></code>…<code class="docutils literal notranslate"><span class="pre">FREQ0014</span></code> and <strong>not</strong> on the
+WCS axis, which describes a different grid entirely. <code class="docutils literal notranslate"><span class="pre">stokes_DEMO_I.fits</span></code> is
+on yet another grid, as the real I cubes are;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stokes_DEMO_V.fits</span></code> declares <code class="docutils literal notranslate"><span class="pre">CRVAL4</span> <span class="pre">=</span> <span class="pre">1</span></code>, i.e. “I” — the error the
+published V cubes carry.</p></li>
+</ul>
+<p><strong>Open:</strong> <em>File ▸ Open…</em> → <code class="docutils literal notranslate"><span class="pre">stokes_DEMO_I.fits</span></code> (cube viewer).</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Do this</p></th>
+<th class="head"><p>Expect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Companion discovery</p></td>
+<td><p>Tools ▸ Load Stokes Q/U/V Companions…</p></td>
+<td><p>Q, U and V found by name, no chooser appears</p></td>
+</tr>
+<tr class="row-odd"><td><p>Polarised intensity</p></td>
+<td><p>Tools ▸ Polarised Intensity &amp; Angle</p></td>
+<td><p>two products; PI peaks ≈ 1.06, PA spans −90…+90°</p></td>
+</tr>
+<tr class="row-even"><td><p>RM synthesis</p></td>
+<td><p>Tools ▸ Rotation Measure Synthesis…, φ −80…80 step 1</p></td>
+<td><p>14 channels used (<strong>not</strong> 16), two maps</p></td>
+</tr>
+<tr class="row-odd"><td><p>Faraday depth map</p></td>
+<td><p>look at it</p></td>
+<td><p>left-to-right gradient −30→+30, plus a <strong>+36</strong> blob and a <strong>−47</strong> one</p></td>
+</tr>
+<tr class="row-even"><td><p>Region restriction</p></td>
+<td><p>draw a box, re-run with the box ticked</p></td>
+<td><p>a separate pair of products, not a replacement</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The last row but one is the check that matters: a flat map, or one spanning
+different values, means the MFImage keywords were ignored and the WCS axis
+(1284–2147 MHz) was used instead. Measured through the backend, the recovered
+depth is −47 … 36 rad m⁻² against a true −46.7 … 36.3, the residual being the
+φ step.</p>
+<p>Full workflow and the real-archive caveats:
+<a class="reference internal" href="user-guide/polarimetry.html"><span class="doc std std-doc">Polarimetry (Stokes Q, U, V)</span></a>.</p>
 <hr class="docutils" />
 <p><strong>Not aligned by accident:</strong> the combo (§6) is the only pair guaranteed to share
 a frame. Mixing an arbitrary field with an arbitrary catalogue (e.g. §5 + §2)
@@ -650,7 +748,8 @@ obvious, which is itself the expected behaviour.</p>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -681,6 +780,7 @@ obvious, which is itself the expected behaviour.</p>
 <li><a class="reference internal" href="#cosmicflows-combo-combo-velocity-fits-combo-galaxies-csv">6 · CosmicFlows combo  ·  <code class="docutils literal notranslate"><span class="pre">combo/velocity.fits</span></code> + <code class="docutils literal notranslate"><span class="pre">combo/galaxies.csv</span></code></a></li>
 <li><a class="reference internal" href="#hi-ppv-cube-hi-cube-fits">7 · HI PPV cube  ·  <code class="docutils literal notranslate"><span class="pre">hi_cube.fits</span></code></a></li>
 <li><a class="reference internal" href="#d-image-image-2d-fits">8 · 2-D image  ·  <code class="docutils literal notranslate"><span class="pre">image_2d.fits</span></code></a></li>
+<li><a class="reference internal" href="#full-stokes-cubes-stokes-demo-i-q-u-v-fits">9 · Full-Stokes cubes  ·  <code class="docutils literal notranslate"><span class="pre">stokes_DEMO_{I,Q,U,V}.fits</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Async Patterns" href="async-patterns.html"><link rel="prev" title="Copilot backend &amp; engine" href="copilot-backend.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Self-hosted copilot LLM" href="user-guide/copilot-self-hosted.html"><link rel="prev" title="The backend as an SRC node" href="deployment/src-node.html">
         <link rel="prefetch" href="_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Sharing one backend between users - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="user-guide/spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user-guide/troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="backend-api.html">Backend API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-backend.html">Copilot backend &amp; engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/src-node.html">The backend as an SRC node</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture-note.html">Architecture Note</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-backend.html">Copilot backend &amp; engine</a></li>
 <li class="toctree-l1"><a class="reference internal" href="async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -302,7 +340,7 @@ always accepted too and is the <strong>operator</strong> token. Multi-user mode 
 the total number of accepted tokens is greater than one — there is no separate
 switch to forget.</p>
 <p>Generate tokens with at least 32 bytes of entropy:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import secrets; print(secrets.token_urlsafe(32))"</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import secrets; print(secrets.token_urlsafe(32))&quot;</span>
 </pre></div>
 </div>
 <p>Every token is compared with <code class="docutils literal notranslate"><span class="pre">secrets.compare_digest</span></code> against the full accepted
@@ -321,8 +359,11 @@ diagnostics snapshots and copilot conversations all hang off that session.</p>
 per session, in backend memory only: never logged, never returned by
 <code class="docutils literal notranslate"><span class="pre">/v1/assistant/status</span></code>, never written to disk. Alice configuring Claude does not
 change what Bob’s copilot talks to, and neither can read the other’s key.</p>
-<p><strong>A session quota.</strong> Each token is capped at a fixed number of live sessions;
-exceeding it returns 429 rather than letting one client exhaust the server.</p>
+<p><strong>A session quota.</strong> Each token is capped at <code class="docutils literal notranslate"><span class="pre">VISIVO_MAX_SESSIONS_PER_TOKEN</span></code>
+live sessions (default 32); exceeding it returns 429 rather than letting one
+client exhaust the server. Sessions idle for longer than <code class="docutils literal notranslate"><span class="pre">VISIVO_SESSION_TTL</span></code>
+seconds (default 1800) are removed, which frees their place in the quota; a
+session with a task still running is kept.</p>
 <p>In multi-user mode the client MUST send <code class="docutils literal notranslate"><span class="pre">X-Visivo-Session</span></code>: the shared anonymous
 session is refused (400), and a client-invented id is not adopted — only ids the
 backend minted are accepted (<code class="docutils literal notranslate"><span class="pre">VISIVO_STRICT_SESSIONS</span></code> defaults to on here, and
@@ -392,22 +433,65 @@ run one backend per user (each with its own token and its own
 covers per-session state; it is not a per-user filesystem sandbox, and this page
 would be lying if it implied otherwise.</p>
 </section>
+<section id="lifetimes-quotas-and-the-snapshot-secret">
+<h2>Lifetimes, quotas and the snapshot secret<a class="headerlink" href="#lifetimes-quotas-and-the-snapshot-secret" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SESSION_TTL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1800</span></code> s</p></td>
+<td><p>An idle session is removed and its datasets closed, unless one of its tasks is still running.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MAX_SESSIONS_PER_TOKEN</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">32</span></code></p></td>
+<td><p>Live sessions per token; the next one answers 429.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_TASK_TTL_SECONDS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1800</span></code> s</p></td>
+<td><p>A task record neither read nor updated for this long is dropped (running tasks are kept); a client polling it afterwards gets “not found”.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_MAX_CONCURRENT_TASKS</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+<td><p>Compute tasks one session may run at once.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VISIVO_SNAPSHOT_SECRET</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ADMIN_SESSION_SECRET</span></code>, else random</p></td>
+<td><p><strong>Secret.</strong> HMAC key that signs reproducibility snapshots.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When neither <code class="docutils literal notranslate"><span class="pre">VISIVO_SNAPSHOT_SECRET</span></code> nor <code class="docutils literal notranslate"><span class="pre">ADMIN_SESSION_SECRET</span></code> is set, the
+backend draws a random key at startup. Snapshots themselves live in session
+memory and disappear with a restart, but the signature a client was given
+with one can only be recomputed under the same key, so set a fixed secret (at
+least 32 random bytes, generated like the tokens above) when signatures kept
+outside the backend must stay checkable across restarts. Keep it as private
+as the tokens: whoever holds it can produce valid signatures. The <a class="reference internal" href="configuration.html"><span class="std std-doc">Configuration reference</span></a> lists
+every backend variable.</p>
+</section>
 <section id="checking-a-deployment">
 <h2>Checking a deployment<a class="headerlink" href="#checking-a-deployment" title="Link to this heading">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># operator sees the whole picture</span>
-curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Visivo-Token: </span><span class="nv">$OPERATOR</span><span class="s2">"</span><span class="w"> </span>localhost:8000/v1/health<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.recent_tasks
+curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;X-Visivo-Token: </span><span class="nv">$OPERATOR</span><span class="s2">&quot;</span><span class="w"> </span>localhost:8000/v1/health<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.recent_tasks
 
 <span class="c1"># a user token does not</span>
-curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s1">'%{http_code}\n'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>-H<span class="w"> </span><span class="s2">"X-Visivo-Token: </span><span class="nv">$ALICE</span><span class="s2">"</span><span class="w"> </span>localhost:8000/v1/exports/list<span class="w">      </span><span class="c1"># 403</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;%{http_code}\n&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>-H<span class="w"> </span><span class="s2">&quot;X-Visivo-Token: </span><span class="nv">$ALICE</span><span class="s2">&quot;</span><span class="w"> </span>localhost:8000/v1/exports/list<span class="w">      </span><span class="c1"># 403</span>
 
 <span class="c1"># a user cannot reach outside the roots</span>
-curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-Visivo-Token: </span><span class="nv">$ALICE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span><span class="s2">"localhost:8000/v1/files/list?path=/etc"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.valid<span class="w">            </span><span class="c1"># false</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;X-Visivo-Token: </span><span class="nv">$ALICE</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span><span class="s2">&quot;localhost:8000/v1/files/list?path=/etc&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.valid<span class="w">            </span><span class="c1"># false</span>
 
-<span class="c1"># nor borrow someone else's session</span>
-curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s1">'%{http_code}\n'</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>-H<span class="w"> </span><span class="s2">"X-Visivo-Token: </span><span class="nv">$ALICE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="c1"># nor borrow someone else&#39;s session</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;%{http_code}\n&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>-H<span class="w"> </span><span class="s2">&quot;X-Visivo-Token: </span><span class="nv">$ALICE</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>localhost:8000/v1/sessions/<span class="nv">$BOB_SESSION</span>/datasets<span class="w">                 </span><span class="c1"># 404</span>
 </pre></div>
 </div>
@@ -419,23 +503,23 @@ curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="async-patterns.html">
+          <a class="next-page" href="user-guide/copilot-self-hosted.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Async Patterns</div>
+                <div class="title">Self-hosted copilot LLM</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="copilot-backend.html">
+          <a class="prev-page" href="deployment/src-node.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Copilot backend &amp; engine</div>
+                <div class="title">The backend as an SRC node</div>
                 
               </div>
             </a>
@@ -452,7 +536,8 @@ curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -477,6 +562,7 @@ curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>
 <li><a class="reference internal" href="#what-each-user-gets">What each user gets</a></li>
 <li><a class="reference internal" href="#what-stays-shared-the-operator-s-resources">What stays shared: the operator’s resources</a></li>
 <li><a class="reference internal" href="#what-is-not-isolated-the-filesystem">What is NOT isolated: the filesystem</a></li>
+<li><a class="reference internal" href="#lifetimes-quotas-and-the-snapshot-secret">Lifetimes, quotas and the snapshot secret</a></li>
 <li><a class="reference internal" href="#checking-a-deployment">Checking a deployment</a></li>
 </ul>
 </li>

@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Architecture Note" href="../architecture-note.html"><link rel="prev" title="Glossary" href="glossary.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Running the backend on a cluster" href="../deployment/hpc-slurm.html"><link rel="prev" title="Glossary" href="glossary.html">
         <link rel="prefetch" href="../_static/visivo_logo_light.svg" as="image">
         <link rel="prefetch" href="../_static/visivo_logo_white.svg" as="image">
 
-    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/visivo_logo_light.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Troubleshooting - VisIVO dev</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -214,21 +214,55 @@
 <li class="toctree-l1"><a class="reference internal" href="spectral-tools.html">Spectral analysis tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="region-pv-noise.html">Regions, PV diagrams, noise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kinematic-lasso.html">Kinematic Lasso</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polarimetry.html">Polarimetry (Stokes Q, U, V)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source-finding.html">Source finding and cross-matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catalogues-hips.html">Catalogues, HiPS, and SAMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vlkb-archive.html">VLKB archive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sed-fitting.html">SED fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulations.html">Simulation snapshots (AREPO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skava-discovery.html">SKAVA Discovery tab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="publication-output.html">Figures, movies and linked views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copilot.html">Scientific Copilot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/hpc-slurm.html">Running the backend on a cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/src-node.html">The backend as an SRC node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copilot-self-hosted.html">Self-hosted copilot LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration reference</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../architecture-note.html">Architecture Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../backend-api.html">Backend API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../backend-api.html">Backend API Reference</a><input aria-label="Toggle navigation of Backend API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/meta-files.html">Meta, sessions, files and diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/datasets.html">Datasets, catalogues and VBT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cube.html">Cube</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/products.html">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/tasks-finders.html">Tasks and source finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/image.html">Image, astrometry and photometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/regions.html">Regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/spectral.html">Spectral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/polarisation.html">Polarisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/velocity.html">Velocity fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/dynspec.html">Dynamic spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/cosmology-analysis.html">Cosmology and analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sky-services.html">HiPS, cone search and VLKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/sed-simulations.html">SED fitting and simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/exports.html">Exports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/samp.html">SAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/render.html">Server-side rendering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/node-soda.html">SRC node and SODA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/assistant.html">Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../backend-api/reproducibility.html">Reproducibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../large-cube-loading.html">Large cube loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-backend-design.html">Distributed VisIVO Backend — Architecture &amp; Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../copilot-backend.html">Copilot backend &amp; engine</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multi-user-backend.html">Sharing one backend between users</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../async-patterns.html">Async Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../service-mapping-note.html">Service Mapping Note</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../catalogue3d-viewer.html">Catalogue 3D Viewer</a></li>
@@ -239,6 +273,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../linked-views.html">Linked Cube Views (F3)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo-datasets.html">Demo datasets (feature test matrix)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">VisIVO Server (CLI tools)</span></p>
 <ul>
@@ -284,7 +322,7 @@
           <section id="troubleshooting">
 <h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h1>
 <p>Common problems, what they mean, and how to fix them. Open a
-<a class="reference external" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics/issues">GitHub issue</a>
+<a class="reference external" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics/issues">GitHub issue</a>
 if you hit something not covered here.</p>
 <section id="backend-connection">
 <h2>Backend / connection<a class="headerlink" href="#backend-connection" title="Link to this heading">¶</a></h2>
@@ -306,7 +344,7 @@ process crashed mid-response. Restart the backend.</p></li>
 </section>
 <section id="session-not-found">
 <h3>“Session not found.”<a class="headerlink" href="#session-not-found" title="Link to this heading">¶</a></h3>
-<p>You’ve requested an action (e.g. <em>Stack Spectral Cubes</em>) referencing a
+<p>You’ve requested an action (e.g. <em>Stack Cubes to a Spectrum</em>) referencing a
 <code class="docutils literal notranslate"><span class="pre">session_id</span></code> that the backend no longer has — usually because the
 backend was restarted after the cube was opened.</p>
 <p><strong>Fix</strong>: close the cube viewer, reopen the cube from the Data Hub, retry
@@ -341,6 +379,26 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
 </section>
 <section id="performance">
 <h2>Performance<a class="headerlink" href="#performance" title="Link to this heading">¶</a></h2>
+<section id="full-resolution-is-refused-not-enough-memory">
+<h3>“Full resolution” is refused: not enough memory<a class="headerlink" href="#full-resolution-is-refused-not-enough-memory" title="Link to this heading">¶</a></h3>
+<p>Loading a cube at full resolution holds about three times its size while it
+arrives (the slabs, the assembled volume, the copy on the GPU). The client
+compares that with the machine’s physical memory before fetching and, when it
+does not fit, keeps the decimated proxy and says so with the numbers. Crop the
+region you need (<em>Tools ▸ Crop Full Resolution</em>), or render on a remote
+backend. A load that fails part-way (a slab the backend could not serve)
+reports the failure instead of retrying through the JSON route, which on a
+multi-GB cube used to multiply the client’s memory until the system killed it.</p>
+<p>Separately, the backend decides whether a cube opens at full resolution or as
+a preview only. A file at or above the threshold opens as a preview, and you
+load full resolution explicitly. The threshold is 4 GiB, or a quarter of the
+memory the backend may use when that is smaller: its container’s or cgroup’s
+memory limit, the memory SLURM granted the job, or else the machine’s physical
+memory. A backend on a node limited to 8 GiB therefore opens cubes of 2 GiB and
+more as previews. <code class="docutils literal notranslate"><span class="pre">VISIVO_FULL_RES_THRESHOLD_BYTES</span></code> on the backend replaces
+the rule with a fixed size in bytes (see the
+<a class="reference internal" href="../configuration.html#memory-and-full-resolution-loading"><span class="std std-ref">Configuration reference</span></a>).</p>
+</section>
 <section id="the-cube-swap-from-preview-to-full-resolution-takes-several-seconds">
 <h3>The cube swap from preview to full-resolution takes several seconds<a class="headerlink" href="#the-cube-swap-from-preview-to-full-resolution-takes-several-seconds" title="Link to this heading">¶</a></h3>
 <p>Expected for cubes ≥ ~500 MB. The first full-resolution Render uploads
@@ -393,6 +451,21 @@ visible.</p></li>
 open a downsampled FITS.</p></li>
 </ul>
 </section>
+<section id="the-remote-3-d-view-is-choppy-frozen-or-shows-only-the-proxy">
+<h3>The remote 3-D view is choppy, frozen or shows only the proxy<a class="headerlink" href="#the-remote-3-d-view-is-choppy-frozen-or-shows-only-the-proxy" title="Link to this heading">¶</a></h3>
+<p>This is the <em>Remote</em> view, rendered by the backend and sent as frames.</p>
+<ul class="simple">
+<li><p>While the view moves it is coarser on purpose, and it sharpens when you
+release the mouse; the first rotation after opening is slower while the
+backend adapts the drag level.</p></li>
+<li><p>A view that stops updating usually means the SSH tunnel dropped: the
+cluster helper reopens it by itself within a few seconds.</p></li>
+<li><p>A decimated proxy instead of the full cube means the backend cannot render
+server-side (no EGL in its image, or no GPU usable by its job).</p></li>
+</ul>
+<p>The cluster side of all three is described in
+<a class="reference internal" href="../deployment/hpc-slurm.html#troubleshooting"><span class="std std-ref">Running the backend on a cluster</span></a>.</p>
+</section>
 </section>
 <section id="wcs">
 <h2>WCS<a class="headerlink" href="#wcs" title="Link to this heading">¶</a></h2>
@@ -421,33 +494,152 @@ fix the source file (e.g. via <code class="docutils literal notranslate"><span c
 <p>The cube has no celestial axes (only the spectral axis is recognised),
 or the <code class="docutils literal notranslate"><span class="pre">CRVAL</span></code> / <code class="docutils literal notranslate"><span class="pre">CRPIX</span></code> are missing. Check the FITS header
 (<em>View → Show FITS Header</em> in the cube viewer).</p>
+<p>If the keywords are simply missing or wrong — a <code class="docutils literal notranslate"><span class="pre">CTYPE1</span></code> that never got
+written, a <code class="docutils literal notranslate"><span class="pre">CDELT</span></code> saved as a quoted string — <strong>Edit…</strong> in that header
+window writes a corrected <strong>copy</strong> into the Workspace and tells you whether
+the result has a celestial WCS. The file on disk is not modified.</p>
+</section>
+<section id="a-layer-will-not-go-onto-my-image-covers-none-of-the-sky">
+<h3>A layer will not go onto my image: “covers none of the sky…”<a class="headerlink" href="#a-layer-will-not-go-onto-my-image-covers-none-of-the-sky" title="Link to this heading">¶</a></h3>
+<p>The FITS you are adding is of a different part of the sky. The viewer refuses
+it because layering it would place it correctly — off the edge of the image —
+and show nothing at all. Use <strong>Open in New Window</strong> for it.</p>
+<p>If you believe the two really do overlap, <strong>Add Anyway</strong> is there: the check
+uses <code class="docutils literal notranslate"><span class="pre">wcsrange()</span></code> bounds, which are a bounding box, and a rotated field
+straddling RA = 0 can measure narrower than it is.</p>
 </section>
 </section>
 <section id="tools">
 <h2>Tools<a class="headerlink" href="#tools" title="Link to this heading">¶</a></h2>
 <section id="pick-spectrum-on-plane-click-does-nothing-when-i-click">
 <h3>“Pick Spectrum on Plane Click” does nothing when I click<a class="headerlink" href="#pick-spectrum-on-plane-click-does-nothing-when-i-click" title="Link to this heading">¶</a></h3>
-<p>The pick uses a <strong>double-click</strong> on the textured cutting plane (not a
-single click, which is reserved for camera rotation).</p>
-<p>If even the double-click does nothing:</p>
+<p>The pick is a <strong>click</strong> on the cutting plane, the volume or the isosurface. A
+press that moves more than a few pixels is a camera rotation, not a pick, so
+hold the mouse still.</p>
+<p>If a click does nothing:</p>
 <ul class="simple">
 <li><p>Make sure the toggle is on (cursor should be a cross-hair over the
-3-D view).</p></li>
-<li><p>The cutting plane must be visible. Lower its opacity to make sure you
-see it.</p></li>
-<li><p>Click <em>on the plane itself</em>, not on the volume rendering behind it.</p></li>
+3-D view, and its pane should carry the amber armed border). Selecting
+another pane does <strong>not</strong> disarm it any more, so the border is the thing to
+check.</p></li>
+<li><p>Click on something the pick can land on: the cutting plane (the spectrum at
+the displayed channel), the volume rendering (the channel the ray reaches —
+in Composite the front surface, in MIP the brightest), or the isosurface.
+Empty space, the box outline and the axes are not picks.</p></li>
+<li><p>With <em>3D rendering</em> off and the plane hidden, there is nothing to pick.</p></li>
 </ul>
 </section>
-<section id="stack-spectral-cubes-shows-only-one-cube">
-<h3>“Stack Spectral Cubes” shows only one cube<a class="headerlink" href="#stack-spectral-cubes-shows-only-one-cube" title="Link to this heading">¶</a></h3>
+<section id="switch-to-remote-is-missing-or-view-remote-is-greyed-out">
+<h3>“Switch to Remote” is missing, or <em>View → Remote</em> is greyed out<a class="headerlink" href="#switch-to-remote-is-missing-or-view-remote-is-greyed-out" title="Link to this heading">¶</a></h3>
+<p>The backend told us it cannot render server-side. It reports that in the
+dataset-open response (<code class="docutils literal notranslate"><span class="pre">server_side_rendering_available</span></code>), and it is false for a
+CPU-only backend and for <strong>any backend running on macOS</strong> — server-side
+rendering needs an EGL context, which macOS does not provide. The tooltip on the
+disabled <em>Remote</em> mode says so.</p>
+<p>This is not a limitation of your cube: rendering simply happens in this process.
+For a cube above the local-load threshold, use <strong>Load full resolution</strong> (in the
+banner, or <em>View → Load Full Resolution</em>) and watch the memory — the whole volume
+becomes resident, in RAM and as a 3-D GPU texture.</p>
+</section>
+<section id="a-tool-in-the-analysis-list-is-greyed-out">
+<h3>A tool in the Analysis list is greyed out<a class="headerlink" href="#a-tool-in-the-analysis-list-is-greyed-out" title="Link to this heading">¶</a></h3>
+<p>Hover it: every disabled tool in this app states its own reason, and the
+tooltip is the answer.</p>
+<ul class="simple">
+<li><p><em>“acts on the 2D Slice — show it in a pane”</em> / <em>“acts on the 3D view — …”</em>:
+the tool is bound to a view, and that view is not currently in any pane. Pick
+it from a pane’s ▾ menu (a tool does <strong>not</strong> need its pane to be the selected
+one — see <a class="reference internal" href="#cube-viewer#when-a-tool-is-available-and-where-it-acts"><span class="xref myst">Cube viewer</span></a>).</p></li>
+<li><p><em>“probe a pixel first”</em> (Pin Spectrum), <em>“draw or import a region first”</em>
+(Export Region), <em>“open a 2D image viewer first”</em> (Overlay Slice on an Open
+Image), <em>“nothing to link yet”</em> (Link Views): the tool works on something that
+does not exist yet. <strong>Hover the greyed entry to read the reason</strong> — it is on
+the row in Inspector ▸ Analysis as well as in the Tools menu.</p></li>
+<li><p><em>Export Moment Map as FITS</em> stays disabled until a moment map has actually
+been computed; <em>Open in VR</em> until a VR runtime is available.</p></li>
+</ul>
+</section>
+<section id="i-armed-a-tool-and-cannot-switch-it-off">
+<h3>I armed a tool and cannot switch it off<a class="headerlink" href="#i-armed-a-tool-and-cannot-switch-it-off" title="Link to this heading">¶</a></h3>
+<p><kbd>Esc</kbd> disarms whatever is armed. The pane an armed tool listens to
+wears a <strong>thicker amber border</strong> — that border, not the blue selection border,
+is what says “this tool is live here”. Clicking the tool’s own entry a second
+time also disarms it.</p>
+</section>
+<section id="my-spectrum-disappeared-when-i-closed-extract-spectrum">
+<h3>My spectrum disappeared when I closed Extract Spectrum<a class="headerlink" href="#my-spectrum-disappeared-when-i-closed-extract-spectrum" title="Link to this heading">¶</a></h3>
+<p>Only a <strong>live</strong> curve — one still following the cursor — goes with the tool. If
+you had <strong>clicked</strong> a pixel (header: <em>🔒 pinned</em>), ending the tool keeps that
+spectrum as a SPEC product in Session Data. Once it is saved the header says
+<em>💾 saved as “Spectrum N”</em>, and ending the tool then removes only the live row,
+because the curve is already safe. To keep one and carry on exploring, use
+<em>Tools ▸ Pin Spectrum</em> at any moment.</p>
+<p>Note that <em>Compare</em> in the Inspector’s SPECTRUM panel does <strong>not</strong> save
+anything: it lays the curve on the plot for comparison. That distinction used to
+be invisible — both buttons were called <em>Pin Spectrum</em>.</p>
+</section>
+<section id="load-lines-drew-nothing-or-nothing-where-i-expected">
+<h3>“Load Lines…” drew nothing (or nothing where I expected)<a class="headerlink" href="#load-lines-drew-nothing-or-nothing-where-i-expected" title="Link to this heading">¶</a></h3>
+<p>The tool tells you which of the two happened.</p>
+<ul class="simple">
+<li><p><em>“none falls inside the plotted range”</em>: the numbers converted fine but land
+outside the band. Almost always the <strong>unit</strong> or the <strong>systemic velocity / z</strong>
+— a rest-frame list drawn unshifted sits outside the observed band by
+construction.</p></li>
+<li><p><em>“this cube’s header has no RESTFRQ”</em>: a frequency list cannot be converted to
+a velocity axis without the cube’s rest frequency. Load a list in the axis’s
+own unit instead.</p></li>
+<li><p>The markers vanished after you changed what the pane shows: they are stored as
+coordinates on the axis they were computed for, so they are dropped when the
+pane moves to a product on a <strong>different</strong> spectral axis. Load them again.</p></li>
+</ul>
+<p>See <a class="reference internal" href="#spectral-tools#line-identification-overlaying-a-line-list"><span class="xref myst">Line identification</span></a>.</p>
+</section>
+<section id="i-closed-a-tool-window-while-it-was-computing">
+<h3>I closed a tool window while it was computing<a class="headerlink" href="#i-closed-a-tool-window-while-it-was-computing" title="Link to this heading">¶</a></h3>
+<p>The computation <strong>keeps running on the backend</strong> — it cannot be cancelled (these
+requests have no cancel route, and the backend cannot kill a running compute
+child) — and its result is discarded when the window that asked for it is gone.
+So the dialogs ask first: <em>Close and Discard</em> / <em>Keep Waiting</em>.</p>
+<p>If you close anyway, watch the status bar: “N running” counts it until it
+finishes, and Diagnostics has the line where it started. Until it does, it holds
+one of the session’s compute slots, so another heavy tool may have to wait.</p>
+</section>
+<section id="too-many-concurrent-compute-tasks-the-backend-is-busy">
+<h3>“Too many concurrent compute tasks” / the backend is busy<a class="headerlink" href="#too-many-concurrent-compute-tasks-the-backend-is-busy" title="Link to this heading">¶</a></h3>
+<p>The backend admits a limited number of concurrent computations <strong>per session</strong>
+(<code class="docutils literal notranslate"><span class="pre">VISIVO_MAX_CONCURRENT_TASKS</span></code>, default 3) and answers HTTP 429 beyond that.
+This is deliberate backpressure, not an error — it keeps a long compute from
+starving slice scrolling — but you should rarely see it:</p>
+<ul class="simple">
+<li><p>the server now <strong>waits</strong> up to <code class="docutils literal notranslate"><span class="pre">VISIVO_TASK_SLOT_WAIT_S</span></code> (default 15 s) for a
+slot before refusing, and</p></li>
+<li><p>the client <strong>retries</strong> a refused heavy request (isosurface, moment, noise,
+line-width, stacking) with backoff before reporting it.</p></li>
+</ul>
+<p>If you still get it, something long is genuinely running. It is most likely on a
+large cube, where opening the dataset itself launches heavy work — the
+full-resolution load and the whole-cube statistics — and a heavy request that is
+merely <em>queued</em> for a worker also holds a session slot. Check the
+<em>Diagnostics</em> panel (the status bar shows <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">running</span> <span class="pre">·</span> <span class="pre">M</span> <span class="pre">queued</span></code>), let the
+running computation finish, and retry. Raising
+<code class="docutils literal notranslate"><span class="pre">VISIVO_MAX_CONCURRENT_TASKS</span></code> / <code class="docutils literal notranslate"><span class="pre">VISIVO_HEAVY_SLOTS</span></code> on the server trades
+interactive responsiveness for throughput.</p>
+</section>
+<section id="stack-cubes-to-a-spectrum-shows-only-one-cube">
+<h3>“Stack Cubes to a Spectrum” shows only one cube<a class="headerlink" href="#stack-cubes-to-a-spectrum-shows-only-one-cube" title="Link to this heading">¶</a></h3>
 <p>You only have one cube open in the current backend session. Open the
-other cubes first (via <em>Data Hub → Open Remote Dataset</em>). The dialog
+other cubes first (via <em>Data Hub → Open…</em>). The dialog
 enumerates all cubes whose shape matches the reference cube.</p>
 <p>If you have multiple cubes open but only one appears in the list:</p>
 <ul class="simple">
 <li><p>Their shapes are different. The dialog disables incompatible cubes
 (different <code class="docutils literal notranslate"><span class="pre">width</span> <span class="pre">×</span> <span class="pre">height</span> <span class="pre">×</span> <span class="pre">depth</span></code>); hover the disabled rows to read
 the tooltip with the actual shape.</p></li>
+<li><p>They are the same file. The list shows one row per <em>file</em>, and a cube can be
+registered in a session twice (a baseline run registers its output, and
+opening that output from its Session Data row registers it again), so the
+duplicate is collapsed rather than offered as a second cube to stack.</p></li>
 </ul>
 </section>
 <section id="moment-dialog-says-computing-forever">
@@ -492,12 +684,12 @@ Diagnostics log attached.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../architecture-note.html">
+          <a class="next-page" href="../deployment/hpc-slurm.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Architecture Note</div>
+                <div class="title">Running the backend on a cluster</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -525,7 +717,8 @@ Diagnostics log attached.</p>
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/ViaLacteaVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link fa-brands fa-github" href="https://github.com/VisIVOLab/VisIVOVisualAnalytics" aria-label="GitHub"></a>
+              <a class="muted-link " href="https://visivolab.oact.inaf.it" aria-label="VisIVOLab"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
               
             </div>
           </div>
@@ -554,21 +747,31 @@ Diagnostics log attached.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#performance">Performance</a><ul>
+<li><a class="reference internal" href="#full-resolution-is-refused-not-enough-memory">“Full resolution” is refused: not enough memory</a></li>
 <li><a class="reference internal" href="#the-cube-swap-from-preview-to-full-resolution-takes-several-seconds">The cube swap from preview to full-resolution takes several seconds</a></li>
 <li><a class="reference internal" href="#line-width-map-takes-a-long-time">Line-width map takes a long time</a></li>
 <li><a class="reference internal" href="#slice-scrolling-stutters-during-a-heavy-compute">Slice scrolling stutters during a heavy compute</a></li>
 <li><a class="reference internal" href="#volume-rendering-is-choppy">Volume rendering is choppy</a></li>
+<li><a class="reference internal" href="#the-remote-3-d-view-is-choppy-frozen-or-shows-only-the-proxy">The remote 3-D view is choppy, frozen or shows only the proxy</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#wcs">WCS</a><ul>
 <li><a class="reference internal" href="#wcs-repaired-wcs-degraded-in-the-status-bar">“WCS repaired” / “WCS degraded” in the status bar</a></li>
 <li><a class="reference internal" href="#sanity-warning-in-the-status-bar">“Sanity: Warning” in the status bar</a></li>
 <li><a class="reference internal" href="#sky-coordinates-show-as-ra-0-00-00-0-dec-0-00-00-0-everywhere">Sky coordinates show as “RA: 0:00:00.0 Dec: 0:00:00.0” everywhere</a></li>
+<li><a class="reference internal" href="#a-layer-will-not-go-onto-my-image-covers-none-of-the-sky">A layer will not go onto my image: “covers none of the sky…”</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#tools">Tools</a><ul>
 <li><a class="reference internal" href="#pick-spectrum-on-plane-click-does-nothing-when-i-click">“Pick Spectrum on Plane Click” does nothing when I click</a></li>
-<li><a class="reference internal" href="#stack-spectral-cubes-shows-only-one-cube">“Stack Spectral Cubes” shows only one cube</a></li>
+<li><a class="reference internal" href="#switch-to-remote-is-missing-or-view-remote-is-greyed-out">“Switch to Remote” is missing, or <em>View → Remote</em> is greyed out</a></li>
+<li><a class="reference internal" href="#a-tool-in-the-analysis-list-is-greyed-out">A tool in the Analysis list is greyed out</a></li>
+<li><a class="reference internal" href="#i-armed-a-tool-and-cannot-switch-it-off">I armed a tool and cannot switch it off</a></li>
+<li><a class="reference internal" href="#my-spectrum-disappeared-when-i-closed-extract-spectrum">My spectrum disappeared when I closed Extract Spectrum</a></li>
+<li><a class="reference internal" href="#load-lines-drew-nothing-or-nothing-where-i-expected">“Load Lines…” drew nothing (or nothing where I expected)</a></li>
+<li><a class="reference internal" href="#i-closed-a-tool-window-while-it-was-computing">I closed a tool window while it was computing</a></li>
+<li><a class="reference internal" href="#too-many-concurrent-compute-tasks-the-backend-is-busy">“Too many concurrent compute tasks” / the backend is busy</a></li>
+<li><a class="reference internal" href="#stack-cubes-to-a-spectrum-shows-only-one-cube">“Stack Cubes to a Spectrum” shows only one cube</a></li>
 <li><a class="reference internal" href="#moment-dialog-says-computing-forever">Moment dialog says “Computing…” forever</a></li>
 </ul>
 </li>

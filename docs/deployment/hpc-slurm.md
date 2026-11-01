@@ -46,7 +46,8 @@ then refuses.
 ## The launcher: `launch_backend_slurm.sh`
 
 The launcher writes a batch script, submits it with `sbatch`, waits for the
-compute node to be assigned, then polls the backend's `/v1/health` over SSH
+compute node to be assigned (up to `VISIVO_ASSIGN_TIMEOUT` seconds, 300 by
+default, set in the frontend's environment), then polls the backend's `/v1/health` over SSH
 from the frontend to the compute node until it answers. It then prints the job
 id, the compute node, the port, the `ssh -N -L` command to run on the laptop,
 and the entries for the desktop's Backends page.
@@ -68,7 +69,11 @@ and the entries for the desktop's Backends page.
 | `--token T` | `VISIVO_TOKEN` | generated | The backend token; a random one is generated when none is given. |
 | `--workspace DIR` | `VISIVO_WORKSPACE` | unset | A writable directory for everything the backend and the launcher write (see below). Needed where `$HOME` is read-only. |
 | `--node-code CODE` | `VISIVO_NODE_CODE` | unset | The node's code in the SKAVA catalogue, reported in `/v1/node/status`. |
+| `--account ACCOUNT` | `VISIVO_ACCOUNT` | unset | The SLURM account (project) charged for the job; required on CINECA Leonardo and BSC MareNostrum 5. |
+| `--qos QOS` | `VISIVO_QOS` | unset | The SLURM quality of service. |
+| `--job-name NAME` | `VISIVO_JOB_NAME` | `visivo_backend` | The SLURM job name. The desktop gives each job a unique name, so that it can cancel a job whose id it never received. |
 | `--version TEXT` | `VISIVO_VERSION` | the image's | What the status document reports as the backend version, for example the commit the image was built from. |
+| | `VISIVO_ASSIGN_TIMEOUT` | `300` | Seconds to wait for SLURM to assign the node before the launcher stops (the job stays queued; `--stop` cancels it). |
 | `--help` | | | Print the help. |
 
 `VISIVO_LOG_DIR` (default `~/.visivo_logs`, or `<workspace>/logs` with a
@@ -114,16 +119,20 @@ compute node, the port and the token from its output, and opens the tunnel
 | `--frontend HOST` | required | The SLURM frontend. |
 | `--user USER` | `$USER` | The SSH login on the frontend. |
 | `--repo-dir DIR` | `VISIVO_REMOTE_REPO`, else `VisIVOVisualAnalytics` | The clone on the frontend, relative to the remote home. |
-| `--port N` | `VISIVO_PORT`, else `18900` | The local port of the tunnel. When given, it is also passed to the launcher, so the backend listens on the same port on the node; otherwise the backend listens on the launcher's default and the tunnel maps one to the other. |
+| `--port N` | `VISIVO_PORT`, else `18900` | The local port of the tunnel. When `--port` is given, it is also passed to the launcher, so the backend listens on the same port on the node; otherwise the backend listens on the launcher's default and the tunnel maps one to the other. Without `--port` (`VISIVO_PORT` only changes the default), a port that is taken, or that is the desktop client's own local backend port, is replaced by the next free one. |
 | `--stop` | | Stop the tunnel, cancel the job and remove the token file. |
 | any other option | | Passed unchanged to the launcher (`--partition`, `--gres`, `--sif`, `--data-root`, `--node-code`, `--workspace`, ...). |
 
 The helper:
 
 * **checks before submitting anything**: it refuses to start while a tunnel
-  from an earlier run is still active (stop it first with `--stop`) or while
-  the local port is already in use, so a job is never submitted that its
-  tunnel could not reach;
+  from an earlier run is still active (stop it first with `--stop`), so a job
+  is never submitted that its tunnel could not reach. The local port must be
+  free and must not be the port of the desktop client's own local backend
+  (read from the client's saved Backend URL, `http://127.0.0.1:8000` by
+  default): the client starts that backend when it opens, possibly after the
+  tunnel is up. Without `--port` the helper takes the next free port; with
+  `--port` it stops and says why;
 * **keeps the tunnel open**: `ssh` runs in a loop in the background, with
   keep-alives (`ServerAliveInterval=15`, `ServerAliveCountMax=4`) so a dead
   connection is noticed within about a minute, and is started again three
@@ -142,6 +151,81 @@ The helper:
 `--stop` ends the reconnect loop (and the `ssh` it started), runs `scancel` on
 the frontend for the job it recorded (`~/.visivo_slurm_job`) and removes
 `~/.visivo_slurm_token`.
+
+### Connecting from the desktop
+
+The desktop can do all of the above itself. In the Data Hub, **Connect to a
+cluster…** keeps named profiles: the frontend and your login there, the VisIVO
+clone on the frontend (for `scripts/launch_backend_slurm.sh`), the SLURM
+resources (partition, account, QOS, GPUs, CPUs, memory, time), the backend image, the data
+root, the workspace, and any further launcher options. **Connect** opens a new
+VisIVO window on that cluster; the window you were using stays on its own
+backend.
+
+The new window, before it opens:
+
+* submits the backend job over `ssh` (OpenSSH, as on macOS, Linux and
+  Windows 10 and later) with key-based access to the frontend, since nothing
+  can be typed: set it up once with `ssh-copy-id`;
+* reads the job, the compute node, the port and the token from the launcher
+  (the token is never shown);
+* opens the tunnel on a free local port that is not the desktop's own local
+  backend port, and opens it again if it drops;
+* waits for the backend to answer, then runs on it as with `--backend` below.
+
+The window owns the job. Closing it, or **Disconnect from NAME** in its Data
+Hub, closes the tunnel and cancels the job (`scancel`). Cancel on the progress
+screen does the same at any stage. Only one window per profile can be open; a
+job left by a window that did not close normally is cancelled by the next one
+for the same profile (each job is recorded, under its unique name, until a
+cancel succeeds). From a terminal, the same is
+`VisIVOVisualAnalytics --connect-cluster NAME`.
+
+Recent Datasets remembers where each dataset was opened, and marks those
+opened on a cluster with its name. All windows share the list. Clicking an
+entry from a window on another backend does not try a path that backend does
+not have: for a cluster entry it offers to open a window on that cluster and
+reopens the dataset there (`--connect-cluster NAME --reopen-recent PATH`);
+otherwise it says where the dataset was opened.
+
+### Opening the desktop client on the cluster backend
+
+Started with no options, the desktop client runs on its own local backend. To
+use the cluster backend instead, start it with the command the helper prints:
+
+```bash
+# macOS
+open -n -a VisIVOVisualAnalytics --args --backend http://localhost:18901 \
+    --backend-token-file ~/.visivo_slurm_token --backend-name PLEIADI
+# Linux
+VisIVOVisualAnalytics --backend http://localhost:18901 \
+    --backend-token-file ~/.visivo_slurm_token --backend-name PLEIADI
+```
+
+| Option | Environment | Meaning |
+|---|---|---|
+| `--backend URL` | `VISIVO_BACKEND_URL` | The backend this run uses. |
+| `--backend-token-file FILE` | `VISIVO_BACKEND_TOKEN_FILE`, or the token itself in `VISIVO_BACKEND_TOKEN` | Its token, read from a file so that it does not appear in the process list. |
+| `--backend-name NAME` | `VISIVO_BACKEND_NAME` | The name shown in the status bar and the backend chip (default: `host:port`). |
+
+For that run only:
+
+* the client starts no local backend and sends only this backend's token,
+  never the local one from `~/.visivo_token`, even though the tunnel is on
+  `localhost`;
+* the saved settings, the list of remote backends and `~/.visivo_token` are
+  not changed. The Settings dialog shows the backend URL and token read-only.
+  The next plain launch is local again;
+* the status bar and the backend chip name the backend, and the 3-D view
+  offers Remote rendering (View ▸ Rendering, or Auto / Local / Remote in the
+  view's header);
+* an option given without its value, a malformed URL, or an empty or
+  unreadable token file stops the launch with an error, rather than starting
+  on the local backend.
+
+If the backend does not answer, the start-up screen names it and says what to
+check: the job, the tunnel, and that the token is this job's (a new job has a
+new token).
 
 ## Multi-node backend with Dask
 
@@ -174,12 +258,11 @@ to the Dask dashboard, default `VISIVO_DASHBOARD_PORT` or `18787`) and
 launcher. The token is saved in `~/.visivo_slurm_dask_token`; `--stop` closes
 both tunnels and cancels the job.
 
-```{note}
-The Dask helper is simpler than the single-node one: its tunnels are plain
-`ssh -N -f` processes that are not reopened when they drop, it does not check
-for an earlier tunnel or a busy port, and it does not wait for the backend to
-answer through the tunnel.
-```
+The Dask helper behaves like the single-node one: it refuses to start while
+an earlier tunnel or job is recorded or a local port is taken (and when
+`--port` and `--dashboard-port` are the same), reopens either tunnel when it
+drops, records the job as soon as the launcher prints its id, and is ready
+only when the backend answers through the tunnel.
 
 ## Apptainer images
 
@@ -291,6 +374,17 @@ GPUs in the job, the session does not start.
 | `VISIVO_RENDER_IN_PROCESS` | unset | `1` renders in the backend's own process instead (slower: rendering then holds the process that serves the WebSocket). |
 | `VTK_EGL_DEVICE_INDEX` | unset | Binds every view to that EGL device instead of spreading them over the job's GPUs. |
 
+A cube larger than `VISIVO_RENDER_OUT_OF_CORE_BYTES` (6 GiB) is not loaded:
+the view draws it from its brick pyramid, a few blocks at the resolution each
+part of the view needs, so a cube larger than the GPU's memory can be shown.
+How it works and its settings are in
+[Brick pyramid](../brick-pyramid.md#rendering-from-the-pyramid). If the
+pyramid is missing, the backend builds it in the background and the desktop
+shows its progress over the preview, then switches to the full-resolution
+view. To skip that wait, build it beforehand in a job of its own
+(`python -m app.brick_pyramid build`, with the backend's `VISIVO_PYRAMID_DIR`). On PLEIADI-GPU a 23.4 GiB cube, larger than the V100's 16 GB, opened in
+2.6 s from its pyramid and turned at 54 frames per second.
+
 How the view streams frames and lowers its quality while you rotate is
 described for users in the
 [Cube viewer](../user-guide/cube-viewer.md#where-the-rendering-happens-auto-local-remote)
@@ -307,12 +401,14 @@ described in the
 
 ## Troubleshooting
 
-**The job stays pending.** The launcher waits about 60 seconds for SLURM to
-assign a node, then stops with `Could not determine compute node`, but the job
-stays queued. The tunnel helper then cannot read the node and has recorded no
-job, so `--stop` does not know it: check it with `squeue -j <jobid>` on the
-frontend and `scancel` it yourself, or ask for fewer resources (a shorter
-`--time`, fewer GPUs, another `--partition`).
+**The job stays pending.** The launcher waits `VISIVO_ASSIGN_TIMEOUT` seconds
+(300 by default) for SLURM to assign a node, then stops with `no compute node
+assigned`; the job stays queued and starts when the resources free up. The
+helper has recorded the job as soon as it was submitted, so `--stop` cancels
+it. To wait longer, set `VISIVO_ASSIGN_TIMEOUT` on the frontend; otherwise ask
+for fewer resources (a shorter `--time`, fewer GPUs, another `--partition`).
+A new run refuses to start while a job from an earlier run is still recorded:
+stop it first.
 
 **The backend does not become ready.** The launcher polls for five minutes
 (ten for the Dask variant), then names the job log. Look there first: a
