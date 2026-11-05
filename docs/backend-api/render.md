@@ -79,6 +79,15 @@ The session's current threshold and data range, as in the answer of `create_sess
 
 Errors: 401 (token), 404 (`"Unknown render session_id."`, also for a session owned by another token).
 
+### `GET /v1/render/{session_id}/camera`
+
+A session's camera (points or a cube), after the commands sent before the
+request: `{position, focal_point, view_up, view_angle, parallel,
+parallel_scale}`, a cube's in its voxel coordinates. A ray-traced still of the
+view on screen is rendered from it ([particles](particle-render),
+[volumes](volume-render)). `/levels` carries it too, as `camera`. 404 for an
+unknown session, 409 for a session with no camera to report.
+
 ### `DELETE /v1/render/{session_id}`
 
 Closes a render session and releases its GPU resources.
@@ -120,7 +129,9 @@ Errors: 401 (token).
 
 ## Point tables
 
-A VBT point table opened with `/v1/vbt/open` (whose reply says `server_side_rendering_available`) is drawn by a point session (`app/render_session/points.py`, issue #83), as the desktop's point viewer draws it: points or emissive Gaussian splats, coloured by one column through a colour map, with the labelled bounding box, a colour bar and the orientation marker. The table is memory-mapped where it lies; the columns drawn are copied once to the GPU. At most `VISIVO_POINT_RENDER_MAX_POINTS` rows are drawn (default 100 000 000; a larger table is drawn from an even sample of its rows), and during a drag at most `VISIVO_POINT_RENDER_LOD_POINTS` (default 1 000 000).
+A VBT point table opened with `/v1/vbt/open`, or a catalogue opened with `/v1/catalogue/open` (whose reply says `server_side_rendering_available`; a sky or cartesian one), is drawn by a point session (`app/render_session/points.py`, issue #83), as the desktop's point viewer draws it: points or emissive Gaussian splats, coloured by one column through a colour map, with the labelled bounding box, a colour bar and the orientation marker. The table is memory-mapped where it lies; the columns drawn are copied once to the GPU. At most `VISIVO_POINT_RENDER_MAX_POINTS` rows are drawn (default 100 000 000; a larger table is drawn from an even sample of its rows), and during a drag at most `VISIVO_POINT_RENDER_LOD_POINTS` (default 1 000 000).
+
+A catalogue is read again in the session's process (its files and format, several files concatenated) and its numeric columns are drawn. A sky catalogue is drawn at positions computed as the desktop computes them (`app/catalogue_positions.py`): the distance from a redshift-space Hubble distance, another cosmology's comoving distance, a distance column (a luminosity or angular-diameter one converted to comoving), the Planck18 comoving distance of the redshift, or 300 Mpc, in that order; the direction in the FK5, galactic or supergalactic frame. They are the columns `@x`, `@y`, `@z`, the session's default coordinates.
 
 `threshold` is null; `data_min` / `data_max` are the colour column's range over the rows drawn (null in solid colour), also from `GET /v1/render/{session_id}/levels` after a colour change.
 
@@ -134,6 +145,8 @@ The camera, viewport and encoding commands are those of a cube (`rotate`, `zoom`
 | `set_filters` | `filters`: list of `{field, op, value}`, `op` one of `=`, `!=`, `>`, `>=`, `<`, `<=` | The rows drawn: those passing every filter. |
 | `set_background` | `name` (`"Dark"`, `"Dark gray"`, `"White"`; anything else is dark) | Background, and the colour of the box and of the colour bar's text. |
 | `set_show_outline`, `set_show_axes`, `set_show_colorbar` | `visible` (bool) | Labelled box, orientation marker, colour bar. |
+| `set_camera` | `position`, `focal_point`, `view_up` (three numbers each), optional `view_angle` (degrees), `parallel` (bool), `parallel_scale` | The whole camera, as `GET /v1/render/{id}/camera` returns it: the desktop hands back the camera of its ray-traced view. Refused without the three vectors, or with the position on the focal point. |
+| `set_sky_positions` | `frame` (`"fk5"`, `"galactic"`, `"supergalactic"`), `distance_mode` (`"comoving"`, `"redshift_space"`), `cosmology` (a model of `/v1/cosmology/distance`; `"Planck18"` is the desktop's own integration) | A sky catalogue's positions, recomputed (`@x`, `@y`, `@z`); refused for a VBT or a cartesian catalogue. |
 
 An unknown column or operator is refused: the command is logged and the view unchanged.
 
@@ -225,6 +238,7 @@ Every other command is applied to the session's view. Each one counts as activit
 | `zoom` | `factor` (default 1.0, clamped to 0.05 to 20) | Zooms the camera by this factor. |
 | `pan` | `dx`, `dy` (default 0) | Accumulates a pan offset in the view state. |
 | `reset` | none | Ends a drag in progress, restores the default view state (keeping the window size; threshold back to the session's default, cutting plane on the middle channel) and resets the camera to fit the cube. |
+| `set_camera` | `position`, `focal_point`, `view_up` (three numbers each), optional `view_angle` (degrees), `parallel` (bool), `parallel_scale` | The whole camera, in the cube's voxel coordinates as `GET /v1/render/{id}/camera` gives it: the desktop hands back the camera its ray-traced view was turned to. Refused (the stream kept) without the three vectors, or with the position on the focal point or the view up along the line of sight. |
 | `set_lut` | `name` (string) | Colour map of the volume (and of the isosurface). Unknown names fall back to Inferno. `colormap` is an accepted alias. |
 | `set_slice_lut` | `name` (string) | Colour map of the cutting-plane slice. |
 | `set_threshold` | `value` (number) | Lower anchor of the opacity transfer function, also the isosurface value. |
